@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xie.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.xie.bean.Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="order_status" property="orderStatus" jdbcType="BIT" />
+    <result column="shipping_status" property="shippingStatus" jdbcType="BIT" />
+    <result column="pay_status" property="payStatus" jdbcType="BIT" />
+    <result column="consignee" property="consignee" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="SMALLINT" />
+    <result column="province" property="province" jdbcType="SMALLINT" />
+    <result column="city" property="city" jdbcType="SMALLINT" />
+    <result column="district" property="district" jdbcType="SMALLINT" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="postscript" property="postscript" jdbcType="VARCHAR" />
+    <result column="shipping_id" property="shippingId" jdbcType="TINYINT" />
+    <result column="shipping_name" property="shippingName" jdbcType="VARCHAR" />
+    <result column="pay_id" property="payId" jdbcType="TINYINT" />
+    <result column="pay_name" property="payName" jdbcType="VARCHAR" />
+    <result column="shipping_fee" property="shippingFee" jdbcType="DECIMAL" />
+    <result column="actual_price" property="actualPrice" jdbcType="DECIMAL" />
+    <result column="integral" property="integral" jdbcType="INTEGER" />
+    <result column="integral_money" property="integralMoney" jdbcType="DECIMAL" />
+    <result column="order_price" property="orderPrice" jdbcType="DECIMAL" />
+    <result column="goods_price" property="goodsPrice" jdbcType="DECIMAL" />
+    <result column="add_time" property="addTime" jdbcType="INTEGER" />
+    <result column="confirm_time" property="confirmTime" jdbcType="INTEGER" />
+    <result column="pay_time" property="payTime" jdbcType="INTEGER" />
+    <result column="freight_price" property="freightPrice" jdbcType="INTEGER" />
+    <result column="coupon_id" property="couponId" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="coupon_price" property="couponPrice" jdbcType="DECIMAL" />
+    <result column="callback_status" property="callbackStatus" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_sn, user_id, order_status, shipping_status, pay_status, consignee, country, 
+    province, city, district, address, mobile, postscript, shipping_id, shipping_name, 
+    pay_id, pay_name, shipping_fee, actual_price, integral, integral_money, order_price, 
+    goods_price, add_time, confirm_time, pay_time, freight_price, coupon_id, parent_id, 
+    coupon_price, callback_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xie.bean.Order" >
+    insert into order (id, order_sn, user_id, 
+      order_status, shipping_status, pay_status, 
+      consignee, country, province, 
+      city, district, address, 
+      mobile, postscript, shipping_id, 
+      shipping_name, pay_id, pay_name, 
+      shipping_fee, actual_price, integral, 
+      integral_money, order_price, goods_price, 
+      add_time, confirm_time, pay_time, 
+      freight_price, coupon_id, parent_id, 
+      coupon_price, callback_status)
+    values (#{id,jdbcType=INTEGER}, #{orderSn,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{orderStatus,jdbcType=BIT}, #{shippingStatus,jdbcType=BIT}, #{payStatus,jdbcType=BIT}, 
+      #{consignee,jdbcType=VARCHAR}, #{country,jdbcType=SMALLINT}, #{province,jdbcType=SMALLINT}, 
+      #{city,jdbcType=SMALLINT}, #{district,jdbcType=SMALLINT}, #{address,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{postscript,jdbcType=VARCHAR}, #{shippingId,jdbcType=TINYINT}, 
+      #{shippingName,jdbcType=VARCHAR}, #{payId,jdbcType=TINYINT}, #{payName,jdbcType=VARCHAR}, 
+      #{shippingFee,jdbcType=DECIMAL}, #{actualPrice,jdbcType=DECIMAL}, #{integral,jdbcType=INTEGER}, 
+      #{integralMoney,jdbcType=DECIMAL}, #{orderPrice,jdbcType=DECIMAL}, #{goodsPrice,jdbcType=DECIMAL}, 
+      #{addTime,jdbcType=INTEGER}, #{confirmTime,jdbcType=INTEGER}, #{payTime,jdbcType=INTEGER}, 
+      #{freightPrice,jdbcType=INTEGER}, #{couponId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, 
+      #{couponPrice,jdbcType=DECIMAL}, #{callbackStatus,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xie.bean.Order" >
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderSn != null" >
+        order_sn,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="shippingStatus != null" >
+        shipping_status,
+      </if>
+      <if test="payStatus != null" >
+        pay_status,
+      </if>
+      <if test="consignee != null" >
+        consignee,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="district != null" >
+        district,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="postscript != null" >
+        postscript,
+      </if>
+      <if test="shippingId != null" >
+        shipping_id,
+      </if>
+      <if test="shippingName != null" >
+        shipping_name,
+      </if>
+      <if test="payId != null" >
+        pay_id,
+      </if>
+      <if test="payName != null" >
+        pay_name,
+      </if>
+      <if test="shippingFee != null" >
+        shipping_fee,
+      </if>
+      <if test="actualPrice != null" >
+        actual_price,
+      </if>
+      <if test="integral != null" >
+        integral,
+      </if>
+      <if test="integralMoney != null" >
+        integral_money,
+      </if>
+      <if test="orderPrice != null" >
+        order_price,
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="confirmTime != null" >
+        confirm_time,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="freightPrice != null" >
+        freight_price,
+      </if>
+      <if test="couponId != null" >
+        coupon_id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="couponPrice != null" >
+        coupon_price,
+      </if>
+      <if test="callbackStatus != null" >
+        callback_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderSn != null" >
+        #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=BIT},
+      </if>
+      <if test="shippingStatus != null" >
+        #{shippingStatus,jdbcType=BIT},
+      </if>
+      <if test="payStatus != null" >
+        #{payStatus,jdbcType=BIT},
+      </if>
+      <if test="consignee != null" >
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=SMALLINT},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=SMALLINT},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=SMALLINT},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=SMALLINT},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="postscript != null" >
+        #{postscript,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingId != null" >
+        #{shippingId,jdbcType=TINYINT},
+      </if>
+      <if test="shippingName != null" >
+        #{shippingName,jdbcType=VARCHAR},
+      </if>
+      <if test="payId != null" >
+        #{payId,jdbcType=TINYINT},
+      </if>
+      <if test="payName != null" >
+        #{payName,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingFee != null" >
+        #{shippingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="actualPrice != null" >
+        #{actualPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="integral != null" >
+        #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="integralMoney != null" >
+        #{integralMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="orderPrice != null" >
+        #{orderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsPrice != null" >
+        #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=INTEGER},
+      </if>
+      <if test="confirmTime != null" >
+        #{confirmTime,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=INTEGER},
+      </if>
+      <if test="freightPrice != null" >
+        #{freightPrice,jdbcType=INTEGER},
+      </if>
+      <if test="couponId != null" >
+        #{couponId,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="couponPrice != null" >
+        #{couponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="callbackStatus != null" >
+        #{callbackStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xie.bean.Order" >
+    update order
+    <set >
+      <if test="orderSn != null" >
+        order_sn = #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=BIT},
+      </if>
+      <if test="shippingStatus != null" >
+        shipping_status = #{shippingStatus,jdbcType=BIT},
+      </if>
+      <if test="payStatus != null" >
+        pay_status = #{payStatus,jdbcType=BIT},
+      </if>
+      <if test="consignee != null" >
+        consignee = #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=SMALLINT},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=SMALLINT},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=SMALLINT},
+      </if>
+      <if test="district != null" >
+        district = #{district,jdbcType=SMALLINT},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="postscript != null" >
+        postscript = #{postscript,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingId != null" >
+        shipping_id = #{shippingId,jdbcType=TINYINT},
+      </if>
+      <if test="shippingName != null" >
+        shipping_name = #{shippingName,jdbcType=VARCHAR},
+      </if>
+      <if test="payId != null" >
+        pay_id = #{payId,jdbcType=TINYINT},
+      </if>
+      <if test="payName != null" >
+        pay_name = #{payName,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingFee != null" >
+        shipping_fee = #{shippingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="actualPrice != null" >
+        actual_price = #{actualPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="integral != null" >
+        integral = #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="integralMoney != null" >
+        integral_money = #{integralMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="orderPrice != null" >
+        order_price = #{orderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=INTEGER},
+      </if>
+      <if test="confirmTime != null" >
+        confirm_time = #{confirmTime,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=INTEGER},
+      </if>
+      <if test="freightPrice != null" >
+        freight_price = #{freightPrice,jdbcType=INTEGER},
+      </if>
+      <if test="couponId != null" >
+        coupon_id = #{couponId,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="couponPrice != null" >
+        coupon_price = #{couponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="callbackStatus != null" >
+        callback_status = #{callbackStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xie.bean.Order" >
+    update order
+    set order_sn = #{orderSn,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      order_status = #{orderStatus,jdbcType=BIT},
+      shipping_status = #{shippingStatus,jdbcType=BIT},
+      pay_status = #{payStatus,jdbcType=BIT},
+      consignee = #{consignee,jdbcType=VARCHAR},
+      country = #{country,jdbcType=SMALLINT},
+      province = #{province,jdbcType=SMALLINT},
+      city = #{city,jdbcType=SMALLINT},
+      district = #{district,jdbcType=SMALLINT},
+      address = #{address,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      postscript = #{postscript,jdbcType=VARCHAR},
+      shipping_id = #{shippingId,jdbcType=TINYINT},
+      shipping_name = #{shippingName,jdbcType=VARCHAR},
+      pay_id = #{payId,jdbcType=TINYINT},
+      pay_name = #{payName,jdbcType=VARCHAR},
+      shipping_fee = #{shippingFee,jdbcType=DECIMAL},
+      actual_price = #{actualPrice,jdbcType=DECIMAL},
+      integral = #{integral,jdbcType=INTEGER},
+      integral_money = #{integralMoney,jdbcType=DECIMAL},
+      order_price = #{orderPrice,jdbcType=DECIMAL},
+      goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      add_time = #{addTime,jdbcType=INTEGER},
+      confirm_time = #{confirmTime,jdbcType=INTEGER},
+      pay_time = #{payTime,jdbcType=INTEGER},
+      freight_price = #{freightPrice,jdbcType=INTEGER},
+      coupon_id = #{couponId,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      coupon_price = #{couponPrice,jdbcType=DECIMAL},
+      callback_status = #{callbackStatus,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

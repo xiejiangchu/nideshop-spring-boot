@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xie.mapper.RolesMapper" >
+  <resultMap id="BaseResultMap" type="com.xie.bean.Roles" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="display_name" property="displayName" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, display_name, description, created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from roles
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from roles
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+    <select id="getRolesByUid" resultMap="BaseResultMap">
+        SELECT
+        roles.id as id,
+        roles.name as name,
+        roles.display_name as display_name,
+        roles.description as description,
+        roles.created_at as created_at,
+        roles.updated_at as updated_at
+        FROM roles
+        LEFT JOIN role_user ON role_user.role_id=roles.id
+        WHERE role_user.user_id = #{uid}
+    </select>
+
+    <select id="checkRole" parameterType="map" resultMap="BaseResultMap">
+        SELECT COUNT(1)
+        FROM role_user
+        LEFT JOIN roles ON role_user.role_id=roles.id
+        WHERE role_user.user_id = #{uid}
+        AND roles.name = #{name}
+    </select>
+
+    <select id="checkPermission" parameterType="map" resultType="Integer">
+        SELECT COUNT(1)
+        FROM (
+        SELECT permission_role.permission_id FROM (
+        SELECT
+        role_id
+        FROM role_user
+        WHERE role_user.user_id = #{uid}
+        ) a LEFT JOIN permission_role ON permission_role.role_id=a.role_id
+        ) b LEFT JOIN permissions ON b.permission_id=permissions.id
+        WHERE permissions.name=#{name}
+    </select>
+
+    <insert id="assignRole">
+        INSERT INTO role_user(
+        user_id,
+        role_id
+        ) VALUES (
+        #{uid},
+        #{role_id}
+        )
+    </insert>
+
+  <insert id="insert" parameterType="com.xie.bean.Roles" >
+    insert into roles (id, name, display_name, 
+      description, created_at, updated_at
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{displayName,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xie.bean.Roles" >
+    insert into roles
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="displayName != null" >
+        display_name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="displayName != null" >
+        #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xie.bean.Roles" >
+    update roles
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="displayName != null" >
+        display_name = #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xie.bean.Roles" >
+    update roles
+    set name = #{name,jdbcType=VARCHAR},
+      display_name = #{displayName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

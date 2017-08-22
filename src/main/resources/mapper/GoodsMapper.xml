@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xie.mapper.GoodsMapper">
+    <resultMap id="BaseResultMap" type="com.xie.bean.Goods">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="category_id" property="categoryId" jdbcType="INTEGER"/>
+        <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="brand_id" property="brandId" jdbcType="INTEGER"/>
+        <result column="goods_number" property="goodsNumber" jdbcType="INTEGER"/>
+        <result column="keywords" property="keywords" jdbcType="VARCHAR"/>
+        <result column="goods_brief" property="goodsBrief" jdbcType="VARCHAR"/>
+        <result column="is_on_sale" property="isOnSale" jdbcType="BIT"/>
+        <result column="add_time" property="addTime" jdbcType="INTEGER"/>
+        <result column="sort_order" property="sortOrder" jdbcType="SMALLINT"/>
+        <result column="is_delete" property="isDelete" jdbcType="BIT"/>
+        <result column="attribute_category" property="attributeCategory" jdbcType="INTEGER"/>
+        <result column="counter_price" property="counterPrice" jdbcType="DECIMAL"/>
+        <result column="extra_price" property="extraPrice" jdbcType="DECIMAL"/>
+        <result column="is_new" property="isNew" jdbcType="BIT"/>
+        <result column="goods_unit" property="goodsUnit" jdbcType="VARCHAR"/>
+        <result column="primary_pic_url" property="primaryPicUrl" jdbcType="VARCHAR"/>
+        <result column="list_pic_url" property="listPicUrl" jdbcType="VARCHAR"/>
+        <result column="retail_price" property="retailPrice" jdbcType="DECIMAL"/>
+        <result column="sell_volume" property="sellVolume" jdbcType="INTEGER"/>
+        <result column="primary_product_id" property="primaryProductId" jdbcType="INTEGER"/>
+        <result column="unit_price" property="unitPrice" jdbcType="DECIMAL"/>
+        <result column="promotion_desc" property="promotionDesc" jdbcType="VARCHAR"/>
+        <result column="promotion_tag" property="promotionTag" jdbcType="VARCHAR"/>
+        <result column="app_exclusive_price" property="appExclusivePrice" jdbcType="DECIMAL"/>
+        <result column="is_app_exclusive" property="isAppExclusive" jdbcType="BIT"/>
+        <result column="is_limited" property="isLimited" jdbcType="BIT"/>
+        <result column="is_hot" property="isHot" jdbcType="BIT"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMapShort" type="com.xie.bean.GoodsShort">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="category_id" property="categoryId" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="list_pic_url" property="listPicUrl" jdbcType="VARCHAR"/>
+        <result column="retail_price" property="retailPrice" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <resultMap id="ResultMapWithBLOBs" type="com.xie.bean.Goods" extends="BaseResultMap">
+        <result column="goods_desc" property="goodsDesc" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, category_id, goods_sn, name, brand_id, goods_number, keywords, goods_brief, is_on_sale, 
+    add_time, sort_order, is_delete, attribute_category, counter_price, extra_price, 
+    is_new, goods_unit, primary_pic_url, list_pic_url, retail_price, sell_volume, primary_product_id, 
+    unit_price, promotion_desc, promotion_tag, app_exclusive_price, is_app_exclusive, 
+    is_limited, is_hot
+  </sql>
+    <sql id="Blob_Column_List">
+    goods_desc
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from goods
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectHotGoods" resultMap="BaseResultMapShort">
+        select
+        id, category_id,name, list_pic_url, retail_price
+        from goods
+        where is_hot = 1
+    </select>
+
+    <select id="selectNewGoods" resultMap="BaseResultMapShort">
+        select
+        id, category_id,name, list_pic_url, retail_price
+        from goods
+        where is_new = 1
+    </select>
+
+    <select id="selectPartialByCategory" resultMap="BaseResultMapShort">
+        select
+        id, category_id,name, list_pic_url, retail_price
+        from goods
+        where category_id = #{categoryId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAllByCategory" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from goods
+        where category_id = #{categoryId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.xie.bean.Goods">
+    insert into goods (id, category_id, goods_sn, 
+      name, brand_id, goods_number, 
+      keywords, goods_brief, is_on_sale, 
+      add_time, sort_order, is_delete, 
+      attribute_category, counter_price, extra_price, ``
+      is_new, goods_unit, primary_pic_url, 
+      list_pic_url, retail_price, sell_volume, 
+      primary_product_id, unit_price, promotion_desc, 
+      promotion_tag, app_exclusive_price, is_app_exclusive, 
+      is_limited, is_hot, goods_desc
+      )
+    values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{goodsSn,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{brandId,jdbcType=INTEGER}, #{goodsNumber,jdbcType=INTEGER}, 
+      #{keywords,jdbcType=VARCHAR}, #{goodsBrief,jdbcType=VARCHAR}, #{isOnSale,jdbcType=BIT}, 
+      #{addTime,jdbcType=INTEGER}, #{sortOrder,jdbcType=SMALLINT}, #{isDelete,jdbcType=BIT}, 
+      #{attributeCategory,jdbcType=INTEGER}, #{counterPrice,jdbcType=DECIMAL}, #{extraPrice,jdbcType=DECIMAL}, 
+      #{isNew,jdbcType=BIT}, #{goodsUnit,jdbcType=VARCHAR}, #{primaryPicUrl,jdbcType=VARCHAR}, 
+      #{listPicUrl,jdbcType=VARCHAR}, #{retailPrice,jdbcType=DECIMAL}, #{sellVolume,jdbcType=INTEGER}, 
+      #{primaryProductId,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL}, #{promotionDesc,jdbcType=VARCHAR}, 
+      #{promotionTag,jdbcType=VARCHAR}, #{appExclusivePrice,jdbcType=DECIMAL}, #{isAppExclusive,jdbcType=BIT}, 
+      #{isLimited,jdbcType=BIT}, #{isHot,jdbcType=BIT}, #{goodsDesc,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.xie.bean.Goods">
+        insert into goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="goodsSn != null">
+                goods_sn,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="brandId != null">
+                brand_id,
+            </if>
+            <if test="goodsNumber != null">
+                goods_number,
+            </if>
+            <if test="keywords != null">
+                keywords,
+            </if>
+            <if test="goodsBrief != null">
+                goods_brief,
+            </if>
+            <if test="isOnSale != null">
+                is_on_sale,
+            </if>
+            <if test="addTime != null">
+                add_time,
+            </if>
+            <if test="sortOrder != null">
+                sort_order,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="attributeCategory != null">
+                attribute_category,
+            </if>
+            <if test="counterPrice != null">
+                counter_price,
+            </if>
+            <if test="extraPrice != null">
+                extra_price,
+            </if>
+            <if test="isNew != null">
+                is_new,
+            </if>
+            <if test="goodsUnit != null">
+                goods_unit,
+            </if>
+            <if test="primaryPicUrl != null">
+                primary_pic_url,
+            </if>
+            <if test="listPicUrl != null">
+                list_pic_url,
+            </if>
+            <if test="retailPrice != null">
+                retail_price,
+            </if>
+            <if test="sellVolume != null">
+                sell_volume,
+            </if>
+            <if test="primaryProductId != null">
+                primary_product_id,
+            </if>
+            <if test="unitPrice != null">
+                unit_price,
+            </if>
+            <if test="promotionDesc != null">
+                promotion_desc,
+            </if>
+            <if test="promotionTag != null">
+                promotion_tag,
+            </if>
+            <if test="appExclusivePrice != null">
+                app_exclusive_price,
+            </if>
+            <if test="isAppExclusive != null">
+                is_app_exclusive,
+            </if>
+            <if test="isLimited != null">
+                is_limited,
+            </if>
+            <if test="isHot != null">
+                is_hot,
+            </if>
+            <if test="goodsDesc != null">
+                goods_desc,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsSn != null">
+                #{goodsSn,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null">
+                #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsNumber != null">
+                #{goodsNumber,jdbcType=INTEGER},
+            </if>
+            <if test="keywords != null">
+                #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsBrief != null">
+                #{goodsBrief,jdbcType=VARCHAR},
+            </if>
+            <if test="isOnSale != null">
+                #{isOnSale,jdbcType=BIT},
+            </if>
+            <if test="addTime != null">
+                #{addTime,jdbcType=INTEGER},
+            </if>
+            <if test="sortOrder != null">
+                #{sortOrder,jdbcType=SMALLINT},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="attributeCategory != null">
+                #{attributeCategory,jdbcType=INTEGER},
+            </if>
+            <if test="counterPrice != null">
+                #{counterPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="extraPrice != null">
+                #{extraPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="isNew != null">
+                #{isNew,jdbcType=BIT},
+            </if>
+            <if test="goodsUnit != null">
+                #{goodsUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="primaryPicUrl != null">
+                #{primaryPicUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="listPicUrl != null">
+                #{listPicUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="retailPrice != null">
+                #{retailPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="sellVolume != null">
+                #{sellVolume,jdbcType=INTEGER},
+            </if>
+            <if test="primaryProductId != null">
+                #{primaryProductId,jdbcType=INTEGER},
+            </if>
+            <if test="unitPrice != null">
+                #{unitPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="promotionDesc != null">
+                #{promotionDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="promotionTag != null">
+                #{promotionTag,jdbcType=VARCHAR},
+            </if>
+            <if test="appExclusivePrice != null">
+                #{appExclusivePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="isAppExclusive != null">
+                #{isAppExclusive,jdbcType=BIT},
+            </if>
+            <if test="isLimited != null">
+                #{isLimited,jdbcType=BIT},
+            </if>
+            <if test="isHot != null">
+                #{isHot,jdbcType=BIT},
+            </if>
+            <if test="goodsDesc != null">
+                #{goodsDesc,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xie.bean.Goods">
+        update goods
+        <set>
+            <if test="categoryId != null">
+                category_id = #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsSn != null">
+                goods_sn = #{goodsSn,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null">
+                brand_id = #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsNumber != null">
+                goods_number = #{goodsNumber,jdbcType=INTEGER},
+            </if>
+            <if test="keywords != null">
+                keywords = #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsBrief != null">
+                goods_brief = #{goodsBrief,jdbcType=VARCHAR},
+            </if>
+            <if test="isOnSale != null">
+                is_on_sale = #{isOnSale,jdbcType=BIT},
+            </if>
+            <if test="addTime != null">
+                add_time = #{addTime,jdbcType=INTEGER},
+            </if>
+            <if test="sortOrder != null">
+                sort_order = #{sortOrder,jdbcType=SMALLINT},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="attributeCategory != null">
+                attribute_category = #{attributeCategory,jdbcType=INTEGER},
+            </if>
+            <if test="counterPrice != null">
+                counter_price = #{counterPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="extraPrice != null">
+                extra_price = #{extraPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="isNew != null">
+                is_new = #{isNew,jdbcType=BIT},
+            </if>
+            <if test="goodsUnit != null">
+                goods_unit = #{goodsUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="primaryPicUrl != null">
+                primary_pic_url = #{primaryPicUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="listPicUrl != null">
+                list_pic_url = #{listPicUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="retailPrice != null">
+                retail_price = #{retailPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="sellVolume != null">
+                sell_volume = #{sellVolume,jdbcType=INTEGER},
+            </if>
+            <if test="primaryProductId != null">
+                primary_product_id = #{primaryProductId,jdbcType=INTEGER},
+            </if>
+            <if test="unitPrice != null">
+                unit_price = #{unitPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="promotionDesc != null">
+                promotion_desc = #{promotionDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="promotionTag != null">
+                promotion_tag = #{promotionTag,jdbcType=VARCHAR},
+            </if>
+            <if test="appExclusivePrice != null">
+                app_exclusive_price = #{appExclusivePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="isAppExclusive != null">
+                is_app_exclusive = #{isAppExclusive,jdbcType=BIT},
+            </if>
+            <if test="isLimited != null">
+                is_limited = #{isLimited,jdbcType=BIT},
+            </if>
+            <if test="isHot != null">
+                is_hot = #{isHot,jdbcType=BIT},
+            </if>
+            <if test="goodsDesc != null">
+                goods_desc = #{goodsDesc,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xie.bean.Goods">
+    update goods
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      goods_sn = #{goodsSn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      goods_number = #{goodsNumber,jdbcType=INTEGER},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      goods_brief = #{goodsBrief,jdbcType=VARCHAR},
+      is_on_sale = #{isOnSale,jdbcType=BIT},
+      add_time = #{addTime,jdbcType=INTEGER},
+      sort_order = #{sortOrder,jdbcType=SMALLINT},
+      is_delete = #{isDelete,jdbcType=BIT},
+      attribute_category = #{attributeCategory,jdbcType=INTEGER},
+      counter_price = #{counterPrice,jdbcType=DECIMAL},
+      extra_price = #{extraPrice,jdbcType=DECIMAL},
+      is_new = #{isNew,jdbcType=BIT},
+      goods_unit = #{goodsUnit,jdbcType=VARCHAR},
+      primary_pic_url = #{primaryPicUrl,jdbcType=VARCHAR},
+      list_pic_url = #{listPicUrl,jdbcType=VARCHAR},
+      retail_price = #{retailPrice,jdbcType=DECIMAL},
+      sell_volume = #{sellVolume,jdbcType=INTEGER},
+      primary_product_id = #{primaryProductId,jdbcType=INTEGER},
+      unit_price = #{unitPrice,jdbcType=DECIMAL},
+      promotion_desc = #{promotionDesc,jdbcType=VARCHAR},
+      promotion_tag = #{promotionTag,jdbcType=VARCHAR},
+      app_exclusive_price = #{appExclusivePrice,jdbcType=DECIMAL},
+      is_app_exclusive = #{isAppExclusive,jdbcType=BIT},
+      is_limited = #{isLimited,jdbcType=BIT},
+      is_hot = #{isHot,jdbcType=BIT},
+      goods_desc = #{goodsDesc,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.xie.bean.Goods">
+    update goods
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      goods_sn = #{goodsSn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      goods_number = #{goodsNumber,jdbcType=INTEGER},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      goods_brief = #{goodsBrief,jdbcType=VARCHAR},
+      is_on_sale = #{isOnSale,jdbcType=BIT},
+      add_time = #{addTime,jdbcType=INTEGER},
+      sort_order = #{sortOrder,jdbcType=SMALLINT},
+      is_delete = #{isDelete,jdbcType=BIT},
+      attribute_category = #{attributeCategory,jdbcType=INTEGER},
+      counter_price = #{counterPrice,jdbcType=DECIMAL},
+      extra_price = #{extraPrice,jdbcType=DECIMAL},
+      is_new = #{isNew,jdbcType=BIT},
+      goods_unit = #{goodsUnit,jdbcType=VARCHAR},
+      primary_pic_url = #{primaryPicUrl,jdbcType=VARCHAR},
+      list_pic_url = #{listPicUrl,jdbcType=VARCHAR},
+      retail_price = #{retailPrice,jdbcType=DECIMAL},
+      sell_volume = #{sellVolume,jdbcType=INTEGER},
+      primary_product_id = #{primaryProductId,jdbcType=INTEGER},
+      unit_price = #{unitPrice,jdbcType=DECIMAL},
+      promotion_desc = #{promotionDesc,jdbcType=VARCHAR},
+      promotion_tag = #{promotionTag,jdbcType=VARCHAR},
+      app_exclusive_price = #{appExclusivePrice,jdbcType=DECIMAL},
+      is_app_exclusive = #{isAppExclusive,jdbcType=BIT},
+      is_limited = #{isLimited,jdbcType=BIT},
+      is_hot = #{isHot,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

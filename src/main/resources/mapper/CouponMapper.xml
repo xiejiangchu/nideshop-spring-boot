@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xie.mapper.CouponMapper" >
+  <resultMap id="BaseResultMap" type="com.xie.bean.Coupon" >
+    <id column="id" property="id" jdbcType="SMALLINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type_money" property="typeMoney" jdbcType="DECIMAL" />
+    <result column="send_type" property="sendType" jdbcType="TINYINT" />
+    <result column="min_amount" property="minAmount" jdbcType="DECIMAL" />
+    <result column="max_amount" property="maxAmount" jdbcType="DECIMAL" />
+    <result column="send_start_date" property="sendStartDate" jdbcType="INTEGER" />
+    <result column="send_end_date" property="sendEndDate" jdbcType="INTEGER" />
+    <result column="use_start_date" property="useStartDate" jdbcType="INTEGER" />
+    <result column="use_end_date" property="useEndDate" jdbcType="INTEGER" />
+    <result column="min_goods_amount" property="minGoodsAmount" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, type_money, send_type, min_amount, max_amount, send_start_date, send_end_date, 
+    use_start_date, use_end_date, min_goods_amount
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from coupon
+    where id = #{id,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from coupon
+    where id = #{id,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.xie.bean.Coupon" >
+    insert into coupon (id, name, type_money, 
+      send_type, min_amount, max_amount, 
+      send_start_date, send_end_date, use_start_date, 
+      use_end_date, min_goods_amount)
+    values (#{id,jdbcType=SMALLINT}, #{name,jdbcType=VARCHAR}, #{typeMoney,jdbcType=DECIMAL}, 
+      #{sendType,jdbcType=TINYINT}, #{minAmount,jdbcType=DECIMAL}, #{maxAmount,jdbcType=DECIMAL}, 
+      #{sendStartDate,jdbcType=INTEGER}, #{sendEndDate,jdbcType=INTEGER}, #{useStartDate,jdbcType=INTEGER}, 
+      #{useEndDate,jdbcType=INTEGER}, #{minGoodsAmount,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xie.bean.Coupon" >
+    insert into coupon
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="typeMoney != null" >
+        type_money,
+      </if>
+      <if test="sendType != null" >
+        send_type,
+      </if>
+      <if test="minAmount != null" >
+        min_amount,
+      </if>
+      <if test="maxAmount != null" >
+        max_amount,
+      </if>
+      <if test="sendStartDate != null" >
+        send_start_date,
+      </if>
+      <if test="sendEndDate != null" >
+        send_end_date,
+      </if>
+      <if test="useStartDate != null" >
+        use_start_date,
+      </if>
+      <if test="useEndDate != null" >
+        use_end_date,
+      </if>
+      <if test="minGoodsAmount != null" >
+        min_goods_amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=SMALLINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="typeMoney != null" >
+        #{typeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="sendType != null" >
+        #{sendType,jdbcType=TINYINT},
+      </if>
+      <if test="minAmount != null" >
+        #{minAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="maxAmount != null" >
+        #{maxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="sendStartDate != null" >
+        #{sendStartDate,jdbcType=INTEGER},
+      </if>
+      <if test="sendEndDate != null" >
+        #{sendEndDate,jdbcType=INTEGER},
+      </if>
+      <if test="useStartDate != null" >
+        #{useStartDate,jdbcType=INTEGER},
+      </if>
+      <if test="useEndDate != null" >
+        #{useEndDate,jdbcType=INTEGER},
+      </if>
+      <if test="minGoodsAmount != null" >
+        #{minGoodsAmount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xie.bean.Coupon" >
+    update coupon
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="typeMoney != null" >
+        type_money = #{typeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="sendType != null" >
+        send_type = #{sendType,jdbcType=TINYINT},
+      </if>
+      <if test="minAmount != null" >
+        min_amount = #{minAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="maxAmount != null" >
+        max_amount = #{maxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="sendStartDate != null" >
+        send_start_date = #{sendStartDate,jdbcType=INTEGER},
+      </if>
+      <if test="sendEndDate != null" >
+        send_end_date = #{sendEndDate,jdbcType=INTEGER},
+      </if>
+      <if test="useStartDate != null" >
+        use_start_date = #{useStartDate,jdbcType=INTEGER},
+      </if>
+      <if test="useEndDate != null" >
+        use_end_date = #{useEndDate,jdbcType=INTEGER},
+      </if>
+      <if test="minGoodsAmount != null" >
+        min_goods_amount = #{minGoodsAmount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xie.bean.Coupon" >
+    update coupon
+    set name = #{name,jdbcType=VARCHAR},
+      type_money = #{typeMoney,jdbcType=DECIMAL},
+      send_type = #{sendType,jdbcType=TINYINT},
+      min_amount = #{minAmount,jdbcType=DECIMAL},
+      max_amount = #{maxAmount,jdbcType=DECIMAL},
+      send_start_date = #{sendStartDate,jdbcType=INTEGER},
+      send_end_date = #{sendEndDate,jdbcType=INTEGER},
+      use_start_date = #{useStartDate,jdbcType=INTEGER},
+      use_end_date = #{useEndDate,jdbcType=INTEGER},
+      min_goods_amount = #{minGoodsAmount,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+</mapper>

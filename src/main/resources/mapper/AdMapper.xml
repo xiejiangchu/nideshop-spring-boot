@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xie.mapper.AdMapper">
+    <resultMap id="BaseResultMap" type="com.xie.bean.Ad">
+        <id column="id" property="id" jdbcType="SMALLINT"/>
+        <result column="ad_position_id" property="adPositionId" jdbcType="SMALLINT"/>
+        <result column="media_type" property="mediaType" jdbcType="TINYINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="link" property="link" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="end_time" property="endTime" jdbcType="INTEGER"/>
+        <result column="enabled" property="enabled" jdbcType="TINYINT"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.xie.bean.Ad" extends="BaseResultMap">
+        <result column="image_url" property="imageUrl" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, ad_position_id, media_type, name, link, content, end_time, enabled
+  </sql>
+    <sql id="Blob_Column_List">
+    image_url
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Short">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from ad
+        where id = #{id,jdbcType=SMALLINT}
+    </select>
+    <select id="selectByPosition" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from ad
+        where ad_position_id = #{position,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    delete from ad
+    where id = #{id,jdbcType=SMALLINT}
+  </delete>
+    <insert id="insert" parameterType="com.xie.bean.Ad">
+    insert into ad (id, ad_position_id, media_type, 
+      name, link, content, 
+      end_time, enabled, image_url
+      )
+    values (#{id,jdbcType=SMALLINT}, #{adPositionId,jdbcType=SMALLINT}, #{mediaType,jdbcType=TINYINT}, 
+      #{name,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=INTEGER}, #{enabled,jdbcType=TINYINT}, #{imageUrl,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.xie.bean.Ad">
+        insert into ad
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="adPositionId != null">
+                ad_position_id,
+            </if>
+            <if test="mediaType != null">
+                media_type,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="link != null">
+                link,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="enabled != null">
+                enabled,
+            </if>
+            <if test="imageUrl != null">
+                image_url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=SMALLINT},
+            </if>
+            <if test="adPositionId != null">
+                #{adPositionId,jdbcType=SMALLINT},
+            </if>
+            <if test="mediaType != null">
+                #{mediaType,jdbcType=TINYINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="link != null">
+                #{link,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=TINYINT},
+            </if>
+            <if test="imageUrl != null">
+                #{imageUrl,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xie.bean.Ad">
+        update ad
+        <set>
+            <if test="adPositionId != null">
+                ad_position_id = #{adPositionId,jdbcType=SMALLINT},
+            </if>
+            <if test="mediaType != null">
+                media_type = #{mediaType,jdbcType=TINYINT},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="link != null">
+                link = #{link,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                enabled = #{enabled,jdbcType=TINYINT},
+            </if>
+            <if test="imageUrl != null">
+                image_url = #{imageUrl,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=SMALLINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xie.bean.Ad">
+    update ad
+    set ad_position_id = #{adPositionId,jdbcType=SMALLINT},
+      media_type = #{mediaType,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=INTEGER},
+      enabled = #{enabled,jdbcType=TINYINT},
+      image_url = #{imageUrl,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.xie.bean.Ad">
+    update ad
+    set ad_position_id = #{adPositionId,jdbcType=SMALLINT},
+      media_type = #{mediaType,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=INTEGER},
+      enabled = #{enabled,jdbcType=TINYINT}
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+</mapper>

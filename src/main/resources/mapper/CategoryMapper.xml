@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xie.mapper.CategoryMapper">
+    <resultMap id="BaseResultMap" type="com.xie.bean.Category">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="keywords" property="keywords" jdbcType="VARCHAR"/>
+        <result column="front_desc" property="frontDesc" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+        <result column="sort_order" property="sortOrder" jdbcType="BIT"/>
+        <result column="show_index" property="showIndex" jdbcType="BIT"/>
+        <result column="is_show" property="isShow" jdbcType="BIT"/>
+        <result column="banner_url" property="bannerUrl" jdbcType="VARCHAR"/>
+        <result column="icon_url" property="iconUrl" jdbcType="VARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="wap_banner_url" property="wapBannerUrl" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="front_name" property="frontName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMapShort" type="com.xie.bean.CategoryShort">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, name, keywords, front_desc, parent_id, sort_order, show_index, is_show, banner_url, 
+    icon_url, img_url, wap_banner_url, level, type, front_name
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from category
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="selectMainCategory" resultMap="BaseResultMapShort">
+        select
+        <include refid="Base_Column_List"/>
+        from category
+        WHERE parent_id=0 and name != '推荐'
+    </select>
+
+    <select id="selectByParents" resultMap="BaseResultMapShort">
+        select
+        <include refid="Base_Column_List"/>
+        from category
+        WHERE parent_id IN
+        <foreach collection="parent_ids" open="(" close=")" item="parent_id" separator=",">
+            #{parent_id,jdbcType=INTEGER}
+        </foreach>
+    </select>
+
+    <select id="selectByParent" resultMap="BaseResultMapShort">
+        select
+        <include refid="Base_Column_List"/>
+        from category
+        WHERE parent_id={parent_id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from category
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.xie.bean.Category">
+    insert into category (id, name, keywords, 
+      front_desc, parent_id, sort_order, 
+      show_index, is_show, banner_url, 
+      icon_url, img_url, wap_banner_url, 
+      level, type, front_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
+      #{frontDesc,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{sortOrder,jdbcType=BIT}, 
+      #{showIndex,jdbcType=BIT}, #{isShow,jdbcType=BIT}, #{bannerUrl,jdbcType=VARCHAR}, 
+      #{iconUrl,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, #{wapBannerUrl,jdbcType=VARCHAR}, 
+      #{level,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{frontName,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.xie.bean.Category">
+        insert into category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="keywords != null">
+                keywords,
+            </if>
+            <if test="frontDesc != null">
+                front_desc,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="sortOrder != null">
+                sort_order,
+            </if>
+            <if test="showIndex != null">
+                show_index,
+            </if>
+            <if test="isShow != null">
+                is_show,
+            </if>
+            <if test="bannerUrl != null">
+                banner_url,
+            </if>
+            <if test="iconUrl != null">
+                icon_url,
+            </if>
+            <if test="imgUrl != null">
+                img_url,
+            </if>
+            <if test="wapBannerUrl != null">
+                wap_banner_url,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="frontName != null">
+                front_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="keywords != null">
+                #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="frontDesc != null">
+                #{frontDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="sortOrder != null">
+                #{sortOrder,jdbcType=BIT},
+            </if>
+            <if test="showIndex != null">
+                #{showIndex,jdbcType=BIT},
+            </if>
+            <if test="isShow != null">
+                #{isShow,jdbcType=BIT},
+            </if>
+            <if test="bannerUrl != null">
+                #{bannerUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="iconUrl != null">
+                #{iconUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="wapBannerUrl != null">
+                #{wapBannerUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="frontName != null">
+                #{frontName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xie.bean.Category">
+        update category
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="keywords != null">
+                keywords = #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="frontDesc != null">
+                front_desc = #{frontDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="sortOrder != null">
+                sort_order = #{sortOrder,jdbcType=BIT},
+            </if>
+            <if test="showIndex != null">
+                show_index = #{showIndex,jdbcType=BIT},
+            </if>
+            <if test="isShow != null">
+                is_show = #{isShow,jdbcType=BIT},
+            </if>
+            <if test="bannerUrl != null">
+                banner_url = #{bannerUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="iconUrl != null">
+                icon_url = #{iconUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                img_url = #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="wapBannerUrl != null">
+                wap_banner_url = #{wapBannerUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="frontName != null">
+                front_name = #{frontName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xie.bean.Category">
+    update category
+    set name = #{name,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      front_desc = #{frontDesc,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      sort_order = #{sortOrder,jdbcType=BIT},
+      show_index = #{showIndex,jdbcType=BIT},
+      is_show = #{isShow,jdbcType=BIT},
+      banner_url = #{bannerUrl,jdbcType=VARCHAR},
+      icon_url = #{iconUrl,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      wap_banner_url = #{wapBannerUrl,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      front_name = #{frontName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

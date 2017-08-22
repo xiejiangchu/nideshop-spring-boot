@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xie.mapper.RegionMapper" >
+  <resultMap id="BaseResultMap" type="com.xie.bean.Region" >
+    <id column="id" property="id" jdbcType="SMALLINT" />
+    <result column="parent_id" property="parentId" jdbcType="SMALLINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="BIT" />
+    <result column="agency_id" property="agencyId" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, parent_id, name, type, agency_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from region
+    where id = #{id,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from region
+    where id = #{id,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.xie.bean.Region" >
+    insert into region (id, parent_id, name, 
+      type, agency_id)
+    values (#{id,jdbcType=SMALLINT}, #{parentId,jdbcType=SMALLINT}, #{name,jdbcType=VARCHAR}, 
+      #{type,jdbcType=BIT}, #{agencyId,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xie.bean.Region" >
+    insert into region
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="agencyId != null" >
+        agency_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=SMALLINT},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=SMALLINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="agencyId != null" >
+        #{agencyId,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xie.bean.Region" >
+    update region
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=SMALLINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=BIT},
+      </if>
+      <if test="agencyId != null" >
+        agency_id = #{agencyId,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xie.bean.Region" >
+    update region
+    set parent_id = #{parentId,jdbcType=SMALLINT},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=BIT},
+      agency_id = #{agencyId,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+</mapper>

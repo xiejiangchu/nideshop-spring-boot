@@ -1,0 +1,89 @@
+apply plugin: 'java'
+sourceCompatibility = 8
+targetCompatibility = 8
+
+buildscript {
+    repositories {
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public"
+        }
+        maven {
+            url "http://mvnrepo.tae.taobao.com/content/groups/public/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+    }
+}
+apply plugin: 'groovy'
+apply plugin: 'org.springframework.boot'
+
+repositories {
+    maven {
+        url "http://maven.aliyun.com/nexus/content/groups/public"
+    }
+    maven {
+        url "http://mvnrepo.tae.taobao.com/content/groups/public/"
+    }
+    jcenter()
+}
+
+bootRun {
+    addResources = true
+//    args '--debug'
+}
+
+bootRepackage {
+    mainClass = 'com.xie.Booter'
+    executable = true
+}
+
+dependencies {
+    compile fileTree(dir: 'lib', includes: ['*.jar'])
+    compile "org.springframework.boot:spring-boot-starter-test:1.5.2.RELEASE"
+    compile "org.springframework.boot:spring-boot-starter-web:1.5.2.RELEASE"
+//    compile 'org.springframework.boot:spring-boot-devtools:1.5.2.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf:1.5.2.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-security:1.5.2.RELEASE'
+//    compile "org.springframework.security.oauth:spring-security-oauth2:2.0.12.RELEASE"
+//    compile 'org.springframework.boot:spring-boot-starter-redis:1.5.2.RELEASE'
+//    compile 'org.springframework.session:spring-session:1.2.2.RELEASE'
+    // https://mvnrepository.com/artifact/javax.persistence/persistence-api
+    compile group: 'javax.persistence', name: 'persistence-api', version: '1.0'
+    compile 'mysql:mysql-connector-java:5.1.39'
+    /** 配置mybatis 数据源  */
+    compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.2.0")
+    compile 'org.springframework.boot:spring-boot-starter-remote-shell'
+    /** mybatis分页插件 */
+    compile 'com.github.pagehelper:pagehelper:4.1.6'
+    /** -Swagger */
+    compile("io.springfox:springfox-swagger-ui:2.2.2")
+    compile("io.springfox:springfox-swagger2:2.2.2")
+    /** http 请求类*/
+//    compile 'httpcomponents-httpcore:httpcore:4.0-alpha6'
+//    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
+    compile 'dom4j:dom4j:1.6.1'
+    compile 'com.alibaba:fastjson:1.2.21'
+    compile 'com.thoughtworks.xstream:xstream:1.4.7'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.7'
+    compile group: 'joda-time', name: 'joda-time', version: '2.9.7'
+    /**阿里百川多媒体*/
+    compile 'com.alibaba.media:sdk:1.2.7'
+    compile 'commons-io:commons-io:2.4'
+    compile("org.webjars:html5shiv:3.7.2")
+    compile("org.webjars:respond:1.4.2")
+    compile("org.webjars:ionicons:2.0.1")
+    compile("org.webjars:bootstrap:3.3.7")
+    compile("org.webjars:jquery:3.1.0")
+    compile("org.webjars:AdminLTE:2.3.8")
+    compile("org.webjars:momentjs:2.17.1")
+    compile("org.webjars:angularjs:1.6.1")
+    compile("org.webjars:angular-ui-router:1.0.0-beta.3")
+    compile("org.webjars:font-awesome:4.7.0")
+    compile('net.sourceforge.nekohtml:nekohtml:1.9.21')
+    compile('org.bouncycastle:bcprov-jdk15on:1.56')
+
+    compile 'com.github.binarywang:weixin-java-mp:2.6.0'
+    compile 'com.github.binarywang:weixin-java-pay:2.6.0'
+
+}

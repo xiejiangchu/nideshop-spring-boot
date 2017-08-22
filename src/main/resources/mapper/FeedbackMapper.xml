@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xie.mapper.FeedbackMapper" >
+  <resultMap id="BaseResultMap" type="com.xie.bean.Feedback" >
+    <id column="msg_id" property="msgId" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="msg_title" property="msgTitle" jdbcType="VARCHAR" />
+    <result column="msg_type" property="msgType" jdbcType="BIT" />
+    <result column="msg_status" property="msgStatus" jdbcType="BIT" />
+    <result column="msg_time" property="msgTime" jdbcType="INTEGER" />
+    <result column="message_img" property="messageImg" jdbcType="VARCHAR" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="msg_area" property="msgArea" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.xie.bean.Feedback" extends="BaseResultMap" >
+    <result column="msg_content" property="msgContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    msg_id, parent_id, user_id, user_name, user_email, msg_title, msg_type, msg_status, 
+    msg_time, message_img, order_id, msg_area
+  </sql>
+  <sql id="Blob_Column_List" >
+    msg_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from feedback
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from feedback
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xie.bean.Feedback" >
+    insert into feedback (msg_id, parent_id, user_id, 
+      user_name, user_email, msg_title, 
+      msg_type, msg_status, msg_time, 
+      message_img, order_id, msg_area, 
+      msg_content)
+    values (#{msgId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{userName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{msgTitle,jdbcType=VARCHAR}, 
+      #{msgType,jdbcType=BIT}, #{msgStatus,jdbcType=BIT}, #{msgTime,jdbcType=INTEGER}, 
+      #{messageImg,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER}, #{msgArea,jdbcType=BIT}, 
+      #{msgContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xie.bean.Feedback" >
+    insert into feedback
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="msgId != null" >
+        msg_id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userEmail != null" >
+        user_email,
+      </if>
+      <if test="msgTitle != null" >
+        msg_title,
+      </if>
+      <if test="msgType != null" >
+        msg_type,
+      </if>
+      <if test="msgStatus != null" >
+        msg_status,
+      </if>
+      <if test="msgTime != null" >
+        msg_time,
+      </if>
+      <if test="messageImg != null" >
+        message_img,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="msgArea != null" >
+        msg_area,
+      </if>
+      <if test="msgContent != null" >
+        msg_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="msgId != null" >
+        #{msgId,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="msgTitle != null" >
+        #{msgTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="msgType != null" >
+        #{msgType,jdbcType=BIT},
+      </if>
+      <if test="msgStatus != null" >
+        #{msgStatus,jdbcType=BIT},
+      </if>
+      <if test="msgTime != null" >
+        #{msgTime,jdbcType=INTEGER},
+      </if>
+      <if test="messageImg != null" >
+        #{messageImg,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="msgArea != null" >
+        #{msgArea,jdbcType=BIT},
+      </if>
+      <if test="msgContent != null" >
+        #{msgContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xie.bean.Feedback" >
+    update feedback
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="msgTitle != null" >
+        msg_title = #{msgTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="msgType != null" >
+        msg_type = #{msgType,jdbcType=BIT},
+      </if>
+      <if test="msgStatus != null" >
+        msg_status = #{msgStatus,jdbcType=BIT},
+      </if>
+      <if test="msgTime != null" >
+        msg_time = #{msgTime,jdbcType=INTEGER},
+      </if>
+      <if test="messageImg != null" >
+        message_img = #{messageImg,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="msgArea != null" >
+        msg_area = #{msgArea,jdbcType=BIT},
+      </if>
+      <if test="msgContent != null" >
+        msg_content = #{msgContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xie.bean.Feedback" >
+    update feedback
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      msg_title = #{msgTitle,jdbcType=VARCHAR},
+      msg_type = #{msgType,jdbcType=BIT},
+      msg_status = #{msgStatus,jdbcType=BIT},
+      msg_time = #{msgTime,jdbcType=INTEGER},
+      message_img = #{messageImg,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=INTEGER},
+      msg_area = #{msgArea,jdbcType=BIT},
+      msg_content = #{msgContent,jdbcType=LONGVARCHAR}
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xie.bean.Feedback" >
+    update feedback
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      msg_title = #{msgTitle,jdbcType=VARCHAR},
+      msg_type = #{msgType,jdbcType=BIT},
+      msg_status = #{msgStatus,jdbcType=BIT},
+      msg_time = #{msgTime,jdbcType=INTEGER},
+      message_img = #{messageImg,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=INTEGER},
+      msg_area = #{msgArea,jdbcType=BIT}
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </update>
+</mapper>
