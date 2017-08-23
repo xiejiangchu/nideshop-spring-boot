@@ -1,5 +1,7 @@
 package com.xie.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.Order;
 import com.xie.mapper.OrderMapper;
 import com.xie.service.OrderService;
@@ -43,5 +45,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public int updateByPrimaryKey(Order record) {
         return orderMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public PageInfo<Order> selectByUid(Integer uid, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Order> page = new PageInfo<Order>(orderMapper.selectByUid(uid));
+        return page;
     }
 }

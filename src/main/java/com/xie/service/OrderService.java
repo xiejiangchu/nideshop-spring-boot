@@ -1,5 +1,6 @@
 package com.xie.service;
 
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.Order;
 
 /**
@@ -17,4 +18,6 @@ public interface OrderService {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    PageInfo<Order> selectByUid(Integer uid,int pageNum, int pageSize);
 }
