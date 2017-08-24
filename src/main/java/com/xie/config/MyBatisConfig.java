@@ -37,21 +37,12 @@ public class MyBatisConfig {
         return DataSourceBuilder.create().build();
     }
 
-    /**
-     * 配置事务
-     *
-     * @param dataSource 数据源
-     * @return DataSourceTransactionManager
-     */
     @Bean(name = "transactionManager")
     public DataSourceTransactionManager transactionManager(@Qualifier(value = "dataSource") DataSource dataSource) throws Exception {
         return new DataSourceTransactionManager(dataSource);
     }
 
-    @Bean(name = "AES")
-    public AES aes() {
-        return new AES();
-    }
+
 
 
     @Bean(name = "jdbcTemplate")
@@ -73,6 +64,11 @@ public class MyBatisConfig {
 
 
         return sqlSessionFactoryBean;
+    }
+
+    @Bean(name = "AES")
+    public AES aes() {
+        return new AES();
     }
 
     @Bean(name = "bCryptPasswordEncoder")

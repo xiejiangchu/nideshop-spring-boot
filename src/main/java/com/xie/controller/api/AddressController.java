@@ -21,8 +21,8 @@ public class AddressController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    BaseResponse getUser(@RequestParam("uid") int uid) {
+    BaseResponse list(@RequestParam("uid") int uid) {
 
-        return BaseResponse.ok(addressService.selectByUid(uid));
+        return BaseResponse.ok(addressService.selectWithNameByUid(uid));
     }
 }

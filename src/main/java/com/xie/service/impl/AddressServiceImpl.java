@@ -1,6 +1,7 @@
 package com.xie.service.impl;
 
 import com.xie.bean.Address;
+import com.xie.bean.AddressWithName;
 import com.xie.mapper.AddressMapper;
 import com.xie.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,13 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
+    public AddressWithName selectWithNameByPrimaryKey(Integer id) {
+        AddressWithName addressWithName = addressMapper.selectWithNameByPrimaryKey(id);
+        addressWithName.setFull_region(addressWithName.getProvince_name() + addressWithName.getCity_name() + addressWithName.getDistrict_name());
+        return addressWithName;
+    }
+
+    @Override
     public int updateByPrimaryKeySelective(Address record) {
         return addressMapper.updateByPrimaryKeySelective(record);
     }
@@ -50,6 +58,13 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public List<Address> selectByUid(Integer uid) {
         return addressMapper.selectByUid(uid);
+    }
+
+    @Override
+    public List<AddressWithName> selectWithNameByUid(Integer uid) {
+        List<AddressWithName> list = addressMapper.selectWithNameByUid(uid);
+        list.forEach(addressWithName -> addressWithName.setFull_region(addressWithName.getProvince_name() + addressWithName.getCity_name() + addressWithName.getDistrict_name()));
+        return list;
     }
 
     @Override

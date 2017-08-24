@@ -13,6 +13,21 @@
         <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
         <result column="is_default" property="isDefault" jdbcType="BIT"/>
     </resultMap>
+    <resultMap id="BaseResultMapWithName" type="com.xie.bean.AddressWithName">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="country_id" property="countryId" jdbcType="SMALLINT"/>
+        <result column="province_id" property="provinceId" jdbcType="SMALLINT"/>
+        <result column="city_id" property="cityId" jdbcType="SMALLINT"/>
+        <result column="district_id" property="districtId" jdbcType="SMALLINT"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="province_name" property="province_name" jdbcType="VARCHAR"/>
+        <result column="city_name" property="city_name" jdbcType="VARCHAR"/>
+        <result column="district_name" property="district_name" jdbcType="VARCHAR"/>
+        <result column="is_default" property="isDefault" jdbcType="BIT"/>
+    </resultMap>
     <sql id="Base_Column_List">
     id, name, user_id, country_id, province_id, city_id, district_id, address, mobile, 
     is_default
@@ -22,6 +37,19 @@
         <include refid="Base_Column_List"/>
         from address
         where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectWithNameByPrimaryKey" resultMap="BaseResultMapWithName" parameterType="java.lang.Integer">
+        select
+        a.id, a.name, a.user_id, a.country_id, a.province_id, a.city_id, a.district_id, a.address, a.mobile, a.is_default
+        ,r1.name as province_name
+        ,r2.name as city_name
+        ,r3.name as district_name
+        from address a
+        LEFT JOIN  region r1 ON a.province_id=r1.id
+        LEFT JOIN  region r2 ON a.city_id=r2.id
+        LEFT JOIN  region r3 ON a.district_id=r3.id
+        where a.id = #{id,jdbcType=INTEGER}
     </select>
 
     <select id="selectDefaultByUid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -36,6 +64,19 @@
         select
         <include refid="Base_Column_List"/>
         from address
+        where user_id = #{uid,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectWithNameByUid" resultMap="BaseResultMapWithName" parameterType="java.lang.Integer">
+        select
+        a.id, a.name, a.user_id, a.country_id, a.province_id, a.city_id, a.district_id, a.address, a.mobile, a.is_default
+        ,r1.name as province_name
+        ,r2.name as city_name
+        ,r3.name as district_name
+        from address a
+        LEFT JOIN  region r1 ON a.province_id=r1.id
+        LEFT JOIN  region r2 ON a.city_id=r2.id
+        LEFT JOIN  region r3 ON a.district_id=r3.id
         where user_id = #{uid,jdbcType=INTEGER}
     </select>
 

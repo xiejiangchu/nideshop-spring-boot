@@ -48,7 +48,6 @@ dependencies {
 //    compile "org.springframework.security.oauth:spring-security-oauth2:2.0.12.RELEASE"
 //    compile 'org.springframework.boot:spring-boot-starter-redis:1.5.2.RELEASE'
 //    compile 'org.springframework.session:spring-session:1.2.2.RELEASE'
-    // https://mvnrepository.com/artifact/javax.persistence/persistence-api
     compile group: 'javax.persistence', name: 'persistence-api', version: '1.0'
     compile 'mysql:mysql-connector-java:5.1.39'
     /** 配置mybatis 数据源  */
@@ -83,7 +82,8 @@ dependencies {
     compile('net.sourceforge.nekohtml:nekohtml:1.9.21')
     compile('org.bouncycastle:bcprov-jdk15on:1.56')
 
-    compile 'com.github.binarywang:weixin-java-mp:2.6.0'
-    compile 'com.github.binarywang:weixin-java-pay:2.6.0'
+    compile 'com.github.binarywang:weixin-java-mp:2.7.0'
+    compile 'com.github.binarywang:weixin-java-pay:2.7.0'
+    compile 'org.jodd:jodd-http:3.8.6'
 
 }
