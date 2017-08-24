@@ -88,15 +88,15 @@
         <selectKey resultType="Java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-    insert into address (id, name, user_id, 
-      country_id, province_id, city_id, 
-      district_id, address, mobile, 
-      is_default)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
-      #{countryId,jdbcType=SMALLINT}, #{provinceId,jdbcType=SMALLINT}, #{cityId,jdbcType=SMALLINT}, 
-      #{districtId,jdbcType=SMALLINT}, #{address,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{isDefault,jdbcType=BIT})
-  </insert>
+        insert into address (id, name, user_id,
+        country_id, province_id, city_id,
+        district_id, address, mobile,
+        is_default)
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
+        #{countryId,jdbcType=SMALLINT}, #{provinceId,jdbcType=SMALLINT}, #{cityId,jdbcType=SMALLINT},
+        #{districtId,jdbcType=SMALLINT}, #{address,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+        #{isDefault,jdbcType=BIT})
+    </insert>
     <insert id="insertSelective" parameterType="com.xie.bean.Address">
         insert into address
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -198,16 +198,20 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.xie.bean.Address">
-    update address
-    set name = #{name,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=INTEGER},
-      country_id = #{countryId,jdbcType=SMALLINT},
-      province_id = #{provinceId,jdbcType=SMALLINT},
-      city_id = #{cityId,jdbcType=SMALLINT},
-      district_id = #{districtId,jdbcType=SMALLINT},
-      address = #{address,jdbcType=VARCHAR},
-      mobile = #{mobile,jdbcType=VARCHAR},
-      is_default = #{isDefault,jdbcType=BIT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update address
+        set name = #{name,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=INTEGER},
+        country_id = #{countryId,jdbcType=SMALLINT},
+        province_id = #{provinceId,jdbcType=SMALLINT},
+        city_id = #{cityId,jdbcType=SMALLINT},
+        district_id = #{districtId,jdbcType=SMALLINT},
+        address = #{address,jdbcType=VARCHAR},
+        mobile = #{mobile,jdbcType=VARCHAR},
+        is_default = #{isDefault,jdbcType=BIT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateDefaultByUid" parameterType="java.lang.Integer">
+        update address set is_default = 0 where user_id = #{uid,jdbcType=INTEGER}
+    </update>
 </mapper>

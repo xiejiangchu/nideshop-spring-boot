@@ -1,27 +1,32 @@
-package com.xie.config;//package com.xie.config;
-//
-//import com.fasterxml.jackson.annotation.JsonAutoDetect;
-//import com.fasterxml.jackson.annotation.PropertyAccessor;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.cache.CacheManager;
-//import org.springframework.cache.annotation.CachingConfigurerSupport;
-//import org.springframework.cache.annotation.EnableCaching;
-//import org.springframework.cache.interceptor.KeyGenerator;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.data.redis.cache.RedisCacheManager;
-//import org.springframework.data.redis.connection.RedisConnectionFactory;
-//import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-//import org.springframework.data.redis.core.RedisTemplate;
-//import org.springframework.data.redis.core.StringRedisTemplate;
-//import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-//import redis.clients.jedis.JedisPoolConfig;
-//
-//@Configuration
-//@EnableCaching
-//public class RedisConfig extends CachingConfigurerSupport {
-//
+package com.xie.config;
+
+import com.google.common.cache.CacheBuilder;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.guava.GuavaCacheManager;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.concurrent.TimeUnit;
+
+/**
+ * Created by xie on 17/8/24.
+ */
+@Configuration
+public class CacheConfig {
+    public static final int DEFAULT_MAXSIZE = 50000;
+    public static final int DEFAULT_TTL = 10;
+
+    @Bean
+    public CacheManager cacheManager() {
+        GuavaCacheManager cacheManager = new GuavaCacheManager();
+        cacheManager.setCacheBuilder(
+                CacheBuilder.newBuilder().
+                        expireAfterWrite(DEFAULT_TTL, TimeUnit.SECONDS).
+                        maximumSize(DEFAULT_MAXSIZE));
+        return cacheManager;
+    }
+
+
 //    @Value("${spring.redis.host}")
 //    private String host;
 //    @Value("${spring.redis.port}")
@@ -105,4 +110,6 @@ package com.xie.config;//package com.xie.config;
 //        return taskTypeCacheManager;
 //    }
 //
-//}
+}
+
+

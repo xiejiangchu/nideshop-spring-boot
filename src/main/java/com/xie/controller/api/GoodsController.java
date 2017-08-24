@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/goods")
-public class GoodsController {
+public class GoodsController extends BaseController {
 
     @Autowired
     private GoodsService goodsService;

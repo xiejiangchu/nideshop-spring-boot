@@ -25,4 +25,6 @@ public interface AddressMapper {
     Address selectDefaultByUid(Integer id);
 
     AddressWithName selectWithNameByPrimaryKey(Integer id);
+
+    int updateDefaultByUid(Integer uid);
 }

@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @ComponentScan
 @EnableAutoConfiguration
+@EnableCaching
 @MapperScan("com.xie.mapper")
 public class Booter implements CommandLineRunner {
 

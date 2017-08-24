@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping(value = "/address")
-public class AddressController {
+public class AddressController extends BaseController {
 
     @Autowired
     private AddressService addressService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    BaseResponse list(@RequestParam("uid") int uid) {
+    BaseResponse list() {
 
-        return BaseResponse.ok(addressService.selectWithNameByUid(uid));
+        return BaseResponse.ok(addressService.selectWithNameByUid(getUid()));
     }
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
@@ -34,7 +34,17 @@ public class AddressController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
     BaseResponse save(@RequestBody Address address) {
+        int clean = addressService.updateDefaultByUid(getUid());
         int result = addressService.insert(address);
         return BaseResponse.ok(addressService.selectByPrimaryKey(result));
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    BaseResponse delete(@RequestParam("id") int id) {
+        if (addressService.selectByPrimaryKey(id).getUserId() == getUid()) {
+            return BaseResponse.ok(addressService.deleteByPrimaryKey(id));
+        }
+        return BaseResponse.fail("未找到");
     }
 }

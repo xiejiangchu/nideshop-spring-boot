@@ -29,4 +29,6 @@ public interface AddressService {
     List<AddressWithName> selectWithNameByUid(Integer uid);
 
     Address selectDefaultByUid(Integer uid);
+
+    int updateDefaultByUid(Integer uid);
 }

@@ -71,4 +71,9 @@ public class AddressServiceImpl implements AddressService {
     public Address selectDefaultByUid(Integer uid) {
         return addressMapper.selectDefaultByUid(uid);
     }
+
+    @Override
+    public int updateDefaultByUid(Integer uid) {
+        return addressMapper.updateDefaultByUid(uid);
+    }
 }
