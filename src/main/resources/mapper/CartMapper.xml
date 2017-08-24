@@ -39,6 +39,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.xie.bean.Cart" >
+    <selectKey resultType="Java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID() AS id
+    </selectKey>
     insert into cart (id, user_id, session_id, 
       goods_id, goods_sn, product_id, 
       goods_name, market_price, retail_price, 

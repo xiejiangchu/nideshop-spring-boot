@@ -60,6 +60,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.xie.bean.Order">
+        <selectKey resultType="Java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
     insert into order (id, order_sn, user_id, 
       order_status, shipping_status, pay_status, 
       consignee, country, province, 

@@ -21,6 +21,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.xie.bean.Footprint" >
+      <selectKey resultType="Java.lang.Integer" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID() AS id
+      </selectKey>
     insert into footprint (id, user_id, goods_id, 
       add_time)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 

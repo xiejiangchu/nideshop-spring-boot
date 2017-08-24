@@ -20,6 +20,9 @@
     where id = #{id,jdbcType=TINYINT}
   </delete>
   <insert id="insert" parameterType="com.xie.bean.UserLevel" >
+      <selectKey resultType="Java.lang.Integer" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID() AS id
+      </selectKey>
     insert into user_level (id, name, description
       )
     values (#{id,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}

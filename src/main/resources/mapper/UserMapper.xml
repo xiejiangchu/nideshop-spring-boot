@@ -46,17 +46,20 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.xie.bean.User">
-    insert into user (id, username, password, 
-      gender, birthday, register_time, 
-      last_login_time, last_login_ip, user_level_id, 
-      nickname, mobile, register_ip, 
-      avatar, weixin_openid)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=BIT}, #{birthday,jdbcType=INTEGER}, #{registerTime,jdbcType=INTEGER}, 
-      #{lastLoginTime,jdbcType=INTEGER}, #{lastLoginIp,jdbcType=VARCHAR}, #{userLevelId,jdbcType=TINYINT}, 
-      #{nickname,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{registerIp,jdbcType=VARCHAR}, 
-      #{avatar,jdbcType=VARCHAR}, #{weixinOpenid,jdbcType=VARCHAR})
-  </insert>
+        <selectKey resultType="Java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        insert into user (id, username, password,
+        gender, birthday, register_time,
+        last_login_time, last_login_ip, user_level_id,
+        nickname, mobile, register_ip,
+        avatar, weixin_openid)
+        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+        #{gender,jdbcType=BIT}, #{birthday,jdbcType=INTEGER}, #{registerTime,jdbcType=INTEGER},
+        #{lastLoginTime,jdbcType=INTEGER}, #{lastLoginIp,jdbcType=VARCHAR}, #{userLevelId,jdbcType=TINYINT},
+        #{nickname,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{registerIp,jdbcType=VARCHAR},
+        #{avatar,jdbcType=VARCHAR}, #{weixinOpenid,jdbcType=VARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="com.xie.bean.User">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">

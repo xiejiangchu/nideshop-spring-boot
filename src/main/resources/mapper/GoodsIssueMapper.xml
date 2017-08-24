@@ -46,6 +46,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.xie.bean.GoodsIssue">
+        <selectKey resultType="Java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
     insert into goods_issue (id, question, answer, 
       goods_id)
     values (#{id,jdbcType=INTEGER}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, 

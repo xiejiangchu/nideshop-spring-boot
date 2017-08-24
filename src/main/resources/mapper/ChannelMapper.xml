@@ -29,6 +29,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.xie.bean.Channel">
+        <selectKey resultType="Java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
     insert into channel (id, name, url, 
       icon_url, sort_order)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 

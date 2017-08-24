@@ -11,6 +11,9 @@
       and role_id = #{roleId,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.xie.bean.RoleUserKey">
+        <selectKey resultType="Java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
     insert into role_user (user_id, role_id)
     values (#{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER})
   </insert>

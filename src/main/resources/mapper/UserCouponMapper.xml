@@ -23,6 +23,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.xie.bean.UserCoupon" >
+      <selectKey resultType="Java.lang.Integer" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID() AS id
+      </selectKey>
     insert into user_coupon (id, coupon_id, coupon_number, 
       user_id, used_time, order_id
       )

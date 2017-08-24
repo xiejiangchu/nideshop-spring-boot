@@ -20,6 +20,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.xie.bean.RelatedGoods" >
+      <selectKey resultType="Java.lang.Integer" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID() AS id
+      </selectKey>
     insert into related_goods (id, goods_id, related_goods_id
       )
     values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{relatedGoodsId,jdbcType=INTEGER}

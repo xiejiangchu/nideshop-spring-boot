@@ -97,6 +97,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.xie.bean.Goods">
+        <selectKey resultType="Java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
     insert into goods (id, category_id, goods_sn, 
       name, brand_id, goods_number, 
       keywords, goods_brief, is_on_sale, 

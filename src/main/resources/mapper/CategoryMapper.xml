@@ -65,6 +65,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.xie.bean.Category">
+        <selectKey resultType="Java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
     insert into category (id, name, keywords, 
       front_desc, parent_id, sort_order, 
       show_index, is_show, banner_url, 
