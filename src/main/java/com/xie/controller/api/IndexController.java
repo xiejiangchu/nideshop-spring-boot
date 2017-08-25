@@ -37,7 +37,7 @@ public class IndexController extends BaseController {
     @Autowired
     private ChannelService channelService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public BaseResponse index() {
         IndexResponse indexResponse = new IndexResponse();
