@@ -38,7 +38,7 @@
     where msg_id = #{msgId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.xie.bean.Feedback" >
-      <selectKey resultType="Java.lang.Integer" order="AFTER" keyProperty="id">
+      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
           SELECT LAST_INSERT_ID() AS id
       </selectKey>
     insert into feedback (msg_id, parent_id, user_id, 
