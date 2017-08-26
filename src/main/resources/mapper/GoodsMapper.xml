@@ -62,6 +62,37 @@
         from goods
         where id = #{id,jdbcType=INTEGER}
     </select>
+
+    <select id="selectByParams" resultMap="BaseResultMapShort">
+        select
+        id, category_id,name, list_pic_url, retail_price
+        from goods
+        where is_delete=0
+        <trim prefix="" suffix="" prefixOverrides="," suffixOverrides=",">
+            <if test="isHot!=null">
+                AND is_hot=1,
+            </if>
+            <if test="isNew!=null">
+                AND is_new=1,
+            </if>
+            <if test="categoryId!=null">
+                AND category_id=#{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="brandId!=null">
+                AND brand_id=#{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="keyword!=null">
+                AND name like '%'+#{keyword}+'%',
+            </if>
+        </trim>
+        <if test="sort!=null and sort=='price'">
+            order by retail_price ${orer}
+        </if>
+        <if test="sort!=null and sort!='price'">
+            order by id DESC
+        </if>
+    </select>
+
     <select id="selectHotGoods" resultMap="BaseResultMapShort">
         select
         id, category_id,name, list_pic_url, retail_price
@@ -74,6 +105,12 @@
         id, category_id,name, list_pic_url, retail_price
         from goods
         where is_new = 1
+    </select>
+
+    <select id="count" resultType="integer">
+        select count(1)
+        from goods
+        where is_delete= 0 AND is_on_sale= 1
     </select>
 
     <select id="selectPartialByCategory" resultMap="BaseResultMapShort">
@@ -100,29 +137,29 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-    insert into goods (id, category_id, goods_sn, 
-      name, brand_id, goods_number, 
-      keywords, goods_brief, is_on_sale, 
-      add_time, sort_order, is_delete, 
-      attribute_category, counter_price, extra_price, ``
-      is_new, goods_unit, primary_pic_url, 
-      list_pic_url, retail_price, sell_volume, 
-      primary_product_id, unit_price, promotion_desc, 
-      promotion_tag, app_exclusive_price, is_app_exclusive, 
-      is_limited, is_hot, goods_desc
-      )
-    values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{goodsSn,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{brandId,jdbcType=INTEGER}, #{goodsNumber,jdbcType=INTEGER}, 
-      #{keywords,jdbcType=VARCHAR}, #{goodsBrief,jdbcType=VARCHAR}, #{isOnSale,jdbcType=BIT}, 
-      #{addTime,jdbcType=INTEGER}, #{sortOrder,jdbcType=SMALLINT}, #{isDelete,jdbcType=BIT}, 
-      #{attributeCategory,jdbcType=INTEGER}, #{counterPrice,jdbcType=DECIMAL}, #{extraPrice,jdbcType=DECIMAL}, 
-      #{isNew,jdbcType=BIT}, #{goodsUnit,jdbcType=VARCHAR}, #{primaryPicUrl,jdbcType=VARCHAR}, 
-      #{listPicUrl,jdbcType=VARCHAR}, #{retailPrice,jdbcType=DECIMAL}, #{sellVolume,jdbcType=INTEGER}, 
-      #{primaryProductId,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL}, #{promotionDesc,jdbcType=VARCHAR}, 
-      #{promotionTag,jdbcType=VARCHAR}, #{appExclusivePrice,jdbcType=DECIMAL}, #{isAppExclusive,jdbcType=BIT}, 
-      #{isLimited,jdbcType=BIT}, #{isHot,jdbcType=BIT}, #{goodsDesc,jdbcType=LONGVARCHAR}
-      )
-  </insert>
+        insert into goods (id, category_id, goods_sn,
+        name, brand_id, goods_number,
+        keywords, goods_brief, is_on_sale,
+        add_time, sort_order, is_delete,
+        attribute_category, counter_price, extra_price, ``
+        is_new, goods_unit, primary_pic_url,
+        list_pic_url, retail_price, sell_volume,
+        primary_product_id, unit_price, promotion_desc,
+        promotion_tag, app_exclusive_price, is_app_exclusive,
+        is_limited, is_hot, goods_desc
+        )
+        values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{goodsSn,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR}, #{brandId,jdbcType=INTEGER}, #{goodsNumber,jdbcType=INTEGER},
+        #{keywords,jdbcType=VARCHAR}, #{goodsBrief,jdbcType=VARCHAR}, #{isOnSale,jdbcType=BIT},
+        #{addTime,jdbcType=INTEGER}, #{sortOrder,jdbcType=SMALLINT}, #{isDelete,jdbcType=BIT},
+        #{attributeCategory,jdbcType=INTEGER}, #{counterPrice,jdbcType=DECIMAL}, #{extraPrice,jdbcType=DECIMAL},
+        #{isNew,jdbcType=BIT}, #{goodsUnit,jdbcType=VARCHAR}, #{primaryPicUrl,jdbcType=VARCHAR},
+        #{listPicUrl,jdbcType=VARCHAR}, #{retailPrice,jdbcType=DECIMAL}, #{sellVolume,jdbcType=INTEGER},
+        #{primaryProductId,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL}, #{promotionDesc,jdbcType=VARCHAR},
+        #{promotionTag,jdbcType=VARCHAR}, #{appExclusivePrice,jdbcType=DECIMAL}, #{isAppExclusive,jdbcType=BIT},
+        #{isLimited,jdbcType=BIT}, #{isHot,jdbcType=BIT}, #{goodsDesc,jdbcType=LONGVARCHAR}
+        )
+    </insert>
     <insert id="insertSelective" parameterType="com.xie.bean.Goods">
         insert into goods
         <trim prefix="(" suffix=")" suffixOverrides=",">

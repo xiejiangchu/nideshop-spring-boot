@@ -33,4 +33,8 @@ public interface GoodsService {
 
     List<Goods> selectAllByCategory(Integer categoryId);
 
+    PageInfo<Goods> selectByParams(Integer categoryId, Integer brandId, String keyword, Integer isHot, Integer isNew, String sort, Integer order, int page, int size);
+
+    int count();
+
 }

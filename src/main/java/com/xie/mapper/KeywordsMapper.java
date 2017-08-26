@@ -3,6 +3,8 @@ package com.xie.mapper;
 import com.xie.bean.Keywords;
 import com.xie.bean.KeywordsKey;
 
+import java.util.List;
+
 public interface KeywordsMapper {
     int deleteByPrimaryKey(KeywordsKey key);
 
@@ -15,4 +17,8 @@ public interface KeywordsMapper {
     int updateByPrimaryKeySelective(Keywords record);
 
     int updateByPrimaryKey(Keywords record);
+
+    List<Keywords> defaultKeyword();
+
+    List<Keywords> hotKeyword();
 }

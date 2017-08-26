@@ -2,6 +2,8 @@ package com.xie.mapper;
 
 import com.xie.bean.SearchHistory;
 
+import java.util.List;
+
 public interface SearchHistoryMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface SearchHistoryMapper {
     int updateByPrimaryKeySelective(SearchHistory record);
 
     int updateByPrimaryKey(SearchHistory record);
+
+    List<SearchHistory> historyKeyword(int uid);
 }

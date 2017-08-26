@@ -1,5 +1,6 @@
 package com.xie.service;
 
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.Category;
 import com.xie.bean.CategoryShort;
 
@@ -21,7 +22,7 @@ public interface CategoryService {
 
     List<CategoryShort> selectByParents(List<Integer> parent_ids);
 
-    List<CategoryShort> selectMainCategory();
+    PageInfo<CategoryShort> selectMainCategory(int pageNum, int pageSize);
 
     int updateByPrimaryKeySelective(Category record);
 

@@ -78,4 +78,16 @@ public class GoodsServiceImpl implements GoodsService {
     public List<Goods> selectAllByCategory(Integer categoryId) {
         return goodsMapper.selectAllByCategory(categoryId);
     }
+
+    @Override
+    public PageInfo<Goods> selectByParams(Integer categoryId, Integer brandId, String keyword, Integer isHot, Integer isNew, String sort, Integer order, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Goods> page = new PageInfo<Goods>(goodsMapper.selectByParams(categoryId, brandId, keyword, isHot, isNew, sort, order));
+        return page;
+    }
+
+    @Override
+    public int count() {
+        return goodsMapper.count();
+    }
 }

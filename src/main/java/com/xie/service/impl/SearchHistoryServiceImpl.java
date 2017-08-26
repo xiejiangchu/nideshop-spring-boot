@@ -1,5 +1,7 @@
 package com.xie.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.SearchHistory;
 import com.xie.mapper.SearchHistoryMapper;
 import com.xie.service.SearchHistoryService;
@@ -43,5 +45,12 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
     @Override
     public int updateByPrimaryKey(SearchHistory record) {
         return searchHistoryMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public PageInfo<SearchHistory> historyKeyword(int uid,int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<SearchHistory> page = new PageInfo<SearchHistory>(searchHistoryMapper.historyKeyword(uid));
+        return page;
     }
 }

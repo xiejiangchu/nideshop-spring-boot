@@ -1,5 +1,6 @@
 package com.xie.service;
 
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.SearchHistory;
 
 public interface SearchHistoryService {
@@ -14,4 +15,6 @@ public interface SearchHistoryService {
     int updateByPrimaryKeySelective(SearchHistory record);
 
     int updateByPrimaryKey(SearchHistory record);
+
+    PageInfo<SearchHistory> historyKeyword(int uid,int pageNum,int pageSize);
 }

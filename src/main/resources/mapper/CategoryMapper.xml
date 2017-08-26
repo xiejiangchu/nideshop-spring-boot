@@ -53,11 +53,11 @@
         </foreach>
     </select>
 
-    <select id="selectByParent" resultMap="BaseResultMapShort">
+    <select id="selectByParent" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from category
-        WHERE parent_id={parent_id,jdbcType=INTEGER}
+        WHERE parent_id= #{parent_id,jdbcType=INTEGER}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

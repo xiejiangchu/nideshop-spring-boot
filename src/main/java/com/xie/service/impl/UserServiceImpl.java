@@ -37,12 +37,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int insert(User user) {
         Assert.notNull(user);
-        return userMapper.insert(user);
-    }
-
-    @Override
-    public int insertAll(User user) {
-        return userMapper.insert(user);
+        if(userMapper.insert(user)>0){
+            return user.getId();
+        }else{
+            return 0;
+        }
     }
 
     @Override

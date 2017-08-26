@@ -44,7 +44,7 @@ public class BaseController {
             MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
             return myUserDetails.getUser().getId();
         }
-        return -1;
+        return 1;
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

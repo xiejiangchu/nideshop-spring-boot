@@ -31,4 +31,6 @@ public class MallConstants {
     public final static int ERROR_POINT_NOT_ENOUGH = 80000;
     public final static int ERROR_LT_ORDER_MIN_MONEY = 80001;
     public final static int ERROR_ITEM_CHANGED = 1;
+
+    public final static String CACHE_NAME = "GUAVA_CACHE_NAME_1";
 }

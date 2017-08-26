@@ -6,6 +6,8 @@ import com.xie.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by xie on 17/8/23.
  */
@@ -48,5 +50,20 @@ public class CartServiceImpl implements CartService {
     @Override
     public int updateByPrimaryKey(Cart record) {
         return cartMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<Cart> selectByUid(Integer uid) {
+        return cartMapper.selectByUid(uid);
+    }
+
+    @Override
+    public int updateCheckedByProductId(List<Integer> productids, int checked) {
+        return cartMapper.updateCheckedByProductId(productids, checked);
+    }
+
+    @Override
+    public int deleteByUid(Integer uid) {
+        return cartMapper.deleteByUid(uid);
     }
 }

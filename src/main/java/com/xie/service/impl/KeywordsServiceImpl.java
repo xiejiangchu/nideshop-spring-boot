@@ -1,5 +1,7 @@
 package com.xie.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.Keywords;
 import com.xie.bean.KeywordsKey;
 import com.xie.mapper.KeywordsMapper;
@@ -44,5 +46,19 @@ public class KeywordsServiceImpl implements KeywordsService {
     @Override
     public int updateByPrimaryKey(Keywords record) {
         return keywordsMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public PageInfo<Keywords> defaultKeyword(int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Keywords> page = new PageInfo<Keywords>(keywordsMapper.defaultKeyword());
+        return page;
+    }
+
+    @Override
+    public PageInfo<Keywords> hotKeyword(int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Keywords> page = new PageInfo<Keywords>(keywordsMapper.hotKeyword());
+        return page;
     }
 }

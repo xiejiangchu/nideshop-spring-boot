@@ -31,6 +31,8 @@ public class User implements Serializable {
 
     private String weixinOpenid;
 
+    private String sessionId;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -143,6 +145,14 @@ public class User implements Serializable {
 
     public void setWeixinOpenid(String weixinOpenid) {
         this.weixinOpenid = weixinOpenid;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     @Override

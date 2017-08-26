@@ -1,5 +1,6 @@
 package com.xie.controller.api;
 
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.CategoryShort;
 import com.xie.response.BaseResponse;
 import com.xie.response.IndexResponse;
@@ -37,7 +38,7 @@ public class IndexController extends BaseController {
     @Autowired
     private ChannelService channelService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/index/index", method = RequestMethod.GET)
     @ResponseBody
     public BaseResponse index() {
         IndexResponse indexResponse = new IndexResponse();
@@ -47,10 +48,11 @@ public class IndexController extends BaseController {
         indexResponse.setBrandList(brandService.selectNewBrands(1, 4).getList());
         indexResponse.setTopicList(topicService.select(1, 3).getList());
 
-        List<CategoryShort> mainCategory = categoryService.selectMainCategory();
-        List<Integer> ids = mainCategory.stream().map(item -> item.getId()).distinct().collect(Collectors.toList());
+        PageInfo<CategoryShort> mainCategory = categoryService.selectMainCategory(1, 2);
+        List<Integer> ids = mainCategory.getList().stream().map(item -> item.getId()).distinct().collect(Collectors.toList());
         List<CategoryShort> categories = categoryService.selectByParents(ids);
-        categories.stream().forEach(item->item.setGoodsList(goodsService.selectPartialByCategory(item.getId())));
+        categories.stream().forEach(item -> item.setGoodsList(goodsService.selectPartialByCategory(item.getId())));
+        categories = categories.stream().filter(item -> item.getGoodsList().size() > 0).collect(Collectors.toList());
         indexResponse.setCategoryList(categories);
 
         indexResponse.setChannel(channelService.selectAll(1, 10).getList());

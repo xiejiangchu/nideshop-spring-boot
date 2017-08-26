@@ -18,8 +18,6 @@ public interface UserService {
 
     int update(User user);
 
-    int insertAll(User user);
-
     int updateAll(User user);
 
     int delete(User user);

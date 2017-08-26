@@ -2,6 +2,7 @@ package com.xie.mapper;
 
 import com.xie.bean.Goods;
 import com.xie.bean.GoodsShort;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -27,4 +28,14 @@ public interface GoodsMapper {
     List<GoodsShort> selectPartialByCategory(Integer categoryId);
 
     List<Goods> selectAllByCategory(Integer categoryId);
+
+    List<Goods> selectByParams(@Param("categoryId") Integer categoryId,
+                     @Param("brandId") Integer brandId,
+                     @Param("keyword") String keyword,
+                     @Param("isHot") Integer isHot,
+                     @Param("isNew") Integer isNew,
+                     @Param("sort") String sort,
+                     @Param("order") Integer order);
+
+    int count();
 }

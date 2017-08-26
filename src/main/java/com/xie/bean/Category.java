@@ -1,6 +1,7 @@
 package com.xie.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Category implements Serializable {
     private Integer id;
@@ -34,6 +35,8 @@ public class Category implements Serializable {
     private String frontName;
 
     private static final long serialVersionUID = 1L;
+
+    private List<Category> subCategoryList;
 
     public Integer getId() {
         return id;
@@ -153,6 +156,14 @@ public class Category implements Serializable {
 
     public void setFrontName(String frontName) {
         this.frontName = frontName;
+    }
+
+    public List<Category> getSubCategoryList() {
+        return subCategoryList;
+    }
+
+    public void setSubCategoryList(List<Category> subCategoryList) {
+        this.subCategoryList = subCategoryList;
     }
 
     @Override

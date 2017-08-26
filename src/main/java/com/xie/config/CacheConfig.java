@@ -1,6 +1,7 @@
 package com.xie.config;
 
 import com.google.common.cache.CacheBuilder;
+import com.xie.utils.MallConstants;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +19,7 @@ public class CacheConfig {
 
     @Bean
     public CacheManager cacheManager() {
-        GuavaCacheManager cacheManager = new GuavaCacheManager();
+        GuavaCacheManager cacheManager = new GuavaCacheManager(MallConstants.CACHE_NAME);
         cacheManager.setCacheBuilder(
                 CacheBuilder.newBuilder().
                         expireAfterWrite(DEFAULT_TTL, TimeUnit.SECONDS).

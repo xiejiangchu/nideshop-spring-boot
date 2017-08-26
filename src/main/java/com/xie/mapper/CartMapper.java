@@ -1,6 +1,9 @@
 package com.xie.mapper;
 
 import com.xie.bean.Cart;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface CartMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +19,10 @@ public interface CartMapper {
     int updateByPrimaryKeyWithBLOBs(Cart record);
 
     int updateByPrimaryKey(Cart record);
+
+    List<Cart> selectByUid(Integer uid);
+
+    int updateCheckedByProductId(@Param("productIds") List<Integer> productIds, @Param("checked") int checked);
+
+    int deleteByUid(Integer uid);
 }

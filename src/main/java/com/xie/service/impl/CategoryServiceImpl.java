@@ -1,5 +1,7 @@
 package com.xie.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.Category;
 import com.xie.bean.CategoryShort;
 import com.xie.mapper.CategoryMapper;
@@ -49,8 +51,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryShort> selectMainCategory() {
-        return categoryMapper.selectMainCategory();
+    public PageInfo<CategoryShort> selectMainCategory(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<CategoryShort> page = new PageInfo<CategoryShort>(categoryMapper.selectMainCategory());
+        return page;
     }
 
     @Override

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * Created by xie on 17/8/22.
  */
 @Controller
-@RequestMapping(value = "/address")
+@RequestMapping(value = "/api/address")
 public class AddressController extends BaseController {
 
     @Autowired

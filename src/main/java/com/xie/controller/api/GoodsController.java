@@ -18,7 +18,7 @@ import java.util.List;
  * Created by xie on 17/8/22.
  */
 @Controller
-@RequestMapping(value = "/goods")
+@RequestMapping(value = "/api/goods")
 public class GoodsController extends BaseController {
 
     @Autowired
@@ -44,17 +44,17 @@ public class GoodsController extends BaseController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    BaseResponse getUser(@RequestParam(value = "categoryId", required = false) int categoryId,
-                         @RequestParam(value = "brandId", required = false) int brandId,
-                         @RequestParam(value = "keyword", required = false) String keyword,
-                         @RequestParam(value = "isHot", required = false) int isHot,
-                         @RequestParam(value = "isNew", required = false) int isNew,
-                         @RequestParam(value = "page") int page,
-                         @RequestParam(value = "size") int size,
-                         @RequestParam(value = "sort", required = false) String sort,
-                         @RequestParam(value = "order", required = false) int order) {
+    BaseResponse list(@RequestParam(value = "categoryId", required = false) Integer categoryId,
+                      @RequestParam(value = "brandId", required = false) Integer brandId,
+                      @RequestParam(value = "keyword", required = false) String keyword,
+                      @RequestParam(value = "isHot", required = false) Integer isHot,
+                      @RequestParam(value = "isNew", required = false) Integer isNew,
+                      @RequestParam(value = "sort", required = false) String sort,
+                      @RequestParam(value = "order", required = false) Integer order,
+                      @RequestParam(value = "page") int page,
+                      @RequestParam(value = "size") int size) {
 
-        return BaseResponse.ok();
+        return BaseResponse.ok(goodsService.selectByParams(categoryId, brandId, keyword, isHot, isNew, sort, order, page, size));
     }
 
     @RequestMapping(value = "/category", method = RequestMethod.GET)
@@ -86,4 +86,12 @@ public class GoodsController extends BaseController {
 
         return BaseResponse.ok(goodsDetailResponse);
     }
+
+    @RequestMapping(value = "/count", method = RequestMethod.GET)
+    @ResponseBody
+    BaseResponse count() {
+
+        return BaseResponse.ok(goodsService.count());
+    }
+
 }

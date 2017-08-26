@@ -1,7 +1,6 @@
 package com.xie.bean;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 public class Cart implements Serializable {
     private Integer id;
@@ -18,11 +17,11 @@ public class Cart implements Serializable {
 
     private String goodsName;
 
-    private BigDecimal marketPrice;
+    private Double marketPrice;
 
-    private BigDecimal retailPrice;
+    private Double retailPrice;
 
-    private Short number;
+    private Integer number;
 
     /**
      * product表对应的goods_specifition_ids
@@ -96,27 +95,27 @@ public class Cart implements Serializable {
         this.goodsName = goodsName;
     }
 
-    public BigDecimal getMarketPrice() {
+    public Double getMarketPrice() {
         return marketPrice;
     }
 
-    public void setMarketPrice(BigDecimal marketPrice) {
+    public void setMarketPrice(Double marketPrice) {
         this.marketPrice = marketPrice;
     }
 
-    public BigDecimal getRetailPrice() {
+    public Double getRetailPrice() {
         return retailPrice;
     }
 
-    public void setRetailPrice(BigDecimal retailPrice) {
+    public void setRetailPrice(Double retailPrice) {
         this.retailPrice = retailPrice;
     }
 
-    public Short getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(Short number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
