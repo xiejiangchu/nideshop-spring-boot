@@ -6,6 +6,8 @@ import com.xie.service.RelatedGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by xie on 17/8/23.
  */
@@ -38,6 +40,11 @@ public class RelatedGoodsServiceImpl implements RelatedGoodsService {
     @Override
     public int updateByPrimaryKeySelective(RelatedGoods record) {
         return relatedGoodsMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public List<RelatedGoods> selectByGoodsId(Integer goodsId) {
+        return relatedGoodsMapper.selectByGoodsId(goodsId);
     }
 
     @Override
