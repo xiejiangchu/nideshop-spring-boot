@@ -27,7 +27,9 @@ public class AddressController extends BaseController {
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     @ResponseBody
     BaseResponse detail(@RequestParam("id") int id) {
-
+        if (id <= 0) {
+            return BaseResponse.ok();
+        }
         return BaseResponse.ok(addressService.selectWithNameByPrimaryKey(id));
     }
 

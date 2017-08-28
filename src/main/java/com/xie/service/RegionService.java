@@ -2,6 +2,8 @@ package com.xie.service;
 
 import com.xie.bean.Region;
 
+import java.util.List;
+
 public interface RegionService {
     int deleteByPrimaryKey(Short id);
 
@@ -14,4 +16,6 @@ public interface RegionService {
     int updateByPrimaryKeySelective(Region record);
 
     int updateByPrimaryKey(Region record);
+
+    List<Region> selectByPatentId(Integer parent_id);
 }

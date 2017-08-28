@@ -22,7 +22,9 @@ public interface CartMapper {
 
     List<Cart> selectByUid(Integer uid);
 
-    int updateCheckedByProductId(@Param("productIds") List<Integer> productIds, @Param("checked") int checked);
+    int updateCheckedByProductId(@Param("uid") Integer uid, @Param("productIds") List<Integer> productIds, @Param("checked") int checked);
+
+    int updateNumberByProductId(@Param("uid") Integer uid, @Param("productId") Integer productId, @Param("number") int number);
 
     int deleteByUid(Integer uid);
 }

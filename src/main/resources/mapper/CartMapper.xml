@@ -56,7 +56,18 @@
     <update id="updateCheckedByProductId">
         update cart
         set checked = #{checked,jdbcType=INTEGER}
-        WHERE product_id IN
+        WHERE user_id = #{uid,jdbcType=INTEGER}
+        AND product_id IN
+        <foreach collection="productIds" open="(" close=")" item="productId" separator=",">
+            #{productId,jdbcType=INTEGER}
+        </foreach>
+    </update>
+
+    <update id="updateNumberByProductId">
+        update cart
+        set checked = #{checked,jdbcType=INTEGER}
+        WHERE user_id = #{uid,jdbcType=INTEGER}
+        AND product_id IN
         <foreach collection="productIds" open="(" close=")" item="productId" separator=",">
             #{productId,jdbcType=INTEGER}
         </foreach>

@@ -27,15 +27,19 @@ public interface GoodsMapper {
 
     List<GoodsShort> selectPartialByCategory(Integer categoryId);
 
+    GoodsShort selectPartialByPrimaryKey(Integer id);
+
+    List<GoodsShort> selectPartialByPrimaryKeys(List<Integer> ids);
+
     List<Goods> selectAllByCategory(Integer categoryId);
 
     List<Goods> selectByParams(@Param("categoryId") Integer categoryId,
-                     @Param("brandId") Integer brandId,
-                     @Param("keyword") String keyword,
-                     @Param("isHot") Integer isHot,
-                     @Param("isNew") Integer isNew,
-                     @Param("sort") String sort,
-                     @Param("order") Integer order);
+                               @Param("brandId") Integer brandId,
+                               @Param("keyword") String keyword,
+                               @Param("isHot") Integer isHot,
+                               @Param("isNew") Integer isNew,
+                               @Param("sort") String sort,
+                               @Param("order") Integer order);
 
     int count();
 }

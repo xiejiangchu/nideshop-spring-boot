@@ -23,10 +23,10 @@ public class AddressWithName implements Serializable {
 
     private Boolean isDefault;
 
-    private String province_name;
-    private String city_name;
-    private String district_name;
-    private String full_region;
+    private String provinceName;
+    private String cityName;
+    private String districtName;
+    private String fullRegion;
 
     private static final long serialVersionUID = 1L;
 
@@ -172,35 +172,35 @@ public class AddressWithName implements Serializable {
         return sb.toString();
     }
 
-    public String getProvince_name() {
-        return province_name;
+    public String getProvinceName() {
+        return provinceName;
     }
 
-    public void setProvince_name(String province_name) {
-        this.province_name = province_name;
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
     }
 
-    public String getCity_name() {
-        return city_name;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setCity_name(String city_name) {
-        this.city_name = city_name;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
-    public String getDistrict_name() {
-        return district_name;
+    public String getDistrictName() {
+        return districtName;
     }
 
-    public void setDistrict_name(String district_name) {
-        this.district_name = district_name;
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
     }
 
-    public String getFull_region() {
-        return full_region;
+    public String getFullRegion() {
+        return fullRegion;
     }
 
-    public void setFull_region(String full_region) {
-        this.full_region = full_region;
+    public void setFullRegion(String fullRegion) {
+        this.fullRegion = fullRegion;
     }
 }

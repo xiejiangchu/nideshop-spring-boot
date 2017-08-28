@@ -1,10 +1,13 @@
 package com.xie.service.impl;
 
 import com.xie.bean.Collect;
+import com.xie.bean.CollectWithGoods;
 import com.xie.mapper.CollectMapper;
 import com.xie.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by xie on 17/8/23.
@@ -36,6 +39,11 @@ public class CollectServiceImpl implements CollectService {
     }
 
     @Override
+    public Collect selectByParams(Integer uid, Integer typeId, Integer valueId) {
+        return collectMapper.selectByParams(uid, typeId, valueId);
+    }
+
+    @Override
     public int updateByPrimaryKeySelective(Collect record) {
         return collectMapper.updateByPrimaryKeySelective(record);
     }
@@ -43,5 +51,10 @@ public class CollectServiceImpl implements CollectService {
     @Override
     public int updateByPrimaryKey(Collect record) {
         return collectMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<CollectWithGoods> selectByUid(Integer uid, Integer typeId) {
+        return collectMapper.selectByUid(uid, typeId);
     }
 }

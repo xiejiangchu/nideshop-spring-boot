@@ -75,6 +75,16 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public GoodsShort selectPartialByPrimaryKey(Integer id) {
+        return goodsMapper.selectPartialByPrimaryKey(id);
+    }
+
+    @Override
+    public List<GoodsShort> selectPartialByPrimaryKeys(List<Integer> ids) {
+        return goodsMapper.selectPartialByPrimaryKeys(ids);
+    }
+
+    @Override
     public List<Goods> selectAllByCategory(Integer categoryId) {
         return goodsMapper.selectAllByCategory(categoryId);
     }

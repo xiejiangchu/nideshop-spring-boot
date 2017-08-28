@@ -41,7 +41,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public AddressWithName selectWithNameByPrimaryKey(Integer id) {
         AddressWithName addressWithName = addressMapper.selectWithNameByPrimaryKey(id);
-        addressWithName.setFull_region(addressWithName.getProvince_name() + addressWithName.getCity_name() + addressWithName.getDistrict_name());
+        addressWithName.setFullRegion(addressWithName.getProvinceName() + addressWithName.getCityName() + addressWithName.getDistrictName());
         return addressWithName;
     }
 
@@ -63,7 +63,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public List<AddressWithName> selectWithNameByUid(Integer uid) {
         List<AddressWithName> list = addressMapper.selectWithNameByUid(uid);
-        list.forEach(addressWithName -> addressWithName.setFull_region(addressWithName.getProvince_name() + addressWithName.getCity_name() + addressWithName.getDistrict_name()));
+        list.forEach(addressWithName -> addressWithName.setFullRegion(addressWithName.getProvinceName() + addressWithName.getCityName() + addressWithName.getDistrictName()));
         return list;
     }
 

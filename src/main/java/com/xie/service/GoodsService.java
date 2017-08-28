@@ -31,6 +31,10 @@ public interface GoodsService {
 
     List<GoodsShort> selectPartialByCategory(Integer categoryId);
 
+    GoodsShort selectPartialByPrimaryKey(Integer id);
+
+    List<GoodsShort> selectPartialByPrimaryKeys(List<Integer> ids);
+
     List<Goods> selectAllByCategory(Integer categoryId);
 
     PageInfo<Goods> selectByParams(Integer categoryId, Integer brandId, String keyword, Integer isHot, Integer isNew, String sort, Integer order, int page, int size);

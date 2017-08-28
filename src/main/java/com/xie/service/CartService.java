@@ -24,7 +24,9 @@ public interface CartService {
 
     List<Cart> selectByUid(Integer uid);
 
-    int updateCheckedByProductId(List<Integer> productids,int checked);
+    int updateCheckedByProductId(Integer uid,List<Integer> productIds,int checked);
+
+    int updateNumberByProductId(Integer uid,Integer productId,int number);
 
     int deleteByUid(Integer uid);
 }

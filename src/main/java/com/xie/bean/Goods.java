@@ -33,12 +33,12 @@ public class Goods implements Serializable {
     /**
      * 专柜价格
      */
-    private BigDecimal counterPrice;
+    private double counterPrice;
 
     /**
      * 附加价格
      */
-    private BigDecimal extraPrice;
+    private double extraPrice;
 
     private Boolean isNew;
 
@@ -75,7 +75,7 @@ public class Goods implements Serializable {
     /**
      * 单位价格，单价
      */
-    private BigDecimal unitPrice;
+    private double unitPrice;
 
     private String promotionDesc;
 
@@ -84,7 +84,7 @@ public class Goods implements Serializable {
     /**
      * APP专享价
      */
-    private BigDecimal appExclusivePrice;
+    private double appExclusivePrice;
 
     /**
      * 是否是APP专属
@@ -203,19 +203,19 @@ public class Goods implements Serializable {
         this.attributeCategory = attributeCategory;
     }
 
-    public BigDecimal getCounterPrice() {
+    public double getCounterPrice() {
         return counterPrice;
     }
 
-    public void setCounterPrice(BigDecimal counterPrice) {
+    public void setCounterPrice(double counterPrice) {
         this.counterPrice = counterPrice;
     }
 
-    public BigDecimal getExtraPrice() {
+    public double getExtraPrice() {
         return extraPrice;
     }
 
-    public void setExtraPrice(BigDecimal extraPrice) {
+    public void setExtraPrice(double extraPrice) {
         this.extraPrice = extraPrice;
     }
 
@@ -275,13 +275,6 @@ public class Goods implements Serializable {
         this.primaryProductId = primaryProductId;
     }
 
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-    }
 
     public String getPromotionDesc() {
         return promotionDesc;
@@ -299,11 +292,19 @@ public class Goods implements Serializable {
         this.promotionTag = promotionTag;
     }
 
-    public BigDecimal getAppExclusivePrice() {
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public double getAppExclusivePrice() {
         return appExclusivePrice;
     }
 
-    public void setAppExclusivePrice(BigDecimal appExclusivePrice) {
+    public void setAppExclusivePrice(double appExclusivePrice) {
         this.appExclusivePrice = appExclusivePrice;
     }
 
@@ -337,87 +338,6 @@ public class Goods implements Serializable {
 
     public void setGoodsDesc(String goodsDesc) {
         this.goodsDesc = goodsDesc;
-    }
-
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        Goods other = (Goods) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getCategoryId() == null ? other.getCategoryId() == null : this.getCategoryId().equals(other.getCategoryId()))
-            && (this.getGoodsSn() == null ? other.getGoodsSn() == null : this.getGoodsSn().equals(other.getGoodsSn()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getBrandId() == null ? other.getBrandId() == null : this.getBrandId().equals(other.getBrandId()))
-            && (this.getGoodsNumber() == null ? other.getGoodsNumber() == null : this.getGoodsNumber().equals(other.getGoodsNumber()))
-            && (this.getKeywords() == null ? other.getKeywords() == null : this.getKeywords().equals(other.getKeywords()))
-            && (this.getGoodsBrief() == null ? other.getGoodsBrief() == null : this.getGoodsBrief().equals(other.getGoodsBrief()))
-            && (this.getIsOnSale() == null ? other.getIsOnSale() == null : this.getIsOnSale().equals(other.getIsOnSale()))
-            && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()))
-            && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()))
-            && (this.getIsDelete() == null ? other.getIsDelete() == null : this.getIsDelete().equals(other.getIsDelete()))
-            && (this.getAttributeCategory() == null ? other.getAttributeCategory() == null : this.getAttributeCategory().equals(other.getAttributeCategory()))
-            && (this.getCounterPrice() == null ? other.getCounterPrice() == null : this.getCounterPrice().equals(other.getCounterPrice()))
-            && (this.getExtraPrice() == null ? other.getExtraPrice() == null : this.getExtraPrice().equals(other.getExtraPrice()))
-            && (this.getIsNew() == null ? other.getIsNew() == null : this.getIsNew().equals(other.getIsNew()))
-            && (this.getGoodsUnit() == null ? other.getGoodsUnit() == null : this.getGoodsUnit().equals(other.getGoodsUnit()))
-            && (this.getPrimaryPicUrl() == null ? other.getPrimaryPicUrl() == null : this.getPrimaryPicUrl().equals(other.getPrimaryPicUrl()))
-            && (this.getListPicUrl() == null ? other.getListPicUrl() == null : this.getListPicUrl().equals(other.getListPicUrl()))
-            && (this.getRetailPrice() == null ? other.getRetailPrice() == null : this.getRetailPrice().equals(other.getRetailPrice()))
-            && (this.getSellVolume() == null ? other.getSellVolume() == null : this.getSellVolume().equals(other.getSellVolume()))
-            && (this.getPrimaryProductId() == null ? other.getPrimaryProductId() == null : this.getPrimaryProductId().equals(other.getPrimaryProductId()))
-            && (this.getUnitPrice() == null ? other.getUnitPrice() == null : this.getUnitPrice().equals(other.getUnitPrice()))
-            && (this.getPromotionDesc() == null ? other.getPromotionDesc() == null : this.getPromotionDesc().equals(other.getPromotionDesc()))
-            && (this.getPromotionTag() == null ? other.getPromotionTag() == null : this.getPromotionTag().equals(other.getPromotionTag()))
-            && (this.getAppExclusivePrice() == null ? other.getAppExclusivePrice() == null : this.getAppExclusivePrice().equals(other.getAppExclusivePrice()))
-            && (this.getIsAppExclusive() == null ? other.getIsAppExclusive() == null : this.getIsAppExclusive().equals(other.getIsAppExclusive()))
-            && (this.getIsLimited() == null ? other.getIsLimited() == null : this.getIsLimited().equals(other.getIsLimited()))
-            && (this.getIsHot() == null ? other.getIsHot() == null : this.getIsHot().equals(other.getIsHot()))
-            && (this.getGoodsDesc() == null ? other.getGoodsDesc() == null : this.getGoodsDesc().equals(other.getGoodsDesc()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getCategoryId() == null) ? 0 : getCategoryId().hashCode());
-        result = prime * result + ((getGoodsSn() == null) ? 0 : getGoodsSn().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getBrandId() == null) ? 0 : getBrandId().hashCode());
-        result = prime * result + ((getGoodsNumber() == null) ? 0 : getGoodsNumber().hashCode());
-        result = prime * result + ((getKeywords() == null) ? 0 : getKeywords().hashCode());
-        result = prime * result + ((getGoodsBrief() == null) ? 0 : getGoodsBrief().hashCode());
-        result = prime * result + ((getIsOnSale() == null) ? 0 : getIsOnSale().hashCode());
-        result = prime * result + ((getAddTime() == null) ? 0 : getAddTime().hashCode());
-        result = prime * result + ((getSortOrder() == null) ? 0 : getSortOrder().hashCode());
-        result = prime * result + ((getIsDelete() == null) ? 0 : getIsDelete().hashCode());
-        result = prime * result + ((getAttributeCategory() == null) ? 0 : getAttributeCategory().hashCode());
-        result = prime * result + ((getCounterPrice() == null) ? 0 : getCounterPrice().hashCode());
-        result = prime * result + ((getExtraPrice() == null) ? 0 : getExtraPrice().hashCode());
-        result = prime * result + ((getIsNew() == null) ? 0 : getIsNew().hashCode());
-        result = prime * result + ((getGoodsUnit() == null) ? 0 : getGoodsUnit().hashCode());
-        result = prime * result + ((getPrimaryPicUrl() == null) ? 0 : getPrimaryPicUrl().hashCode());
-        result = prime * result + ((getListPicUrl() == null) ? 0 : getListPicUrl().hashCode());
-        result = prime * result + ((getRetailPrice() == null) ? 0 : getRetailPrice().hashCode());
-        result = prime * result + ((getSellVolume() == null) ? 0 : getSellVolume().hashCode());
-        result = prime * result + ((getPrimaryProductId() == null) ? 0 : getPrimaryProductId().hashCode());
-        result = prime * result + ((getUnitPrice() == null) ? 0 : getUnitPrice().hashCode());
-        result = prime * result + ((getPromotionDesc() == null) ? 0 : getPromotionDesc().hashCode());
-        result = prime * result + ((getPromotionTag() == null) ? 0 : getPromotionTag().hashCode());
-        result = prime * result + ((getAppExclusivePrice() == null) ? 0 : getAppExclusivePrice().hashCode());
-        result = prime * result + ((getIsAppExclusive() == null) ? 0 : getIsAppExclusive().hashCode());
-        result = prime * result + ((getIsLimited() == null) ? 0 : getIsLimited().hashCode());
-        result = prime * result + ((getIsHot() == null) ? 0 : getIsHot().hashCode());
-        result = prime * result + ((getGoodsDesc() == null) ? 0 : getGoodsDesc().hashCode());
-        return result;
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.xie.mapper;
 
 import com.xie.bean.RelatedGoods;
 
+import java.util.List;
+
 public interface RelatedGoodsMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface RelatedGoodsMapper {
     int updateByPrimaryKeySelective(RelatedGoods record);
 
     int updateByPrimaryKey(RelatedGoods record);
+
+    List<RelatedGoods> selectByGoodsId(Integer goodsId);
 }

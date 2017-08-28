@@ -93,6 +93,23 @@
         </if>
     </select>
 
+    <select id="selectPartialByPrimaryKey" resultMap="BaseResultMapShort" parameterType="java.lang.Integer">
+        select
+        id, category_id,name, list_pic_url, retail_price
+        from goods
+       where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectPartialByPrimaryKeys" resultMap="BaseResultMapShort">
+        select
+        id, category_id,name, list_pic_url, retail_price
+        from goods
+        where id IN
+        <foreach collection="ids" separator="," item="id" open="(" close=")">
+            #{id,jdbcType=INTEGER}
+        </foreach>
+    </select>
+
     <select id="selectHotGoods" resultMap="BaseResultMapShort">
         select
         id, category_id,name, list_pic_url, retail_price

@@ -3,6 +3,7 @@ package com.xie.controller.api;
 import com.alibaba.fastjson.JSONObject;
 import com.xie.bean.Cart;
 import com.xie.request.CartCheckedRequest;
+import com.xie.request.CartUpdateRequest;
 import com.xie.response.BaseResponse;
 import com.xie.response.CartTotalResponse;
 import com.xie.service.CartService;
@@ -72,13 +73,20 @@ public class CartController extends BaseController {
             return BaseResponse.ok();
         }
         List<Integer> goodsIds = Arrays.stream(cartCheckedRequest.getProductIds().split(",")).map(item -> Integer.parseInt(item)).collect(Collectors.toList());
-        int count = cartService.updateCheckedByProductId(goodsIds, cartCheckedRequest.getIsChecked());
+        int count = cartService.updateCheckedByProductId(getUid(), goodsIds, cartCheckedRequest.getIsChecked());
         return BaseResponse.ok(getCart());
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public BaseResponse delete() {
+        int count = cartService.deleteByUid(getUid());
+        return BaseResponse.ok(getCart());
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseResponse update(@RequestBody CartUpdateRequest cartUpdateRequest) {
         int count = cartService.deleteByUid(getUid());
         return BaseResponse.ok(getCart());
     }

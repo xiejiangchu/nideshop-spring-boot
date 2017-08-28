@@ -23,9 +23,9 @@
         <result column="district_id" property="districtId" jdbcType="SMALLINT"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
-        <result column="province_name" property="province_name" jdbcType="VARCHAR"/>
-        <result column="city_name" property="city_name" jdbcType="VARCHAR"/>
-        <result column="district_name" property="district_name" jdbcType="VARCHAR"/>
+        <result column="province_name" property="provinceName" jdbcType="VARCHAR"/>
+        <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+        <result column="district_name" property="districtName" jdbcType="VARCHAR"/>
         <result column="is_default" property="isDefault" jdbcType="BIT"/>
     </resultMap>
     <sql id="Base_Column_List">
