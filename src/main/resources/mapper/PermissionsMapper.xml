@@ -31,40 +31,40 @@
     role_id
     FROM role_user
     WHERE role_user.user_id = #{uid}
-    ) a LEFT JOIN permission_role ON permission_role.role_id=a.role_id
+    ) a LEFT JOIN permission_role ON permission_role.role_id=a.role_id``
     ) b LEFT JOIN permissions ON b.permission_id=permissions.id
     WHERE permissions.name=#{permission}
   </select>
 
     <select id="getByUid" resultMap="BaseResultMap">
-    SELECT
-    permissions.id,
-    permissions.name,
-    permissions.display_name,
-    permissions.description,
-    permissions.created_at,
-    permissions.updated_at
-    FROM (
-    SELECT permission_role.permission_id FROM (
-    SELECT
-    role_id
-    FROM role_user
-    WHERE role_user.user_id = #{uid}
-    ) a LEFT JOIN permission_role ON permission_role.role_id=a.role_id
-    ) b LEFT JOIN permissions ON b.permission_id=permissions.id
-  </select>
+        SELECT
+        permissions.id,
+        permissions.name,
+        permissions.display_name,
+        permissions.description,
+        permissions.created_at,
+        permissions.updated_at
+        FROM (
+        SELECT permission_role.permission_id FROM (
+        SELECT
+        role_id
+        FROM role_user
+        WHERE role_user.user_id = #{uid}
+        ) a LEFT JOIN permission_role ON permission_role.role_id=a.role_id
+        ) b LEFT JOIN permissions ON b.permission_id=permissions.id
+     </select>
 
     <insert id="insert" parameterType="com.xie.bean.Permissions">
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-    insert into permissions (id, name, display_name, 
-      description, created_at, updated_at
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{displayName,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
-      )
-  </insert>
+        insert into permissions (id, name, display_name,
+        description, created_at, updated_at
+        )
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{displayName,jdbcType=VARCHAR},
+        #{description,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+        )
+    </insert>
     <insert id="insertSelective" parameterType="com.xie.bean.Permissions">
         insert into permissions
         <trim prefix="(" suffix=")" suffixOverrides=",">

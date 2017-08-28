@@ -31,7 +31,7 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public List<Permissions> getByUid(int uid) {
-        return null;
+        return permissionsMapper.getByUid(uid);
     }
 
     @Override
