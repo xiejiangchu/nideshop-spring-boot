@@ -29,6 +29,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getByUsername(String username) {
+        return userMapper.getByUsername(username);
+    }
+
+    @Override
+    public User getByUsernameOrOpenId(String username) {
+        return userMapper.getByUsernameOrOpenId(username);
+    }
+
+    @Override
     public PageInfo<User> getAllUsers(int pageNum, int pageSize) {
         PageInfo<User> page = PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> userMapper.selectAll());
         return page;
@@ -37,9 +47,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public int insert(User user) {
         Assert.notNull(user);
-        if(userMapper.insert(user)>0){
+        if (userMapper.insert(user) > 0) {
             return user.getId();
-        }else{
+        } else {
             return 0;
         }
     }
@@ -51,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int checkUsername(String username) {
-        return 0;
+        return userMapper.getByUsername(username) != null ? 1 : 0;
     }
 
     @Override

@@ -12,6 +12,10 @@ public interface UserService {
 
     User getByOpenId(String openId);
 
+    User getByUsername(String username);
+
+    User getByUsernameOrOpenId(String username);
+
     PageInfo<User> getAllUsers(int pageNum, int pageSize);
 
     int insert(User user);

@@ -42,9 +42,6 @@ public class MyBatisConfig {
         return new DataSourceTransactionManager(dataSource);
     }
 
-
-
-
     @Bean(name = "jdbcTemplate")
     public JdbcTemplate jdbcTemplate(@Qualifier(value = "dataSource") DataSource dataSource) throws Exception {
         return new JdbcTemplate(dataSource);
@@ -61,7 +58,6 @@ public class MyBatisConfig {
         sqlSessionFactoryBean.setMapperLocations(pathMatchingResourcePatternResolver.getResources(packageSearchPath));
         /** 设置datasource */
         sqlSessionFactoryBean.setDataSource(dataSource);
-
 
         return sqlSessionFactoryBean;
     }

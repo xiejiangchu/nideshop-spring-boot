@@ -45,18 +45,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-//        http.addFilterBefore(authenticationTokenProcessingFilter, UsernamePasswordAuthenticationFilter.class)
-//                .authorizeRequests()
-//                .antMatchers("/js/**","/img/**","/admin/html/**", "/admin/js/**", "/admin/template/**", "/admin/*.html", "/css/**", "/**/favicon.ico").permitAll()
-//                .antMatchers("/", "index", "/banner/list", "/category/**", "/item/*").permitAll()
-//                .antMatchers("/user/get3rdSession", "/user/login").permitAll()
-//                .antMatchers("/sysConfig/**").permitAll()
-//                .antMatchers("/wechat/server").permitAll()
-//                .antMatchers("/error").permitAll()
-//                .anyRequest().authenticated()
-//                .and().formLogin().loginPage("/login.html").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/admin", true).failureUrl("/login.html?error=true").permitAll()
-//                .and().logout().permitAll().logoutUrl("/logout").logoutSuccessUrl("/admin/index").invalidateHttpSession(true)
-//                .and().exceptionHandling().accessDeniedHandler(myAccessDeniedHandler);
+        http.addFilterBefore(authenticationTokenProcessingFilter, UsernamePasswordAuthenticationFilter.class)
+                .authorizeRequests()
+                .antMatchers("/js/**", "/img/**", "/css/**", "/**/favicon.ico").permitAll()
+                .antMatchers("/api/**").permitAll()
+                .antMatchers("/wechat/server").permitAll()
+                .antMatchers("/error","/register").permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/index", true).failureUrl("/login").permitAll()
+                .and().logout().permitAll().logoutUrl("/logout").logoutSuccessUrl("/login").invalidateHttpSession(true)
+                .and().exceptionHandling().accessDeniedHandler(myAccessDeniedHandler);
 //                .and().addFilterAfter(new MyCsrfHeaderFilter(), CsrfFilter.class);
 //        http.csrf().requireCsrfProtectionMatcher(myCsrfSecurityRequestMatcher).csrfTokenRepository(csrfTokenRepository());
 
@@ -64,7 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("administrator").password("112233").roles("USER");
         auth.userDetailsService(myUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
         auth.authenticationProvider(myAuthenticationProvider);
     }

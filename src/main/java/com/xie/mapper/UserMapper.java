@@ -21,4 +21,8 @@ public interface UserMapper {
     List<User> selectAll();
 
     User selectByOpenId(String openId);
+
+    User getByUsername(String username);
+
+    User getByUsernameOrOpenId(String username);
 }

@@ -2,29 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xie.mapper.UserMapper">
     <resultMap id="BaseResultMap" type="com.xie.bean.User">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="username" property="username" jdbcType="VARCHAR"/>
-        <result column="password" property="password" jdbcType="VARCHAR"/>
-        <result column="gender" property="gender" jdbcType="BIT"/>
-        <result column="birthday" property="birthday" jdbcType="INTEGER"/>
-        <result column="register_time" property="registerTime" jdbcType="INTEGER"/>
-        <result column="last_login_time" property="lastLoginTime" jdbcType="INTEGER"/>
-        <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR"/>
-        <result column="user_level_id" property="userLevelId" jdbcType="TINYINT"/>
-        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
-        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
-        <result column="register_ip" property="registerIp" jdbcType="VARCHAR"/>
-        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
-        <result column="weixin_openid" property="weixinOpenid" jdbcType="VARCHAR"/>
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="sessionid" jdbcType="CHAR" property="sessionid"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="wx" jdbcType="VARCHAR" property="wx"/>
+        <result column="openid" jdbcType="VARCHAR" property="openid"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="user_level_id" jdbcType="TINYINT" property="userLevelId"/>
+        <result column="remember_token" jdbcType="VARCHAR" property="rememberToken"/>
+        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
+        <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
+        <result column="expired" jdbcType="TIMESTAMP" property="expired"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, username, password, gender, birthday, register_time, last_login_time, last_login_ip, 
-    user_level_id, nickname, mobile, register_ip, avatar, weixin_openid
-  </sql>
+    id, username, sessionid, mobile, email, wx, openid, avatar, gender, password, user_level_id,
+    remember_token, created_at, updated_at, expired
+    </sql>
     <select id="selectAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from user
+    </select>
+
+    <select id="getByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where username = #{username}
+    </select>
+
+    <select id="getByUsernameOrOpenId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where username = #{username,jdbcType=VARCHAR} OR openid = #{username,jdbcType=VARCHAR}
     </select>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -38,7 +53,7 @@
         select
         <include refid="Base_Column_List"/>
         from user
-        where weixin_openid = #{openId,jdbcType=VARCHAR}
+        where openid = #{openId,jdbcType=VARCHAR}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -49,16 +64,18 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-        insert into user (id, username, password,
-        gender, birthday, register_time,
-        last_login_time, last_login_ip, user_level_id,
-        nickname, mobile, register_ip,
-        avatar, weixin_openid)
-        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-        #{gender,jdbcType=BIT}, #{birthday,jdbcType=INTEGER}, #{registerTime,jdbcType=INTEGER},
-        #{lastLoginTime,jdbcType=INTEGER}, #{lastLoginIp,jdbcType=VARCHAR}, #{userLevelId,jdbcType=TINYINT},
-        #{nickname,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{registerIp,jdbcType=VARCHAR},
-        #{avatar,jdbcType=VARCHAR}, #{weixinOpenid,jdbcType=VARCHAR})
+        insert into user (id, username, sessionid,
+        mobile, email, wx,
+        openid, avatar, gender,
+        password, user_level_id, remember_token,
+        created_at, updated_at, expired
+        )
+        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{sessionid,jdbcType=CHAR},
+        #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{wx,jdbcType=VARCHAR},
+        #{openid,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR}, #{userLevelId,jdbcType=TINYINT}, #{rememberToken,jdbcType=VARCHAR},
+        #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{expired,jdbcType=TIMESTAMP}
+        )
     </insert>
     <insert id="insertSelective" parameterType="com.xie.bean.User">
         insert into user
@@ -69,41 +86,44 @@
             <if test="username != null">
                 username,
             </if>
-            <if test="password != null">
-                password,
-            </if>
-            <if test="gender != null">
-                gender,
-            </if>
-            <if test="birthday != null">
-                birthday,
-            </if>
-            <if test="registerTime != null">
-                register_time,
-            </if>
-            <if test="lastLoginTime != null">
-                last_login_time,
-            </if>
-            <if test="lastLoginIp != null">
-                last_login_ip,
-            </if>
-            <if test="userLevelId != null">
-                user_level_id,
-            </if>
-            <if test="nickname != null">
-                nickname,
+            <if test="sessionid != null">
+                sessionId,
             </if>
             <if test="mobile != null">
                 mobile,
             </if>
-            <if test="registerIp != null">
-                register_ip,
+            <if test="email != null">
+                email,
+            </if>
+            <if test="wx != null">
+                wx,
+            </if>
+            <if test="openid != null">
+                openId,
             </if>
             <if test="avatar != null">
                 avatar,
             </if>
-            <if test="weixinOpenid != null">
-                weixin_openid,
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="userLevelId != null">
+                user_level_id,
+            </if>
+            <if test="rememberToken != null">
+                remember_token,
+            </if>
+            <if test="createdAt != null">
+                created_at,
+            </if>
+            <if test="updatedAt != null">
+                updated_at,
+            </if>
+            <if test="expired != null">
+                expired,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -113,41 +133,44 @@
             <if test="username != null">
                 #{username,jdbcType=VARCHAR},
             </if>
-            <if test="password != null">
-                #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="gender != null">
-                #{gender,jdbcType=BIT},
-            </if>
-            <if test="birthday != null">
-                #{birthday,jdbcType=INTEGER},
-            </if>
-            <if test="registerTime != null">
-                #{registerTime,jdbcType=INTEGER},
-            </if>
-            <if test="lastLoginTime != null">
-                #{lastLoginTime,jdbcType=INTEGER},
-            </if>
-            <if test="lastLoginIp != null">
-                #{lastLoginIp,jdbcType=VARCHAR},
-            </if>
-            <if test="userLevelId != null">
-                #{userLevelId,jdbcType=TINYINT},
-            </if>
-            <if test="nickname != null">
-                #{nickname,jdbcType=VARCHAR},
+            <if test="sessionid != null">
+                #{sessionid,jdbcType=CHAR},
             </if>
             <if test="mobile != null">
                 #{mobile,jdbcType=VARCHAR},
             </if>
-            <if test="registerIp != null">
-                #{registerIp,jdbcType=VARCHAR},
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="wx != null">
+                #{wx,jdbcType=VARCHAR},
+            </if>
+            <if test="openid != null">
+                #{openid,jdbcType=VARCHAR},
             </if>
             <if test="avatar != null">
                 #{avatar,jdbcType=VARCHAR},
             </if>
-            <if test="weixinOpenid != null">
-                #{weixinOpenid,jdbcType=VARCHAR},
+            <if test="gender != null">
+                #{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="userLevelId != null">
+                #{userLevelId,jdbcType=TINYINT},
+            </if>
+            <if test="rememberToken != null">
+                #{rememberToken,jdbcType=VARCHAR},
+            </if>
+            <if test="createdAt != null">
+                #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expired != null">
+                #{expired,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
@@ -157,60 +180,64 @@
             <if test="username != null">
                 username = #{username,jdbcType=VARCHAR},
             </if>
-            <if test="password != null">
-                password = #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="gender != null">
-                gender = #{gender,jdbcType=BIT},
-            </if>
-            <if test="birthday != null">
-                birthday = #{birthday,jdbcType=INTEGER},
-            </if>
-            <if test="registerTime != null">
-                register_time = #{registerTime,jdbcType=INTEGER},
-            </if>
-            <if test="lastLoginTime != null">
-                last_login_time = #{lastLoginTime,jdbcType=INTEGER},
-            </if>
-            <if test="lastLoginIp != null">
-                last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
-            </if>
-            <if test="userLevelId != null">
-                user_level_id = #{userLevelId,jdbcType=TINYINT},
-            </if>
-            <if test="nickname != null">
-                nickname = #{nickname,jdbcType=VARCHAR},
+            <if test="sessionid != null">
+                sessionId = #{sessionid,jdbcType=CHAR},
             </if>
             <if test="mobile != null">
                 mobile = #{mobile,jdbcType=VARCHAR},
             </if>
-            <if test="registerIp != null">
-                register_ip = #{registerIp,jdbcType=VARCHAR},
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="wx != null">
+                wx = #{wx,jdbcType=VARCHAR},
+            </if>
+            <if test="openid != null">
+                openId = #{openid,jdbcType=VARCHAR},
             </if>
             <if test="avatar != null">
                 avatar = #{avatar,jdbcType=VARCHAR},
             </if>
-            <if test="weixinOpenid != null">
-                weixin_openid = #{weixinOpenid,jdbcType=VARCHAR},
+            <if test="gender != null">
+                gender = #{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="userLevelId != null">
+                user_level_id = #{userLevelId,jdbcType=TINYINT},
+            </if>
+            <if test="rememberToken != null">
+                remember_token = #{rememberToken,jdbcType=VARCHAR},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expired != null">
+                expired = #{expired,jdbcType=TIMESTAMP},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.xie.bean.User">
-    update user
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=BIT},
-      birthday = #{birthday,jdbcType=INTEGER},
-      register_time = #{registerTime,jdbcType=INTEGER},
-      last_login_time = #{lastLoginTime,jdbcType=INTEGER},
-      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
-      user_level_id = #{userLevelId,jdbcType=TINYINT},
-      nickname = #{nickname,jdbcType=VARCHAR},
-      mobile = #{mobile,jdbcType=VARCHAR},
-      register_ip = #{registerIp,jdbcType=VARCHAR},
-      avatar = #{avatar,jdbcType=VARCHAR},
-      weixin_openid = #{weixinOpenid,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update user
+        set username = #{username,jdbcType=VARCHAR},
+        sessionId = #{sessionid,jdbcType=CHAR},
+        mobile = #{mobile,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
+        wx = #{wx,jdbcType=VARCHAR},
+        openId = #{openid,jdbcType=VARCHAR},
+        avatar = #{avatar,jdbcType=VARCHAR},
+        gender = #{gender,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        user_level_id = #{userLevelId,jdbcType=TINYINT},
+        remember_token = #{rememberToken,jdbcType=VARCHAR},
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+        expired = #{expired,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

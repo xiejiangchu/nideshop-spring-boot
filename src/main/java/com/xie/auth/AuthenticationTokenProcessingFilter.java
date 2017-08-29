@@ -45,25 +45,9 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-
-//        ========================================           测试              ==================================================================
-
-        if(httpServletRequest.getRequestURL().toString().endsWith("/user/login")){
+        if(httpServletRequest.getRequestURL().toString().endsWith("/login")){
             chain.doFilter(request, response);
             return;
-        }
-        String refer = httpServletRequest.getHeader("Referer");
-        if (refer != null && refer.contains("swagger")) {
-            MyUserDetails myUserDetails = (MyUserDetails) myUserDetailsService.loadUserByUsername("admin");
-            if (myUserDetails.isAccountNonExpired() && myUserDetails.isEnabled()) {
-                // build an Authentication object with the user's info
-                UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(myUserDetails, myUserDetails.getPassword(), myUserDetails.getAuthorities());
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails((HttpServletRequest) request));
-                // set the authentication into the SecurityContext
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            }
         }
 
         Map<String, String[]> params = httpServletRequest.getParameterMap();

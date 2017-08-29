@@ -38,7 +38,7 @@ public class MyUserDetailsService implements UserDetailsService {
         if (users.containsKey(username)) {
             return users.get(username);
         }
-        User user = userService.getByOpenId(username);
+        User user = userService.getByUsernameOrOpenId(username);
         if (null == user) {
             throw new UsernameNotFoundException("用户不存在");
         }

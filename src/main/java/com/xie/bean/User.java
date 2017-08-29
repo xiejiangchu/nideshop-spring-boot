@@ -1,37 +1,38 @@
 package com.xie.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable {
     private Integer id;
 
     private String username;
 
-    private String password;
-
-    private Boolean gender;
-
-    private Integer birthday;
-
-    private Integer registerTime;
-
-    private Integer lastLoginTime;
-
-    private String lastLoginIp;
-
-    private Byte userLevelId;
-
-    private String nickname;
+    private String sessionid;
 
     private String mobile;
 
-    private String registerIp;
+    private String email;
+
+    private String wx;
+
+    private String openid;
 
     private String avatar;
 
-    private String weixinOpenid;
+    private String gender;
 
-    private String sessionId;
+    private String password;
+
+    private Byte userLevelId;
+
+    private String rememberToken;
+
+    private Date createdAt;
+
+    private Date updatedAt;
+
+    private Date expired;
 
     private static final long serialVersionUID = 1L;
 
@@ -51,68 +52,12 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSessionid() {
+        return sessionid;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getGender() {
-        return gender;
-    }
-
-    public void setGender(Boolean gender) {
-        this.gender = gender;
-    }
-
-    public Integer getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Integer birthday) {
-        this.birthday = birthday;
-    }
-
-    public Integer getRegisterTime() {
-        return registerTime;
-    }
-
-    public void setRegisterTime(Integer registerTime) {
-        this.registerTime = registerTime;
-    }
-
-    public Integer getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(Integer lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
-
-    public String getLastLoginIp() {
-        return lastLoginIp;
-    }
-
-    public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp;
-    }
-
-    public Byte getUserLevelId() {
-        return userLevelId;
-    }
-
-    public void setUserLevelId(Byte userLevelId) {
-        this.userLevelId = userLevelId;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setSessionid(String sessionid) {
+        this.sessionid = sessionid;
     }
 
     public String getMobile() {
@@ -123,12 +68,28 @@ public class User implements Serializable {
         this.mobile = mobile;
     }
 
-    public String getRegisterIp() {
-        return registerIp;
+    public String getEmail() {
+        return email;
     }
 
-    public void setRegisterIp(String registerIp) {
-        this.registerIp = registerIp;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getWx() {
+        return wx;
+    }
+
+    public void setWx(String wx) {
+        this.wx = wx;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
     public String getAvatar() {
@@ -139,20 +100,60 @@ public class User implements Serializable {
         this.avatar = avatar;
     }
 
-    public String getWeixinOpenid() {
-        return weixinOpenid;
+    public String getGender() {
+        return gender;
     }
 
-    public void setWeixinOpenid(String weixinOpenid) {
-        this.weixinOpenid = weixinOpenid;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public String getSessionId() {
-        return sessionId;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Byte getUserLevelId() {
+        return userLevelId;
+    }
+
+    public void setUserLevelId(Byte userLevelId) {
+        this.userLevelId = userLevelId;
+    }
+
+    public String getRememberToken() {
+        return rememberToken;
+    }
+
+    public void setRememberToken(String rememberToken) {
+        this.rememberToken = rememberToken;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Date getExpired() {
+        return expired;
+    }
+
+    public void setExpired(Date expired) {
+        this.expired = expired;
     }
 
     @Override
@@ -168,19 +169,20 @@ public class User implements Serializable {
         }
         User other = (User) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-            && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
-            && (this.getBirthday() == null ? other.getBirthday() == null : this.getBirthday().equals(other.getBirthday()))
-            && (this.getRegisterTime() == null ? other.getRegisterTime() == null : this.getRegisterTime().equals(other.getRegisterTime()))
-            && (this.getLastLoginTime() == null ? other.getLastLoginTime() == null : this.getLastLoginTime().equals(other.getLastLoginTime()))
-            && (this.getLastLoginIp() == null ? other.getLastLoginIp() == null : this.getLastLoginIp().equals(other.getLastLoginIp()))
-            && (this.getUserLevelId() == null ? other.getUserLevelId() == null : this.getUserLevelId().equals(other.getUserLevelId()))
-            && (this.getNickname() == null ? other.getNickname() == null : this.getNickname().equals(other.getNickname()))
-            && (this.getMobile() == null ? other.getMobile() == null : this.getMobile().equals(other.getMobile()))
-            && (this.getRegisterIp() == null ? other.getRegisterIp() == null : this.getRegisterIp().equals(other.getRegisterIp()))
-            && (this.getAvatar() == null ? other.getAvatar() == null : this.getAvatar().equals(other.getAvatar()))
-            && (this.getWeixinOpenid() == null ? other.getWeixinOpenid() == null : this.getWeixinOpenid().equals(other.getWeixinOpenid()));
+                && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
+                && (this.getSessionid() == null ? other.getSessionid() == null : this.getSessionid().equals(other.getSessionid()))
+                && (this.getMobile() == null ? other.getMobile() == null : this.getMobile().equals(other.getMobile()))
+                && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
+                && (this.getWx() == null ? other.getWx() == null : this.getWx().equals(other.getWx()))
+                && (this.getOpenid() == null ? other.getOpenid() == null : this.getOpenid().equals(other.getOpenid()))
+                && (this.getAvatar() == null ? other.getAvatar() == null : this.getAvatar().equals(other.getAvatar()))
+                && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
+                && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
+                && (this.getUserLevelId() == null ? other.getUserLevelId() == null : this.getUserLevelId().equals(other.getUserLevelId()))
+                && (this.getRememberToken() == null ? other.getRememberToken() == null : this.getRememberToken().equals(other.getRememberToken()))
+                && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
+                && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()))
+                && (this.getExpired() == null ? other.getExpired() == null : this.getExpired().equals(other.getExpired()));
     }
 
     @Override
@@ -189,18 +191,19 @@ public class User implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
-        result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());
-        result = prime * result + ((getBirthday() == null) ? 0 : getBirthday().hashCode());
-        result = prime * result + ((getRegisterTime() == null) ? 0 : getRegisterTime().hashCode());
-        result = prime * result + ((getLastLoginTime() == null) ? 0 : getLastLoginTime().hashCode());
-        result = prime * result + ((getLastLoginIp() == null) ? 0 : getLastLoginIp().hashCode());
-        result = prime * result + ((getUserLevelId() == null) ? 0 : getUserLevelId().hashCode());
-        result = prime * result + ((getNickname() == null) ? 0 : getNickname().hashCode());
+        result = prime * result + ((getSessionid() == null) ? 0 : getSessionid().hashCode());
         result = prime * result + ((getMobile() == null) ? 0 : getMobile().hashCode());
-        result = prime * result + ((getRegisterIp() == null) ? 0 : getRegisterIp().hashCode());
+        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
+        result = prime * result + ((getWx() == null) ? 0 : getWx().hashCode());
+        result = prime * result + ((getOpenid() == null) ? 0 : getOpenid().hashCode());
         result = prime * result + ((getAvatar() == null) ? 0 : getAvatar().hashCode());
-        result = prime * result + ((getWeixinOpenid() == null) ? 0 : getWeixinOpenid().hashCode());
+        result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());
+        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
+        result = prime * result + ((getUserLevelId() == null) ? 0 : getUserLevelId().hashCode());
+        result = prime * result + ((getRememberToken() == null) ? 0 : getRememberToken().hashCode());
+        result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
+        result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
+        result = prime * result + ((getExpired() == null) ? 0 : getExpired().hashCode());
         return result;
     }
 
@@ -212,18 +215,19 @@ public class User implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", username=").append(username);
-        sb.append(", password=").append(password);
-        sb.append(", gender=").append(gender);
-        sb.append(", birthday=").append(birthday);
-        sb.append(", registerTime=").append(registerTime);
-        sb.append(", lastLoginTime=").append(lastLoginTime);
-        sb.append(", lastLoginIp=").append(lastLoginIp);
-        sb.append(", userLevelId=").append(userLevelId);
-        sb.append(", nickname=").append(nickname);
+        sb.append(", sessionid=").append(sessionid);
         sb.append(", mobile=").append(mobile);
-        sb.append(", registerIp=").append(registerIp);
+        sb.append(", email=").append(email);
+        sb.append(", wx=").append(wx);
+        sb.append(", openid=").append(openid);
         sb.append(", avatar=").append(avatar);
-        sb.append(", weixinOpenid=").append(weixinOpenid);
+        sb.append(", gender=").append(gender);
+        sb.append(", password=").append(password);
+        sb.append(", userLevelId=").append(userLevelId);
+        sb.append(", rememberToken=").append(rememberToken);
+        sb.append(", createdAt=").append(createdAt);
+        sb.append(", updatedAt=").append(updatedAt);
+        sb.append(", expired=").append(expired);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

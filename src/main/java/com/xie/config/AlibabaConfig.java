@@ -3,6 +3,7 @@ package com.xie.config;
 import com.alibaba.media.MediaConfiguration;
 import com.alibaba.media.client.MediaClient;
 import com.alibaba.media.client.impl.DefaultMediaClient;
+import com.alibaba.media.manage.ManageClient;
 import com.alibaba.media.upload.UploadPolicy;
 import com.alibaba.media.upload.UploadTokenClient;
 import com.alibaba.media.upload.impl.DefaultUploadTokenClient;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 /**
  * @Author xie
@@ -18,16 +18,15 @@ import org.springframework.stereotype.Component;
  */
 @Configuration
 @ConfigurationProperties(prefix = "spring.alibaba")
-@Component
 public class  AlibabaConfig {
     private String appkey;
     private String appsecret;
     private String namespace;
 
-//    @Bean(name = "manageClient")
-//    public ManageClient manageClient(@Qualifier("mediaConfiguration") MediaConfiguration configuration) {
-//        return new DefaultMediaClient(configuration);
-//    }
+    @Bean(name = "manageClient")
+    public ManageClient manageClient(@Qualifier("mediaConfiguration") MediaConfiguration configuration) {
+        return new DefaultMediaClient(configuration);
+    }
 
     @Bean(name = "mediaClient")
     public MediaClient mediaClient(@Qualifier("mediaConfiguration") MediaConfiguration configuration) {

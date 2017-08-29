@@ -86,7 +86,6 @@ public class AuthController extends BaseController {
             sessionResponse.setSessionId(sessionId);
             if (user != null) {
                 BeanUtils.copyProperties(loginRequest.getUserInfo(), user);
-                user.setLastLoginTime((int) DateTime.now().toDate().getTime());
                 userService.updateAll(user);
                 session.setAttribute(MallConstants.SESSION_USER, user);
                 sessionResponse.setUid(user.getId());
@@ -96,9 +95,9 @@ public class AuthController extends BaseController {
                 if (null != wxSession.getSession_key()) {
                     User insert = new User();
                     BeanUtils.copyProperties(loginRequest.getUserInfo(), insert);
-                    user.setRegisterTime((int) DateTime.now().toDate().getTime());
-                    insert.setLastLoginTime((int) DateTime.now().toDate().getTime());
-                    insert.setUsername(insert.getNickname());
+                    user.setCreatedAt( DateTime.now().toDate());
+                    insert.setUpdatedAt( DateTime.now().toDate());
+                    insert.setUsername(insert.getUsername());
                     insert.setPassword(bCryptPasswordEncoder.encode("pass@1234"));
                     int uid = userService.insert(insert);
                     if (uid > 0) {
