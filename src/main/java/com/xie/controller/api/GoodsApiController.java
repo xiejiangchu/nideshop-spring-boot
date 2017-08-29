@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  */
 @Controller
 @RequestMapping(value = "/api/goods")
-public class GoodsController extends BaseController {
+public class GoodsApiController extends BaseController {
 
     @Autowired
     private GoodsService goodsService;

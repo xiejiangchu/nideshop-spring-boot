@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * Created by xie on 17/1/7.
  */
 @Controller
-public class IndexController extends BaseController {
+public class IndexApiController extends BaseController {
 
     @Autowired
     private AdService adService;

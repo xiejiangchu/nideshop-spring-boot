@@ -56,6 +56,13 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public PageInfo<Goods> selectGoods(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Goods> page = new PageInfo<Goods>(goodsMapper.selectGoods());
+        return page;
+    }
+
+    @Override
     public PageInfo<Goods> selectHotGoods(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         PageInfo<Goods> page = new PageInfo<Goods>(goodsMapper.selectHotGoods());

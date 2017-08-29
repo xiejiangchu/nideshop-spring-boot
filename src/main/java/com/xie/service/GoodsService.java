@@ -25,6 +25,8 @@ public interface GoodsService {
 
     int updateByPrimaryKey(Goods record);
 
+    PageInfo<Goods> selectGoods(int pageNum, int pageSize);
+
     PageInfo<Goods> selectHotGoods(int pageNum, int pageSize);
 
     PageInfo<Goods> selectNewGoods(int pageNum, int pageSize);

@@ -42,4 +42,6 @@ public interface GoodsMapper {
                                @Param("order") Integer order);
 
     int count();
+
+    List<Goods> selectGoods();
 }
