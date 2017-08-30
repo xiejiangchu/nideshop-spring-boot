@@ -1,5 +1,7 @@
 package com.xie.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.Ad;
 import com.xie.mapper.AdMapper;
 import com.xie.service.AdService;
@@ -55,5 +57,17 @@ public class AdServiceImpl implements AdService{
     @Override
     public List<Ad> selectByPosition(int position) {
         return adMapper.selectByPosition(position);
+    }
+
+    @Override
+    public PageInfo<Ad> select(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Ad> page = new PageInfo<Ad>(adMapper.select());
+        return page;
+    }
+
+    @Override
+    public int count() {
+        return adMapper.count();
     }
 }

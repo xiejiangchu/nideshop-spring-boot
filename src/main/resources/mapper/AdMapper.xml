@@ -28,13 +28,27 @@
         from ad
         where id = #{id,jdbcType=SMALLINT}
     </select>
-    <select id="selectByPosition" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+
+    <select id="select" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
         from ad
-        where ad_position_id = #{position,jdbcType=INTEGER}
+    </select>
+
+    <select id="count" resultType="integer">
+        SELECT count(1) FROM ad
+    </select>
+
+    <select id="selectByPosition" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        FROM ad
+        WHERE ad_position_id = #{position,jdbcType=INTEGER}
+        AND enabled = 1
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
     delete from ad
@@ -44,15 +58,15 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-    insert into ad (id, ad_position_id, media_type, 
-      name, link, content, 
-      end_time, enabled, image_url
-      )
-    values (#{id,jdbcType=SMALLINT}, #{adPositionId,jdbcType=SMALLINT}, #{mediaType,jdbcType=TINYINT}, 
-      #{name,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
-      #{endTime,jdbcType=INTEGER}, #{enabled,jdbcType=TINYINT}, #{imageUrl,jdbcType=LONGVARCHAR}
-      )
-  </insert>
+        insert into ad (id, ad_position_id, media_type,
+        name, link, content,
+        end_time, enabled, image_url
+        )
+        values (#{id,jdbcType=SMALLINT}, #{adPositionId,jdbcType=SMALLINT}, #{mediaType,jdbcType=TINYINT},
+        #{name,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+        #{endTime,jdbcType=INTEGER}, #{enabled,jdbcType=TINYINT}, #{imageUrl,jdbcType=LONGVARCHAR}
+        )
+    </insert>
     <insert id="insertSelective" parameterType="com.xie.bean.Ad">
         insert into ad
         <trim prefix="(" suffix=")" suffixOverrides=",">

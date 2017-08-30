@@ -1,10 +1,9 @@
-package com.xie.mapper;
+package com.xie.service;
 
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.Attribute;
 
-import java.util.List;
-
-public interface AttributeMapper {
+public interface AttributeService {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Attribute record);
@@ -19,7 +18,7 @@ public interface AttributeMapper {
 
     int updateByPrimaryKey(Attribute record);
 
-    List<Attribute> select();
+    PageInfo<Attribute> select(int pageNum, int pageSize);
 
     int count();
 }

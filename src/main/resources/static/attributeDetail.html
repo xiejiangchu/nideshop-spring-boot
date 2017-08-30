@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace='layout/header :: header'></head>
+<body class="skin-blue sidebar-mini wysihtml5-supported" style="height: auto; min-height: 100%;">
+
+<!-- wrapper -->
+<div class="wrapper">
+    <div th:replace='layout/top :: top'></div>
+    <!-- Left side column. contains the logo and sidebar -->
+    <div th:replace='layout/left :: left'></div>
+    <!-- /Left side column. contains the logo and sidebar -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                广告位详情
+                <small th:text="${attribute.name}"></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">广告位详情</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="box box-solid">
+                        <div class="box-body no-padding">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li class="active"><a href="#"><i class="fa fa-inbox"></i> 基本信息
+                                    <span class="label label-primary pull-right">12</span></a></li>
+                                <li><a href="#"><i class="fa fa-envelope-o"></i> 价格</a></li>
+                                <li><a href="#"><i class="fa fa-file-text-o"></i> 图集</a></li>
+                                <li><a href="#"><i class="fa fa-filter"></i> 属性信息 <span
+                                        class="label label-warning pull-right">65</span></a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-trash-o"></i> 相关产品</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /. box -->
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Labels</h3>
+
+                            <div class="box-tools">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body no-padding">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#"><i class="fa fa-circle-o text-red"></i> Important</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Promotions</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <div th:replace='layout/control :: control'></div>
+    <!-- /.control-sidebar -->
+
+    <!-- footer -->
+    <div th:replace='layout/footer :: footer'></div>
+    <!-- /footer -->
+</div>
+<!-- ./wrapper -->
+
+
+<div th:replace='layout/scripts :: scripts'></div>
+</body>
+</html>
+
+

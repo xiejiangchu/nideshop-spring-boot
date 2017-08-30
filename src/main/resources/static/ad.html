@@ -15,12 +15,12 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                商品列表
-                <small th:text="${'共计 '+goodsCount+' 种商品'}"></small>
+                广告位
+                <small th:text="${'共计 '+adCount+' 个广告位'}"></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li class="active">商品列表</li>
+                <li class="active">广告位</li>
             </ol>
         </section>
         <section class="content">
@@ -32,36 +32,33 @@
                             <table class="table table-hover">
                                 <tr>
                                     <th>编号</th>
-                                    <th>SN</th>
+                                    <th>位置</th>
+                                    <th>类型</th>
                                     <th>名称</th>
-                                    <th>简述</th>
-                                    <th>单位</th>
-                                    <th>价格</th>
-                                    <th>在售</th>
-                                    <th>新品</th>
-                                    <th>热销</th>
-                                    <th>销量</th>
+                                    <th>链接</th>
+                                    <th>图片</th>
+                                    <th>内容</th>
+                                    <th>可用</th>
                                     <th>操作</th>
                                 </tr>
-                                <tr th:each="item,state : ${goodsPageInfo.list}">
+                                <tr th:each="item,state : ${adPageInfo.list}">
                                     <td>
-                                        <a th:href="@{'/goods/'+${item.id}}" th:text="${item.id}"></a>
+                                        <a th:href="@{'/ad/'+${item.id}}" th:text="${item.id}"></a>
                                     </td>
-                                    <td th:text="${item.goodsSn}"></td>
+                                    <td th:text="${item.adPositionId}"></td>
+                                    <td th:text="${item.mediaType}"></td>
                                     <td th:text="${item.name}"></td>
-                                    <td th:text="${item.goodsBrief}"></td>
-                                    <td th:text="${item.goodsUnit}"></td>
-                                    <td th:text="${item.retailPrice}"></td>
-                                    <td><span th:class="${item.isNew==1}? 'label label-success':'label label-danger'"
-                                              th:text="${item.isNew==1}? '是':'否'"></span></td>
-                                    <td><span th:class="${item.isHot==1}? 'label label-success':'label label-danger'"
-                                              th:text="${item.isHot==1}? '是':'否'"></span></td>
-                                    <td><span th:class="${item.isOnSale==1}? 'label label-success':'label label-danger'"
-                                              th:text="${item.isOnSale==1}? '是':'否'"></span></td>
-                                    <td th:text="${item.sellVolume}"></td>
+                                    <td th:text="${item.link}"></td>
                                     <td>
-                                        <button class="btn btn-xs btn-flat btn-success">新品</button>
-                                        <button class="btn btn-xs btn-flat btn-danger">热销</button>
+                                        <a th:href="@{${item.imageUrl}}" target="_blank">
+                                            <img th:src="${item.imageUrl}" th:alt="${item.imageUrl}" style="height: 20px;">
+                                        </a>
+
+                                    </td>
+                                    <td th:text="${item.content}"></td>
+                                    <td><span th:class="${item.enabled==1}? 'label label-success':'label label-danger'"
+                                              th:text="${item.enabled==1}? '是':'否'"></span></td>
+                                    <td>
                                         <button class="btn btn-xs btn-flat btn-warning">下架</button>
                                         <button class="btn btn-xs btn-flat btn-primary">上架</button>
                                     </td>
@@ -72,11 +69,11 @@
 
                         <div class="box-footer clearfix">
                             <ul class="pagination pagination-sm no-margin pull-right">
-                                <li><a th:href="@{/goods(pageNum=${goodsPageInfo.prePage})}">&laquo;</a></li>
-                                <li th:each="navigatepageNum,state : ${goodsPageInfo.navigatepageNums}"><a
-                                        th:href="@{/goods(pageNum=${navigatepageNum},pageSize=${goodsPageInfo.pageSize})}"
+                                <li><a th:href="@{/goods(pageNum=${adPageInfo.prePage})}">&laquo;</a></li>
+                                <li th:each="navigatepageNum,state : ${adPageInfo.navigatepageNums}"><a
+                                        th:href="@{/goods(pageNum=${navigatepageNum},pageSize=${adPageInfo.pageSize})}"
                                         th:text="${navigatepageNum}">2</a></li>
-                                <li><a th:href="@{/goods(pageNum=${goodsPageInfo.lastPage})}">&raquo;</a></li>
+                                <li><a th:href="@{/goods(pageNum=${adPageInfo.lastPage})}">&raquo;</a></li>
                             </ul>
                         </div>
                     </div>

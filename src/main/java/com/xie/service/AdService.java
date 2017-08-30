@@ -1,5 +1,6 @@
 package com.xie.service;
 
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.Ad;
 
 import java.util.List;
@@ -24,4 +25,8 @@ public interface AdService {
     int updateByPrimaryKey(Ad record);
 
     List<Ad> selectByPosition(int position);
+
+    PageInfo<Ad> select(int pageNum, int pageSize);
+
+    int count();
 }

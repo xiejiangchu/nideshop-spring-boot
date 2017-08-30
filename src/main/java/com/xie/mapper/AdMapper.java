@@ -20,4 +20,8 @@ public interface AdMapper {
     int updateByPrimaryKey(Ad record);
 
     List<Ad> selectByPosition(int position);
+
+    List<Ad> select();
+
+    int count();
 }
