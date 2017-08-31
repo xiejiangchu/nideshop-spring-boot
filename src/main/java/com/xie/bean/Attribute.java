@@ -1,8 +1,12 @@
 package com.xie.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 public class Attribute implements Serializable {
+    private static final long serialVersionUID = -2403384160781412537L;
+
     private Integer id;
 
     private Integer attributeCategoryId;
@@ -15,7 +19,8 @@ public class Attribute implements Serializable {
 
     private String values;
 
-    private static final long serialVersionUID = 1L;
+    @JsonIgnore
+    private String categoryName;
 
     public Integer getId() {
         return id;
@@ -63,6 +68,14 @@ public class Attribute implements Serializable {
 
     public void setValues(String values) {
         this.values = values;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     @Override

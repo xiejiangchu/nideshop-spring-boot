@@ -34,8 +34,7 @@
                                     <th>编号</th>
                                     <th>分类</th>
                                     <th>名称</th>
-                                    <th>输入类型</th>
-                                    <th>值</th>
+                                    <th>类型</th>
                                     <th>排序</th>
                                     <th>操作</th>
                                 </tr>
@@ -46,11 +45,9 @@
                                     <td th:text="${item.attributeCategoryId}"></td>
                                     <td th:text="${item.name}"></td>
                                     <td th:text="${item.inputType}"></td>
-                                    <td th:text="${item.values}"></td>
                                     <td th:text="${item.sortOrder}"></td>
                                     <td>
-                                        <button class="btn btn-xs btn-flat btn-warning">下架</button>
-                                        <button class="btn btn-xs btn-flat btn-primary">上架</button>
+                                        <a th:href="@{/attribute/delete(id=${item.id})}" class="btn btn-xs btn-flat btn-danger">删除</a>
                                     </td>
                                 </tr>
                             </table>

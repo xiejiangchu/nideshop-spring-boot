@@ -34,7 +34,7 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">主菜单</li>
-                <li th:class="${title=='广告位'}? 'treeview active':'treeview'">
+                <li th:class="${title.indexOf('广告位')>-1}? 'treeview active':'treeview'">
                     <a href="#">
                         <i class="fa fa-dashboard"></i> <span>广告位</span>
                         <span class="pull-right-container">
@@ -43,6 +43,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li class="active"><a th:href="@{/ad}"><i class="fa fa-circle-o"></i>广告位列表</a></li>
+                        <li class="active"><a th:href="@{/ad/add}"><i class="fa fa-circle-o"></i>增加广告位</a></li>
                     </ul>
                 </li>
                 <li th:class="${title.indexOf('商品')>-1}? 'treeview active':'treeview'">

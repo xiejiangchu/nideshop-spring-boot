@@ -84,4 +84,51 @@ public class GoodsController extends BaseController {
         return "goodsDetail";
     }
 
+    @RequestMapping(value = "/hot", method = RequestMethod.GET)
+    public String isHot(@RequestParam(value = "id") int id,
+                        @RequestParam(value = "isHot") int isHot) {
+
+
+        Goods goods = goodsService.selectByPrimaryKey(id);
+        goods.setIsHot(isHot);
+
+        goodsService.updateByPrimaryKey(goods);
+
+        return "redirect:/ad";
+    }
+
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    public String isNew(@RequestParam(value = "id") int id,
+                        @RequestParam(value = "isNew") int isNew) {
+
+
+        Goods goods = goodsService.selectByPrimaryKey(id);
+        goods.setIsNew(isNew);
+
+        goodsService.updateByPrimaryKey(goods);
+
+        return "redirect:/ad";
+    }
+
+
+    @RequestMapping(value = "/enabled", method = RequestMethod.GET)
+    public String enabled(@RequestParam(value = "id") int id,
+                          @RequestParam(value = "enabled") int enabled) {
+
+
+        Goods goods = goodsService.selectByPrimaryKey(id);
+        goods.setIsOnSale(enabled);
+
+        goodsService.updateByPrimaryKey(goods);
+
+        return "redirect:/ad";
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String delete(@RequestParam(value = "id") int id) {
+
+        goodsService.deleteByPrimaryKey(id);
+        return "redirect:/ad";
+    }
+
 }

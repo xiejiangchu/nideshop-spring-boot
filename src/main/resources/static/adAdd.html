@@ -29,19 +29,15 @@
         </section>
         <section class="content">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-offset-3 col-md-6">
                     <!-- general form elements -->
                     <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Quick Example</h3>
-                        </div>
-                        <!-- /.box-header -->
                         <!-- form start -->
                         <form role="form">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label>位置</label>
-                                    <select class="form-control select2" multiple="multiple" data-placeholder="位置"
+                                    <select class="form-control select2" data-placeholder="位置"
                                             style="width: 100%;">
                                         <option th:each="item,state:${adPositionTypeList}" th:text="${item.name}"
                                                 th:value="${item.val}"></option>
@@ -50,7 +46,7 @@
 
                                 <div class="form-group">
                                     <label>类型</label>
-                                    <select class="form-control select2" multiple="multiple" data-placeholder="类别"
+                                    <select class="form-control select2" data-placeholder="类别"
                                             style="width: 100%;">
                                         <option th:each="item,state:${mediaTypeList}" th:text="${item.name}"
                                                 th:value="${item.val}"></option>
@@ -67,8 +63,9 @@
                                            placeholder="">
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">图片</label>
-                                    <input id='input-file' type="file" accept="image/*" class="file-loading">
+
+                                    <label for="exampleInputFile">图片</label>
+                                    <input type="file" id="exampleInputFile">
 
                                     <p class="help-block">上传相关图片</p>
                                 </div>

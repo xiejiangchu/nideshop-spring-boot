@@ -1,7 +1,6 @@
 package com.xie.bean;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 public class Goods implements Serializable {
     private Integer id;
@@ -20,13 +19,13 @@ public class Goods implements Serializable {
 
     private String goodsBrief;
 
-    private Boolean isOnSale;
+    private Integer isOnSale;
 
     private Integer addTime;
 
     private Short sortOrder;
 
-    private Boolean isDelete;
+    private Integer isDelete;
 
     private Integer attributeCategory;
 
@@ -40,7 +39,7 @@ public class Goods implements Serializable {
      */
     private double extraPrice;
 
-    private Boolean isNew;
+    private Integer isNew;
 
     /**
      * 商品单位
@@ -60,7 +59,7 @@ public class Goods implements Serializable {
     /**
      * 零售价格
      */
-    private BigDecimal retailPrice;
+    private double retailPrice;
 
     /**
      * 销售量
@@ -89,11 +88,11 @@ public class Goods implements Serializable {
     /**
      * 是否是APP专属
      */
-    private Boolean isAppExclusive;
+    private Integer isAppExclusive;
 
-    private Boolean isLimited;
+    private Integer isLimited;
 
-    private Boolean isHot;
+    private Integer isHot;
 
     private String goodsDesc;
 
@@ -163,14 +162,6 @@ public class Goods implements Serializable {
         this.goodsBrief = goodsBrief;
     }
 
-    public Boolean getIsOnSale() {
-        return isOnSale;
-    }
-
-    public void setIsOnSale(Boolean isOnSale) {
-        this.isOnSale = isOnSale;
-    }
-
     public Integer getAddTime() {
         return addTime;
     }
@@ -187,12 +178,60 @@ public class Goods implements Serializable {
         this.sortOrder = sortOrder;
     }
 
-    public Boolean getIsDelete() {
+    public Integer getIsOnSale() {
+        return isOnSale;
+    }
+
+    public void setIsOnSale(Integer isOnSale) {
+        this.isOnSale = isOnSale;
+    }
+
+    public Integer getIsDelete() {
         return isDelete;
     }
 
-    public void setIsDelete(Boolean isDelete) {
+    public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
+    }
+
+    public Integer getIsNew() {
+        return isNew;
+    }
+
+    public void setIsNew(Integer isNew) {
+        this.isNew = isNew;
+    }
+
+    public double getRetailPrice() {
+        return retailPrice;
+    }
+
+    public void setRetailPrice(double retailPrice) {
+        this.retailPrice = retailPrice;
+    }
+
+    public Integer getIsAppExclusive() {
+        return isAppExclusive;
+    }
+
+    public void setIsAppExclusive(Integer isAppExclusive) {
+        this.isAppExclusive = isAppExclusive;
+    }
+
+    public Integer getIsLimited() {
+        return isLimited;
+    }
+
+    public void setIsLimited(Integer isLimited) {
+        this.isLimited = isLimited;
+    }
+
+    public Integer getIsHot() {
+        return isHot;
+    }
+
+    public void setIsHot(Integer isHot) {
+        this.isHot = isHot;
     }
 
     public Integer getAttributeCategory() {
@@ -219,14 +258,6 @@ public class Goods implements Serializable {
         this.extraPrice = extraPrice;
     }
 
-    public Boolean getIsNew() {
-        return isNew;
-    }
-
-    public void setIsNew(Boolean isNew) {
-        this.isNew = isNew;
-    }
-
     public String getGoodsUnit() {
         return goodsUnit;
     }
@@ -251,13 +282,6 @@ public class Goods implements Serializable {
         this.listPicUrl = listPicUrl;
     }
 
-    public BigDecimal getRetailPrice() {
-        return retailPrice;
-    }
-
-    public void setRetailPrice(BigDecimal retailPrice) {
-        this.retailPrice = retailPrice;
-    }
 
     public Integer getSellVolume() {
         return sellVolume;
@@ -306,30 +330,6 @@ public class Goods implements Serializable {
 
     public void setAppExclusivePrice(double appExclusivePrice) {
         this.appExclusivePrice = appExclusivePrice;
-    }
-
-    public Boolean getIsAppExclusive() {
-        return isAppExclusive;
-    }
-
-    public void setIsAppExclusive(Boolean isAppExclusive) {
-        this.isAppExclusive = isAppExclusive;
-    }
-
-    public Boolean getIsLimited() {
-        return isLimited;
-    }
-
-    public void setIsLimited(Boolean isLimited) {
-        this.isLimited = isLimited;
-    }
-
-    public Boolean getIsHot() {
-        return isHot;
-    }
-
-    public void setIsHot(Boolean isHot) {
-        this.isHot = isHot;
     }
 
     public String getGoodsDesc() {

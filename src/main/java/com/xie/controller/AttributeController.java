@@ -38,9 +38,14 @@ public class AttributeController extends BaseController {
     public String detail(@PathVariable(value = "id") int id, Model model) {
         setHeaderData(model);
         model.addAttribute("title", "商品属性详情");
-
         Attribute attribute = attributeService.selectByPrimaryKey(id);
         model.addAttribute("attribute", attribute);
         return "attributeDetail";
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String delete(@RequestParam(value = "id") int id) {
+        attributeService.deleteByPrimaryKey(id);
+        return "redirect:/attribute";
     }
 }
