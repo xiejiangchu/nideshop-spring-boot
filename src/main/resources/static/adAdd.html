@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace='layout/header :: header'>
+
+</head>
+<link rel="stylesheet" href="/css/select2.min.css">
+<link rel="stylesheet" href="/css/fileinput.min.css">
+<body class="skin-blue sidebar-mini wysihtml5-supported" style="height: auto; min-height: 100%;">
+
+<!-- wrapper -->
+<div class="wrapper">
+    <div th:replace='layout/top :: top'></div>
+    <!-- Left side column. contains the logo and sidebar -->
+    <div th:replace='layout/left :: left'></div>
+    <!-- /Left side column. contains the logo and sidebar -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                新增广告位
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">新增广告位</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Quick Example</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form role="form">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label>位置</label>
+                                    <select class="form-control select2" multiple="multiple" data-placeholder="位置"
+                                            style="width: 100%;">
+                                        <option th:each="item,state:${adPositionTypeList}" th:text="${item.name}"
+                                                th:value="${item.val}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>类型</label>
+                                    <select class="form-control select2" multiple="multiple" data-placeholder="类别"
+                                            style="width: 100%;">
+                                        <option th:each="item,state:${mediaTypeList}" th:text="${item.name}"
+                                                th:value="${item.val}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">名称</label>
+                                    <input type="name" class="form-control" id="name"
+                                           placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="link">链接/商品编号</label>
+                                    <input type="link" class="form-control" id="link"
+                                           placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">图片</label>
+                                    <input id='input-file' type="file" accept="image/*" class="file-loading">
+
+                                    <p class="help-block">上传相关图片</p>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <div th:replace='layout/control :: control'></div>
+    <!-- /.control-sidebar -->
+
+    <!-- footer -->
+    <div th:replace='layout/footer :: footer'></div>
+    <!-- /footer -->
+</div>
+<!-- ./wrapper -->
+
+
+<div th:replace='layout/scripts :: scripts'></div>
+<script src="/js/select2.full.min.js"></script>
+<script src="/js/fileinput.min.js"></script>
+<script src="/js/theme.js"></script>
+
+<script type="text/javascript">
+
+    $(document).on('ready', function() {
+        $("#input-file").fileinput({
+            previewFileType: "image",
+            browseClass: "btn btn-success",
+            browseLabel: "Pick Image",
+            browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+            removeClass: "btn btn-danger",
+            removeLabel: "Delete",
+            removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
+            uploadClass: "btn btn-info",
+            uploadLabel: "Upload",
+            uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> "
+        });
+    });
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+    });
+</script>
+</body>
+</html>
+
+

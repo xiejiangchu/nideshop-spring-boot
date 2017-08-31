@@ -2,6 +2,8 @@ package com.xie.mapper;
 
 import com.xie.bean.Specification;
 
+import java.util.List;
+
 public interface SpecificationMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,8 @@ public interface SpecificationMapper {
     int updateByPrimaryKeySelective(Specification record);
 
     int updateByPrimaryKey(Specification record);
+
+    List<Specification> select();
+
+    int count();
 }

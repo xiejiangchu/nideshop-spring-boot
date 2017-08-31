@@ -27,4 +27,6 @@ public interface CartMapper {
     int updateNumberByProductId(@Param("uid") Integer uid, @Param("productId") Integer productId, @Param("number") int number);
 
     int deleteByUid(Integer uid);
+
+    int count(Integer uid);
 }

@@ -20,21 +20,21 @@
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
-            <!-- search form -->
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-                </div>
-            </form>
-            <!-- /.search form -->
+            <!--&lt;!&ndash; search form &ndash;&gt;-->
+            <!--<form action="#" method="get" class="sidebar-form">-->
+                <!--<div class="input-group">-->
+                    <!--<input type="text" name="q" class="form-control" placeholder="Search...">-->
+                    <!--<span class="input-group-btn">-->
+                <!--<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>-->
+                <!--</button>-->
+              <!--</span>-->
+                <!--</div>-->
+            <!--</form>-->
+            <!--&lt;!&ndash; /.search form &ndash;&gt;-->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">主菜单</li>
-                <li class="treeview">
+                <li th:class="${title=='广告位'}? 'treeview active':'treeview'">
                     <a href="#">
                         <i class="fa fa-dashboard"></i> <span>广告位</span>
                         <span class="pull-right-container">
@@ -45,7 +45,7 @@
                         <li class="active"><a th:href="@{/ad}"><i class="fa fa-circle-o"></i>广告位列表</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
+                <li th:class="${title.indexOf('商品')>-1}? 'treeview active':'treeview'">
                     <a href="#">
                         <i class="fa fa-dashboard"></i> <span>商品信息</span>
                         <span class="pull-right-container">
@@ -53,11 +53,12 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a th:href="@{/goods}"><i class="fa fa-circle-o"></i>商品列表</a></li>
+                        <li class="active"><a th:href="@{/specification}"><i class="fa fa-circle-o"></i>商品规格</a></li>
                         <li class="active"><a th:href="@{/attribute}"><i class="fa fa-circle-o"></i>商品属性</a></li>
+                        <li class="active"><a th:href="@{/goods}"><i class="fa fa-circle-o"></i>商品列表</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
+                <li th:class="${title.indexOf('类别')>-1}? 'treeview active':'treeview'">
                     <a href="#">
                         <i class="fa fa-files-o"></i>
                         <span>类别信息</span>

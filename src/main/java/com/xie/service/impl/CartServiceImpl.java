@@ -71,4 +71,9 @@ public class CartServiceImpl implements CartService {
     public int deleteByUid(Integer uid) {
         return cartMapper.deleteByUid(uid);
     }
+
+    @Override
+    public int count(Integer uid) {
+        return cartMapper.count(uid);
+    }
 }

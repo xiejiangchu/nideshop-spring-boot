@@ -35,6 +35,12 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
+    <select id="count" resultType="integer" parameterType="java.lang.Integer">
+        SELECT SUM(number)
+        from cart
+        where user_id = #{uid,jdbcType=INTEGER}
+    </select>
+
     <select id="selectByUid" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>

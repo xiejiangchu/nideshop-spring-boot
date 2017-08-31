@@ -1,5 +1,6 @@
 package com.xie.service;
 
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.Specification;
 
 public interface SpecificationService {
@@ -14,4 +15,8 @@ public interface SpecificationService {
     int updateByPrimaryKeySelective(Specification record);
 
     int updateByPrimaryKey(Specification record);
+
+    PageInfo<Specification> select(int pageNum, int pageSize);
+
+    int count();
 }

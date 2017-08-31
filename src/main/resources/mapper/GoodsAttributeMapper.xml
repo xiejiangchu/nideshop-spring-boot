@@ -14,7 +14,7 @@
     id, goods_id, attribute_id
   </sql>
     <sql id="Blob_Column_List">
-    value
+    `value`
   </sql>
     <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
         select
@@ -26,7 +26,7 @@
     </select>
 
     <select id="selectByGoodsId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
-        SELECT ga.id, ga.goods_id, ga.attribute_id,a.name
+        SELECT ga.id, ga.goods_id, ga.attribute_id,ga.`value`,a.name
         from goods_attribute ga
         INNER JOIN attribute a ON ga.attribute_id=a.id
         WHERE ga.goods_id=#{gid,jdbcType=INTEGER}
@@ -42,11 +42,11 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-    insert into goods_attribute (id, goods_id, attribute_id, 
-      value)
-    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{attributeId,jdbcType=INTEGER}, 
-      #{value,jdbcType=LONGVARCHAR})
-  </insert>
+        insert into goods_attribute (id, goods_id, attribute_id,
+        value)
+        values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{attributeId,jdbcType=INTEGER},
+        #{value,jdbcType=LONGVARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="com.xie.bean.GoodsAttribute">
         insert into goods_attribute
         <trim prefix="(" suffix=")" suffixOverrides=",">

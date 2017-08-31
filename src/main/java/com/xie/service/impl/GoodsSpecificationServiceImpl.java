@@ -6,6 +6,8 @@ import com.xie.service.GoodsSpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by xie on 17/8/23.
  */
@@ -43,5 +45,10 @@ public class GoodsSpecificationServiceImpl implements GoodsSpecificationService 
     @Override
     public int updateByPrimaryKey(GoodsSpecification record) {
         return goodsSpecificationMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<GoodsSpecification> selectByGoodsId(Integer gid) {
+        return null;
     }
 }

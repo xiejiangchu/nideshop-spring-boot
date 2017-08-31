@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.xie.bean.Ad;
 import com.xie.controller.api.BaseController;
 import com.xie.service.AdService;
+import com.xie.utils.MallConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +35,15 @@ public class AdController extends BaseController {
         return "ad";
     }
 
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String add(Model model) {
+        setHeaderData(model);
+        model.addAttribute("title", "新增广告位");
+        model.addAttribute("adPositionTypeList", MallConstants.AdPositionType.json());
+        model.addAttribute("mediaTypeList", MallConstants.MediaType.json());
+        return "adAdd";
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String detail(@PathVariable(value = "id") int id, Model model) {
         setHeaderData(model);
@@ -42,5 +52,25 @@ public class AdController extends BaseController {
         Ad ad = adService.selectByPrimaryKey((short) id);
         model.addAttribute("ad", ad);
         return "adDetail";
+    }
+
+    @RequestMapping(value = "/enabled", method = RequestMethod.GET)
+    public String enabled(@RequestParam(value = "id") int id,
+                          @RequestParam(value = "enabled") int enabled) {
+
+
+        Ad ad = adService.selectByPrimaryKey((short) id);
+        ad.setEnabled((byte) enabled);
+
+        adService.updateByPrimaryKey(ad);
+
+        return "redirect:/ad";
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String delete(@RequestParam(value = "id") int id) {
+
+        adService.deleteByPrimaryKey((short) id);
+        return "redirect:/ad";
     }
 }

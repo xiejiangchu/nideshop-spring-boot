@@ -1,5 +1,7 @@
 package com.xie.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.Specification;
 import com.xie.mapper.SpecificationMapper;
 import com.xie.service.SpecificationService;
@@ -43,5 +45,17 @@ public class SpecificationServiceImpl implements SpecificationService {
     @Override
     public int updateByPrimaryKey(Specification record) {
         return specificationMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public PageInfo<Specification> select(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Specification> page = new PageInfo<Specification>(specificationMapper.select());
+        return page;
+    }
+
+    @Override
+    public int count() {
+        return specificationMapper.count();
     }
 }

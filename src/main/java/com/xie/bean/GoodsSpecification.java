@@ -3,6 +3,7 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class GoodsSpecification implements Serializable {
+    private static final long serialVersionUID = -7329464985701263711L;
     private Integer id;
 
     private Integer goodsId;
@@ -13,7 +14,7 @@ public class GoodsSpecification implements Serializable {
 
     private String picUrl;
 
-    private static final long serialVersionUID = 1L;
+    private String name;
 
     public Integer getId() {
         return id;
@@ -53,6 +54,14 @@ public class GoodsSpecification implements Serializable {
 
     public void setPicUrl(String picUrl) {
         this.picUrl = picUrl;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

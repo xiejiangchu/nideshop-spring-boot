@@ -29,4 +29,6 @@ public interface CartService {
     int updateNumberByProductId(Integer uid,Integer productId,int number);
 
     int deleteByUid(Integer uid);
+
+    int count(Integer uid);
 }

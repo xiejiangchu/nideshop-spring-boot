@@ -25,6 +25,14 @@
         </section>
         <section class="content">
             <div class="row">
+                <div class="col-xs-12 text-right">
+                    <a th:href="@{/ad/add}"
+                       class="btn btn-md btn-primary">增加
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+
                 <div class="col-xs-12">
                     <div class="box">
                         <!-- /.box-header -->
@@ -51,7 +59,8 @@
                                     <td th:text="${item.link}"></td>
                                     <td>
                                         <a th:href="@{${item.imageUrl}}" target="_blank">
-                                            <img th:src="${item.imageUrl}" th:alt="${item.imageUrl}" style="height: 20px;">
+                                            <img th:src="${item.imageUrl}" th:alt="${item.imageUrl}"
+                                                 style="height: 20px;">
                                         </a>
 
                                     </td>
@@ -59,8 +68,17 @@
                                     <td><span th:class="${item.enabled==1}? 'label label-success':'label label-danger'"
                                               th:text="${item.enabled==1}? '是':'否'"></span></td>
                                     <td>
-                                        <button class="btn btn-xs btn-flat btn-warning">下架</button>
-                                        <button class="btn btn-xs btn-flat btn-primary">上架</button>
+                                        <a th:href="@{/ad/enabled(id=${item.id},enabled=0)}" th:if="${item.enabled==1}"
+                                           class="btn btn-xs btn-flat bg-orange">
+                                            下架
+                                        </a>
+                                        <a th:href="@{/ad/enabled(id=${item.id},enabled=1)}" th:if="${item.enabled==0}"
+                                           class="btn btn-xs btn-flat btn-success">
+                                            上架
+                                        </a>
+                                        <a th:href="@{/ad/delete(id=${item.id})}"
+                                           class="btn btn-xs btn-flat btn-danger">删除
+                                        </a>
                                     </td>
                                 </tr>
                             </table>
@@ -81,6 +99,28 @@
                 </div>
             </div>
         </section>
+
+
+        <div class="modal modal-danger fade" id="modal-danger">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>确定删除&hellip;</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-outline">删除</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
 
     </div>
     <!-- /.content-wrapper -->

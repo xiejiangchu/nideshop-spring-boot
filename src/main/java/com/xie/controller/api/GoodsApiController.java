@@ -46,6 +46,9 @@ public class GoodsApiController extends BaseController {
     @Autowired
     private RelatedGoodsService relatedGoodsService;
 
+    @Autowired
+    private GoodsSpecificationService goodsSpecificationService;
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public BaseResponse list(@RequestParam(value = "categoryId", required = false) Integer categoryId,
@@ -87,13 +90,16 @@ public class GoodsApiController extends BaseController {
         Brand brand = brandService.selectByPrimaryKey(goods.getBrandId());
         int commentCount = commentService.countByGoodsIdAndType(id, 0);
         List<Comment> hotComment = commentService.selectByGoodsIdAndType(id, 0);
+        List<GoodsSpecification> goodsSpecificationList=goodsSpecificationService.selectByGoodsId(id);
 
+        goodsDetailResponse.setGoods(goods);
         goodsDetailResponse.setAttributes(attributes);
         goodsDetailResponse.setBrand(brand);
         goodsDetailResponse.setCommentCount(commentCount);
         goodsDetailResponse.setHotComment(hotComment);
         goodsDetailResponse.setGoodsGalleries(goodsGalleries);
         goodsDetailResponse.setGoodsIssues(goodsIssues);
+        goodsDetailResponse.setSpecificationList(goodsSpecificationList);
 
         return BaseResponse.ok(goodsDetailResponse);
     }

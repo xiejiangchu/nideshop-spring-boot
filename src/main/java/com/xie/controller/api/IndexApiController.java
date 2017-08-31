@@ -5,6 +5,7 @@ import com.xie.bean.CategoryShort;
 import com.xie.response.BaseResponse;
 import com.xie.response.IndexResponse;
 import com.xie.service.*;
+import com.xie.utils.MallConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +43,7 @@ public class IndexApiController extends BaseController {
     @ResponseBody
     public BaseResponse index() {
         IndexResponse indexResponse = new IndexResponse();
-        indexResponse.setBanner(adService.selectByPosition(1));
+        indexResponse.setBanner(adService.selectByPosition(MallConstants.AdPositionType.首页标题.getVal()));
         indexResponse.setHotGoodsList(goodsService.selectHotGoods(1, 4).getList());
         indexResponse.setNewGoodsList(goodsService.selectNewGoods(1, 4).getList());
         indexResponse.setBrandList(brandService.selectNewBrands(1, 4).getList());

@@ -90,4 +90,11 @@ public class CartController extends BaseController {
         int count = cartService.deleteByUid(getUid());
         return BaseResponse.ok(getCart());
     }
+
+    @RequestMapping(value = "/goodsCount", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseResponse goodsCount() {
+        int count = cartService.count(getUid());
+        return BaseResponse.ok(count);
+    }
 }

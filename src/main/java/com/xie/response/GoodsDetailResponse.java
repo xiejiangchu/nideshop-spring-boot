@@ -8,13 +8,14 @@ import java.util.List;
  * Created by xie on 17/8/22.
  */
 public class GoodsDetailResponse {
-    Goods goods;
-    List<GoodsGallery> goodsGalleries;
-    List<GoodsAttribute> attributes;
-    List<GoodsIssue> goodsIssues;
-    Brand brand;
-    int commentCount;
-    List<Comment> hotComment;
+    private Goods goods;
+    private List<GoodsGallery> goodsGalleries;
+    private List<GoodsAttribute> attributes;
+    private List<GoodsIssue> goodsIssues;
+    private Brand brand;
+    private int commentCount;
+    private List<Comment> hotComment;
+    private List<GoodsSpecification> specificationList;
 
     public Goods getGoods() {
         return goods;
@@ -70,5 +71,13 @@ public class GoodsDetailResponse {
 
     public void setHotComment(List<Comment> hotComment) {
         this.hotComment = hotComment;
+    }
+
+    public List<GoodsSpecification> getSpecificationList() {
+        return specificationList;
+    }
+
+    public void setSpecificationList(List<GoodsSpecification> specificationList) {
+        this.specificationList = specificationList;
     }
 }
