@@ -50,6 +50,27 @@ public class AdController extends BaseController {
     }
 
 
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String add(@RequestParam("adPositionId") short adPositionId,
+                      @RequestParam("mediaType") short mediaType,
+                      @RequestParam("name") String name,
+                      @RequestParam("link") String link,
+                      @RequestParam("imageUrl") String imageUrl,
+                      @RequestParam("content") String content) {
+        Ad ad = new Ad();
+        ad.setAdPositionId(adPositionId);
+        ad.setMediaType((byte) mediaType);
+        ad.setName(name);
+        ad.setLink(link);
+        ad.setImageUrl(imageUrl);
+        ad.setContent(content);
+        ad.setEnabled((byte) 1);
+
+        adService.insert(ad);
+        return "redirect:/ad";
+    }
+
+
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@RequestParam("id") short id,
                          @RequestParam("adPositionId") short adPositionId,
