@@ -67,7 +67,7 @@ public class MallConstants {
     }
 
     public enum MediaType {
-        链接(1), 商品(2);
+        链接(1), 商品(2), 富文本(3);
         private int val;
 
         MediaType(int val) {

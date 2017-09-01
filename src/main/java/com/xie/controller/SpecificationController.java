@@ -43,4 +43,13 @@ public class SpecificationController extends BaseController {
         model.addAttribute("specification", specification);
         return "specificationDetail";
     }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String delete(@RequestParam(value = "id") int id,
+                         @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                         @RequestParam(value = "pageSize", defaultValue = "20") int pageSize) {
+
+        specificationService.deleteByPrimaryKey(id);
+        return "forward:/specification?pageNum="+pageNum+"&pageSize="+pageSize;
+    }
 }

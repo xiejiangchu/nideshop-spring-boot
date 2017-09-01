@@ -38,13 +38,13 @@
                                 </tr>
                                 <tr th:each="item,state : ${specificationPageInfo.list}">
                                     <td>
-                                        <a th:href="@{'/attribute/'+${item.id}}" th:text="${item.id}"></a>
+                                        <a th:href="@{'/specification/'+${item.id}}" th:text="${item.id}"></a>
                                     </td>
                                     <td th:text="${item.name}"></td>
                                     <td th:text="${item.sortOrder}"></td>
                                     <td>
-                                        <button class="btn btn-xs btn-flat btn-warning">下架</button>
-                                        <button class="btn btn-xs btn-flat btn-primary">上架</button>
+                                        <a th:href="@{/specification/delete(id=${item.id},pageNum=${specificationPageInfo.pageNum},pageSize=${specificationPageInfo.pageSize})}"
+                                           class="btn btn-xs btn-flat btn-danger">删除</a>
                                     </td>
                                 </tr>
                             </table>

@@ -45,17 +45,18 @@
                                     <th>名称</th>
                                     <th>链接</th>
                                     <th>图片</th>
-                                    <th>内容</th>
                                     <th>可用</th>
                                     <th>操作</th>
                                 </tr>
                                 <tr th:each="item,state : ${adPageInfo.list}">
                                     <td>
-                                        <a th:href="@{'/ad/'+${item.id}}" th:text="${item.id}"></a>
+                                        <span th:text="${item.id}"></span>
                                     </td>
-                                    <td th:text="${item.adPositionId}"></td>
-                                    <td th:text="${item.mediaType}"></td>
-                                    <td th:text="${item.name}"></td>
+                                    <td th:text="${@enumService.getAdPositionType(item.adPositionId)}"></td>
+                                    <td th:text="${@enumService.getMediaType(item.mediaType)}"></td>
+                                    <td>
+                                        <a th:href="@{'/ad/'+${item.id}}" th:text="${item.name}"></a>
+                                    </td>
                                     <td th:text="${item.link}"></td>
                                     <td>
                                         <a th:href="@{${item.imageUrl}}" target="_blank">
@@ -64,7 +65,6 @@
                                         </a>
 
                                     </td>
-                                    <td th:text="${item.content}"></td>
                                     <td><span th:class="${item.enabled==1}? 'label label-success':'label label-danger'"
                                               th:text="${item.enabled==1}? '是':'否'"></span></td>
                                     <td>

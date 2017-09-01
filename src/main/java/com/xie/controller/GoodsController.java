@@ -86,7 +86,9 @@ public class GoodsController extends BaseController {
 
     @RequestMapping(value = "/hot", method = RequestMethod.GET)
     public String isHot(@RequestParam(value = "id") int id,
-                        @RequestParam(value = "isHot") int isHot) {
+                        @RequestParam(value = "isHot") int isHot,
+                        @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                        @RequestParam(value = "pageSize", defaultValue = "20") int pageSize) {
 
 
         Goods goods = goodsService.selectByPrimaryKey(id);
@@ -94,12 +96,14 @@ public class GoodsController extends BaseController {
 
         goodsService.updateByPrimaryKey(goods);
 
-        return "redirect:/ad";
+        return "forward:/goods?pageNum="+pageNum+"&pageSize="+pageSize;
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String isNew(@RequestParam(value = "id") int id,
-                        @RequestParam(value = "isNew") int isNew) {
+                        @RequestParam(value = "isNew") int isNew,
+                        @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                        @RequestParam(value = "pageSize", defaultValue = "20") int pageSize) {
 
 
         Goods goods = goodsService.selectByPrimaryKey(id);
@@ -107,13 +111,15 @@ public class GoodsController extends BaseController {
 
         goodsService.updateByPrimaryKey(goods);
 
-        return "redirect:/ad";
+        return "forward:/goods?pageNum="+pageNum+"&pageSize="+pageSize;
     }
 
 
     @RequestMapping(value = "/enabled", method = RequestMethod.GET)
     public String enabled(@RequestParam(value = "id") int id,
-                          @RequestParam(value = "enabled") int enabled) {
+                          @RequestParam(value = "enabled") int enabled,
+                          @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                          @RequestParam(value = "pageSize", defaultValue = "20") int pageSize) {
 
 
         Goods goods = goodsService.selectByPrimaryKey(id);
@@ -121,14 +127,16 @@ public class GoodsController extends BaseController {
 
         goodsService.updateByPrimaryKey(goods);
 
-        return "redirect:/ad";
+        return "forward:/goods?pageNum="+pageNum+"&pageSize="+pageSize;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String delete(@RequestParam(value = "id") int id) {
+    public String delete(@RequestParam(value = "id") int id,
+                         @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                         @RequestParam(value = "pageSize", defaultValue = "20") int pageSize) {
 
         goodsService.deleteByPrimaryKey(id);
-        return "redirect:/ad";
+        return "forward:/goods?pageNum="+pageNum+"&pageSize="+pageSize;
     }
 
 }

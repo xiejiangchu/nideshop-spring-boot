@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace='layout/header :: header'></head>
+<head th:replace='layout/header :: header'>
+
+</head>
+<link rel="stylesheet" href="/css/select2.min.css">
+<link rel="stylesheet" href="/css/fileinput.min.css">
 <body class="skin-blue sidebar-mini wysihtml5-supported" style="height: auto; min-height: 100%;">
 
 <!-- wrapper -->
@@ -15,57 +19,77 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                广告位详情
-                <small th:text="${ad.name}"></small>
+                新增广告位
+                <small></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li class="active">广告位详情</li>
+                <li class="active">新增广告位</li>
             </ol>
         </section>
         <section class="content">
             <div class="row">
-                <div class="col-md-3">
-                    <div class="box box-solid">
-                        <div class="box-body no-padding">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li class="active"><a href="#"><i class="fa fa-inbox"></i> 基本信息
-                                    <span class="label label-primary pull-right">12</span></a></li>
-                                <li><a href="#"><i class="fa fa-envelope-o"></i> 价格</a></li>
-                                <li><a href="#"><i class="fa fa-file-text-o"></i> 图集</a></li>
-                                <li><a href="#"><i class="fa fa-filter"></i> 属性信息 <span
-                                        class="label label-warning pull-right">65</span></a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-trash-o"></i> 相关产品</a></li>
-                            </ul>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /. box -->
-                    <div class="box box-solid">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Labels</h3>
+                <div class="col-md-offset-2 col-md-8">
+                    <!-- general form elements -->
+                    <div class="box box-primary">
+                        <!-- form start -->
+                        <form role="form" th:action="@{/ad/update}" method="post">
+                            <input type="hidden" name="id" th:value="${ad.id}">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label>位置</label>
+                                    <select class="form-control select2" data-placeholder="位置" name="adPositionId"
+                                            style="width: 100%;">
+                                        <option th:each="item,state:${adPositionTypeList}" th:text="${item.name}"
+                                                th:value="${item.val}"></option>
+                                    </select>
+                                </div>
 
-                            <div class="box-tools">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                        class="fa fa-minus"></i>
-                                </button>
+                                <div class="form-group">
+                                    <label>类型</label>
+                                    <select class="form-control select2" data-placeholder="类别" name="mediaType"
+                                            style="width: 100%;">
+                                        <option th:each="item,state:${mediaTypeList}" th:text="${item.name}"
+                                                th:value="${item.val}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">名称</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder=""
+                                           th:value="${ad.name}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="link">链接/商品编号</label>
+                                    <input type="text" class="form-control" id="link" name="link" th:value="${ad.link}"
+                                           placeholder="">
+                                </div>
+                                <div class="form-group">
+
+
+                                    <label for="imgFile">上传图片</label>
+                                    <input type="file" id="imgFile" name="imageUrl">
+
+                                    <p class="help-block">当前图片</p>
+                                    <img th:src="${ad.imageUrl}" th:alt="${ad.imageUrl}" style="width: 100%;">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea class="textarea" placeholder="内容" name="content" th:text="${ad.content}"
+                                              style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="box-body no-padding">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#"><i class="fa fa-circle-o text-red"></i> Important</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Promotions</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social</a></li>
-                            </ul>
-                        </div>
-                        <!-- /.box-body -->
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">修改</button>
+                            </div>
+                        </form>
                     </div>
                     <!-- /.box -->
                 </div>
             </div>
         </section>
-
     </div>
     <!-- /.content-wrapper -->
 
@@ -81,6 +105,16 @@
 
 
 <div th:replace='layout/scripts :: scripts'></div>
+<script src="/js/select2.full.min.js"></script>
+<script src="/js/fileinput.min.js"></script>
+<script src="/js/theme.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.select2').select2();
+//        $('.textarea').wysihtml5();
+    });
+</script>
 </body>
 </html>
 

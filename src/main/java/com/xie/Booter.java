@@ -3,7 +3,6 @@ package com.xie;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cache.annotation.EnableCaching;
@@ -16,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableAutoConfiguration
 @EnableCaching
 @MapperScan("com.xie.mapper")
-public class Booter implements CommandLineRunner {
+public class Booter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Booter.class);
 
@@ -24,10 +23,5 @@ public class Booter implements CommandLineRunner {
         LOGGER.info("========                      微信商城服务启动 开始                     ========");
         SpringApplication.run(Booter.class, args);
         LOGGER.info("========                      微信商城服务启动 完成                     ========");
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
-        LOGGER.info("========                      微信商城服务启动中 ...                    ========");
     }
 }

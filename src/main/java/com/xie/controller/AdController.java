@@ -44,10 +44,35 @@ public class AdController extends BaseController {
         return "adAdd";
     }
 
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(@RequestParam("id") short id,
+                         @RequestParam("adPositionId") short adPositionId,
+                         @RequestParam("mediaType") short mediaType,
+                         @RequestParam("name") String name,
+                         @RequestParam("link") String link,
+                         @RequestParam("imageUrl") String imageUrl,
+                         @RequestParam("content") String content) {
+        Ad ad = new Ad();
+        ad.setId(id);
+        ad.setAdPositionId(adPositionId);
+        ad.setMediaType((byte) mediaType);
+        ad.setName(name);
+        ad.setLink(link);
+        ad.setImageUrl(imageUrl);
+        ad.setContent(content);
+        ad.setEnabled((byte) 1);
+
+        adService.updateByPrimaryKey(ad);
+        return "redirect:/ad";
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String detail(@PathVariable(value = "id") int id, Model model) {
         setHeaderData(model);
         model.addAttribute("title", "广告位详情");
+        model.addAttribute("adPositionTypeList", MallConstants.AdPositionType.json());
+        model.addAttribute("mediaTypeList", MallConstants.MediaType.json());
 
         Ad ad = adService.selectByPrimaryKey((short) id);
         model.addAttribute("ad", ad);
