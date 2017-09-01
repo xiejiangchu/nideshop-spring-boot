@@ -29,12 +29,13 @@
         </section>
         <section class="content">
             <div class="row">
-                <div class="col-md-offset-2 col-md-8">
+                <div class="col-md-offset-1 col-md-10">
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <!-- form start -->
                         <form role="form" th:action="@{/ad/update}" method="post">
                             <input type="hidden" name="id" th:value="${ad.id}">
+                            <input type="hidden" name="token" id="token" th:value="${token}">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label>位置</label>
@@ -67,7 +68,11 @@
 
 
                                     <label for="imgFile">上传图片</label>
-                                    <input type="file" id="imgFile" name="imageUrl">
+                                    <input type="hidden" id="imageUrl" name="imageUrl">
+                                    <input type="file" id="imgFile" name="imgFile">
+
+                                    <p class="help-block">替换图片</p>
+                                    <img id="imgFilePreview" style="width: 100%;">
 
                                     <p class="help-block">当前图片</p>
                                     <img th:src="${ad.imageUrl}" th:alt="${ad.imageUrl}" style="width: 100%;">
@@ -112,7 +117,43 @@
 <script type="text/javascript">
     $(function () {
         $('.select2').select2();
-//        $('.textarea').wysihtml5();
+        $('.textarea').wysihtml5();
+
+        $('#imgFile').on("change", function (e) {
+            var data = $('#imgFile')[0];
+            var protocol = window.location.protocol || 'http:';
+            var query = 'Authorization=' + document.getElementById('token').value + '&UserAgent=ALIMEDIASDK_WORKSTATION'
+            var url = protocol + "//upload.media.aliyun.com/api/proxy/upload?" + query;
+            var formData = new FormData();
+            formData.append('dir', "");
+            formData.append('name', data.files[0].name);
+            formData.append('size', data.files[0].size);
+            formData.append("content", data.files[0]);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                // 告诉jQuery不要去处理发送的数据
+                processData: false,
+                // 告诉jQuery不要去设置Content-Type请求头
+                contentType: false,
+                beforeSend: function () {
+                    console.log("正在进行，请稍候");
+                },
+                success: function (responseStr) {
+                    if (responseStr.code == 'OK') {
+                        $('#imageUrl').val(responseStr.url);
+                        $('#imgFilePreview').attr("src", responseStr.url);
+                    } else {
+                        alert("失败" + responseStr);
+                    }
+                },
+                error: function (responseStr) {
+                    console.log("error");
+                }
+            });
+        })
     });
 </script>
 </body>

@@ -20,6 +20,7 @@ public class UploadServiceImpl implements UploadService {
 
     @Override
     public String token() {
-        return null;
+        String token = uploadTokenClient.getUploadToken(uploadPolicy);
+        return token;
     }
 }

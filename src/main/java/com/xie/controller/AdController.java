@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.xie.bean.Ad;
 import com.xie.controller.api.BaseController;
 import com.xie.service.AdService;
+import com.xie.service.UploadService;
 import com.xie.utils.MallConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ public class AdController extends BaseController {
     @Autowired
     private AdService adService;
 
+    @Autowired
+    private UploadService uploadService;
+
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public String index(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                         @RequestParam(value = "pageSize", defaultValue = "20") int pageSize,
@@ -41,6 +45,7 @@ public class AdController extends BaseController {
         model.addAttribute("title", "新增广告位");
         model.addAttribute("adPositionTypeList", MallConstants.AdPositionType.json());
         model.addAttribute("mediaTypeList", MallConstants.MediaType.json());
+        model.addAttribute("token", uploadService.token());
         return "adAdd";
     }
 
@@ -63,7 +68,7 @@ public class AdController extends BaseController {
         ad.setContent(content);
         ad.setEnabled((byte) 1);
 
-        adService.updateByPrimaryKey(ad);
+        adService.updateByPrimaryKeyWithBLOBs(ad);
         return "redirect:/ad";
     }
 
@@ -76,6 +81,7 @@ public class AdController extends BaseController {
 
         Ad ad = adService.selectByPrimaryKey((short) id);
         model.addAttribute("ad", ad);
+        model.addAttribute("token", uploadService.token());
         return "adDetail";
     }
 
