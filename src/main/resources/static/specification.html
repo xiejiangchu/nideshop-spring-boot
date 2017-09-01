@@ -25,6 +25,14 @@
         </section>
         <section class="content">
             <div class="row">
+                <div class="col-xs-12 text-right">
+                    <a th:href="@{/specification/add}"
+                       class="btn btn-md btn-primary">增加
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+
                 <div class="col-xs-12">
                     <div class="box">
                         <!-- /.box-header -->
@@ -37,10 +45,11 @@
                                     <th>操作</th>
                                 </tr>
                                 <tr th:each="item,state : ${specificationPageInfo.list}">
-                                    <td>
-                                        <a th:href="@{'/specification/'+${item.id}}" th:text="${item.id}"></a>
+                                    <td th:text="${item.id}">
                                     </td>
-                                    <td th:text="${item.name}"></td>
+                                    <td>
+                                        <a th:href="@{'/specification/'+${item.id}}" th:text="${item.name}"></a>
+                                    </td>
                                     <td th:text="${item.sortOrder}"></td>
                                     <td>
                                         <a th:href="@{/specification/delete(id=${item.id},pageNum=${specificationPageInfo.pageNum},pageSize=${specificationPageInfo.pageSize})}"

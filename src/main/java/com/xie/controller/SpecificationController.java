@@ -44,12 +44,44 @@ public class SpecificationController extends BaseController {
         return "specificationDetail";
     }
 
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(@RequestParam("id") int id,
+                         @RequestParam("name") String name,
+                         @RequestParam("sortOrder") short sortOrder) {
+        Specification specification = new Specification();
+        specification.setId(id);
+        specification.setName(name);
+        specification.setSortOrder((byte) sortOrder);
+
+        specificationService.updateByPrimaryKey(specification);
+        return "redirect:/specification";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String getAdd(Model model) {
+        setHeaderData(model);
+        model.addAttribute("title", "商品规格新增");
+        return "specificationAdd";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String add(@RequestParam("name") String name,
+                      @RequestParam("sortOrder") short sortOrder) {
+        Specification specification = new Specification();
+        specification.setName(name);
+        specification.setSortOrder((byte) sortOrder);
+
+        specificationService.insert(specification);
+        return "redirect:/specification";
+    }
+
+
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(@RequestParam(value = "id") int id,
                          @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                          @RequestParam(value = "pageSize", defaultValue = "20") int pageSize) {
 
         specificationService.deleteByPrimaryKey(id);
-        return "forward:/specification?pageNum="+pageNum+"&pageSize="+pageSize;
+        return "forward:/specification?pageNum=" + pageNum + "&pageSize=" + pageSize;
     }
 }
