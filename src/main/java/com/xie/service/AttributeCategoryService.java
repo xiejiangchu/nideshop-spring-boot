@@ -1,10 +1,13 @@
-package com.xie.mapper;
+package com.xie.service;
 
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.AttributeCategory;
 
-import java.util.List;
+/**
+ * Created by xie on 17/8/23.
+ */
+public interface AttributeCategoryService {
 
-public interface AttributeCategoryMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(AttributeCategory record);
@@ -17,8 +20,7 @@ public interface AttributeCategoryMapper {
 
     int updateByPrimaryKey(AttributeCategory record);
 
-
-    List<AttributeCategory> select();
+    PageInfo<AttributeCategory> select(int pageNum, int pageSize);
 
     int count();
 }

@@ -60,6 +60,13 @@ public class AttributeServiceImpl implements AttributeService {
     }
 
     @Override
+    public PageInfo<Attribute> selectByAttributeCategory(int attributeCategory, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Attribute> page = new PageInfo<Attribute>(attributeMapper.selectByAttributeCategory(attributeCategory));
+        return page;
+    }
+
+    @Override
     public int count() {
         return attributeMapper.count();
     }

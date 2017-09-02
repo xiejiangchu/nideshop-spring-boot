@@ -42,7 +42,7 @@ public class CategoryController extends BaseController {
     @ResponseBody
     BaseResponse index(@RequestParam(value = "id", required = false) Integer id) {
         Category currentCategory = null;
-        if (id == null) {
+        if (id != null && id > 0) {
             currentCategory = categoryService.selectByPrimaryKey(id);
         }
         List<Category> categoryList = categoryService.selectByParent(0);
@@ -68,7 +68,7 @@ public class CategoryController extends BaseController {
 
     @RequestMapping(value = "/current", method = RequestMethod.GET)
     @ResponseBody
-    BaseResponse getById(@RequestParam(value = "id") int id) {
+    BaseResponse current(@RequestParam(value = "id") int id) {
 
         Category currentCategory = categoryService.selectByPrimaryKey(id);
         currentCategory.setSubCategoryList(categoryService.selectByParent(currentCategory.getId()));

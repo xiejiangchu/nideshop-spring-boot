@@ -3,6 +3,8 @@ package com.xie.controller.api;
 import com.xie.auth.MyUserDetails;
 import com.xie.bean.User;
 import com.xie.response.BaseResponse;
+import com.xie.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,6 +24,9 @@ import java.util.Date;
  * @Date 17/2/23 下午12:46.
  */
 public class BaseController {
+
+    @Autowired
+    private UserService userService;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -55,7 +60,14 @@ public class BaseController {
      * @param model
      */
     protected void setHeaderData(Model model) {
-        model.addAttribute("user", getUser());
+        User user = getUser();
+        if (null == user) {
+            model.addAttribute("user", userService.getById(1));
+        } else {
+            model.addAttribute("user", user);
+        }
+
+
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

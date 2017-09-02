@@ -45,25 +45,25 @@
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
-        from order
+        from `order`
         where id = #{id,jdbcType=INTEGER}
     </select>
 
     <select id="selectByUid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
-        from order
+        from `order`
         where user_id = #{uid,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order
+    delete from `order`
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.xie.bean.Order">
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-    insert into order (id, order_sn, user_id, 
+    insert into `order` (id, order_sn, user_id,
       order_status, shipping_status, pay_status, 
       consignee, country, province, 
       city, district, address, 
@@ -87,7 +87,7 @@
       #{couponPrice,jdbcType=DECIMAL}, #{callbackStatus,jdbcType=CHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.xie.bean.Order">
-        insert into order
+        insert into `order`
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -385,7 +385,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.xie.bean.Order">
-    update order
+    update `order`
     set order_sn = #{orderSn,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
       order_status = #{orderStatus,jdbcType=BIT},

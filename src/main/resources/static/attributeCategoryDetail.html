@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace='layout/header :: header'></head>
+<body class="skin-blue sidebar-mini wysihtml5-supported" style="height: auto; min-height: 100%;">
+
+<!-- wrapper -->
+<div class="wrapper">
+    <div th:replace='layout/top :: top'></div>
+    <!-- Left side column. contains the logo and sidebar -->
+    <div th:replace='layout/left :: left'></div>
+    <!-- /Left side column. contains the logo and sidebar -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                分类详情
+                <small th:text="${attributeCategory.name}"></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">分类详情</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="box box-solid">
+                        <div class="box-body no-padding">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li class="section active" data-id="section1-content">
+                                    <a href="javascript:void(0);"><i class="fa fa-inbox"></i> 基本信息
+                                    </a></li>
+                                <li class="section" data-id="section2-content"><a href="javascript:void(0);">
+                                    <i class="fa fa-envelope-o"></i> 属性列表</a></li>
+                                <li class="section" data-id="section3-content"><a href="javascript:void(0);">
+                                    <i class="fa fa-plus-square-o"></i> 属性新增</a></li>
+                                <li class="section" data-id="section4-content"><a href="javascript:void(0);">
+                                    <i class="fa fa-minus-square-o"></i> 属性修改</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <div id="section1-content" class="section-content col-md-9" style="">
+                    <div class="box box-primary">
+                        <!-- form start -->
+                        <form role="form" th:action="@{/ad/update}" method="post">
+                            <input type="hidden" name="id" th:value="${attributeCategory.id}">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="name">名称</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder=""
+                                           th:value="${attributeCategory.name}">
+                                </div>
+                                <div class="form-group">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="enabled" value="1"
+                                                   th:checked="${attributeCategory.enabled==1}">
+                                            可用
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="enabled" value="0"
+                                                   th:checked="${attributeCategory.enabled==0}">
+                                            不可用
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">修改</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="section2-content" class="section-content col-md-9" style="display: none;">
+                    <div class="box">
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>编号</th>
+                                    <th>分类</th>
+                                    <th>名称</th>
+                                    <th>类型</th>
+                                    <th>排序</th>
+                                    <th>操作</th>
+                                </tr>
+                                <tr th:each="item,state : ${attributePageInfo.list}">
+                                    <td th:text="${item.id}">
+
+                                    </td>
+                                    <td th:text="${item.attributeCategoryId}"></td>
+                                    <td>
+                                        <a th:href="@{'/attribute/'+${item.id}}" th:text="${item.name}"></a>
+                                    </td>
+                                    <td th:text="${@enumService.getInputType(item.inputType)}"></td>
+                                    <td th:text="${item.sortOrder}"></td>
+                                    <td>
+                                        <button th:attr="data-id=${item.id}"
+                                                class="attributeDel btn btn-xs btn-flat btn-danger">删除
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+
+                        <div class="box-footer clearfix">
+                            <ul class="pagination pagination-sm no-margin pull-right">
+                                <li><a th:href="@{/attribute(pageNum=${attributePageInfo.prePage})}">&laquo;</a></li>
+                                <li th:each="navigatepageNum,state : ${attributePageInfo.navigatepageNums}"><a
+                                        th:href="@{/attribute(pageNum=${navigatepageNum},pageSize=${attributePageInfo.pageSize})}"
+                                        th:text="${navigatepageNum}">2</a></li>
+                                <li><a th:href="@{/attribute(pageNum=${attributePageInfo.lastPage})}">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <div id="section3-content" class="section-content col-md-9" style="display: none;">
+                    <div class="box box-primary">
+                        <!-- form start -->
+                        <form role="form" id="attributeAdd">
+                            <input type="hidden" name="attributeCategoryId" th:value="${attributeCategory.id}">
+                            <div class="box-body">
+
+                                <div class="form-group">
+                                    <label for="name">名称</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>类别</label>
+                                    <select class="form-control select2" data-placeholder="位置" name="inputType"
+                                            style="width: 100%;">
+                                        <option th:each="item,state:${inputTypeList}" th:text="${item.name}"
+                                                th:value="${item.val}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name">排序</label>
+                                    <input type="text" class="form-control" id="sortOrder" name="sortOrder"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">新增</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <div id="section4-content" class="section-content col-md-9" style="display: none;">
+                    <div class="box box-primary">
+                        <!-- form start -->
+                        <form role="form" id="attributeUpdate">
+                            <input type="hidden" name="attributeCategoryId" th:value="${attributeCategory.id}">
+
+                            <div class="box-body">
+
+                                <div class="form-group">
+                                    <label>选项</label>
+                                    <select class="form-control select2" data-placeholder="位置" name="id" id="update_id"
+                                            style="width: 100%;">
+                                        <option th:each="item,state:${attributePageInfo.list}" th:text="${item.name}"
+                                                th:value="${item.id}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name">名称</label>
+                                    <input type="text" class="form-control" id="update_name" name="name" placeholder="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>类别</label>
+                                    <select class="form-control select2" id="update_inputType" data-placeholder="位置" name="inputType"
+                                            style="width: 100%;">
+                                        <option th:each="item,state:${inputTypeList}" th:text="${item.name}"
+                                                th:value="${item.val}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name">排序</label>
+                                    <input type="text" class="form-control" id="update_sortOrder" name="sortOrder"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">修改</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <div th:replace='layout/control :: control'></div>
+    <!-- /.control-sidebar -->
+
+    <!-- footer -->
+    <div th:replace='layout/footer :: footer'></div>
+    <!-- /footer -->
+</div>
+<!-- ./wrapper -->
+
+
+<div th:replace='layout/scripts :: scripts'></div>
+
+<script type="text/javascript">
+    $(function () {
+        $('.section').click(function (event) {
+            $('.section').removeClass('active');
+            $(event.target).parent(".section").addClass("active");
+            var id = $(event.target).parent(".section").attr("data-id");
+            $('.section-content').css("display", "none");
+            $('#' + id).css("display", "block");
+        });
+
+        $('.attributeDel').click(function (event) {
+            var that = $(this);
+            var id = $(this).attr("data-id");
+            $.post('/attribute/delete', {'id': id}, function (data, textStatus, xhr) {
+                if (data.errno == 0) {
+                    alert('删除成功');
+                    that.parent().parent().remove();
+                } else {
+                    alert(data.errmsg);
+                }
+            });
+        });
+
+
+        $("#attributeAdd").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/attribute/add',
+                data: $('#attributeAdd').serialize(),// 你的formid
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('添加成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        });
+
+        $("#attributeUpdate").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/attribute/update',
+                data: $('#attributeUpdate').serialize(),// 你的formid
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        });
+
+        $('#update_id').on('change', function () {
+            var id = $(this).val();
+            $.get('/attribute/' + id, function (data) {
+                $('#update_name').val(data.data.name);
+                $('#update_inputType').val(data.data.inputType);
+                $('#update_sortOrder').val(data.data.sortOrder);
+            });
+        })
+    })
+</script>
+</body>
+</html>
+
+

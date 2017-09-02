@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
  * Created by xie on 17/1/7.
  */
 @Controller
+@RequestMapping("/api/index")
 public class IndexApiController extends BaseController {
 
     @Autowired
@@ -39,7 +40,7 @@ public class IndexApiController extends BaseController {
     @Autowired
     private ChannelService channelService;
 
-    @RequestMapping(value = "/api/index/index", method = RequestMethod.GET)
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     @ResponseBody
     public BaseResponse index() {
         IndexResponse indexResponse = new IndexResponse();

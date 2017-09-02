@@ -21,5 +21,7 @@ public interface AttributeMapper {
 
     List<Attribute> select();
 
+    List<Attribute> selectByAttributeCategory(Integer attributeCategory);
+
     int count();
 }

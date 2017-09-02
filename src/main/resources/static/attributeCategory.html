@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace='layout/header :: header'></head>
+<body class="skin-blue sidebar-mini wysihtml5-supported" style="height: auto; min-height: 100%;">
+
+<!-- wrapper -->
+<div class="wrapper">
+    <div th:replace='layout/top :: top'></div>
+    <!-- Left side column. contains the logo and sidebar -->
+    <div th:replace='layout/left :: left'></div>
+    <!-- /Left side column. contains the logo and sidebar -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                商品属性
+                <small th:text="${'共计 '+attributeCategoryCount+' 个商品属性'}"></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">商品属性</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12 text-right">
+                    <a th:href="@{/attributeCategory/add}"
+                       class="btn btn-md btn-primary">增加
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>编号</th>
+                                    <th>名称</th>
+                                    <th>可用</th>
+                                    <th>操作</th>
+                                </tr>
+                                <tr th:each="item,state : ${attributeCategoryPageInfo.list}">
+                                    <td th:text="${item.id}">
+
+                                    </td>
+                                    <td >
+                                        <a th:href="@{'/attributeCategory/'+${item.id}}" th:text="${item.name}"></a>
+                                    </td>
+                                    <td>
+                                        <span th:class="${item.enabled==1}? 'label label-success':'label label-danger'"
+                                              th:text="${item.enabled==1}? '是':'否'"></span>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/attributeCategory/enabled(id=${item.id},enabled=0,pageNum=${attributeCategoryPageInfo.pageNum},pageSize=${attributeCategoryPageInfo.pageSize})}" th:if="${item.enabled==1}" class="btn btn-xs btn-flat btn-danger">停用</a>
+                                        <a th:href="@{/attributeCategory/enabled(id=${item.id},enabled=1,pageNum=${attributeCategoryPageInfo.pageNum},pageSize=${attributeCategoryPageInfo.pageSize})}" th:if="${item.enabled==0}" class="btn btn-xs btn-flat btn-danger">使用</a>
+                                        <a th:href="@{/attributeCategory/delete(id=${item.id},pageNum=${attributeCategoryPageInfo.pageNum},pageSize=${attributeCategoryPageInfo.pageSize})}" class="btn btn-xs btn-flat btn-danger">删除</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+
+                        <div class="box-footer clearfix">
+                            <ul class="pagination pagination-sm no-margin pull-right">
+                                <li><a th:href="@{/attributeCategory(pageNum=${attributeCategoryPageInfo.prePage})}">&laquo;</a></li>
+                                <li th:each="navigatepageNum,state : ${attributeCategoryPageInfo.navigatepageNums}"><a
+                                        th:href="@{/attributeCategory(pageNum=${navigatepageNum},pageSize=${attributeCategoryPageInfo.pageSize})}"
+                                        th:text="${navigatepageNum}">2</a></li>
+                                <li><a th:href="@{/attributeCategory(pageNum=${attributeCategoryPageInfo.lastPage})}">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <div th:replace='layout/control :: control'></div>
+    <!-- /.control-sidebar -->
+
+    <!-- footer -->
+    <div th:replace='layout/footer :: footer'></div>
+    <!-- /footer -->
+</div>
+<!-- ./wrapper -->
+
+
+<div th:replace='layout/scripts :: scripts'></div>
+</body>
+</html>
+
+

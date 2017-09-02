@@ -5,8 +5,8 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="attribute_category_id" property="attributeCategoryId" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="input_type" property="inputType" jdbcType="BIT"/>
-        <result column="sort_order" property="sortOrder" jdbcType="TINYINT"/>
+        <result column="input_type" property="inputType" jdbcType="INTEGER"/>
+        <result column="sort_order" property="sortOrder" jdbcType="INTEGER"/>
     </resultMap>
     <resultMap id="ResultMapWithBLOBs" type="com.xie.bean.Attribute" extends="BaseResultMap">
         <result column="values" property="values" jdbcType="LONGVARCHAR"/>
@@ -17,6 +17,15 @@
     <sql id="Blob_Column_List">
     `values`
   </sql>
+
+    <select id="selectByAttributeCategory" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from attribute
+        where attribute_category_id = #{attributeCategory,jdbcType=INTEGER}
+    </select>
 
 
     <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
@@ -48,10 +57,10 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-        insert into attribute (id, attribute_category_id, name,
-        input_type, sort_order, values
+        insert into attribute (attribute_category_id, name,
+        input_type, sort_order, `values`
         )
-        values (#{id,jdbcType=INTEGER}, #{attributeCategoryId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+        values ( #{attributeCategoryId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
         #{inputType,jdbcType=BIT}, #{sortOrder,jdbcType=TINYINT}, #{values,jdbcType=LONGVARCHAR}
         )
     </insert>

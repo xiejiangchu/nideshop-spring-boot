@@ -94,4 +94,33 @@ public class MallConstants {
             return jsonArray;
         }
     }
+
+    public enum InputType {
+        文本(1), 富文本(2);
+        private int val;
+
+        InputType(int val) {
+            this.val = val;
+        }
+
+        public int getVal() {
+            return val;
+        }
+
+        public void setVal(int val) {
+            this.val = val;
+        }
+
+        public static JSONArray json() {
+            JSONArray jsonArray = new JSONArray();
+            InputType[] list = InputType.values();
+            for (int i = 0; i < list.length; i++) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("name", list[i].name());
+                jsonObject.put("val", list[i].val);
+                jsonArray.add(jsonObject);
+            }
+            return jsonArray;
+        }
+    }
 }
