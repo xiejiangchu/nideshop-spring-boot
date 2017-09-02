@@ -3,13 +3,14 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class AttributeCategory implements Serializable {
+    private static final long serialVersionUID = -3507727326547019525L;
     private Integer id;
 
     private String name;
 
-    private  Integer enabled;
+    private CategoryShort categoryShort;
 
-    private static final long serialVersionUID = 1L;
+    private  Integer enabled;
 
     public Integer getId() {
         return id;
@@ -33,6 +34,14 @@ public class AttributeCategory implements Serializable {
 
     public void setEnabled(Integer enabled) {
         this.enabled = enabled;
+    }
+
+    public CategoryShort getCategoryShort() {
+        return categoryShort;
+    }
+
+    public void setCategoryShort(CategoryShort categoryShort) {
+        this.categoryShort = categoryShort;
     }
 
     @Override

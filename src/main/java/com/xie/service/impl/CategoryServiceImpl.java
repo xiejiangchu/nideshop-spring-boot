@@ -41,6 +41,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public CategoryShort selectShortByPrimaryKey(Integer id) {
+        return categoryMapper.selectShortByPrimaryKey(id);
+    }
+
+    @Override
     public List<Category> selectByParent(Integer parent_id) {
         return categoryMapper.selectByParent(parent_id);
     }

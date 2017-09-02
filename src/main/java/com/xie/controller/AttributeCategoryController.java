@@ -3,9 +3,11 @@ package com.xie.controller;
 import com.github.pagehelper.PageInfo;
 import com.xie.bean.Attribute;
 import com.xie.bean.AttributeCategory;
+import com.xie.bean.CategoryShort;
 import com.xie.controller.api.BaseController;
 import com.xie.service.AttributeCategoryService;
 import com.xie.service.AttributeService;
+import com.xie.service.CategoryService;
 import com.xie.utils.MallConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by xie on 17/8/30.
@@ -28,6 +33,9 @@ public class AttributeCategoryController extends BaseController {
     @Autowired
     private AttributeService attributeService;
 
+    @Autowired
+    private CategoryService categoryService;
+
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public String index(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
@@ -36,6 +44,7 @@ public class AttributeCategoryController extends BaseController {
         setHeaderData(model);
         model.addAttribute("title", "商品属性");
         PageInfo<AttributeCategory> attributeCategoryPageInfo = attributeCategoryService.select(pageNum, pageSize);
+        attributeCategoryPageInfo.getList().stream().forEach(item -> item.setCategoryShort(categoryService.selectShortByPrimaryKey(item.getId())));
         model.addAttribute("attributeCategoryPageInfo", attributeCategoryPageInfo);
         model.addAttribute("attributeCategoryCount", attributeCategoryService.count());
 
@@ -48,13 +57,24 @@ public class AttributeCategoryController extends BaseController {
     public String getAdd(Model model) {
         setHeaderData(model);
         model.addAttribute("title", "商品属性新增");
+
+        List<CategoryShort> categoryShortList = categoryService.selectByParents(Arrays.asList(0));
+        List<CategoryShort> subCategoryShortList = categoryService.selectByParents(Arrays.asList(categoryShortList.get(0).getId()));
+        model.addAttribute("categoryShortList", categoryShortList);
+        model.addAttribute("subCategoryShortList", subCategoryShortList);
         return "attributeCategoryAdd";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(@RequestParam("name") String name,
+    public String add(@RequestParam("id") int id,
+                      @RequestParam("name") String name,
                       @RequestParam("enabled") int enabled) {
+
+        if (attributeCategoryService.selectByPrimaryKey(id) != null) {
+            return "redirect:/attributeCategory";
+        }
         AttributeCategory attributeCategory = new AttributeCategory();
+        attributeCategory.setId(id);
         attributeCategory.setName(name);
         attributeCategory.setEnabled(enabled);
 

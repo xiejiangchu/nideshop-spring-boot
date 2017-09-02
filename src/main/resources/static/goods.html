@@ -34,7 +34,6 @@
                                     <th>编号</th>
                                     <th>SN</th>
                                     <th>名称</th>
-                                    <th>简述</th>
                                     <th>单位</th>
                                     <th>价格</th>
                                     <th>在售</th>
@@ -49,7 +48,6 @@
                                     </td>
                                     <td th:text="${item.goodsSn}"></td>
                                     <td th:text="${item.name}"></td>
-                                    <td th:text="${item.goodsBrief}"></td>
                                     <td th:text="${item.goodsUnit}"></td>
                                     <td th:text="${item.retailPrice}"></td>
                                     <td><span th:class="${item.isOnSale==1}? 'label label-success':'label label-danger'"

@@ -39,12 +39,16 @@
                             <table class="table table-hover">
                                 <tr>
                                     <th>编号</th>
+                                    <th>类别</th>
                                     <th>名称</th>
                                     <th>可用</th>
                                     <th>操作</th>
                                 </tr>
                                 <tr th:each="item,state : ${attributeCategoryPageInfo.list}">
                                     <td th:text="${item.id}">
+
+                                    </td>
+                                    <td th:text="${item.categoryShort.name}">
 
                                     </td>
                                     <td >

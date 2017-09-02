@@ -35,6 +35,26 @@
                         <!-- form start -->
                         <form role="form" th:action="@{/attributeCategory/add}" method="post">
                             <div class="box-body">
+
+                                <div class="form-group">
+                                    <label>一级分类</label>
+                                    <select class="form-control select2" name='category_l1_id' id="l1_id"
+                                            style="width: 100%;">
+                                        <option th:each="item,state:${categoryShortList}" th:text="${item.name}"
+                                                th:value="${item.id}"></option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>二级分类</label>
+                                    <select class="form-control select2" name="id" id="l2_id"
+                                            style="width: 100%;">
+                                        <option th:each="item,state:${subCategoryShortList}" th:text="${item.name}"
+                                                th:value="${item.id}"></option>
+                                    </select>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="name">名称</label>
                                     <input type="text" class="form-control" id="name" name="name" placeholder="">
@@ -76,10 +96,36 @@
     <div th:replace='layout/footer :: footer'></div>
     <!-- /footer -->
 </div>
+
 <!-- ./wrapper -->
 
 
 <div th:replace='layout/scripts :: scripts'></div>
+
+<script type="text/javascript">
+
+    $(function () {
+        $.extend({
+            format: function (str, param) {
+                str = str.toString();
+                var reg = /{(\d+)}/gm;
+                return str.replace(reg, function (match, name) {
+                    return param[name];
+                });
+            }
+        });
+        $('#l1_id').on('change', function () {
+            var id = $(this).val();
+            $.get('/category/' + id, function (data) {
+                var html = '';
+                for (var i = 0; i < data.data.length; i++) {
+                    html += $.format("<option value='{0}'>{1}</option>", [data.data[i].id, data.data[i].name]);
+                }
+                $('#l2_id').html(html);
+            });
+        });
+    })
+</script>
 </body>
 </html>
 

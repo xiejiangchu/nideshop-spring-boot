@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 public class CategoryShort implements Serializable {
+    private static final long serialVersionUID = 2429175987554108041L;
     private Integer id;
 
     private String name;
 
-    List<GoodsShort> goodsList;
+    private List<GoodsShort> goodsList;
+
 
     public Integer getId() {
         return id;

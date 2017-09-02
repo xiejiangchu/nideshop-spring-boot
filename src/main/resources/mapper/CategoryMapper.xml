@@ -24,6 +24,10 @@
         <result column="name" property="name" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <sql id="Base_Column_List_Short">
+        id, name
+    </sql>
+
     <sql id="Base_Column_List">
     id, name, keywords, front_desc, parent_id, sort_order, show_index, is_show, banner_url, 
     icon_url, img_url, wap_banner_url, level, type, front_name
@@ -38,14 +42,21 @@
 
     <select id="selectMainCategory" resultMap="BaseResultMapShort">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List_Short"/>
         from category
         WHERE parent_id=0 and name != '推荐'
     </select>
 
+    <select id="selectShortByPrimaryKey" resultMap="BaseResultMapShort" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List_Short"/>
+        from category
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
     <select id="selectByParents" resultMap="BaseResultMapShort">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List_Short"/>
         from category
         WHERE parent_id IN
         <foreach collection="parent_ids" open="(" close=")" item="parent_id" separator=",">
@@ -68,19 +79,19 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-    insert into category (id, name, keywords, 
-      front_desc, parent_id, sort_order, 
-      show_index, is_show, banner_url, 
-      icon_url, img_url, wap_banner_url, 
-      level, type, front_name
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
-      #{frontDesc,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{sortOrder,jdbcType=BIT}, 
-      #{showIndex,jdbcType=BIT}, #{isShow,jdbcType=BIT}, #{bannerUrl,jdbcType=VARCHAR}, 
-      #{iconUrl,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, #{wapBannerUrl,jdbcType=VARCHAR}, 
-      #{level,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{frontName,jdbcType=VARCHAR}
-      )
-  </insert>
+        insert into category (id, name, keywords,
+        front_desc, parent_id, sort_order,
+        show_index, is_show, banner_url,
+        icon_url, img_url, wap_banner_url,
+        level, type, front_name
+        )
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR},
+        #{frontDesc,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{sortOrder,jdbcType=BIT},
+        #{showIndex,jdbcType=BIT}, #{isShow,jdbcType=BIT}, #{bannerUrl,jdbcType=VARCHAR},
+        #{iconUrl,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, #{wapBannerUrl,jdbcType=VARCHAR},
+        #{level,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{frontName,jdbcType=VARCHAR}
+        )
+    </insert>
     <insert id="insertSelective" parameterType="com.xie.bean.Category">
         insert into category
         <trim prefix="(" suffix=")" suffixOverrides=",">
