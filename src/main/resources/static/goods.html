@@ -43,11 +43,13 @@
                                     <th>操作</th>
                                 </tr>
                                 <tr th:each="item,state : ${goodsPageInfo.list}">
-                                    <td>
-                                        <a th:href="@{'/goods/'+${item.id}}" th:text="${item.id}"></a>
+                                    <td th:text="${item.id}">
+
                                     </td>
                                     <td th:text="${item.goodsSn}"></td>
-                                    <td th:text="${item.name}"></td>
+                                    <td>
+                                        <a th:href="@{'/goods/'+${item.id}}" th:text="${item.name}"></a>
+                                    </td>
                                     <td th:text="${item.goodsUnit}"></td>
                                     <td th:text="${item.retailPrice}"></td>
                                     <td><span th:class="${item.isOnSale==1}? 'label label-success':'label label-danger'"
@@ -58,17 +60,23 @@
                                               th:text="${item.isHot==1}? '是':'否'"></span></td>
                                     <td th:text="${item.sellVolume}"></td>
                                     <td>
-                                        <a th:href="@{/goods/new(id=${item.id},isNew=0,pageNum=${goodsPageInfo.pageNum},pageSize=${goodsPageInfo.pageSize})}" th:if="${item.isNew==1}"
+                                        <a th:href="@{/goods/new(id=${item.id},isNew=0,pageNum=${goodsPageInfo.pageNum},pageSize=${goodsPageInfo.pageSize})}"
+                                           th:if="${item.isNew==1}"
                                            class="btn btn-xs btn-flat btn-danger">取消新品</a>
-                                        <a th:href="@{/goods/new(id=${item.id},isNew=1,pageNum=${goodsPageInfo.pageNum},pageSize=${goodsPageInfo.pageSize})}" th:if="${item.isNew==0}"
+                                        <a th:href="@{/goods/new(id=${item.id},isNew=1,pageNum=${goodsPageInfo.pageNum},pageSize=${goodsPageInfo.pageSize})}"
+                                           th:if="${item.isNew==0}"
                                            class="btn btn-xs btn-flat btn-success">设置新品</a>
-                                        <a th:href="@{/goods/hot(id=${item.id},isHot=0,pageNum=${goodsPageInfo.pageNum},pageSize=${goodsPageInfo.pageSize})}" th:if="${item.isHot==1}"
+                                        <a th:href="@{/goods/hot(id=${item.id},isHot=0,pageNum=${goodsPageInfo.pageNum},pageSize=${goodsPageInfo.pageSize})}"
+                                           th:if="${item.isHot==1}"
                                            class="btn btn-xs btn-flat btn-danger">取消热销</a>
-                                        <a th:href="@{/goods/hot(id=${item.id},isHot=1,pageNum=${goodsPageInfo.pageNum},pageSize=${goodsPageInfo.pageSize})}" th:if="${item.isHot==0}"
+                                        <a th:href="@{/goods/hot(id=${item.id},isHot=1,pageNum=${goodsPageInfo.pageNum},pageSize=${goodsPageInfo.pageSize})}"
+                                           th:if="${item.isHot==0}"
                                            class="btn btn-xs btn-flat btn-success">设置热销</a>
-                                        <a th:href="@{/goods/enabled(id=${item.id},enabled=0,pageNum=${goodsPageInfo.pageNum},pageSize=${goodsPageInfo.pageSize})}" th:if="${item.isOnSale==1}"
+                                        <a th:href="@{/goods/enabled(id=${item.id},enabled=0,pageNum=${goodsPageInfo.pageNum},pageSize=${goodsPageInfo.pageSize})}"
+                                           th:if="${item.isOnSale==1}"
                                            class="btn btn-xs btn-flat btn-warning">下架</a>
-                                        <a th:href="@{/goods/enabled(id=${item.id},enabled=1,pageNum=${goodsPageInfo.pageNum},pageSize=${goodsPageInfo.pageSize})}" th:if="${item.isOnSale==0}"
+                                        <a th:href="@{/goods/enabled(id=${item.id},enabled=1,pageNum=${goodsPageInfo.pageNum},pageSize=${goodsPageInfo.pageSize})}"
+                                           th:if="${item.isOnSale==0}"
                                            class="btn btn-xs btn-flat btn-primary">上架</a>
                                     </td>
                                 </tr>

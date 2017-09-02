@@ -29,14 +29,24 @@
                     <div class="box box-solid">
                         <div class="box-body no-padding">
                             <ul class="nav nav-pills nav-stacked">
-                                <li class="active"><a href="#"><i class="fa fa-inbox"></i> 基本信息
-                                    <span class="label label-primary pull-right">12</span></a></li>
-                                <li><a href="#"><i class="fa fa-envelope-o"></i> 价格</a></li>
-                                <li><a href="#"><i class="fa fa-file-text-o"></i> 图集</a></li>
-                                <li><a href="#"><i class="fa fa-filter"></i> 属性信息 <span
-                                        class="label label-warning pull-right">65</span></a>
+                                <li class="section active" data-id="section1-content">
+                                    <a href="#"><i class="fa fa-inbox"></i>基本信息</a></li>
+                                <li class="section" data-id="section2-content">
+                                    <a href="#"><i class="fa fa-envelope-o"></i>商品详情</a></li>
+                                <li class="section" data-id="section3-content">
+                                    <a href="#"><i class="fa fa-file-text-o"></i>商品图片</a></li>
+                                <li class="section" data-id="section4-content">
+                                    <a href="#"><i class="fa fa-filter"></i>销售信息</a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-trash-o"></i> 相关产品</a></li>
+                                <li class="section" data-id="section5-content">
+                                    <a href="#"><i class="fa fa-filter"></i>类别信息</a>
+                                </li>
+                                <li class="section" data-id="section6-content">
+                                    <a href="#"><i class="fa fa-filter"></i>属性信息</a>
+                                </li>
+                                <li class="section" data-id="section7-content">
+                                    <a href="#"><i class="fa fa-filter"></i>规格信息</a>
+                                </li>
                             </ul>
                         </div>
                         <!-- /.box-body -->
@@ -44,7 +54,7 @@
                     <!-- /. box -->
                     <div class="box box-solid">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Labels</h3>
+                            <h3 class="box-title">订单</h3>
 
                             <div class="box-tools">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -54,9 +64,9 @@
                         </div>
                         <div class="box-body no-padding">
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#"><i class="fa fa-circle-o text-red"></i> Important</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Promotions</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o text-red"></i> 订单</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> 订单</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> 订单</a></li>
                             </ul>
                         </div>
                         <!-- /.box-body -->
@@ -64,37 +74,157 @@
                     <!-- /.box -->
                 </div>
                 <!-- /.col -->
-                <div class="col-md-6">
-                    <div class="box box-solid">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Carousel</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="item" th:each="item,state : ${goodsDetail.goodsGalleries}">
-                                        <img th:src="${item.imgUrl}" alt="First slide">
-                                        <div class="carousel-caption" th:text="${item.imgDesc}">
+                <div id="section1-content" class="section-content col-md-9" style="">
+                    <div class="box box-primary">
+                        <!-- form start -->
+                        <form role="form" th:action="@{/ad/update}" method="post">
+                            <input type="hidden" name="id" th:value="${goodsDetail.goods.id}">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label>名称</label>
+                                    <input type="text" class="form-control" name="name"
+                                           th:value="${goodsDetail.goods.name}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>SN</label>
+                                    <input type="text" class="form-control" name="goodsSn"
+                                           th:value="${goodsDetail.goods.goodsSn}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>关键字</label>
+                                    <input type="text" class="form-control" name="keywords"
+                                           th:value="${goodsDetail.goods.keywords}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>单位</label>
+                                    <input type="text" class="form-control" name="goodsUnit"
+                                           th:value="${goodsDetail.goods.goodsUnit}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>促销信息</label>
+                                    <input type="text" class="form-control" name="promotionDesc"
+                                           th:value="${goodsDetail.goods.promotionDesc}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>简单描述</label>
+                                    <input type="text" class="form-control" name="goodsBrief"
+                                           th:value="${goodsDetail.goods.goodsBrief}">
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">修改</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="section2-content" class="section-content col-md-9" style="display: none;">
+                    <div class="box box-primary">
+                        <!-- form start -->
+                        <form role="form" th:action="@{/goods/update}" method="post">
+                            <input type="hidden" name="id" th:value="${goodsDetail.goods.id}">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label>详情描述</label>
+                                    <textarea class="textarea" placeholder="内容" name="goodsDesc"
+                                              th:text="${goodsDetail.goods.goodsDesc}"
+                                              style="width: 100%; height: 400px; border: 1px solid #dddddd;"></textarea>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">修改</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="section3-content" class="section-content col-md-9" style="display: none;">
+                    <div class="box box-primary">
+                        <!-- form start -->
+                        <form role="form" th:action="@{/goods/update}" method="post">
+                            <input type="hidden" name="id" th:value="${goodsDetail.goods.id}">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="primaryPicUrl">首页图片</label>
+                                    <input type="hidden" id="primaryPicUrl" name="primaryPicUrl">
+                                    <input type="file" id="imgFilePrimary" name="imgFile">
+
+                                    <p class="help-block">预览</p>
+                                    <img class="imgFilePreview" style="width: 100%;">
+
+                                    <p class="help-block">当前图片</p>
+                                    <img th:src="${goodsDetail.goods.primaryPicUrl}"
+                                         th:alt="${goodsDetail.goods.primaryPicUrl}" style="height: 100px;">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="listPicUrl">列表图片</label>
+                                    <input type="hidden" id="listPicUrl" name="listPicUrl">
+                                    <input type="file" id="imgFileList" name="imgFile">
+
+                                    <p class="help-block">预览</p>
+                                    <img class="imgFilePreview" style="width: 100%;">
+
+                                    <p class="help-block">当前图片</p>
+                                    <img th:src="${goodsDetail.goods.listPicUrl}"
+                                         th:alt="${goodsDetail.goods.listPicUrl}" style="height: 100px;">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="listPicUrl">详情图片</label>
+                                    <input type="file" id="imgFileList" name="imgFile">
+
+                                    <p class="help-block">预览</p>
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-sm-2 col-xs-3"
+                                                 th:each="item,state :${goodsDetail.goodsGalleries}">
+                                                <img class="imgFilePreview" style="width: 100%;">
+                                            </div>
                                         </div>
                                     </div>
+
+
+                                    <p class="help-block">当前图片</p>
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-sm-2 col-xs-3"
+                                                 th:each="item,state :${goodsDetail.goodsGalleries}">
+                                                <img th:src="${item.imgUrl}" th:alt="${item.imgDesc}"
+                                                     style="width: 100%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                                    <span class="fa fa-angle-left"></span>
-                                </a>
-                                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                                    <span class="fa fa-angle-right"></span>
-                                </a>
                             </div>
-                        </div>
-                        <!-- /.box-body -->
+
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">修改</button>
+                            </div>
+                        </form>
                     </div>
-                    <!-- /.box -->
+                </div>
+                <div id="section4-content" class="section-content col-md-9" style="display: none;">
+                    4
+                </div>
+                <div id="section5-content" class="section-content col-md-9" style="display: none;">
+                    5
+                </div>
+                <div id="section6-content" class="section-content col-md-9" style="display: none;">
+                    6
                 </div>
                 <!-- /.col -->
             </div>
@@ -115,6 +245,21 @@
 
 
 <div th:replace='layout/scripts :: scripts'></div>
+<script src="/js/select2.full.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.select2').select2();
+        $('.textarea').wysihtml5();
+
+        $('.section').click(function (event) {
+            $('.section').removeClass('active');
+            $(event.target).parent(".section").addClass("active");
+            var id = $(event.target).parent(".section").attr("data-id");
+            $('.section-content').css("display", "none");
+            $('#' + id).css("display", "block");
+        });
+    })
+</script>
 </body>
 </html>
 
