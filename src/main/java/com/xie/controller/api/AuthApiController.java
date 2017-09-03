@@ -36,9 +36,9 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/api/auth")
-public class AuthController extends BaseController {
+public class AuthApiController extends BaseController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthApiController.class);
 
     @Autowired
     private RestTemplate restTemplate;

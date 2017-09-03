@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping(value = "/api/user")
-public class UserController extends BaseController {
+public class UserApiController extends BaseController {
 
-    private Logger logger = LoggerFactory.getLogger(UserController.class);
+    private Logger logger = LoggerFactory.getLogger(UserApiController.class);
 
     @Autowired
     private UserService userService;

@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 @Controller
 @RequestMapping(value = "/api/search")
-public class SearchController extends BaseController {
+public class SearchApiController extends BaseController {
 
     @Autowired
     private KeywordsService keywordsService;

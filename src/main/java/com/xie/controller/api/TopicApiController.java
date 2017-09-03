@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping(value = "/api/topic")
-public class TopicController extends BaseController {
+public class TopicApiController extends BaseController {
 
 
     @Autowired

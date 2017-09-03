@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping(value = "/api/collect")
-public class CollectController extends BaseController {
+public class CollectApiController extends BaseController {
 
     @Autowired
     private CollectService collectService;
