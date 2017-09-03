@@ -54,6 +54,26 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
+    <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from category
+        WHERE id IN
+        <foreach collection="ids" open="(" close=")" item="id" separator=",">
+            #{id,jdbcType=INTEGER}
+        </foreach>
+    </select>
+
+    <select id="selectShortByPrimaryKeys" resultMap="BaseResultMapShort">
+        select
+        <include refid="Base_Column_List_Short"/>
+        from category
+        WHERE id IN
+        <foreach collection="ids" open="(" close=")" item="id" separator=",">
+            #{id,jdbcType=INTEGER}
+        </foreach>
+    </select>
+
     <select id="selectByParents" resultMap="BaseResultMapShort">
         select
         <include refid="Base_Column_List_Short"/>

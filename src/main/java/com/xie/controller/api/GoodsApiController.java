@@ -1,5 +1,7 @@
 package com.xie.controller.api;
 
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.*;
 import com.xie.response.BaseResponse;
 import com.xie.response.CategoryGoodsResponse;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,11 +60,51 @@ public class GoodsApiController extends BaseController {
                              @RequestParam(value = "isHot", required = false) Integer isHot,
                              @RequestParam(value = "isNew", required = false) Integer isNew,
                              @RequestParam(value = "sort", required = false) String sort,
-                             @RequestParam(value = "order", required = false) Integer order,
+                             @RequestParam(value = "order", required = false) String order,
                              @RequestParam(value = "page") int page,
                              @RequestParam(value = "size") int size) {
 
-        return BaseResponse.ok(goodsService.selectByParams(categoryId, brandId, keyword, isHot, isNew, sort, order, page, size));
+        if (categoryId != null && categoryId == 0) {
+            categoryId = null;
+        }
+
+        if (brandId != null && brandId == 0) {
+            brandId = null;
+        }
+
+        List<CategoryShort> filterCategory = new ArrayList<>();
+        CategoryShort categoryShort = new CategoryShort();
+        categoryShort.setId(0);
+        categoryShort.setName("全部");
+        categoryShort.setChecked(false);
+        filterCategory.add(categoryShort);
+
+        PageInfo<GoodsShort> goodsList = goodsService.selectByParams(categoryId, brandId, keyword, isHot, isNew, sort, order, page, size);
+        List<Integer> categoryIds = goodsList.getList().stream().map(item -> item.getCategoryId()).distinct().collect(Collectors.toList());
+        if (categoryIds != null && categoryIds.size() > 0) {
+            List<Category> categoryShortList = categoryService.selectByPrimaryKeys(categoryIds);
+            List<Integer> parent_categoryIds = categoryShortList.stream().map(item -> item.getId()).distinct().collect(Collectors.toList());
+            if (parent_categoryIds != null && parent_categoryIds.size() > 0) {
+                List<CategoryShort> parent_categoryShortList = categoryService.selectShortByPrimaryKeys(parent_categoryIds);
+                if (parent_categoryShortList != null && parent_categoryShortList.size() > 0) {
+                    filterCategory.addAll(parent_categoryShortList);
+                }
+            }
+        }
+
+        Integer finalCategoryId = categoryId;
+        filterCategory.forEach(item -> {
+            if ((finalCategoryId == null && item.getId() == 0) || (item.getId() == finalCategoryId)) {
+                item.setChecked(true);
+            } else {
+                item.setChecked(false);
+            }
+        });
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("goodsList", goodsList);
+        jsonObject.put("filterCategory", filterCategory);
+        return BaseResponse.ok(jsonObject);
     }
 
     @RequestMapping(value = "/category", method = RequestMethod.GET)
@@ -90,7 +133,7 @@ public class GoodsApiController extends BaseController {
         Brand brand = brandService.selectByPrimaryKey(goods.getBrandId());
         int commentCount = commentService.countByGoodsIdAndType(id, 0);
         List<Comment> hotComment = commentService.selectByGoodsIdAndType(id, 0);
-        List<GoodsSpecification> goodsSpecificationList=goodsSpecificationService.selectByGoodsId(id);
+        List<GoodsSpecification> goodsSpecificationList = goodsSpecificationService.selectByGoodsId(id);
 
         goodsDetailResponse.setGoods(goods);
         goodsDetailResponse.setAttributes(attributes);
@@ -125,6 +168,30 @@ public class GoodsApiController extends BaseController {
             List<GoodsShort> goodsList = goodsService.selectPartialByPrimaryKeys(ids);
             return BaseResponse.ok(goodsList);
         }
+    }
+
+
+    @RequestMapping(value = "/hot", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseResponse hot() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("url", "");
+        jsonObject.put("name", "大家都在买的严选好物");
+        jsonObject.put("imgUrl", "http://yanxuan.nosdn.127.net/8976116db321744084774643a933c5ce.png");
+
+        return BaseResponse.ok(jsonObject);
+    }
+
+
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseResponse newAction() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("url", "");
+        jsonObject.put("name", "坚持初心，为你寻觅世间好物");
+        jsonObject.put("imgUrl", "http://yanxuan.nosdn.127.net/8976116db321744084774643a933c5ce.png");
+
+        return BaseResponse.ok(jsonObject);
     }
 
 }

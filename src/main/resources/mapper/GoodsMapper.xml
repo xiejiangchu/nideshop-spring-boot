@@ -78,23 +78,23 @@
         where is_delete=0
         <trim prefix="" suffix="" prefixOverrides="," suffixOverrides=",">
             <if test="isHot!=null">
-                AND is_hot=1,
+                AND is_hot=1
             </if>
             <if test="isNew!=null">
-                AND is_new=1,
+                AND is_new=1
             </if>
             <if test="categoryId!=null">
-                AND category_id=#{categoryId,jdbcType=INTEGER},
+                AND category_id=#{categoryId,jdbcType=INTEGER}
             </if>
             <if test="brandId!=null">
-                AND brand_id=#{brandId,jdbcType=INTEGER},
+                AND brand_id=#{brandId,jdbcType=INTEGER}
             </if>
             <if test="keyword!=null">
-                AND name like '%'+#{keyword}+'%',
+                AND name like concat('%',#{keyword},'%')
             </if>
         </trim>
-        <if test="sort!=null and sort=='price'">
-            order by retail_price ${orer}
+        <if test="sort!=null and sort == 'price'">
+            order by retail_price ${order}
         </if>
         <if test="sort!=null and sort!='price'">
             order by id DESC
@@ -122,14 +122,14 @@
         select
         id, category_id,name, list_pic_url, retail_price
         from goods
-        where is_hot = 1
+        where is_hot = 1 and is_delete=0
     </select>
 
     <select id="selectNewGoods" resultMap="BaseResultMapShort">
         select
         id, category_id,name, list_pic_url, retail_price
         from goods
-        where is_new = 1
+        where is_new = 1 and is_delete=0
     </select>
 
     <select id="count" resultType="integer">

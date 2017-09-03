@@ -17,6 +17,10 @@ public interface CategoryMapper {
 
     CategoryShort selectShortByPrimaryKey(Integer id);
 
+    List<CategoryShort> selectShortByPrimaryKeys(@Param("ids") List<Integer> ids);
+
+    List<Category> selectByPrimaryKeys(@Param("ids") List<Integer> ids);
+
     List<Category> selectByParent(Integer parent_id);
 
     List<CategoryShort> selectByParents(@Param("parent_ids") List<Integer> parent_ids);

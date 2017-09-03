@@ -33,6 +33,12 @@
         where is_new = 1 ORDER BY new_sort_order ASC
     </select>
 
+    <select id="select" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from brand
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from brand
     where id = #{id,jdbcType=INTEGER}

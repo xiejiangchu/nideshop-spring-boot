@@ -8,6 +8,7 @@ import com.xie.mapper.CategoryMapper;
 import com.xie.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -43,6 +44,18 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryShort selectShortByPrimaryKey(Integer id) {
         return categoryMapper.selectShortByPrimaryKey(id);
+    }
+
+    @Override
+    public List<CategoryShort> selectShortByPrimaryKeys(List<Integer> ids) {
+        Assert.notEmpty(ids);
+        return categoryMapper.selectShortByPrimaryKeys(ids);
+    }
+
+    @Override
+    public List<Category> selectByPrimaryKeys(List<Integer> ids) {
+        Assert.notEmpty(ids);
+        return categoryMapper.selectByPrimaryKeys(ids);
     }
 
     @Override

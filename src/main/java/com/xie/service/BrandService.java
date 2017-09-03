@@ -20,4 +20,6 @@ public interface BrandService {
     int updateByPrimaryKey(Brand record);
 
     PageInfo<Brand> selectNewBrands(int pageNum, int pageSize);
+
+    PageInfo<Brand> select(int pageNum, int pageSize);
 }

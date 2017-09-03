@@ -97,9 +97,9 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public PageInfo<Goods> selectByParams(Integer categoryId, Integer brandId, String keyword, Integer isHot, Integer isNew, String sort, Integer order, int pageNum, int pageSize) {
+    public PageInfo<GoodsShort> selectByParams(Integer categoryId, Integer brandId, String keyword, Integer isHot, Integer isNew, String sort, String order, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        PageInfo<Goods> page = new PageInfo<Goods>(goodsMapper.selectByParams(categoryId, brandId, keyword, isHot, isNew, sort, order));
+        PageInfo<GoodsShort> page = new PageInfo<GoodsShort>(goodsMapper.selectByParams(categoryId, brandId, keyword, isHot, isNew, sort, order));
         return page;
     }
 

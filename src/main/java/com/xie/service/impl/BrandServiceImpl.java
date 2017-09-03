@@ -53,4 +53,11 @@ public class BrandServiceImpl implements BrandService {
         PageInfo<Brand> page = new PageInfo<Brand>(brandMapper.selectNewBrands());
         return page;
     }
+
+    @Override
+    public PageInfo<Brand> select(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Brand> page = new PageInfo<Brand>(brandMapper.select());
+        return page;
+    }
 }

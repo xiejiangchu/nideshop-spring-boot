@@ -20,6 +20,10 @@ public interface CategoryService {
 
     CategoryShort selectShortByPrimaryKey(Integer id);
 
+    List<CategoryShort> selectShortByPrimaryKeys(List<Integer> ids);
+
+    List<Category> selectByPrimaryKeys(List<Integer> ids);
+
     List<Category> selectByParent(Integer parent_id);
 
     List<CategoryShort> selectByParents(List<Integer> parent_ids);

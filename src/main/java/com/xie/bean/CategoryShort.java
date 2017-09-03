@@ -11,6 +11,8 @@ public class CategoryShort implements Serializable {
 
     private List<GoodsShort> goodsList;
 
+    private Boolean checked;
+
 
     public Integer getId() {
         return id;
@@ -34,5 +36,13 @@ public class CategoryShort implements Serializable {
 
     public void setGoodsList(List<GoodsShort> goodsList) {
         this.goodsList = goodsList;
+    }
+
+    public Boolean getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Boolean checked) {
+        this.checked = checked;
     }
 }

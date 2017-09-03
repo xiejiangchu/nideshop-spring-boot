@@ -33,13 +33,13 @@ public interface GoodsMapper {
 
     List<Goods> selectAllByCategory(Integer categoryId);
 
-    List<Goods> selectByParams(@Param("categoryId") Integer categoryId,
-                               @Param("brandId") Integer brandId,
-                               @Param("keyword") String keyword,
-                               @Param("isHot") Integer isHot,
-                               @Param("isNew") Integer isNew,
-                               @Param("sort") String sort,
-                               @Param("order") Integer order);
+    List<GoodsShort> selectByParams(@Param("categoryId") Integer categoryId,
+                                    @Param("brandId") Integer brandId,
+                                    @Param("keyword") String keyword,
+                                    @Param("isHot") Integer isHot,
+                                    @Param("isNew") Integer isNew,
+                                    @Param("sort") String sort,
+                                    @Param("order") String order);
 
     int count();
 

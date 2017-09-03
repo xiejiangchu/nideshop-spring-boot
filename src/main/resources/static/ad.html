@@ -88,7 +88,7 @@
                         <div class="box-footer clearfix">
                             <ul class="pagination pagination-sm no-margin pull-right">
                                 <li><a th:href="@{/goods(pageNum=${adPageInfo.prePage})}">&laquo;</a></li>
-                                <li th:each="navigatepageNum,state : ${adPageInfo.navigatepageNums}"><a
+                                <li th:class="${navigatepageNum==goodsPageInfo.pageNum}?  th:each="navigatepageNum,state : ${adPageInfo.navigatepageNums}"><a
                                         th:href="@{/goods(pageNum=${navigatepageNum},pageSize=${adPageInfo.pageSize})}"
                                         th:text="${navigatepageNum}">2</a></li>
                                 <li><a th:href="@{/goods(pageNum=${adPageInfo.lastPage})}">&raquo;</a></li>
