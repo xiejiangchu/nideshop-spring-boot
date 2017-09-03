@@ -5,7 +5,7 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="value_id" property="valueId" jdbcType="INTEGER"/>
-        <result column="add_time" property="addTime" jdbcType="INTEGER"/>
+        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
         <result column="is_attention" property="isAttention" jdbcType="BIT"/>
         <result column="type_id" property="typeId" jdbcType="INTEGER"/>
     </resultMap>
@@ -14,7 +14,7 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="value_id" property="valueId" jdbcType="INTEGER"/>
-        <result column="add_time" property="addTime" jdbcType="INTEGER"/>
+        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
         <result column="is_attention" property="isAttention" jdbcType="BIT"/>
         <result column="type_id" property="typeId" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
@@ -44,7 +44,6 @@
     <select id="selectByParams" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        ,g.name,g.list_pic_url,g.goods_brief,g.retail_price
         from collect
         where 1=1
         <if test="user_id!=null">
@@ -71,7 +70,7 @@
         add_time, is_attention, type_id
         )
         values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{valueId,jdbcType=INTEGER},
-        #{addTime,jdbcType=INTEGER}, #{isAttention,jdbcType=BIT}, #{typeId,jdbcType=INTEGER}
+        #{addTime,jdbcType=TIMESTAMP}, #{isAttention,jdbcType=BIT}, #{typeId,jdbcType=INTEGER}
         )
     </insert>
     <insert id="insertSelective" parameterType="com.xie.bean.Collect">
@@ -107,7 +106,7 @@
                 #{valueId,jdbcType=INTEGER},
             </if>
             <if test="addTime != null">
-                #{addTime,jdbcType=INTEGER},
+                #{addTime,jdbcType=TIMESTAMP},
             </if>
             <if test="isAttention != null">
                 #{isAttention,jdbcType=BIT},
@@ -127,7 +126,7 @@
                 value_id = #{valueId,jdbcType=INTEGER},
             </if>
             <if test="addTime != null">
-                add_time = #{addTime,jdbcType=INTEGER},
+                add_time = #{addTime,jdbcType=TIMESTAMP},
             </if>
             <if test="isAttention != null">
                 is_attention = #{isAttention,jdbcType=BIT},
@@ -142,7 +141,7 @@
     update collect
     set user_id = #{userId,jdbcType=INTEGER},
       value_id = #{valueId,jdbcType=INTEGER},
-      add_time = #{addTime,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
       is_attention = #{isAttention,jdbcType=BIT},
       type_id = #{typeId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

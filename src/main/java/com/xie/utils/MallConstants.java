@@ -123,4 +123,34 @@ public class MallConstants {
             return jsonArray;
         }
     }
+
+
+    public enum CollectType {
+        商品(0);
+        private int val;
+
+        CollectType(int val) {
+            this.val = val;
+        }
+
+        public int getVal() {
+            return val;
+        }
+
+        public void setVal(int val) {
+            this.val = val;
+        }
+
+        public static JSONArray json() {
+            JSONArray jsonArray = new JSONArray();
+            CollectType[] list = CollectType.values();
+            for (int i = 0; i < list.length; i++) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("name", list[i].name());
+                jsonObject.put("val", list[i].val);
+                jsonArray.add(jsonObject);
+            }
+            return jsonArray;
+        }
+    }
 }

@@ -7,6 +7,7 @@ import com.xie.response.BaseResponse;
 import com.xie.response.CategoryGoodsResponse;
 import com.xie.response.GoodsDetailResponse;
 import com.xie.service.*;
+import com.xie.utils.MallConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,6 +52,9 @@ public class GoodsApiController extends BaseController {
 
     @Autowired
     private GoodsSpecificationService goodsSpecificationService;
+
+    @Autowired
+    private CollectService collectService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
@@ -143,6 +147,7 @@ public class GoodsApiController extends BaseController {
         goodsDetailResponse.setGoodsGalleries(goodsGalleries);
         goodsDetailResponse.setGoodsIssues(goodsIssues);
         goodsDetailResponse.setSpecificationList(goodsSpecificationList);
+        goodsDetailResponse.setUserHasCollect(collectService.selectByParams(getUid(), MallConstants.CollectType.商品.getVal(), id) == null ? 0 : 1);
 
         return BaseResponse.ok(goodsDetailResponse);
     }

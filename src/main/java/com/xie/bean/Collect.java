@@ -1,6 +1,7 @@
 package com.xie.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Collect implements Serializable {
     private Integer id;
@@ -9,12 +10,12 @@ public class Collect implements Serializable {
 
     private Integer valueId;
 
-    private Integer addTime;
+    private Date addTime;
 
     /**
      * 是否是关注
      */
-    private Boolean isAttention;
+    private Integer isAttention;
 
     private Integer typeId;
 
@@ -44,19 +45,19 @@ public class Collect implements Serializable {
         this.valueId = valueId;
     }
 
-    public Integer getAddTime() {
+    public Date getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(Integer addTime) {
+    public void setAddTime(Date addTime) {
         this.addTime = addTime;
     }
 
-    public Boolean getIsAttention() {
+    public Integer getIsAttention() {
         return isAttention;
     }
 
-    public void setIsAttention(Boolean isAttention) {
+    public void setIsAttention(Integer isAttention) {
         this.isAttention = isAttention;
     }
 

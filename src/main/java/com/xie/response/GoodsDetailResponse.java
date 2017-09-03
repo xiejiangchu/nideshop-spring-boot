@@ -16,6 +16,7 @@ public class GoodsDetailResponse {
     private int commentCount;
     private List<Comment> hotComment;
     private List<GoodsSpecification> specificationList;
+    private int userHasCollect;
 
     public Goods getGoods() {
         return goods;
@@ -79,5 +80,13 @@ public class GoodsDetailResponse {
 
     public void setSpecificationList(List<GoodsSpecification> specificationList) {
         this.specificationList = specificationList;
+    }
+
+    public int getUserHasCollect() {
+        return userHasCollect;
+    }
+
+    public void setUserHasCollect(int userHasCollect) {
+        this.userHasCollect = userHasCollect;
     }
 }
