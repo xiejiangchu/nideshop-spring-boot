@@ -3,22 +3,16 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class Keywords extends KeywordsKey implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Boolean isHot;
-
     private Boolean isDefault;
-
     private Boolean isShow;
-
     private Integer sortOrder;
-
     /**
      * 关键词的跳转链接
      */
     private String schemeUrl;
-
     private Integer type;
-
-    private static final long serialVersionUID = 1L;
 
     public Boolean getIsHot() {
         return isHot;
@@ -81,13 +75,13 @@ public class Keywords extends KeywordsKey implements Serializable {
         }
         Keywords other = (Keywords) that;
         return (this.getKeyword() == null ? other.getKeyword() == null : this.getKeyword().equals(other.getKeyword()))
-            && (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getIsHot() == null ? other.getIsHot() == null : this.getIsHot().equals(other.getIsHot()))
-            && (this.getIsDefault() == null ? other.getIsDefault() == null : this.getIsDefault().equals(other.getIsDefault()))
-            && (this.getIsShow() == null ? other.getIsShow() == null : this.getIsShow().equals(other.getIsShow()))
-            && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()))
-            && (this.getSchemeUrl() == null ? other.getSchemeUrl() == null : this.getSchemeUrl().equals(other.getSchemeUrl()))
-            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()));
+                && (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+                && (this.getIsHot() == null ? other.getIsHot() == null : this.getIsHot().equals(other.getIsHot()))
+                && (this.getIsDefault() == null ? other.getIsDefault() == null : this.getIsDefault().equals(other.getIsDefault()))
+                && (this.getIsShow() == null ? other.getIsShow() == null : this.getIsShow().equals(other.getIsShow()))
+                && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()))
+                && (this.getSchemeUrl() == null ? other.getSchemeUrl() == null : this.getSchemeUrl().equals(other.getSchemeUrl()))
+                && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()));
     }
 
     @Override

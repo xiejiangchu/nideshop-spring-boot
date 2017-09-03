@@ -4,33 +4,20 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class OrderGoods implements Serializable {
-    private Integer id;
-
-    private Integer orderId;
-
-    private Integer goodsId;
-
-    private String goodsName;
-
-    private String goodsSn;
-
-    private Integer productId;
-
-    private Short number;
-
-    private BigDecimal marketPrice;
-
-    private BigDecimal retailPrice;
-
-    private Boolean isReal;
-
-    private String goodsSpecifitionIds;
-
-    private String listPicUrl;
-
-    private String goodsSpecifitionNameValue;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private Integer orderId;
+    private Integer goodsId;
+    private String goodsName;
+    private String goodsSn;
+    private Integer productId;
+    private Short number;
+    private BigDecimal marketPrice;
+    private BigDecimal retailPrice;
+    private Boolean isReal;
+    private String goodsSpecifitionIds;
+    private String listPicUrl;
+    private String goodsSpecifitionNameValue;
 
     public Integer getId() {
         return id;
@@ -149,18 +136,18 @@ public class OrderGoods implements Serializable {
         }
         OrderGoods other = (OrderGoods) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getOrderId() == null ? other.getOrderId() == null : this.getOrderId().equals(other.getOrderId()))
-            && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
-            && (this.getGoodsName() == null ? other.getGoodsName() == null : this.getGoodsName().equals(other.getGoodsName()))
-            && (this.getGoodsSn() == null ? other.getGoodsSn() == null : this.getGoodsSn().equals(other.getGoodsSn()))
-            && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
-            && (this.getNumber() == null ? other.getNumber() == null : this.getNumber().equals(other.getNumber()))
-            && (this.getMarketPrice() == null ? other.getMarketPrice() == null : this.getMarketPrice().equals(other.getMarketPrice()))
-            && (this.getRetailPrice() == null ? other.getRetailPrice() == null : this.getRetailPrice().equals(other.getRetailPrice()))
-            && (this.getIsReal() == null ? other.getIsReal() == null : this.getIsReal().equals(other.getIsReal()))
-            && (this.getGoodsSpecifitionIds() == null ? other.getGoodsSpecifitionIds() == null : this.getGoodsSpecifitionIds().equals(other.getGoodsSpecifitionIds()))
-            && (this.getListPicUrl() == null ? other.getListPicUrl() == null : this.getListPicUrl().equals(other.getListPicUrl()))
-            && (this.getGoodsSpecifitionNameValue() == null ? other.getGoodsSpecifitionNameValue() == null : this.getGoodsSpecifitionNameValue().equals(other.getGoodsSpecifitionNameValue()));
+                && (this.getOrderId() == null ? other.getOrderId() == null : this.getOrderId().equals(other.getOrderId()))
+                && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
+                && (this.getGoodsName() == null ? other.getGoodsName() == null : this.getGoodsName().equals(other.getGoodsName()))
+                && (this.getGoodsSn() == null ? other.getGoodsSn() == null : this.getGoodsSn().equals(other.getGoodsSn()))
+                && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
+                && (this.getNumber() == null ? other.getNumber() == null : this.getNumber().equals(other.getNumber()))
+                && (this.getMarketPrice() == null ? other.getMarketPrice() == null : this.getMarketPrice().equals(other.getMarketPrice()))
+                && (this.getRetailPrice() == null ? other.getRetailPrice() == null : this.getRetailPrice().equals(other.getRetailPrice()))
+                && (this.getIsReal() == null ? other.getIsReal() == null : this.getIsReal().equals(other.getIsReal()))
+                && (this.getGoodsSpecifitionIds() == null ? other.getGoodsSpecifitionIds() == null : this.getGoodsSpecifitionIds().equals(other.getGoodsSpecifitionIds()))
+                && (this.getListPicUrl() == null ? other.getListPicUrl() == null : this.getListPicUrl().equals(other.getListPicUrl()))
+                && (this.getGoodsSpecifitionNameValue() == null ? other.getGoodsSpecifitionNameValue() == null : this.getGoodsSpecifitionNameValue().equals(other.getGoodsSpecifitionNameValue()));
     }
 
     @Override

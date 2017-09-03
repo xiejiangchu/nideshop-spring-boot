@@ -20,7 +20,7 @@ public interface AttributeService {
 
     PageInfo<Attribute> select(int pageNum, int pageSize);
 
-    PageInfo<Attribute> selectByAttributeCategory(int attributeCategory,int pageNum, int pageSize);
+    PageInfo<Attribute> selectByAttributeCategory(int attributeCategory, int pageNum, int pageSize);
 
     int count();
 }

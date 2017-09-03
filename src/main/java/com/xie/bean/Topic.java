@@ -4,31 +4,19 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class Topic implements Serializable {
-    private Integer id;
-
-    private String title;
-
-    private String avatar;
-
-    private String itemPicUrl;
-
-    private String subtitle;
-
-    private Integer topicCategoryId;
-
-    private BigDecimal priceInfo;
-
-    private String readCount;
-
-    private String scenePicUrl;
-
-    private Integer topicTemplateId;
-
-    private Integer topicTagId;
-
-    private String content;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private String title;
+    private String avatar;
+    private String itemPicUrl;
+    private String subtitle;
+    private Integer topicCategoryId;
+    private BigDecimal priceInfo;
+    private String readCount;
+    private String scenePicUrl;
+    private Integer topicTemplateId;
+    private Integer topicTagId;
+    private String content;
 
     public Integer getId() {
         return id;
@@ -139,17 +127,17 @@ public class Topic implements Serializable {
         }
         Topic other = (Topic) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
-            && (this.getAvatar() == null ? other.getAvatar() == null : this.getAvatar().equals(other.getAvatar()))
-            && (this.getItemPicUrl() == null ? other.getItemPicUrl() == null : this.getItemPicUrl().equals(other.getItemPicUrl()))
-            && (this.getSubtitle() == null ? other.getSubtitle() == null : this.getSubtitle().equals(other.getSubtitle()))
-            && (this.getTopicCategoryId() == null ? other.getTopicCategoryId() == null : this.getTopicCategoryId().equals(other.getTopicCategoryId()))
-            && (this.getPriceInfo() == null ? other.getPriceInfo() == null : this.getPriceInfo().equals(other.getPriceInfo()))
-            && (this.getReadCount() == null ? other.getReadCount() == null : this.getReadCount().equals(other.getReadCount()))
-            && (this.getScenePicUrl() == null ? other.getScenePicUrl() == null : this.getScenePicUrl().equals(other.getScenePicUrl()))
-            && (this.getTopicTemplateId() == null ? other.getTopicTemplateId() == null : this.getTopicTemplateId().equals(other.getTopicTemplateId()))
-            && (this.getTopicTagId() == null ? other.getTopicTagId() == null : this.getTopicTagId().equals(other.getTopicTagId()))
-            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()));
+                && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
+                && (this.getAvatar() == null ? other.getAvatar() == null : this.getAvatar().equals(other.getAvatar()))
+                && (this.getItemPicUrl() == null ? other.getItemPicUrl() == null : this.getItemPicUrl().equals(other.getItemPicUrl()))
+                && (this.getSubtitle() == null ? other.getSubtitle() == null : this.getSubtitle().equals(other.getSubtitle()))
+                && (this.getTopicCategoryId() == null ? other.getTopicCategoryId() == null : this.getTopicCategoryId().equals(other.getTopicCategoryId()))
+                && (this.getPriceInfo() == null ? other.getPriceInfo() == null : this.getPriceInfo().equals(other.getPriceInfo()))
+                && (this.getReadCount() == null ? other.getReadCount() == null : this.getReadCount().equals(other.getReadCount()))
+                && (this.getScenePicUrl() == null ? other.getScenePicUrl() == null : this.getScenePicUrl().equals(other.getScenePicUrl()))
+                && (this.getTopicTemplateId() == null ? other.getTopicTemplateId() == null : this.getTopicTemplateId().equals(other.getTopicTemplateId()))
+                && (this.getTopicTagId() == null ? other.getTopicTagId() == null : this.getTopicTagId().equals(other.getTopicTagId()))
+                && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()));
     }
 
     @Override

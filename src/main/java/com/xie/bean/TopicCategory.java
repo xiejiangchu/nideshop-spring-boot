@@ -3,13 +3,10 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class TopicCategory implements Serializable {
-    private Integer id;
-
-    private String title;
-
-    private String picUrl;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private String title;
+    private String picUrl;
 
     public Integer getId() {
         return id;
@@ -48,8 +45,8 @@ public class TopicCategory implements Serializable {
         }
         TopicCategory other = (TopicCategory) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
-            && (this.getPicUrl() == null ? other.getPicUrl() == null : this.getPicUrl().equals(other.getPicUrl()));
+                && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
+                && (this.getPicUrl() == null ? other.getPicUrl() == null : this.getPicUrl().equals(other.getPicUrl()));
     }
 
     @Override

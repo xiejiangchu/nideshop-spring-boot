@@ -3,17 +3,12 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class GoodsGallery implements Serializable {
-    private Integer id;
-
-    private Integer goodsId;
-
-    private String imgUrl;
-
-    private String imgDesc;
-
-    private Integer sortOrder;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private Integer goodsId;
+    private String imgUrl;
+    private String imgDesc;
+    private Integer sortOrder;
 
     public Integer getId() {
         return id;
@@ -68,10 +63,10 @@ public class GoodsGallery implements Serializable {
         }
         GoodsGallery other = (GoodsGallery) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
-            && (this.getImgUrl() == null ? other.getImgUrl() == null : this.getImgUrl().equals(other.getImgUrl()))
-            && (this.getImgDesc() == null ? other.getImgDesc() == null : this.getImgDesc().equals(other.getImgDesc()))
-            && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()));
+                && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
+                && (this.getImgUrl() == null ? other.getImgUrl() == null : this.getImgUrl().equals(other.getImgUrl()))
+                && (this.getImgDesc() == null ? other.getImgDesc() == null : this.getImgDesc().equals(other.getImgDesc()))
+                && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()));
     }
 
     @Override

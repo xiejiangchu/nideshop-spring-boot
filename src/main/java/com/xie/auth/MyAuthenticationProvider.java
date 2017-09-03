@@ -26,10 +26,9 @@ import java.util.Collection;
 public class MyAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
-    private MyUserDetailsService myUserDetailsService;
-
-    @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private MyUserDetailsService myUserDetailsService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

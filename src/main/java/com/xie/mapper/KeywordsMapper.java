@@ -14,6 +14,8 @@ public interface KeywordsMapper {
 
     Keywords selectByPrimaryKey(KeywordsKey key);
 
+    List<Keywords> selectLikePrimaryKey(String keyword);
+
     int updateByPrimaryKeySelective(Keywords record);
 
     int updateByPrimaryKey(Keywords record);

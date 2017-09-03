@@ -3,11 +3,9 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class KeywordsKey implements Serializable {
-    private String keyword;
-
-    private Integer id;
-
     private static final long serialVersionUID = 1L;
+    private String keyword;
+    private Integer id;
 
     public String getKeyword() {
         return keyword;
@@ -38,7 +36,7 @@ public class KeywordsKey implements Serializable {
         }
         KeywordsKey other = (KeywordsKey) that;
         return (this.getKeyword() == null ? other.getKeyword() == null : this.getKeyword().equals(other.getKeyword()))
-            && (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()));
+                && (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()));
     }
 
     @Override

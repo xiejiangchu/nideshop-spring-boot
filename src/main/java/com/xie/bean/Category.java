@@ -4,38 +4,22 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Category implements Serializable {
-    private Integer id;
-
-    private String name;
-
-    private String keywords;
-
-    private String frontDesc;
-
-    private Integer parentId;
-
-    private Boolean sortOrder;
-
-    private Boolean showIndex;
-
-    private Boolean isShow;
-
-    private String bannerUrl;
-
-    private String iconUrl;
-
-    private String imgUrl;
-
-    private String wapBannerUrl;
-
-    private String level;
-
-    private Integer type;
-
-    private String frontName;
-
     private static final long serialVersionUID = 1L;
-
+    private Integer id;
+    private String name;
+    private String keywords;
+    private String frontDesc;
+    private Integer parentId;
+    private Boolean sortOrder;
+    private Boolean showIndex;
+    private Boolean isShow;
+    private String bannerUrl;
+    private String iconUrl;
+    private String imgUrl;
+    private String wapBannerUrl;
+    private String level;
+    private Integer type;
+    private String frontName;
     private List<Category> subCategoryList;
 
     public Integer getId() {
@@ -179,20 +163,20 @@ public class Category implements Serializable {
         }
         Category other = (Category) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getKeywords() == null ? other.getKeywords() == null : this.getKeywords().equals(other.getKeywords()))
-            && (this.getFrontDesc() == null ? other.getFrontDesc() == null : this.getFrontDesc().equals(other.getFrontDesc()))
-            && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
-            && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()))
-            && (this.getShowIndex() == null ? other.getShowIndex() == null : this.getShowIndex().equals(other.getShowIndex()))
-            && (this.getIsShow() == null ? other.getIsShow() == null : this.getIsShow().equals(other.getIsShow()))
-            && (this.getBannerUrl() == null ? other.getBannerUrl() == null : this.getBannerUrl().equals(other.getBannerUrl()))
-            && (this.getIconUrl() == null ? other.getIconUrl() == null : this.getIconUrl().equals(other.getIconUrl()))
-            && (this.getImgUrl() == null ? other.getImgUrl() == null : this.getImgUrl().equals(other.getImgUrl()))
-            && (this.getWapBannerUrl() == null ? other.getWapBannerUrl() == null : this.getWapBannerUrl().equals(other.getWapBannerUrl()))
-            && (this.getLevel() == null ? other.getLevel() == null : this.getLevel().equals(other.getLevel()))
-            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
-            && (this.getFrontName() == null ? other.getFrontName() == null : this.getFrontName().equals(other.getFrontName()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getKeywords() == null ? other.getKeywords() == null : this.getKeywords().equals(other.getKeywords()))
+                && (this.getFrontDesc() == null ? other.getFrontDesc() == null : this.getFrontDesc().equals(other.getFrontDesc()))
+                && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
+                && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()))
+                && (this.getShowIndex() == null ? other.getShowIndex() == null : this.getShowIndex().equals(other.getShowIndex()))
+                && (this.getIsShow() == null ? other.getIsShow() == null : this.getIsShow().equals(other.getIsShow()))
+                && (this.getBannerUrl() == null ? other.getBannerUrl() == null : this.getBannerUrl().equals(other.getBannerUrl()))
+                && (this.getIconUrl() == null ? other.getIconUrl() == null : this.getIconUrl().equals(other.getIconUrl()))
+                && (this.getImgUrl() == null ? other.getImgUrl() == null : this.getImgUrl().equals(other.getImgUrl()))
+                && (this.getWapBannerUrl() == null ? other.getWapBannerUrl() == null : this.getWapBannerUrl().equals(other.getWapBannerUrl()))
+                && (this.getLevel() == null ? other.getLevel() == null : this.getLevel().equals(other.getLevel()))
+                && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+                && (this.getFrontName() == null ? other.getFrontName() == null : this.getFrontName().equals(other.getFrontName()));
     }
 
     @Override

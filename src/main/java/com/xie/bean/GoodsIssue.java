@@ -3,15 +3,11 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class GoodsIssue implements Serializable {
-    private Integer id;
-
-    private String question;
-
-    private String answer;
-
-    private Integer goodsId;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private String question;
+    private String answer;
+    private Integer goodsId;
 
     public Integer getId() {
         return id;
@@ -58,9 +54,9 @@ public class GoodsIssue implements Serializable {
         }
         GoodsIssue other = (GoodsIssue) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getQuestion() == null ? other.getQuestion() == null : this.getQuestion().equals(other.getQuestion()))
-            && (this.getAnswer() == null ? other.getAnswer() == null : this.getAnswer().equals(other.getAnswer()))
-            && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()));
+                && (this.getQuestion() == null ? other.getQuestion() == null : this.getQuestion().equals(other.getQuestion()))
+                && (this.getAnswer() == null ? other.getAnswer() == null : this.getAnswer().equals(other.getAnswer()))
+                && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()));
     }
 
     @Override

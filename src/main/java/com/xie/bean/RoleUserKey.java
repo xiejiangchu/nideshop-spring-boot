@@ -3,11 +3,9 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class RoleUserKey implements Serializable {
-    private Integer userId;
-
-    private Integer roleId;
-
     private static final long serialVersionUID = 1L;
+    private Integer userId;
+    private Integer roleId;
 
     public Integer getUserId() {
         return userId;
@@ -38,7 +36,7 @@ public class RoleUserKey implements Serializable {
         }
         RoleUserKey other = (RoleUserKey) that;
         return (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()));
+                && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()));
     }
 
     @Override

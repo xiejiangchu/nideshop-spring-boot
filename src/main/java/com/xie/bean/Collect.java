@@ -4,22 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Collect implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
-
     private Integer userId;
-
     private Integer valueId;
-
     private Date addTime;
-
     /**
      * 是否是关注
      */
     private Integer isAttention;
-
     private Integer typeId;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -82,11 +76,11 @@ public class Collect implements Serializable {
         }
         Collect other = (Collect) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getValueId() == null ? other.getValueId() == null : this.getValueId().equals(other.getValueId()))
-            && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()))
-            && (this.getIsAttention() == null ? other.getIsAttention() == null : this.getIsAttention().equals(other.getIsAttention()))
-            && (this.getTypeId() == null ? other.getTypeId() == null : this.getTypeId().equals(other.getTypeId()));
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+                && (this.getValueId() == null ? other.getValueId() == null : this.getValueId().equals(other.getValueId()))
+                && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()))
+                && (this.getIsAttention() == null ? other.getIsAttention() == null : this.getIsAttention().equals(other.getIsAttention()))
+                && (this.getTypeId() == null ? other.getTypeId() == null : this.getTypeId().equals(other.getTypeId()));
     }
 
     @Override

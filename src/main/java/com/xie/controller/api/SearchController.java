@@ -3,14 +3,18 @@ package com.xie.controller.api;
 import com.alibaba.fastjson.JSONObject;
 import com.xie.bean.Keywords;
 import com.xie.bean.SearchHistory;
-import com.xie.bean.Topic;
 import com.xie.response.BaseResponse;
-import com.xie.service.*;
+import com.xie.service.KeywordsService;
+import com.xie.service.SearchHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by xie on 17/8/22.
@@ -18,25 +22,6 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/api/search")
 public class SearchController extends BaseController {
-
-
-    @Autowired
-    private TopicService topicService;
-
-    @Autowired
-    private GoodsGalleryService goodsGalleryService;
-
-    @Autowired
-    private GoodsAttributeService goodsAttributeService;
-
-    @Autowired
-    private GoodsIssueService goodsIssueService;
-
-    @Autowired
-    private BrandService brandService;
-
-    @Autowired
-    private CommentService commentService;
 
     @Autowired
     private KeywordsService keywordsService;
@@ -57,39 +42,20 @@ public class SearchController extends BaseController {
         return BaseResponse.ok(jsonObject);
     }
 
-    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    @RequestMapping(value = "/helper", method = RequestMethod.GET)
     @ResponseBody
-    BaseResponse detail(@RequestParam(value = "id", required = false) int id) {
-
-        return BaseResponse.ok(topicService.selectByPrimaryKey(id));
+    BaseResponse keyword(@RequestParam(value = "keyword", required = false) String keyword) {
+        List<Keywords> keywordsList = keywordsService.selectLikePrimaryKey(keyword);
+        List<String> stringList = keywordsList.stream().map(item -> item.getKeyword()).collect(Collectors.toList());
+        return BaseResponse.ok(stringList);
     }
 
-    @RequestMapping(value = "/related", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/clearHistory", method = RequestMethod.GET)
     @ResponseBody
-    BaseResponse related(@RequestParam(value = "id", required = false) int id) {
-
-        return BaseResponse.ok(topicService.select(1, 4).getList());
-
+    BaseResponse clearHistory() {
+        searchHistoryService.deleteByUid(getUid());
+        return BaseResponse.ok();
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    @ResponseBody
-    BaseResponse post(@RequestBody Topic record) {
-
-        return BaseResponse.ok(topicService.insert(record));
-    }
-
-    @RequestMapping(value = "/", method = RequestMethod.PUT)
-    @ResponseBody
-    BaseResponse put(@RequestBody Topic record) {
-
-        return BaseResponse.ok(topicService.updateByPrimaryKey(record));
-    }
-
-    @RequestMapping(value = "/", method = RequestMethod.DELETE)
-    @ResponseBody
-    BaseResponse delete(@RequestParam int id) {
-
-        return BaseResponse.ok(topicService.deleteByPrimaryKey(id));
-    }
 }

@@ -18,4 +18,6 @@ public interface SearchHistoryMapper {
     int updateByPrimaryKey(SearchHistory record);
 
     List<SearchHistory> historyKeyword(int uid);
+
+    int deleteByUid(Integer uid);
 }

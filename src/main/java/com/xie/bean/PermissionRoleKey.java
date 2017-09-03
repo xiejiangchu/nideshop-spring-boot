@@ -3,11 +3,9 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class PermissionRoleKey implements Serializable {
-    private Integer permissionId;
-
-    private Integer roleId;
-
     private static final long serialVersionUID = 1L;
+    private Integer permissionId;
+    private Integer roleId;
 
     public Integer getPermissionId() {
         return permissionId;
@@ -38,7 +36,7 @@ public class PermissionRoleKey implements Serializable {
         }
         PermissionRoleKey other = (PermissionRoleKey) that;
         return (this.getPermissionId() == null ? other.getPermissionId() == null : this.getPermissionId().equals(other.getPermissionId()))
-            && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()));
+                && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()));
     }
 
     @Override

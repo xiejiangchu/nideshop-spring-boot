@@ -4,29 +4,18 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class Coupon implements Serializable {
-    private Short id;
-
-    private String name;
-
-    private BigDecimal typeMoney;
-
-    private Byte sendType;
-
-    private BigDecimal minAmount;
-
-    private BigDecimal maxAmount;
-
-    private Integer sendStartDate;
-
-    private Integer sendEndDate;
-
-    private Integer useStartDate;
-
-    private Integer useEndDate;
-
-    private BigDecimal minGoodsAmount;
-
     private static final long serialVersionUID = 1L;
+    private Short id;
+    private String name;
+    private BigDecimal typeMoney;
+    private Byte sendType;
+    private BigDecimal minAmount;
+    private BigDecimal maxAmount;
+    private Integer sendStartDate;
+    private Integer sendEndDate;
+    private Integer useStartDate;
+    private Integer useEndDate;
+    private BigDecimal minGoodsAmount;
 
     public Short getId() {
         return id;
@@ -129,16 +118,16 @@ public class Coupon implements Serializable {
         }
         Coupon other = (Coupon) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getTypeMoney() == null ? other.getTypeMoney() == null : this.getTypeMoney().equals(other.getTypeMoney()))
-            && (this.getSendType() == null ? other.getSendType() == null : this.getSendType().equals(other.getSendType()))
-            && (this.getMinAmount() == null ? other.getMinAmount() == null : this.getMinAmount().equals(other.getMinAmount()))
-            && (this.getMaxAmount() == null ? other.getMaxAmount() == null : this.getMaxAmount().equals(other.getMaxAmount()))
-            && (this.getSendStartDate() == null ? other.getSendStartDate() == null : this.getSendStartDate().equals(other.getSendStartDate()))
-            && (this.getSendEndDate() == null ? other.getSendEndDate() == null : this.getSendEndDate().equals(other.getSendEndDate()))
-            && (this.getUseStartDate() == null ? other.getUseStartDate() == null : this.getUseStartDate().equals(other.getUseStartDate()))
-            && (this.getUseEndDate() == null ? other.getUseEndDate() == null : this.getUseEndDate().equals(other.getUseEndDate()))
-            && (this.getMinGoodsAmount() == null ? other.getMinGoodsAmount() == null : this.getMinGoodsAmount().equals(other.getMinGoodsAmount()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getTypeMoney() == null ? other.getTypeMoney() == null : this.getTypeMoney().equals(other.getTypeMoney()))
+                && (this.getSendType() == null ? other.getSendType() == null : this.getSendType().equals(other.getSendType()))
+                && (this.getMinAmount() == null ? other.getMinAmount() == null : this.getMinAmount().equals(other.getMinAmount()))
+                && (this.getMaxAmount() == null ? other.getMaxAmount() == null : this.getMaxAmount().equals(other.getMaxAmount()))
+                && (this.getSendStartDate() == null ? other.getSendStartDate() == null : this.getSendStartDate().equals(other.getSendStartDate()))
+                && (this.getSendEndDate() == null ? other.getSendEndDate() == null : this.getSendEndDate().equals(other.getSendEndDate()))
+                && (this.getUseStartDate() == null ? other.getUseStartDate() == null : this.getUseStartDate().equals(other.getUseStartDate()))
+                && (this.getUseEndDate() == null ? other.getUseEndDate() == null : this.getUseEndDate().equals(other.getUseEndDate()))
+                && (this.getMinGoodsAmount() == null ? other.getMinGoodsAmount() == null : this.getMinGoodsAmount().equals(other.getMinGoodsAmount()));
     }
 
     @Override

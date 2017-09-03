@@ -28,7 +28,7 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         if (request.getHeader("X-Requested-With") != null && request.getHeader("X-Requested-With").equalsIgnoreCase("XMLHttpRequest")) {
             response.setHeader("Content-Type", "application/json;charset=UTF-8");
-            BaseResponse baseResponse=BaseResponse.fail("未授权");
+            BaseResponse baseResponse = BaseResponse.fail("未授权");
             response.getWriter().write(JSON.toJSONString(baseResponse));
         }
     }

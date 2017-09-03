@@ -3,17 +3,12 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class Region implements Serializable {
-    private Short id;
-
-    private Short parentId;
-
-    private String name;
-
-    private Boolean type;
-
-    private Short agencyId;
-
     private static final long serialVersionUID = 1L;
+    private Short id;
+    private Short parentId;
+    private String name;
+    private Boolean type;
+    private Short agencyId;
 
     public Short getId() {
         return id;
@@ -68,10 +63,10 @@ public class Region implements Serializable {
         }
         Region other = (Region) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
-            && (this.getAgencyId() == null ? other.getAgencyId() == null : this.getAgencyId().equals(other.getAgencyId()));
+                && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+                && (this.getAgencyId() == null ? other.getAgencyId() == null : this.getAgencyId().equals(other.getAgencyId()));
     }
 
     @Override

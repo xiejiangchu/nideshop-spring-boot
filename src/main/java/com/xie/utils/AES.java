@@ -19,8 +19,22 @@ import java.security.*;
 public class AES {
     public static boolean initialized = false;
 
+    public static void initialize() {
+        if (initialized) return;
+        Security.addProvider(new BouncyCastleProvider());
+        initialized = true;
+    }
+
+    //生成iv
+    public static AlgorithmParameters generateIV(byte[] iv) throws Exception {
+        AlgorithmParameters params = AlgorithmParameters.getInstance("AES");
+        params.init(new IvParameterSpec(iv));
+        return params;
+    }
+
     /**
      * AES解密
+     *
      * @param content 密文
      * @return
      * @throws InvalidAlgorithmParameterException
@@ -52,17 +66,5 @@ public class AES {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static void initialize(){
-        if (initialized) return;
-        Security.addProvider(new BouncyCastleProvider());
-        initialized = true;
-    }
-    //生成iv
-    public static AlgorithmParameters generateIV(byte[] iv) throws Exception{
-        AlgorithmParameters params = AlgorithmParameters.getInstance("AES");
-        params.init(new IvParameterSpec(iv));
-        return params;
     }
 }

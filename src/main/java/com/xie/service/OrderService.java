@@ -19,5 +19,5 @@ public interface OrderService {
 
     int updateByPrimaryKey(Order record);
 
-    PageInfo<Order> selectByUid(Integer uid,int pageNum, int pageSize);
+    PageInfo<Order> selectByUid(Integer uid, int pageNum, int pageSize);
 }

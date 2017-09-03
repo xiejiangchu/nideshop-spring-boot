@@ -3,21 +3,16 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class CollectWithGoods implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
-
     private Integer userId;
-
     private Integer valueId;
-
     private Integer addTime;
-
     /**
      * 是否是关注
      */
     private Boolean isAttention;
-
     private Integer typeId;
-
     private String name;
     /**
      * 商品列表图
@@ -28,8 +23,6 @@ public class CollectWithGoods implements Serializable {
      */
     private double retailPrice;
     private String goodsBrief;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

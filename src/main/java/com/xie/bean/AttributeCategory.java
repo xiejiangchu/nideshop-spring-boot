@@ -10,7 +10,7 @@ public class AttributeCategory implements Serializable {
 
     private CategoryShort categoryShort;
 
-    private  Integer enabled;
+    private Integer enabled;
 
     public Integer getId() {
         return id;
@@ -57,8 +57,8 @@ public class AttributeCategory implements Serializable {
         }
         AttributeCategory other = (AttributeCategory) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getEnabled() == null ? other.getEnabled() == null : this.getEnabled().equals(other.getEnabled()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getEnabled() == null ? other.getEnabled() == null : this.getEnabled().equals(other.getEnabled()));
     }
 
     @Override

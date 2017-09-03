@@ -14,7 +14,7 @@ import java.util.List;
  * Created by xie on 17/8/21.
  */
 @Service
-public class AdServiceImpl implements AdService{
+public class AdServiceImpl implements AdService {
 
     @Autowired
     private AdMapper adMapper;

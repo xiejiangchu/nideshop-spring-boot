@@ -3,19 +3,13 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class UserCoupon implements Serializable {
-    private Integer id;
-
-    private Byte couponId;
-
-    private String couponNumber;
-
-    private Integer userId;
-
-    private Integer usedTime;
-
-    private Integer orderId;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private Byte couponId;
+    private String couponNumber;
+    private Integer userId;
+    private Integer usedTime;
+    private Integer orderId;
 
     public Integer getId() {
         return id;
@@ -78,11 +72,11 @@ public class UserCoupon implements Serializable {
         }
         UserCoupon other = (UserCoupon) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getCouponId() == null ? other.getCouponId() == null : this.getCouponId().equals(other.getCouponId()))
-            && (this.getCouponNumber() == null ? other.getCouponNumber() == null : this.getCouponNumber().equals(other.getCouponNumber()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getUsedTime() == null ? other.getUsedTime() == null : this.getUsedTime().equals(other.getUsedTime()))
-            && (this.getOrderId() == null ? other.getOrderId() == null : this.getOrderId().equals(other.getOrderId()));
+                && (this.getCouponId() == null ? other.getCouponId() == null : this.getCouponId().equals(other.getCouponId()))
+                && (this.getCouponNumber() == null ? other.getCouponNumber() == null : this.getCouponNumber().equals(other.getCouponNumber()))
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+                && (this.getUsedTime() == null ? other.getUsedTime() == null : this.getUsedTime().equals(other.getUsedTime()))
+                && (this.getOrderId() == null ? other.getOrderId() == null : this.getOrderId().equals(other.getOrderId()));
     }
 
     @Override

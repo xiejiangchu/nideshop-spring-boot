@@ -16,5 +16,8 @@ public interface SearchHistoryService {
 
     int updateByPrimaryKey(SearchHistory record);
 
-    PageInfo<SearchHistory> historyKeyword(int uid,int pageNum,int pageSize);
+
+    int deleteByUid(Integer uid);
+
+    PageInfo<SearchHistory> historyKeyword(int uid, int pageNum, int pageSize);
 }

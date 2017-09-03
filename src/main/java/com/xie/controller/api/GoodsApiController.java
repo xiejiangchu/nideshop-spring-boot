@@ -65,8 +65,8 @@ public class GoodsApiController extends BaseController {
                              @RequestParam(value = "isNew", required = false) Integer isNew,
                              @RequestParam(value = "sort", required = false) String sort,
                              @RequestParam(value = "order", required = false) String order,
-                             @RequestParam(value = "page") int page,
-                             @RequestParam(value = "size") int size) {
+                             @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                             @RequestParam(value = "size", required = false, defaultValue = "10") Integer size) {
 
         if (categoryId != null && categoryId == 0) {
             categoryId = null;

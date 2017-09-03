@@ -3,41 +3,27 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class Cart implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
-
     private Integer userId;
-
     private String sessionId;
-
     private Integer goodsId;
-
     private String goodsSn;
-
     private Integer productId;
-
     private String goodsName;
-
     private Double marketPrice;
-
     private Double retailPrice;
-
     private Integer number;
-
     /**
      * product表对应的goods_specifition_ids
      */
     private String goodsSpecifitionIds;
-
     private Boolean checked;
-
     private String listPicUrl;
-
     /**
      * 规格属性组成的字符串，用来显示用
      */
     private String goodsSpecifitionNameValue;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -164,19 +150,19 @@ public class Cart implements Serializable {
         }
         Cart other = (Cart) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getSessionId() == null ? other.getSessionId() == null : this.getSessionId().equals(other.getSessionId()))
-            && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
-            && (this.getGoodsSn() == null ? other.getGoodsSn() == null : this.getGoodsSn().equals(other.getGoodsSn()))
-            && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
-            && (this.getGoodsName() == null ? other.getGoodsName() == null : this.getGoodsName().equals(other.getGoodsName()))
-            && (this.getMarketPrice() == null ? other.getMarketPrice() == null : this.getMarketPrice().equals(other.getMarketPrice()))
-            && (this.getRetailPrice() == null ? other.getRetailPrice() == null : this.getRetailPrice().equals(other.getRetailPrice()))
-            && (this.getNumber() == null ? other.getNumber() == null : this.getNumber().equals(other.getNumber()))
-            && (this.getGoodsSpecifitionIds() == null ? other.getGoodsSpecifitionIds() == null : this.getGoodsSpecifitionIds().equals(other.getGoodsSpecifitionIds()))
-            && (this.getChecked() == null ? other.getChecked() == null : this.getChecked().equals(other.getChecked()))
-            && (this.getListPicUrl() == null ? other.getListPicUrl() == null : this.getListPicUrl().equals(other.getListPicUrl()))
-            && (this.getGoodsSpecifitionNameValue() == null ? other.getGoodsSpecifitionNameValue() == null : this.getGoodsSpecifitionNameValue().equals(other.getGoodsSpecifitionNameValue()));
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+                && (this.getSessionId() == null ? other.getSessionId() == null : this.getSessionId().equals(other.getSessionId()))
+                && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
+                && (this.getGoodsSn() == null ? other.getGoodsSn() == null : this.getGoodsSn().equals(other.getGoodsSn()))
+                && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
+                && (this.getGoodsName() == null ? other.getGoodsName() == null : this.getGoodsName().equals(other.getGoodsName()))
+                && (this.getMarketPrice() == null ? other.getMarketPrice() == null : this.getMarketPrice().equals(other.getMarketPrice()))
+                && (this.getRetailPrice() == null ? other.getRetailPrice() == null : this.getRetailPrice().equals(other.getRetailPrice()))
+                && (this.getNumber() == null ? other.getNumber() == null : this.getNumber().equals(other.getNumber()))
+                && (this.getGoodsSpecifitionIds() == null ? other.getGoodsSpecifitionIds() == null : this.getGoodsSpecifitionIds().equals(other.getGoodsSpecifitionIds()))
+                && (this.getChecked() == null ? other.getChecked() == null : this.getChecked().equals(other.getChecked()))
+                && (this.getListPicUrl() == null ? other.getListPicUrl() == null : this.getListPicUrl().equals(other.getListPicUrl()))
+                && (this.getGoodsSpecifitionNameValue() == null ? other.getGoodsSpecifitionNameValue() == null : this.getGoodsSpecifitionNameValue().equals(other.getGoodsSpecifitionNameValue()));
     }
 
     @Override

@@ -3,17 +3,12 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class GoodsAttribute implements Serializable {
-    private Integer id;
-
-    private Integer goodsId;
-
-    private Integer attributeId;
-
-    private String value;
-
-    private String name;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private Integer goodsId;
+    private Integer attributeId;
+    private String value;
+    private String name;
 
     public Integer getId() {
         return id;
@@ -68,9 +63,9 @@ public class GoodsAttribute implements Serializable {
         }
         GoodsAttribute other = (GoodsAttribute) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
-            && (this.getAttributeId() == null ? other.getAttributeId() == null : this.getAttributeId().equals(other.getAttributeId()))
-            && (this.getValue() == null ? other.getValue() == null : this.getValue().equals(other.getValue()));
+                && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
+                && (this.getAttributeId() == null ? other.getAttributeId() == null : this.getAttributeId().equals(other.getAttributeId()))
+                && (this.getValue() == null ? other.getValue() == null : this.getValue().equals(other.getValue()));
     }
 
     @Override

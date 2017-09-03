@@ -24,5 +24,5 @@ public interface CommentService {
 
     List<Comment> selectByGoodsIdAndType(Integer gid, Integer type);
 
-    int countByGoodsIdAndType(Integer gid,Integer type);
+    int countByGoodsIdAndType(Integer gid, Integer type);
 }

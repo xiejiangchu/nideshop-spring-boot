@@ -3,15 +3,11 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class Footprint implements Serializable {
-    private Integer id;
-
-    private Integer userId;
-
-    private Integer goodsId;
-
-    private Integer addTime;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private Integer userId;
+    private Integer goodsId;
+    private Integer addTime;
 
     public Integer getId() {
         return id;
@@ -58,9 +54,9 @@ public class Footprint implements Serializable {
         }
         Footprint other = (Footprint) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
-            && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()));
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+                && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
+                && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()));
     }
 
     @Override

@@ -21,7 +21,7 @@ public class RegionController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public BaseResponse list(@RequestParam("parentId")int parentId) {
+    public BaseResponse list(@RequestParam("parentId") int parentId) {
 
         return BaseResponse.ok(regionService.selectByPatentId(parentId));
     }

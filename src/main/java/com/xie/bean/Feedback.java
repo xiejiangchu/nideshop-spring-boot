@@ -3,33 +3,20 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class Feedback implements Serializable {
-    private Integer msgId;
-
-    private Integer parentId;
-
-    private Integer userId;
-
-    private String userName;
-
-    private String userEmail;
-
-    private String msgTitle;
-
-    private Boolean msgType;
-
-    private Boolean msgStatus;
-
-    private Integer msgTime;
-
-    private String messageImg;
-
-    private Integer orderId;
-
-    private Boolean msgArea;
-
-    private String msgContent;
-
     private static final long serialVersionUID = 1L;
+    private Integer msgId;
+    private Integer parentId;
+    private Integer userId;
+    private String userName;
+    private String userEmail;
+    private String msgTitle;
+    private Boolean msgType;
+    private Boolean msgStatus;
+    private Integer msgTime;
+    private String messageImg;
+    private Integer orderId;
+    private Boolean msgArea;
+    private String msgContent;
 
     public Integer getMsgId() {
         return msgId;
@@ -148,18 +135,18 @@ public class Feedback implements Serializable {
         }
         Feedback other = (Feedback) that;
         return (this.getMsgId() == null ? other.getMsgId() == null : this.getMsgId().equals(other.getMsgId()))
-            && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
-            && (this.getUserEmail() == null ? other.getUserEmail() == null : this.getUserEmail().equals(other.getUserEmail()))
-            && (this.getMsgTitle() == null ? other.getMsgTitle() == null : this.getMsgTitle().equals(other.getMsgTitle()))
-            && (this.getMsgType() == null ? other.getMsgType() == null : this.getMsgType().equals(other.getMsgType()))
-            && (this.getMsgStatus() == null ? other.getMsgStatus() == null : this.getMsgStatus().equals(other.getMsgStatus()))
-            && (this.getMsgTime() == null ? other.getMsgTime() == null : this.getMsgTime().equals(other.getMsgTime()))
-            && (this.getMessageImg() == null ? other.getMessageImg() == null : this.getMessageImg().equals(other.getMessageImg()))
-            && (this.getOrderId() == null ? other.getOrderId() == null : this.getOrderId().equals(other.getOrderId()))
-            && (this.getMsgArea() == null ? other.getMsgArea() == null : this.getMsgArea().equals(other.getMsgArea()))
-            && (this.getMsgContent() == null ? other.getMsgContent() == null : this.getMsgContent().equals(other.getMsgContent()));
+                && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+                && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
+                && (this.getUserEmail() == null ? other.getUserEmail() == null : this.getUserEmail().equals(other.getUserEmail()))
+                && (this.getMsgTitle() == null ? other.getMsgTitle() == null : this.getMsgTitle().equals(other.getMsgTitle()))
+                && (this.getMsgType() == null ? other.getMsgType() == null : this.getMsgType().equals(other.getMsgType()))
+                && (this.getMsgStatus() == null ? other.getMsgStatus() == null : this.getMsgStatus().equals(other.getMsgStatus()))
+                && (this.getMsgTime() == null ? other.getMsgTime() == null : this.getMsgTime().equals(other.getMsgTime()))
+                && (this.getMessageImg() == null ? other.getMessageImg() == null : this.getMessageImg().equals(other.getMessageImg()))
+                && (this.getOrderId() == null ? other.getOrderId() == null : this.getOrderId().equals(other.getOrderId()))
+                && (this.getMsgArea() == null ? other.getMsgArea() == null : this.getMsgArea().equals(other.getMsgArea()))
+                && (this.getMsgContent() == null ? other.getMsgContent() == null : this.getMsgContent().equals(other.getMsgContent()));
     }
 
     @Override

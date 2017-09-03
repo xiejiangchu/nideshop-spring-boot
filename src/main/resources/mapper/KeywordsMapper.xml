@@ -22,6 +22,14 @@
         and id = #{id,jdbcType=INTEGER}
     </select>
 
+    <select id="selectLikePrimaryKey" resultMap="BaseResultMap">
+        select
+        DISTINCT
+        <include refid="Base_Column_List"/>
+        from keywords
+        where keyword like concat('%',#{keyword,jdbcType=VARCHAR},'%')
+    </select>
+
     <select id="defaultKeyword" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

@@ -48,7 +48,12 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
     }
 
     @Override
-    public PageInfo<SearchHistory> historyKeyword(int uid,int pageNum, int pageSize) {
+    public int deleteByUid(Integer uid) {
+        return searchHistoryMapper.deleteByUid(uid);
+    }
+
+    @Override
+    public PageInfo<SearchHistory> historyKeyword(int uid, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         PageInfo<SearchHistory> page = new PageInfo<SearchHistory>(searchHistoryMapper.historyKeyword(uid));
         return page;

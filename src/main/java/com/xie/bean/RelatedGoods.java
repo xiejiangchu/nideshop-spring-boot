@@ -3,13 +3,10 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class RelatedGoods implements Serializable {
-    private Integer id;
-
-    private Integer goodsId;
-
-    private Integer relatedGoodsId;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private Integer goodsId;
+    private Integer relatedGoodsId;
 
     public Integer getId() {
         return id;
@@ -48,8 +45,8 @@ public class RelatedGoods implements Serializable {
         }
         RelatedGoods other = (RelatedGoods) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
-            && (this.getRelatedGoodsId() == null ? other.getRelatedGoodsId() == null : this.getRelatedGoodsId().equals(other.getRelatedGoodsId()));
+                && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
+                && (this.getRelatedGoodsId() == null ? other.getRelatedGoodsId() == null : this.getRelatedGoodsId().equals(other.getRelatedGoodsId()));
     }
 
     @Override

@@ -3,24 +3,17 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class Comment implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
-
     private Byte typeId;
-
     private Integer valueId;
-
     /**
      * 储存为base64编码
      */
     private String content;
-
     private Long addTime;
-
     private Byte status;
-
     private Integer userId;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -91,12 +84,12 @@ public class Comment implements Serializable {
         }
         Comment other = (Comment) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getTypeId() == null ? other.getTypeId() == null : this.getTypeId().equals(other.getTypeId()))
-            && (this.getValueId() == null ? other.getValueId() == null : this.getValueId().equals(other.getValueId()))
-            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
-            && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()))
-            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()));
+                && (this.getTypeId() == null ? other.getTypeId() == null : this.getTypeId().equals(other.getTypeId()))
+                && (this.getValueId() == null ? other.getValueId() == null : this.getValueId().equals(other.getValueId()))
+                && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
+                && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()))
+                && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()));
     }
 
     @Override

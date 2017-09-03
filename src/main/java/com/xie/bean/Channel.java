@@ -3,17 +3,12 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class Channel implements Serializable {
-    private Integer id;
-
-    private String name;
-
-    private String url;
-
-    private String iconUrl;
-
-    private Integer sortOrder;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private String name;
+    private String url;
+    private String iconUrl;
+    private Integer sortOrder;
 
     public Integer getId() {
         return id;
@@ -68,10 +63,10 @@ public class Channel implements Serializable {
         }
         Channel other = (Channel) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
-            && (this.getIconUrl() == null ? other.getIconUrl() == null : this.getIconUrl().equals(other.getIconUrl()))
-            && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
+                && (this.getIconUrl() == null ? other.getIconUrl() == null : this.getIconUrl().equals(other.getIconUrl()))
+                && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()));
     }
 
     @Override

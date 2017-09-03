@@ -91,11 +91,11 @@ public class Attribute implements Serializable {
         }
         Attribute other = (Attribute) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getAttributeCategoryId() == null ? other.getAttributeCategoryId() == null : this.getAttributeCategoryId().equals(other.getAttributeCategoryId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getInputType() == null ? other.getInputType() == null : this.getInputType().equals(other.getInputType()))
-            && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()))
-            && (this.getValues() == null ? other.getValues() == null : this.getValues().equals(other.getValues()));
+                && (this.getAttributeCategoryId() == null ? other.getAttributeCategoryId() == null : this.getAttributeCategoryId().equals(other.getAttributeCategoryId()))
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getInputType() == null ? other.getInputType() == null : this.getInputType().equals(other.getInputType()))
+                && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()))
+                && (this.getValues() == null ? other.getValues() == null : this.getValues().equals(other.getValues()));
     }
 
     @Override

@@ -45,14 +45,6 @@ public class MallConstants {
             this.val = val;
         }
 
-        public int getVal() {
-            return val;
-        }
-
-        public void setVal(int val) {
-            this.val = val;
-        }
-
         public static JSONArray json() {
             JSONArray jsonArray = new JSONArray();
             AdPositionType[] list = AdPositionType.values();
@@ -64,6 +56,14 @@ public class MallConstants {
             }
             return jsonArray;
         }
+
+        public int getVal() {
+            return val;
+        }
+
+        public void setVal(int val) {
+            this.val = val;
+        }
     }
 
     public enum MediaType {
@@ -71,14 +71,6 @@ public class MallConstants {
         private int val;
 
         MediaType(int val) {
-            this.val = val;
-        }
-
-        public int getVal() {
-            return val;
-        }
-
-        public void setVal(int val) {
             this.val = val;
         }
 
@@ -93,6 +85,14 @@ public class MallConstants {
             }
             return jsonArray;
         }
+
+        public int getVal() {
+            return val;
+        }
+
+        public void setVal(int val) {
+            this.val = val;
+        }
     }
 
     public enum InputType {
@@ -100,14 +100,6 @@ public class MallConstants {
         private int val;
 
         InputType(int val) {
-            this.val = val;
-        }
-
-        public int getVal() {
-            return val;
-        }
-
-        public void setVal(int val) {
             this.val = val;
         }
 
@@ -122,6 +114,14 @@ public class MallConstants {
             }
             return jsonArray;
         }
+
+        public int getVal() {
+            return val;
+        }
+
+        public void setVal(int val) {
+            this.val = val;
+        }
     }
 
 
@@ -130,14 +130,6 @@ public class MallConstants {
         private int val;
 
         CollectType(int val) {
-            this.val = val;
-        }
-
-        public int getVal() {
-            return val;
-        }
-
-        public void setVal(int val) {
             this.val = val;
         }
 
@@ -151,6 +143,14 @@ public class MallConstants {
                 jsonArray.add(jsonObject);
             }
             return jsonArray;
+        }
+
+        public int getVal() {
+            return val;
+        }
+
+        public void setVal(int val) {
+            this.val = val;
         }
     }
 }

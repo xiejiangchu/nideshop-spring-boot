@@ -3,13 +3,10 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class UserLevel implements Serializable {
-    private Byte id;
-
-    private String name;
-
-    private String description;
-
     private static final long serialVersionUID = 1L;
+    private Byte id;
+    private String name;
+    private String description;
 
     public Byte getId() {
         return id;
@@ -48,8 +45,8 @@ public class UserLevel implements Serializable {
         }
         UserLevel other = (UserLevel) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()));
     }
 
     @Override

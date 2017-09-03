@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConfigurationProperties(prefix = "spring.alibaba")
-public class  AlibabaConfig {
+public class AlibabaConfig {
     private String appkey;
     private String appsecret;
     private String namespace;

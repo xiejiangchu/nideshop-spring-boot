@@ -9,6 +9,8 @@ import com.xie.service.KeywordsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by xie on 17/8/23.
  */
@@ -39,6 +41,11 @@ public class KeywordsServiceImpl implements KeywordsService {
     }
 
     @Override
+    public List<Keywords> selectLikePrimaryKey(String keyword) {
+        return keywordsMapper.selectLikePrimaryKey(keyword);
+    }
+
+    @Override
     public int updateByPrimaryKeySelective(Keywords record) {
         return keywordsMapper.updateByPrimaryKeySelective(record);
     }
@@ -49,14 +56,14 @@ public class KeywordsServiceImpl implements KeywordsService {
     }
 
     @Override
-    public PageInfo<Keywords> defaultKeyword(int pageNum,int pageSize) {
+    public PageInfo<Keywords> defaultKeyword(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         PageInfo<Keywords> page = new PageInfo<Keywords>(keywordsMapper.defaultKeyword());
         return page;
     }
 
     @Override
-    public PageInfo<Keywords> hotKeyword(int pageNum,int pageSize) {
+    public PageInfo<Keywords> hotKeyword(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         PageInfo<Keywords> page = new PageInfo<Keywords>(keywordsMapper.hotKeyword());
         return page;

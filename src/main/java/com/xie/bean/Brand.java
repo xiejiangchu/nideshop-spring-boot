@@ -4,31 +4,19 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class Brand implements Serializable {
-    private Integer id;
-
-    private String name;
-
-    private String listPicUrl;
-
-    private String simpleDesc;
-
-    private String picUrl;
-
-    private Byte sortOrder;
-
-    private Boolean isShow;
-
-    private BigDecimal floorPrice;
-
-    private String appListPicUrl;
-
-    private Boolean isNew;
-
-    private String newPicUrl;
-
-    private Byte newSortOrder;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private String name;
+    private String listPicUrl;
+    private String simpleDesc;
+    private String picUrl;
+    private Byte sortOrder;
+    private Boolean isShow;
+    private BigDecimal floorPrice;
+    private String appListPicUrl;
+    private Boolean isNew;
+    private String newPicUrl;
+    private Byte newSortOrder;
 
     public Integer getId() {
         return id;
@@ -139,17 +127,17 @@ public class Brand implements Serializable {
         }
         Brand other = (Brand) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getListPicUrl() == null ? other.getListPicUrl() == null : this.getListPicUrl().equals(other.getListPicUrl()))
-            && (this.getSimpleDesc() == null ? other.getSimpleDesc() == null : this.getSimpleDesc().equals(other.getSimpleDesc()))
-            && (this.getPicUrl() == null ? other.getPicUrl() == null : this.getPicUrl().equals(other.getPicUrl()))
-            && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()))
-            && (this.getIsShow() == null ? other.getIsShow() == null : this.getIsShow().equals(other.getIsShow()))
-            && (this.getFloorPrice() == null ? other.getFloorPrice() == null : this.getFloorPrice().equals(other.getFloorPrice()))
-            && (this.getAppListPicUrl() == null ? other.getAppListPicUrl() == null : this.getAppListPicUrl().equals(other.getAppListPicUrl()))
-            && (this.getIsNew() == null ? other.getIsNew() == null : this.getIsNew().equals(other.getIsNew()))
-            && (this.getNewPicUrl() == null ? other.getNewPicUrl() == null : this.getNewPicUrl().equals(other.getNewPicUrl()))
-            && (this.getNewSortOrder() == null ? other.getNewSortOrder() == null : this.getNewSortOrder().equals(other.getNewSortOrder()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getListPicUrl() == null ? other.getListPicUrl() == null : this.getListPicUrl().equals(other.getListPicUrl()))
+                && (this.getSimpleDesc() == null ? other.getSimpleDesc() == null : this.getSimpleDesc().equals(other.getSimpleDesc()))
+                && (this.getPicUrl() == null ? other.getPicUrl() == null : this.getPicUrl().equals(other.getPicUrl()))
+                && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()))
+                && (this.getIsShow() == null ? other.getIsShow() == null : this.getIsShow().equals(other.getIsShow()))
+                && (this.getFloorPrice() == null ? other.getFloorPrice() == null : this.getFloorPrice().equals(other.getFloorPrice()))
+                && (this.getAppListPicUrl() == null ? other.getAppListPicUrl() == null : this.getAppListPicUrl().equals(other.getAppListPicUrl()))
+                && (this.getIsNew() == null ? other.getIsNew() == null : this.getIsNew().equals(other.getIsNew()))
+                && (this.getNewPicUrl() == null ? other.getNewPicUrl() == null : this.getNewPicUrl().equals(other.getNewPicUrl()))
+                && (this.getNewSortOrder() == null ? other.getNewSortOrder() == null : this.getNewSortOrder().equals(other.getNewSortOrder()));
     }
 
     @Override

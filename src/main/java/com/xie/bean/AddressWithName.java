@@ -3,32 +3,21 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class AddressWithName implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
-
     private String name;
-
     private Integer userId;
-
     private Short countryId;
-
     private Short provinceId;
-
     private Short cityId;
-
     private Short districtId;
-
     private String address;
-
     private String mobile;
-
     private Boolean isDefault;
-
     private String provinceName;
     private String cityName;
     private String districtName;
     private String fullRegion;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -123,15 +112,15 @@ public class AddressWithName implements Serializable {
         }
         AddressWithName other = (AddressWithName) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getCountryId() == null ? other.getCountryId() == null : this.getCountryId().equals(other.getCountryId()))
-            && (this.getProvinceId() == null ? other.getProvinceId() == null : this.getProvinceId().equals(other.getProvinceId()))
-            && (this.getCityId() == null ? other.getCityId() == null : this.getCityId().equals(other.getCityId()))
-            && (this.getDistrictId() == null ? other.getDistrictId() == null : this.getDistrictId().equals(other.getDistrictId()))
-            && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
-            && (this.getMobile() == null ? other.getMobile() == null : this.getMobile().equals(other.getMobile()))
-            && (this.getIsDefault() == null ? other.getIsDefault() == null : this.getIsDefault().equals(other.getIsDefault()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+                && (this.getCountryId() == null ? other.getCountryId() == null : this.getCountryId().equals(other.getCountryId()))
+                && (this.getProvinceId() == null ? other.getProvinceId() == null : this.getProvinceId().equals(other.getProvinceId()))
+                && (this.getCityId() == null ? other.getCityId() == null : this.getCityId().equals(other.getCityId()))
+                && (this.getDistrictId() == null ? other.getDistrictId() == null : this.getDistrictId().equals(other.getDistrictId()))
+                && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
+                && (this.getMobile() == null ? other.getMobile() == null : this.getMobile().equals(other.getMobile()))
+                && (this.getIsDefault() == null ? other.getIsDefault() == null : this.getIsDefault().equals(other.getIsDefault()));
     }
 
     @Override

@@ -29,7 +29,7 @@ public class EnumService {
         return "";
     }
 
-    public String getInputType(int val){
+    public String getInputType(int val) {
         MallConstants.InputType[] list = MallConstants.InputType.values();
         for (int i = 0; i < list.length; i++) {
             if (list[i].getVal() == val) {

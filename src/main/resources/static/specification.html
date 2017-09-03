@@ -64,7 +64,7 @@
                             <ul class="pagination pagination-sm no-margin pull-right">
                                 <li><a th:href="@{/specification(pageNum=${specificationPageInfo.prePage})}">&laquo;</a>
                                 </li>
-                                <li th:class="${navigatepageNum==goodsPageInfo.pageNum}?  th:each="navigatepageNum,state : ${specificationPageInfo.navigatepageNums}"><a
+                                <li th:class="${navigatepageNum==specificationPageInfo.pageNum}? 'active':''"  th:each="navigatepageNum,state : ${specificationPageInfo.navigatepageNums}"><a
                                         th:href="@{/specification(pageNum=${navigatepageNum},pageSize=${specificationPageInfo.pageSize})}"
                                         th:text="${navigatepageNum}">2</a></li>
                                 <li>

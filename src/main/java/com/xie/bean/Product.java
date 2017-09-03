@@ -4,19 +4,13 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class Product implements Serializable {
-    private Integer id;
-
-    private Integer goodsId;
-
-    private String goodsSpecificationIds;
-
-    private String goodsSn;
-
-    private Integer goodsNumber;
-
-    private BigDecimal retailPrice;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private Integer goodsId;
+    private String goodsSpecificationIds;
+    private String goodsSn;
+    private Integer goodsNumber;
+    private BigDecimal retailPrice;
 
     public Integer getId() {
         return id;
@@ -79,11 +73,11 @@ public class Product implements Serializable {
         }
         Product other = (Product) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
-            && (this.getGoodsSpecificationIds() == null ? other.getGoodsSpecificationIds() == null : this.getGoodsSpecificationIds().equals(other.getGoodsSpecificationIds()))
-            && (this.getGoodsSn() == null ? other.getGoodsSn() == null : this.getGoodsSn().equals(other.getGoodsSn()))
-            && (this.getGoodsNumber() == null ? other.getGoodsNumber() == null : this.getGoodsNumber().equals(other.getGoodsNumber()))
-            && (this.getRetailPrice() == null ? other.getRetailPrice() == null : this.getRetailPrice().equals(other.getRetailPrice()));
+                && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
+                && (this.getGoodsSpecificationIds() == null ? other.getGoodsSpecificationIds() == null : this.getGoodsSpecificationIds().equals(other.getGoodsSpecificationIds()))
+                && (this.getGoodsSn() == null ? other.getGoodsSn() == null : this.getGoodsSn().equals(other.getGoodsSn()))
+                && (this.getGoodsNumber() == null ? other.getGoodsNumber() == null : this.getGoodsNumber().equals(other.getGoodsNumber()))
+                && (this.getRetailPrice() == null ? other.getRetailPrice() == null : this.getRetailPrice().equals(other.getRetailPrice()));
     }
 
     @Override

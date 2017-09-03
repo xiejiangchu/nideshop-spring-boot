@@ -45,7 +45,7 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-        if(httpServletRequest.getRequestURL().toString().endsWith("/login")){
+        if (httpServletRequest.getRequestURL().toString().endsWith("/login")) {
             chain.doFilter(request, response);
             return;
         }

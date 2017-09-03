@@ -3,23 +3,18 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class SearchHistory implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
-
     private String keyword;
-
     /**
      * 搜索来源，如PC、小程序、APP等
      */
     private String from;
-
     /**
      * 搜索时间
      */
     private Integer addTime;
-
     private String userId;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -74,10 +69,10 @@ public class SearchHistory implements Serializable {
         }
         SearchHistory other = (SearchHistory) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getKeyword() == null ? other.getKeyword() == null : this.getKeyword().equals(other.getKeyword()))
-            && (this.getFrom() == null ? other.getFrom() == null : this.getFrom().equals(other.getFrom()))
-            && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()));
+                && (this.getKeyword() == null ? other.getKeyword() == null : this.getKeyword().equals(other.getKeyword()))
+                && (this.getFrom() == null ? other.getFrom() == null : this.getFrom().equals(other.getFrom()))
+                && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()))
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()));
     }
 
     @Override

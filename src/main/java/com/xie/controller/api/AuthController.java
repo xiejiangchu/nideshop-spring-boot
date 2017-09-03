@@ -95,8 +95,8 @@ public class AuthController extends BaseController {
                 if (null != wxSession.getSession_key()) {
                     User insert = new User();
                     BeanUtils.copyProperties(loginRequest.getUserInfo(), insert);
-                    user.setCreatedAt( DateTime.now().toDate());
-                    insert.setUpdatedAt( DateTime.now().toDate());
+                    user.setCreatedAt(DateTime.now().toDate());
+                    insert.setUpdatedAt(DateTime.now().toDate());
                     insert.setUsername(insert.getUsername());
                     insert.setPassword(bCryptPasswordEncoder.encode("pass@1234"));
                     int uid = userService.insert(insert);

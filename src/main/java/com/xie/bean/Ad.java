@@ -3,25 +3,16 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class Ad implements Serializable {
-    private Short id;
-
-    private Short adPositionId;
-
-    private Byte mediaType;
-
-    private String name;
-
-    private String link;
-
-    private String content;
-
-    private Integer endTime;
-
-    private Byte enabled;
-
-    private String imageUrl;
-
     private static final long serialVersionUID = 1L;
+    private Short id;
+    private Short adPositionId;
+    private Byte mediaType;
+    private String name;
+    private String link;
+    private String content;
+    private Integer endTime;
+    private Byte enabled;
+    private String imageUrl;
 
     public Short getId() {
         return id;
@@ -108,14 +99,14 @@ public class Ad implements Serializable {
         }
         Ad other = (Ad) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getAdPositionId() == null ? other.getAdPositionId() == null : this.getAdPositionId().equals(other.getAdPositionId()))
-            && (this.getMediaType() == null ? other.getMediaType() == null : this.getMediaType().equals(other.getMediaType()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getLink() == null ? other.getLink() == null : this.getLink().equals(other.getLink()))
-            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
-            && (this.getEndTime() == null ? other.getEndTime() == null : this.getEndTime().equals(other.getEndTime()))
-            && (this.getEnabled() == null ? other.getEnabled() == null : this.getEnabled().equals(other.getEnabled()))
-            && (this.getImageUrl() == null ? other.getImageUrl() == null : this.getImageUrl().equals(other.getImageUrl()));
+                && (this.getAdPositionId() == null ? other.getAdPositionId() == null : this.getAdPositionId().equals(other.getAdPositionId()))
+                && (this.getMediaType() == null ? other.getMediaType() == null : this.getMediaType().equals(other.getMediaType()))
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getLink() == null ? other.getLink() == null : this.getLink().equals(other.getLink()))
+                && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
+                && (this.getEndTime() == null ? other.getEndTime() == null : this.getEndTime().equals(other.getEndTime()))
+                && (this.getEnabled() == null ? other.getEnabled() == null : this.getEnabled().equals(other.getEnabled()))
+                && (this.getImageUrl() == null ? other.getImageUrl() == null : this.getImageUrl().equals(other.getImageUrl()));
     }
 
     @Override

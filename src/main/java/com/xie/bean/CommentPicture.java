@@ -3,15 +3,11 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class CommentPicture implements Serializable {
-    private Integer id;
-
-    private Integer commentId;
-
-    private String picUrl;
-
-    private Boolean sortOrder;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private Integer commentId;
+    private String picUrl;
+    private Boolean sortOrder;
 
     public Integer getId() {
         return id;
@@ -58,9 +54,9 @@ public class CommentPicture implements Serializable {
         }
         CommentPicture other = (CommentPicture) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getCommentId() == null ? other.getCommentId() == null : this.getCommentId().equals(other.getCommentId()))
-            && (this.getPicUrl() == null ? other.getPicUrl() == null : this.getPicUrl().equals(other.getPicUrl()))
-            && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()));
+                && (this.getCommentId() == null ? other.getCommentId() == null : this.getCommentId().equals(other.getCommentId()))
+                && (this.getPicUrl() == null ? other.getPicUrl() == null : this.getPicUrl().equals(other.getPicUrl()))
+                && (this.getSortOrder() == null ? other.getSortOrder() == null : this.getSortOrder().equals(other.getSortOrder()));
     }
 
     @Override
