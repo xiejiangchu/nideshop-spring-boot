@@ -9,7 +9,7 @@ public class GoodsIssue implements Serializable {
 
     private String answer;
 
-    private String goodsId;
+    private Integer goodsId;
 
     private static final long serialVersionUID = 1L;
 
@@ -37,11 +37,11 @@ public class GoodsIssue implements Serializable {
         this.answer = answer;
     }
 
-    public String getGoodsId() {
+    public Integer getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(String goodsId) {
+    public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
     }
 

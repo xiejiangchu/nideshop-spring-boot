@@ -32,12 +32,12 @@ public class Goods implements Serializable {
     /**
      * 专柜价格
      */
-    private double counterPrice;
+    private Double counterPrice;
 
     /**
      * 附加价格
      */
-    private double extraPrice;
+    private Double extraPrice;
 
     private Integer isNew;
 
@@ -59,7 +59,7 @@ public class Goods implements Serializable {
     /**
      * 零售价格
      */
-    private double retailPrice;
+    private Double retailPrice;
 
     /**
      * 销售量
@@ -74,7 +74,7 @@ public class Goods implements Serializable {
     /**
      * 单位价格，单价
      */
-    private double unitPrice;
+    private Double unitPrice;
 
     private String promotionDesc;
 
@@ -83,7 +83,7 @@ public class Goods implements Serializable {
     /**
      * APP专享价
      */
-    private double appExclusivePrice;
+    private Double appExclusivePrice;
 
     /**
      * 是否是APP专属

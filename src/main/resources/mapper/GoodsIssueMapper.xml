@@ -7,7 +7,7 @@
         <result column="answer" property="answer" jdbcType="VARCHAR"/>
     </resultMap>
     <resultMap id="ResultMapWithBLOBs" type="com.xie.bean.GoodsIssue" extends="BaseResultMap">
-        <result column="goods_id" property="goodsId" jdbcType="LONGVARCHAR"/>
+        <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, question, answer

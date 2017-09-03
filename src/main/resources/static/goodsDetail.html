@@ -39,13 +39,20 @@
                                     <a href="#"><i class="fa fa-filter"></i>销售信息</a>
                                 </li>
                                 <li class="section" data-id="section5-content">
-                                    <a href="#"><i class="fa fa-filter"></i>类别信息</a>
+                                    <a href="#"><i class="fa fa-filter"></i>规格信息</a>
                                 </li>
                                 <li class="section" data-id="section6-content">
-                                    <a href="#"><i class="fa fa-filter"></i>属性信息</a>
+                                    <a href="#"><i class="fa fa-filter"></i>类别信息</a>
                                 </li>
                                 <li class="section" data-id="section7-content">
+                                    <a href="#"><i class="fa fa-filter"></i>属性信息</a>
+                                </li>
+                                <li class="section" data-id="section8-content">
                                     <a href="#"><i class="fa fa-filter"></i>规格信息</a>
+                                </li>
+
+                                <li class="section" data-id="section9-content">
+                                    <a href="#"><i class="fa fa-filter"></i>服务信息</a>
                                 </li>
                             </ul>
                         </div>
@@ -77,7 +84,7 @@
                 <div id="section1-content" class="section-content col-md-9" style="">
                     <div class="box box-primary">
                         <!-- form start -->
-                        <form role="form" th:action="@{/ad/update}" method="post">
+                        <form role="form" id="goodsUpdateBaseInfo">
                             <input type="hidden" name="id" th:value="${goodsDetail.goods.id}">
                             <div class="box-body">
                                 <div class="form-group">
@@ -105,6 +112,12 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label>促销标签</label>
+                                    <input type="text" class="form-control" name="promotionTag"
+                                           th:value="${goodsDetail.goods.promotionTag}">
+                                </div>
+
+                                <div class="form-group">
                                     <label>促销信息</label>
                                     <input type="text" class="form-control" name="promotionDesc"
                                            th:value="${goodsDetail.goods.promotionDesc}">
@@ -127,7 +140,7 @@
                 <div id="section2-content" class="section-content col-md-9" style="display: none;">
                     <div class="box box-primary">
                         <!-- form start -->
-                        <form role="form" th:action="@{/goods/update}" method="post">
+                        <form role="form" id="goodsUpdateGoodsDesc">
                             <input type="hidden" name="id" th:value="${goodsDetail.goods.id}">
                             <div class="box-body">
                                 <div class="form-group">
@@ -151,44 +164,55 @@
                         <!-- form start -->
                         <form role="form" th:action="@{/goods/update}" method="post">
                             <input type="hidden" name="id" th:value="${goodsDetail.goods.id}">
+                            <input type="hidden" name="token" id="token" th:value="${token}">
                             <div class="box-body">
-                                <div class="form-group">
-                                    <label for="primaryPicUrl">首页图片</label>
-                                    <input type="hidden" id="primaryPicUrl" name="primaryPicUrl">
-                                    <input type="file" id="imgFilePrimary" name="imgFile">
 
-                                    <p class="help-block">预览</p>
-                                    <img class="imgFilePreview" style="width: 100%;">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-xs-6">
+                                            <div class="form-group">
+                                                <label for="primaryPicUrl">首页图片</label>
+                                                <input type="hidden" id="primaryPicUrl" name="primaryPicUrl">
+                                                <input type="file" id="imgFilePrimary">
 
-                                    <p class="help-block">当前图片</p>
-                                    <img th:src="${goodsDetail.goods.primaryPicUrl}"
-                                         th:alt="${goodsDetail.goods.primaryPicUrl}" style="height: 100px;">
+                                                <p class="help-block">预览</p>
+                                                <img class="imgFilePreview" style="width: 100%;">
 
+                                                <p class="help-block">当前图片</p>
+                                                <img th:src="${goodsDetail.goods.primaryPicUrl}"
+                                                     th:alt="${goodsDetail.goods.primaryPicUrl}" style="height: 300px;">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-sm-6 col-xs-6">
+                                            <div class="form-group">
+                                                <label for="listPicUrl">列表图片</label>
+                                                <input type="hidden" id="listPicUrl" name="listPicUrl">
+                                                <input type="file" id="imgFileList">
+
+                                                <p class="help-block">预览</p>
+                                                <img class="imgFilePreview" style="width: 100%;">
+
+                                                <p class="help-block">当前图片</p>
+                                                <img th:src="${goodsDetail.goods.listPicUrl}"
+                                                     th:alt="${goodsDetail.goods.listPicUrl}" style="height: 300px;">
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="listPicUrl">列表图片</label>
-                                    <input type="hidden" id="listPicUrl" name="listPicUrl">
-                                    <input type="file" id="imgFileList" name="imgFile">
-
-                                    <p class="help-block">预览</p>
-                                    <img class="imgFilePreview" style="width: 100%;">
-
-                                    <p class="help-block">当前图片</p>
-                                    <img th:src="${goodsDetail.goods.listPicUrl}"
-                                         th:alt="${goodsDetail.goods.listPicUrl}" style="height: 100px;">
-
-                                </div>
 
                                 <div class="form-group">
                                     <label for="listPicUrl">详情图片</label>
-                                    <input type="file" id="imgFileList" name="imgFile">
+                                    <input type="file" id="goodsGalleries">
 
                                     <p class="help-block">预览</p>
                                     <div class="container-fluid">
                                         <div class="row">
-                                            <div class="col-sm-2 col-xs-3"
-                                                 th:each="item,state :${goodsDetail.goodsGalleries}">
+                                            <div class="col-sm-3 col-xs-3">
                                                 <img class="imgFilePreview" style="width: 100%;">
                                             </div>
                                         </div>
@@ -198,7 +222,7 @@
                                     <p class="help-block">当前图片</p>
                                     <div class="container-fluid">
                                         <div class="row">
-                                            <div class="col-sm-2 col-xs-3"
+                                            <div class="col-sm-3 col-xs-3"
                                                  th:each="item,state :${goodsDetail.goodsGalleries}">
                                                 <img th:src="${item.imgUrl}" th:alt="${item.imgDesc}"
                                                      style="width: 100%;">
@@ -218,13 +242,200 @@
                     </div>
                 </div>
                 <div id="section4-content" class="section-content col-md-9" style="display: none;">
-                    4
+                    <div class="box box-primary">
+                        <!-- form start -->
+                        <form role="form" id="goodsUpdatePrice">
+                            <input type="hidden" name="id" th:value="${goodsDetail.goods.id}">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label>库存</label>
+                                    <input type="text" class="form-control" name="goodsNumber"
+                                           th:value="${goodsDetail.goods.goodsNumber}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Counter-price</label>
+                                    <input type="text" class="form-control" name="counterPrice"
+                                           th:value="${goodsDetail.goods.counterPrice}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Extra-price</label>
+                                    <input type="text" class="form-control" name="extraPrice"
+                                           th:value="${goodsDetail.goods.extraPrice}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Retail-price</label>
+                                    <input type="text" class="form-control" name="retailPrice"
+                                           th:value="${goodsDetail.goods.retailPrice}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Unit-price</label>
+                                    <input type="text" class="form-control" name="unitPrice"
+                                           th:value="${goodsDetail.goods.unitPrice}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>App-price</label>
+                                    <input type="text" class="form-control" name="appExclusivePrice"
+                                           th:value="${goodsDetail.goods.appExclusivePrice}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>销量</label>
+                                    <input type="text" class="form-control" name="sellVolume"
+                                           th:value="${goodsDetail.goods.sellVolume}">
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">修改</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div id="section5-content" class="section-content col-md-9" style="display: none;">
-                    5
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-4">
+
+                            </div>
+                            <div class="col-sm-4">
+
+                            </div>
+                            <div class="col-sm-4">
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div id="section6-content" class="section-content col-md-9" style="display: none;">
                     6
+                </div>
+                <div id="section7-content" class="section-content col-md-9" style="display: none;">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12" th:each="item,state : ${goodsDetail.attributes}">
+                                <form id="goodsAttributeUpdate">
+                                    <input type="hidden" name="goodsId" th:value="${goodsDetail.goods.id}">
+                                    <div th:class="${state.index%4==1}?'box box-warning':(${state.index%4==2}?'box box-success':(${state.index%4==3}? 'box box-primary':'box box-danger'))">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title" th:text="${item.name}"></h3>
+                                            <input type="hidden" name='id' th:value="${item.id}">
+                                            <input type="hidden" name='attributeId' th:value="${item.attributeId}">
+                                            <div class="box-tools pull-right">
+                                                <button type="button"
+                                                        class="goodsAttributeUpdate btn btn-xs btn-warning"
+                                                        th:attr="data-id=${item.id}">
+                                                    修改
+                                                </button>
+                                                <button type="button"
+                                                        class="goodsAttributeDelete btn btn-xs btn-warning"
+                                                        th:attr="data-id=${item.id}">
+                                                    删除
+                                                </button>
+                                            </div>
+                                            <!-- /.box-tools -->
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <textarea name="value"  class="form-control" rows="2" th:text="${item.value}"></textarea>
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                </form>
+
+                            </div>
+
+                            <div class="col-sm-12">
+                                <form id="goodsAttributeAdd">
+                                    <input type="hidden" name="goodsId" th:value="${goodsDetail.goods.id}">
+                                    <div class="box box-success">
+                                        <div class="box-header with-border">
+                                            <div class="form-group">
+                                                <label>属性</label>
+                                                <select class="form-control select2" name='attributeId'
+                                                        style="width: 100%;">
+                                                    <option th:each="item,state:${attributePageInfo.list}"
+                                                            th:text="${item.name}"
+                                                            th:value="${item.id}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <textarea name="value" class="form-control" rows="2"
+                                                      placeholder="值"></textarea>
+                                        </div>
+                                        <!-- /.box-body -->
+
+                                        <div class="box-footer">
+                                            <button type="submit" class="btn btn-primary">添加</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="section8-content" class="section-content col-md-9" style="display: none;">
+                    8
+                </div>
+                <div id="section9-content" class="section-content col-md-9" style="display: none;">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12" th:each="item,state : ${goodsDetail.goodsIssues}">
+                                <form id="goodsIssueUpdate">
+                                    <input type="hidden" name="goodsId" th:value="${goodsDetail.goods.id}">
+                                    <div th:class="${state.index%4==1}?'box box-warning':(${state.index%4==2}?'box box-success':(${state.index%4==3}? 'box box-primary':'box box-danger'))">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title" th:text="${item.question}"></h3>
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="goodsIssueDelete btn btn-xs btn-warning"
+                                                        th:attr="data-id=${item.id}">
+                                                    删除
+                                                </button>
+                                            </div>
+                                            <!-- /.box-tools -->
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <textarea name="" class="form-control" rows="6"
+                                                      th:text="${item.answer}"></textarea>
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <form id="goodsIssueAdd">
+                                    <input type="hidden" name="goodsId" th:value="${goodsDetail.goods.id}">
+                                    <div class="box box-success">
+                                        <div class="box-header with-border">
+                                            <input type="text" class="box-title" placeholder="问题" name="question">
+                                            <!-- /.box-tools -->
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <textarea name="answer" class="form-control" rows="6"
+                                                      placeholder="答案"></textarea>
+                                        </div>
+                                        <!-- /.box-body -->
+
+                                        <div class="box-footer">
+                                            <button type="submit" class="btn btn-primary">添加</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.col -->
             </div>
@@ -248,8 +459,17 @@
 <script src="/js/select2.full.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        $('.select2').select2();
         $('.textarea').wysihtml5();
+
+        $.extend({
+            format: function (str, param) {
+                str = str.toString();
+                var reg = /{(\d+)}/gm;
+                return str.replace(reg, function (match, name) {
+                    return param[name];
+                });
+            }
+        });
 
         $('.section').click(function (event) {
             $('.section').removeClass('active');
@@ -257,6 +477,259 @@
             var id = $(event.target).parent(".section").attr("data-id");
             $('.section-content').css("display", "none");
             $('#' + id).css("display", "block");
+        });
+
+
+        $("#goodsUpdateBaseInfo").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/goods/updateBaseInfo',
+                data: $('#goodsUpdateBaseInfo').serialize(),
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        });
+
+
+        $("#goodsUpdateGoodsDesc").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/goods/updateGoodsDesc',
+                data: $('#goodsUpdateGoodsDesc').serialize(),
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        });
+
+
+        $('#imgFilePrimary').on("change", function (e) {
+            var data = $('#imgFilePrimary')[0];
+            var protocol = window.location.protocol || 'http:';
+            var query = 'Authorization=' + document.getElementById('token').value + '&UserAgent=ALIMEDIASDK_WORKSTATION'
+            var url = protocol + "//upload.media.aliyun.com/api/proxy/upload?" + query;
+            var formData = new FormData();
+            formData.append('dir', "");
+            formData.append('name', data.files[0].name);
+            formData.append('size', data.files[0].size);
+            formData.append("content", data.files[0]);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                // 告诉jQuery不要去处理发送的数据
+                processData: false,
+                // 告诉jQuery不要去设置Content-Type请求头
+                contentType: false,
+                beforeSend: function () {
+                    console.log("正在进行，请稍候");
+                },
+                success: function (responseStr) {
+                    if (responseStr.code == 'OK') {
+                        $('#primaryPicUrl').val(responseStr.url);
+                        $('#imgFilePrimary').siblings('.imgFilePreview').attr("src", responseStr.url);
+                    } else {
+                        alert("失败" + responseStr);
+                    }
+                },
+                error: function (responseStr) {
+                    console.log("error");
+                }
+            });
+        });
+
+
+        $('#imgFileList').on("change", function (e) {
+            var data = $('#imgFileList')[0];
+            var protocol = window.location.protocol || 'http:';
+            var query = 'Authorization=' + document.getElementById('token').value + '&UserAgent=ALIMEDIASDK_WORKSTATION'
+            var url = protocol + "//upload.media.aliyun.com/api/proxy/upload?" + query;
+            var formData = new FormData();
+            formData.append('dir', "");
+            formData.append('name', data.files[0].name);
+            formData.append('size', data.files[0].size);
+            formData.append("content", data.files[0]);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                // 告诉jQuery不要去处理发送的数据
+                processData: false,
+                // 告诉jQuery不要去设置Content-Type请求头
+                contentType: false,
+                beforeSend: function () {
+                    console.log("正在进行，请稍候");
+                },
+                success: function (responseStr) {
+                    if (responseStr.code == 'OK') {
+                        $('#listPicUrl').val(responseStr.url);
+                        $('#imgFileList').siblings('.imgFilePreview').attr("src", responseStr.url);
+                    } else {
+                        alert("失败" + responseStr);
+                    }
+                },
+                error: function (responseStr) {
+                    console.log("error");
+                }
+            });
+        })
+
+
+        $("#goodsUpdatePrice").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/goods/updateGoodsPrice',
+                data: $('#goodsUpdatePrice').serialize(),
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        });
+
+        $('.goodsIssueDelete').click(function (e) {
+            var that = $(this);
+            var id = $(this).attr("data-id");
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/goodsIssue/delete',
+                data: {'id': id},
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                        that.parents('.col-sm-12').remove();
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        });
+
+
+        $('.goodsAttributeUpdate').click(function (e) {
+            var that = $(this);
+            var id = $(this).attr("data-id");
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/goodsAttribute/update',
+                data: $('#goodsAttributeUpdate').serialize(),
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        })
+
+        $('.goodsAttributeDelete').click(function (e) {
+            var that = $(this);
+            var id = $(this).attr("data-id");
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/goodsAttribute/delete',
+                data: {'id': id},
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                        that.parents('.col-sm-12').remove();
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        })
+
+
+        $("#goodsIssueAdd").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/goodsIssue/add',
+                data: $('#goodsIssueAdd').serialize(),
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        });
+
+
+        $("#goodsAttributeAdd").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/goodsAttribute/add',
+                data: $('#goodsAttributeAdd').serialize(),
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
         });
     })
 </script>
