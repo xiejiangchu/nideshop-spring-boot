@@ -3,6 +3,7 @@ package com.xie.bean;
 import java.io.Serializable;
 
 public class Goods implements Serializable {
+    private static final long serialVersionUID = 8729401128878552741L;
     private Integer id;
 
     private Integer categoryId;
@@ -96,8 +97,6 @@ public class Goods implements Serializable {
 
     private String goodsDesc;
 
-    private static final long serialVersionUID = 1L;
-
     public Integer getId() {
         return id;
     }
@@ -162,6 +161,14 @@ public class Goods implements Serializable {
         this.goodsBrief = goodsBrief;
     }
 
+    public Integer getIsOnSale() {
+        return isOnSale;
+    }
+
+    public void setIsOnSale(Integer isOnSale) {
+        this.isOnSale = isOnSale;
+    }
+
     public Integer getAddTime() {
         return addTime;
     }
@@ -178,60 +185,12 @@ public class Goods implements Serializable {
         this.sortOrder = sortOrder;
     }
 
-    public Integer getIsOnSale() {
-        return isOnSale;
-    }
-
-    public void setIsOnSale(Integer isOnSale) {
-        this.isOnSale = isOnSale;
-    }
-
     public Integer getIsDelete() {
         return isDelete;
     }
 
     public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
-    }
-
-    public Integer getIsNew() {
-        return isNew;
-    }
-
-    public void setIsNew(Integer isNew) {
-        this.isNew = isNew;
-    }
-
-    public double getRetailPrice() {
-        return retailPrice;
-    }
-
-    public void setRetailPrice(double retailPrice) {
-        this.retailPrice = retailPrice;
-    }
-
-    public Integer getIsAppExclusive() {
-        return isAppExclusive;
-    }
-
-    public void setIsAppExclusive(Integer isAppExclusive) {
-        this.isAppExclusive = isAppExclusive;
-    }
-
-    public Integer getIsLimited() {
-        return isLimited;
-    }
-
-    public void setIsLimited(Integer isLimited) {
-        this.isLimited = isLimited;
-    }
-
-    public Integer getIsHot() {
-        return isHot;
-    }
-
-    public void setIsHot(Integer isHot) {
-        this.isHot = isHot;
     }
 
     public Integer getAttributeCategory() {
@@ -242,20 +201,28 @@ public class Goods implements Serializable {
         this.attributeCategory = attributeCategory;
     }
 
-    public double getCounterPrice() {
+    public Double getCounterPrice() {
         return counterPrice;
     }
 
-    public void setCounterPrice(double counterPrice) {
+    public void setCounterPrice(Double counterPrice) {
         this.counterPrice = counterPrice;
     }
 
-    public double getExtraPrice() {
+    public Double getExtraPrice() {
         return extraPrice;
     }
 
-    public void setExtraPrice(double extraPrice) {
+    public void setExtraPrice(Double extraPrice) {
         this.extraPrice = extraPrice;
+    }
+
+    public Integer getIsNew() {
+        return isNew;
+    }
+
+    public void setIsNew(Integer isNew) {
+        this.isNew = isNew;
     }
 
     public String getGoodsUnit() {
@@ -282,6 +249,13 @@ public class Goods implements Serializable {
         this.listPicUrl = listPicUrl;
     }
 
+    public Double getRetailPrice() {
+        return retailPrice;
+    }
+
+    public void setRetailPrice(Double retailPrice) {
+        this.retailPrice = retailPrice;
+    }
 
     public Integer getSellVolume() {
         return sellVolume;
@@ -299,6 +273,13 @@ public class Goods implements Serializable {
         this.primaryProductId = primaryProductId;
     }
 
+    public Double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(Double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
 
     public String getPromotionDesc() {
         return promotionDesc;
@@ -316,20 +297,36 @@ public class Goods implements Serializable {
         this.promotionTag = promotionTag;
     }
 
-    public double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public double getAppExclusivePrice() {
+    public Double getAppExclusivePrice() {
         return appExclusivePrice;
     }
 
-    public void setAppExclusivePrice(double appExclusivePrice) {
+    public void setAppExclusivePrice(Double appExclusivePrice) {
         this.appExclusivePrice = appExclusivePrice;
+    }
+
+    public Integer getIsAppExclusive() {
+        return isAppExclusive;
+    }
+
+    public void setIsAppExclusive(Integer isAppExclusive) {
+        this.isAppExclusive = isAppExclusive;
+    }
+
+    public Integer getIsLimited() {
+        return isLimited;
+    }
+
+    public void setIsLimited(Integer isLimited) {
+        this.isLimited = isLimited;
+    }
+
+    public Integer getIsHot() {
+        return isHot;
+    }
+
+    public void setIsHot(Integer isHot) {
+        this.isHot = isHot;
     }
 
     public String getGoodsDesc() {

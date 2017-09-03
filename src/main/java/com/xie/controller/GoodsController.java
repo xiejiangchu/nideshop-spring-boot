@@ -52,7 +52,7 @@ public class GoodsController extends BaseController {
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public String index(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
-                        @RequestParam(value = "pageSize", defaultValue = "20") int pageSize,
+                        @RequestParam(value = "pageSize", defaultValue = "40") int pageSize,
                         Model model) {
         setHeaderData(model);
         model.addAttribute("title", "商品信息");

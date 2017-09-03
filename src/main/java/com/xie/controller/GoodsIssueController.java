@@ -26,14 +26,12 @@ public class GoodsIssueController {
     @ResponseBody
     public BaseResponse update(@RequestParam("id") int id,
                                @RequestParam("goodsId") int goodsId,
-                               @RequestParam("question") String question,
                                @RequestParam("answer") String answer) {
         GoodsIssue goodsIssue = new GoodsIssue();
         goodsIssue.setId(id);
-        goodsIssue.setQuestion(question);
         goodsIssue.setAnswer(answer);
 
-        goodsIssueService.updateByPrimaryKeyWithBLOBs(goodsIssue);
+        goodsIssueService.updateByPrimaryKeySelective(goodsIssue);
         return BaseResponse.ok();
 
     }

@@ -328,8 +328,7 @@
                                             <input type="hidden" name='attributeId' th:value="${item.attributeId}">
                                             <div class="box-tools pull-right">
                                                 <button type="button"
-                                                        class="goodsAttributeUpdate btn btn-xs btn-warning"
-                                                        th:attr="data-id=${item.id}">
+                                                        class="goodsAttributeUpdate btn btn-xs btn-warning">
                                                     修改
                                                 </button>
                                                 <button type="button"
@@ -394,7 +393,12 @@
                                     <div th:class="${state.index%4==1}?'box box-warning':(${state.index%4==2}?'box box-success':(${state.index%4==3}? 'box box-primary':'box box-danger'))">
                                         <div class="box-header with-border">
                                             <h3 class="box-title" th:text="${item.question}"></h3>
+                                            <input type="hidden" name='id' th:value="${item.id}">
                                             <div class="box-tools pull-right">
+                                                <button type="button"
+                                                        class="goodsIssueUpdate btn btn-xs btn-warning">
+                                                    修改
+                                                </button>
                                                 <button type="button" class="goodsIssueDelete btn btn-xs btn-warning"
                                                         th:attr="data-id=${item.id}">
                                                     删除
@@ -404,7 +408,7 @@
                                         </div>
                                         <!-- /.box-header -->
                                         <div class="box-body">
-                                            <textarea name="" class="form-control" rows="6"
+                                            <textarea name="answer" class="form-control" rows="6"
                                                       th:text="${item.answer}"></textarea>
                                         </div>
                                         <!-- /.box-body -->
@@ -645,12 +649,32 @@
 
         $('.goodsAttributeUpdate').click(function (e) {
             var that = $(this);
-            var id = $(this).attr("data-id");
             $.ajax({
                 cache: true,
                 type: "POST",
                 url: '/goodsAttribute/update',
-                data: $('#goodsAttributeUpdate').serialize(),
+                data: that.parents('#goodsAttributeUpdate').serialize(),
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        })
+
+        $('.goodsIssueUpdate').click(function (e) {
+            var that = $(this);
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/goodsIssue/update',
+                data: that.parents('#goodsIssueUpdate').serialize(),
                 async: false,
                 error: function (request) {
                     alert("网络错误");
