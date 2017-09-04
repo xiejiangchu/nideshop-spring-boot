@@ -49,6 +49,11 @@ public class GoodsSpecificationServiceImpl implements GoodsSpecificationService 
 
     @Override
     public List<GoodsSpecification> selectByGoodsId(Integer gid) {
-        return null;
+        return goodsSpecificationMapper.selectByGoodsId(gid);
+    }
+
+    @Override
+    public List<GoodsSpecification> selectByPrimaryKeyAndGoodsId(List<String> ids, Integer gid) {
+        return goodsSpecificationMapper.selectByPrimaryKeyAndGoodsId(ids, gid);
     }
 }

@@ -4,12 +4,15 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xie.bean.Goods;
 import com.xie.bean.GoodsShort;
+import com.xie.bean.GoodsSpecification;
 import com.xie.mapper.GoodsMapper;
+import com.xie.response.SkuResponse;
 import com.xie.service.GoodsService;
+import com.xie.service.GoodsSpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by xie on 17/8/21.
@@ -19,6 +22,9 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private GoodsMapper goodsMapper;
+
+    @Autowired
+    private GoodsSpecificationService goodsSpecificationService;
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
@@ -106,5 +112,37 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public int count() {
         return goodsMapper.count();
+    }
+
+    @Override
+    public List<SkuResponse> getGoodsSpecificationList(Integer gid) {
+
+        List<GoodsSpecification> goodsSpecificationList = goodsSpecificationService.selectByGoodsId(gid);
+        List<SkuResponse> skuResponseList = new ArrayList<>();
+        Map<Integer, List<GoodsSpecification>> map = new HashMap<>();
+        goodsSpecificationList.forEach(item -> {
+            List<GoodsSpecification> list = map.get(item.getSpecificationId());
+            if (null == list) {
+                list = new ArrayList<GoodsSpecification>();
+                list.add(item);
+                map.put(item.getSpecificationId(), list);
+            } else {
+                list.add(item);
+            }
+        });
+
+        Set s = map.keySet();
+        Iterator<Integer> it = s.iterator();
+        while (it.hasNext()) {
+            Integer key = it.next().intValue();
+            List<GoodsSpecification> value = map.get(key);
+            SkuResponse sukResponse = new SkuResponse();
+            sukResponse.setSpecificationId(value.get(0).getSpecificationId());
+            sukResponse.setName(value.get(0).getName());
+            sukResponse.setValueList(value);
+            skuResponseList.add(sukResponse);
+        }
+
+        return skuResponseList;
     }
 }

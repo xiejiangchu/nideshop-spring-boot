@@ -1,103 +1,120 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xie.mapper.ProductMapper" >
-  <resultMap id="BaseResultMap" type="com.xie.bean.Product" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
-    <result column="goods_specification_ids" property="goodsSpecificationIds" jdbcType="VARCHAR" />
-    <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR" />
-    <result column="goods_number" property="goodsNumber" jdbcType="INTEGER" />
-    <result column="retail_price" property="retailPrice" jdbcType="DECIMAL" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.xie.mapper.ProductMapper">
+    <resultMap id="BaseResultMap" type="com.xie.bean.Product">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
+        <result column="goods_specification_ids" property="goodsSpecificationIds" jdbcType="VARCHAR"/>
+        <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR"/>
+        <result column="goods_number" property="goodsNumber" jdbcType="INTEGER"/>
+        <result column="retail_price" property="retailPrice" jdbcType="DECIMAL"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, goods_id, goods_specification_ids, goods_sn, goods_number, retail_price
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from product
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from product
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByGoodsId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from product
+        where goods_id = #{goodsId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPrimaryKeyAndGid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product
+        where id = #{id,jdbcType=INTEGER}
+        AND goods_id = #{goodsId,jdbcType=INTEGER}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from product
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.xie.bean.Product" >
-      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
-      SELECT LAST_INSERT_ID() AS id
-    </selectKey>
-    insert into product (id, goods_id, goods_specification_ids, 
-      goods_sn, goods_number, retail_price
-      )
-    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{goodsSpecificationIds,jdbcType=VARCHAR}, 
-      #{goodsSn,jdbcType=VARCHAR}, #{goodsNumber,jdbcType=INTEGER}, #{retailPrice,jdbcType=DECIMAL}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.xie.bean.Product" >
-    insert into product
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="goodsId != null" >
-        goods_id,
-      </if>
-      <if test="goodsSpecificationIds != null" >
-        goods_specification_ids,
-      </if>
-      <if test="goodsSn != null" >
-        goods_sn,
-      </if>
-      <if test="goodsNumber != null" >
-        goods_number,
-      </if>
-      <if test="retailPrice != null" >
-        retail_price,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="goodsId != null" >
-        #{goodsId,jdbcType=INTEGER},
-      </if>
-      <if test="goodsSpecificationIds != null" >
-        #{goodsSpecificationIds,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsSn != null" >
-        #{goodsSn,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsNumber != null" >
-        #{goodsNumber,jdbcType=INTEGER},
-      </if>
-      <if test="retailPrice != null" >
-        #{retailPrice,jdbcType=DECIMAL},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xie.bean.Product" >
-    update product
-    <set >
-      <if test="goodsId != null" >
-        goods_id = #{goodsId,jdbcType=INTEGER},
-      </if>
-      <if test="goodsSpecificationIds != null" >
-        goods_specification_ids = #{goodsSpecificationIds,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsSn != null" >
-        goods_sn = #{goodsSn,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsNumber != null" >
-        goods_number = #{goodsNumber,jdbcType=INTEGER},
-      </if>
-      <if test="retailPrice != null" >
-        retail_price = #{retailPrice,jdbcType=DECIMAL},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.xie.bean.Product" >
+    <insert id="insert" parameterType="com.xie.bean.Product">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        insert into product (id, goods_id, goods_specification_ids,
+        goods_sn, goods_number, retail_price
+        )
+        values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{goodsSpecificationIds,jdbcType=VARCHAR},
+        #{goodsSn,jdbcType=VARCHAR}, #{goodsNumber,jdbcType=INTEGER}, #{retailPrice,jdbcType=DECIMAL}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.xie.bean.Product">
+        insert into product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="goodsSpecificationIds != null">
+                goods_specification_ids,
+            </if>
+            <if test="goodsSn != null">
+                goods_sn,
+            </if>
+            <if test="goodsNumber != null">
+                goods_number,
+            </if>
+            <if test="retailPrice != null">
+                retail_price,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsSpecificationIds != null">
+                #{goodsSpecificationIds,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsSn != null">
+                #{goodsSn,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsNumber != null">
+                #{goodsNumber,jdbcType=INTEGER},
+            </if>
+            <if test="retailPrice != null">
+                #{retailPrice,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xie.bean.Product">
+        update product
+        <set>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsSpecificationIds != null">
+                goods_specification_ids = #{goodsSpecificationIds,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsSn != null">
+                goods_sn = #{goodsSn,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsNumber != null">
+                goods_number = #{goodsNumber,jdbcType=INTEGER},
+            </if>
+            <if test="retailPrice != null">
+                retail_price = #{retailPrice,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xie.bean.Product">
     update product
     set goods_id = #{goodsId,jdbcType=INTEGER},
       goods_specification_ids = #{goodsSpecificationIds,jdbcType=VARCHAR},

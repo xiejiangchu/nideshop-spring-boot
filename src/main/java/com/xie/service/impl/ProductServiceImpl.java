@@ -6,6 +6,8 @@ import com.xie.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by xie on 17/8/24.
  */
@@ -43,5 +45,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int updateByPrimaryKey(Product record) {
         return productMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<Product> selectByGoodsId(Integer goodsId) {
+        return productMapper.selectByGoodsId(goodsId);
+    }
+
+    @Override
+    public Product selectByPrimaryKeyAndGid(Integer id, Integer goodsId) {
+        return null;
     }
 }

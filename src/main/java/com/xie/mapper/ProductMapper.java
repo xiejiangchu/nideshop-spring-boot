@@ -1,6 +1,9 @@
 package com.xie.mapper;
 
 import com.xie.bean.Product;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ProductMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,8 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    List<Product> selectByGoodsId(Integer goodsId);
+
+    Product selectByPrimaryKeyAndGid(@Param("id") Integer id, @Param("goodsId") Integer goodsId);
 }

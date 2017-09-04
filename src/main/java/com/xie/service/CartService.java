@@ -16,6 +16,8 @@ public interface CartService {
 
     Cart selectByPrimaryKey(Integer id);
 
+    Cart selectByGidAndPid(Integer goodsId,Integer productId);
+
     int updateByPrimaryKeySelective(Cart record);
 
     int updateByPrimaryKeyWithBLOBs(Cart record);

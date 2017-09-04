@@ -18,7 +18,7 @@ public class Cart implements Serializable {
      * product表对应的goods_specifition_ids
      */
     private String goodsSpecifitionIds;
-    private Boolean checked;
+    private Integer checked;
     private String listPicUrl;
     /**
      * 规格属性组成的字符串，用来显示用
@@ -113,11 +113,11 @@ public class Cart implements Serializable {
         this.goodsSpecifitionIds = goodsSpecifitionIds;
     }
 
-    public Boolean getChecked() {
+    public Integer getChecked() {
         return checked;
     }
 
-    public void setChecked(Boolean checked) {
+    public void setChecked(Integer checked) {
         this.checked = checked;
     }
 

@@ -14,6 +14,8 @@ public interface CartMapper {
 
     Cart selectByPrimaryKey(Integer id);
 
+    Cart selectByGidAndPid(@Param("goodsId") Integer goodsId, @Param("productId") Integer productId);
+
     int updateByPrimaryKeySelective(Cart record);
 
     int updateByPrimaryKeyWithBLOBs(Cart record);

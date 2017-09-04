@@ -35,6 +35,21 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
+    <select id="selectByGidAndPid" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from cart
+        where 1=1
+        <if test="goodsId!=null">
+            AND goods_id = #{goodsId,jdbcType=INTEGER}
+        </if>
+        <if test="goodsId!=null">
+            AND product_id = #{productId,jdbcType=INTEGER}
+        </if>
+    </select>
+
     <select id="count" resultType="integer" parameterType="java.lang.Integer">
         SELECT SUM(number)
         from cart

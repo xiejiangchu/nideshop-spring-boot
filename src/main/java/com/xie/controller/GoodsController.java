@@ -88,6 +88,7 @@ public class GoodsController extends BaseController {
         goodsDetailResponse.setHotComment(hotComment);
         goodsDetailResponse.setGoodsGalleries(goodsGalleries);
         goodsDetailResponse.setGoodsIssues(goodsIssues);
+        goodsDetailResponse.setSpecificationList(goodsService.getGoodsSpecificationList(id));
 
         model.addAttribute("goodsDetail", goodsDetailResponse);
         return "goodsDetail";

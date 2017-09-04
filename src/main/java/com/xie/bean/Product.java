@@ -1,7 +1,6 @@
 package com.xie.bean;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -10,7 +9,7 @@ public class Product implements Serializable {
     private String goodsSpecificationIds;
     private String goodsSn;
     private Integer goodsNumber;
-    private BigDecimal retailPrice;
+    private Double retailPrice;
 
     public Integer getId() {
         return id;
@@ -52,11 +51,11 @@ public class Product implements Serializable {
         this.goodsNumber = goodsNumber;
     }
 
-    public BigDecimal getRetailPrice() {
+    public Double getRetailPrice() {
         return retailPrice;
     }
 
-    public void setRetailPrice(BigDecimal retailPrice) {
+    public void setRetailPrice(Double retailPrice) {
         this.retailPrice = retailPrice;
     }
 

@@ -22,4 +22,6 @@ public interface GoodsSpecificationService {
     int updateByPrimaryKey(GoodsSpecification record);
 
     List<GoodsSpecification> selectByGoodsId(Integer gid);
+
+    List<GoodsSpecification> selectByPrimaryKeyAndGoodsId(List<String> ids, Integer gid);
 }

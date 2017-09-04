@@ -2,6 +2,8 @@ package com.xie.service;
 
 import com.xie.bean.Product;
 
+import java.util.List;
+
 public interface ProductService {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,8 @@ public interface ProductService {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    List<Product> selectByGoodsId(Integer goodsId);
+
+    Product selectByPrimaryKeyAndGid(Integer id, Integer goodsId);
 }

@@ -38,6 +38,11 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public Cart selectByGidAndPid(Integer goodsId, Integer productId) {
+        return cartMapper.selectByGidAndPid(goodsId, productId);
+    }
+
+    @Override
     public int updateByPrimaryKeySelective(Cart record) {
         return cartMapper.updateByPrimaryKeySelective(record);
     }

@@ -3,6 +3,7 @@ package com.xie.service;
 import com.github.pagehelper.PageInfo;
 import com.xie.bean.Goods;
 import com.xie.bean.GoodsShort;
+import com.xie.response.SkuResponse;
 
 import java.util.List;
 
@@ -42,5 +43,7 @@ public interface GoodsService {
     PageInfo<GoodsShort> selectByParams(Integer categoryId, Integer brandId, String keyword, Integer isHot, Integer isNew, String sort, String order, int page, int size);
 
     int count();
+
+    List<SkuResponse> getGoodsSpecificationList(Integer gid);
 
 }

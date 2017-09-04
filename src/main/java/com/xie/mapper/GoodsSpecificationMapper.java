@@ -1,6 +1,7 @@
 package com.xie.mapper;
 
 import com.xie.bean.GoodsSpecification;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface GoodsSpecificationMapper {
     int updateByPrimaryKey(GoodsSpecification record);
 
     List<GoodsSpecification> selectByGoodsId(Integer gid);
+
+    List<GoodsSpecification> selectByPrimaryKeyAndGoodsId(@Param("ids") List<String> ids, @Param("gid") Integer gid);
 }

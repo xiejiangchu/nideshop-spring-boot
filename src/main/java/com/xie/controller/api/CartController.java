@@ -2,18 +2,20 @@ package com.xie.controller.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xie.bean.Cart;
+import com.xie.bean.Goods;
+import com.xie.bean.GoodsSpecification;
+import com.xie.bean.Product;
 import com.xie.request.CartCheckedRequest;
 import com.xie.request.CartUpdateRequest;
 import com.xie.response.BaseResponse;
 import com.xie.response.CartTotalResponse;
 import com.xie.service.CartService;
 import com.xie.service.GoodsService;
+import com.xie.service.GoodsSpecificationService;
+import com.xie.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,9 +34,74 @@ public class CartController extends BaseController {
     @Autowired
     private GoodsService goodsService;
 
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private GoodsSpecificationService goodsSpecificationService;
+
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     @ResponseBody
     public BaseResponse index() {
+
+        return BaseResponse.ok(getCart());
+    }
+
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseResponse add(@RequestParam(value = "goodsId") int goodsId,
+                            @RequestParam(value = "productId") int productId,
+                            @RequestParam(value = "number") int number) {
+        Goods goods = goodsService.selectByPrimaryKey(goodsId);
+        if (null == goods || goods.getIsDelete() == 1) {
+            return BaseResponse.fail("商品已下架");
+        }
+
+        Product product = productService.selectByPrimaryKeyAndGid(productId, goodsId);
+        if (product == null || product.getGoodsNumber() < number) {
+            return BaseResponse.fail("库存不足");
+        }
+
+        Cart cart = cartService.selectByGidAndPid(goodsId, productId);
+        if (cart == null) {
+            List<GoodsSpecification> goodsSepcifitionValue = null;
+            if (cart == null) {
+                List<String> goods_specification_ids = Arrays.asList(product.getGoodsSpecificationIds().split("_"));
+                goodsSepcifitionValue = goodsSpecificationService.selectByPrimaryKeyAndGoodsId(goods_specification_ids, goodsId);
+            }
+
+            Cart insert = new Cart();
+            insert.setGoodsId(goodsId);
+            insert.setProductId(productId);
+            insert.setGoodsSn(goods.getGoodsSn());
+            insert.setGoodsName(goods.getName());
+            insert.setListPicUrl(goods.getListPicUrl());
+            insert.setNumber(number);
+            insert.setSessionId("1");
+            insert.setUserId(getUid());
+            insert.setRetailPrice(product.getRetailPrice());
+            insert.setMarketPrice(product.getRetailPrice());
+            if (goodsSepcifitionValue != null) {
+                StringBuilder stringBuilder = new StringBuilder();
+                goodsSepcifitionValue.forEach(item -> {
+                    stringBuilder.append(item.getValue());
+                    stringBuilder.append(";");
+                });
+                stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+                insert.setGoodsSpecifitionNameValue(stringBuilder.toString());
+            }
+            insert.setGoodsSpecifitionIds(product.getGoodsSpecificationIds());
+            insert.setChecked(1);
+
+            cartService.insert(insert);
+        } else {
+            if (product.getGoodsNumber() < (number + cart.getNumber())) {
+                return BaseResponse.fail("库存不足");
+            } else {
+                cartService.updateNumberByProductId(getUid(), productId, number);
+            }
+        }
 
         return BaseResponse.ok(getCart());
     }
@@ -49,7 +116,7 @@ public class CartController extends BaseController {
             Cart item = cartList.get(i);
             goodsCount += item.getNumber();
             goodsAmount += item.getNumber() * item.getRetailPrice();
-            if (item.getChecked()) {
+            if (item.getChecked() == 1) {
                 checkedGoodsCount += item.getNumber();
                 checkedGoodsAmount += item.getNumber() * item.getRetailPrice();
             }

@@ -56,6 +56,9 @@ public class GoodsApiController extends BaseController {
     @Autowired
     private CollectService collectService;
 
+    @Autowired
+    private ProductService productService;
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public BaseResponse list(@RequestParam(value = "categoryId", required = false) Integer categoryId,
@@ -111,6 +114,17 @@ public class GoodsApiController extends BaseController {
         return BaseResponse.ok(jsonObject);
     }
 
+
+    @RequestMapping(value = "/sku", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseResponse list(@RequestParam(value = "id", required = false) Integer id) {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("productList", productService.selectByGoodsId(id));
+        jsonObject.put("specificationList", goodsService.getGoodsSpecificationList(id));
+        return BaseResponse.ok(jsonObject);
+    }
+
     @RequestMapping(value = "/category", method = RequestMethod.GET)
     @ResponseBody
     public BaseResponse category(@RequestParam(value = "id") int id) {
@@ -146,10 +160,59 @@ public class GoodsApiController extends BaseController {
         goodsDetailResponse.setHotComment(hotComment);
         goodsDetailResponse.setGoodsGalleries(goodsGalleries);
         goodsDetailResponse.setGoodsIssues(goodsIssues);
-        goodsDetailResponse.setSpecificationList(goodsSpecificationList);
+        goodsDetailResponse.setSpecificationList(goodsService.getGoodsSpecificationList(id));
         goodsDetailResponse.setUserHasCollect(collectService.selectByParams(getUid(), MallConstants.CollectType.商品.getVal(), id) == null ? 0 : 1);
 
         return BaseResponse.ok(goodsDetailResponse);
+    }
+
+
+    @RequestMapping(value = "/filter", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseResponse filter(@RequestParam(value = "categoryId", required = false) Integer categoryId,
+                               @RequestParam(value = "keyword", required = false) String keyword,
+                               @RequestParam(value = "isHot", required = false) Integer isHot,
+                               @RequestParam(value = "isNew", required = false) Integer isNew,
+                               @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                               @RequestParam(value = "size", required = false, defaultValue = "1000") Integer size) {
+
+        if (categoryId != null && categoryId == 0) {
+            categoryId = null;
+        }
+
+        List<CategoryShort> filterCategory = new ArrayList<>();
+        CategoryShort categoryShort = new CategoryShort();
+        categoryShort.setId(0);
+        categoryShort.setName("全部");
+        categoryShort.setChecked(false);
+        filterCategory.add(categoryShort);
+
+        PageInfo<GoodsShort> goodsList = goodsService.selectByParams(categoryId, null, keyword, isHot, isNew, null, null, page, size);
+        List<Integer> categoryIds = goodsList.getList().stream().map(item -> item.getCategoryId()).distinct().collect(Collectors.toList());
+        if (categoryIds != null && categoryIds.size() > 0) {
+            List<Category> categoryShortList = categoryService.selectByPrimaryKeys(categoryIds);
+            List<Integer> parent_categoryIds = categoryShortList.stream().map(item -> item.getId()).distinct().collect(Collectors.toList());
+            if (parent_categoryIds != null && parent_categoryIds.size() > 0) {
+                List<CategoryShort> parent_categoryShortList = categoryService.selectShortByPrimaryKeys(parent_categoryIds);
+                if (parent_categoryShortList != null && parent_categoryShortList.size() > 0) {
+                    filterCategory.addAll(parent_categoryShortList);
+                }
+            }
+        }
+
+        Integer finalCategoryId = categoryId;
+        filterCategory.forEach(item -> {
+            if ((finalCategoryId == null && item.getId() == 0) || (item.getId() == finalCategoryId)) {
+                item.setChecked(true);
+            } else {
+                item.setChecked(false);
+            }
+        });
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("goodsList", goodsList);
+        jsonObject.put("filterCategory", filterCategory);
+        return BaseResponse.ok(jsonObject);
     }
 
     @RequestMapping(value = "/count", method = RequestMethod.GET)
