@@ -108,7 +108,9 @@ public class AdController extends BaseController {
 
     @RequestMapping(value = "/enabled", method = RequestMethod.GET)
     public String enabled(@RequestParam(value = "id") int id,
-                          @RequestParam(value = "enabled") int enabled) {
+                          @RequestParam(value = "enabled") int enabled,
+                          @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                          @RequestParam(value = "pageSize", defaultValue = "20") int pageSize) {
 
 
         Ad ad = adService.selectByPrimaryKey((short) id);
@@ -116,13 +118,15 @@ public class AdController extends BaseController {
 
         adService.updateByPrimaryKey(ad);
 
-        return "redirect:/ad";
+        return "forward:/ad?pageNum=" + pageNum + "&pageSize=" + pageSize;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String delete(@RequestParam(value = "id") int id) {
+    public String delete(@RequestParam(value = "id") int id,
+                         @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                         @RequestParam(value = "pageSize", defaultValue = "20") int pageSize) {
 
         adService.deleteByPrimaryKey((short) id);
-        return "redirect:/ad";
+        return "forward:/ad?pageNum=" + pageNum + "&pageSize=" + pageSize;
     }
 }

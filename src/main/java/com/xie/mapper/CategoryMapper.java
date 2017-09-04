@@ -9,6 +9,8 @@ import java.util.List;
 public interface CategoryMapper {
     int deleteByPrimaryKey(Integer id);
 
+    int deleteByParentId(Integer pid);
+
     int insert(Category record);
 
     int insertSelective(Category record);
@@ -26,6 +28,12 @@ public interface CategoryMapper {
     List<CategoryShort> selectByParents(@Param("parent_ids") List<Integer> parent_ids);
 
     List<CategoryShort> selectMainCategory();
+
+    List<CategoryShort> selectSubCategory();
+
+    List<Category> selectFullMainCategory();
+
+    List<Category> selectFullSubCategory();
 
     int updateByPrimaryKeySelective(Category record);
 

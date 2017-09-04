@@ -47,6 +47,40 @@
         WHERE parent_id=0 and name != '推荐'
     </select>
 
+
+    <select id="selectFullMainCategory" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from category
+        WHERE parent_id=0 and name != '推荐'
+    </select>
+
+
+    <select id="selectSubCategory" resultMap="BaseResultMapShort">
+        select
+        <include refid="Base_Column_List_Short"/>
+        from category
+        WHERE parent_id IN (
+        select
+        id
+        from category
+        WHERE parent_id=0 and name != '推荐'
+        )
+    </select>
+
+
+    <select id="selectFullSubCategory" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from category
+        WHERE parent_id IN (
+        select
+        id
+        from category
+        WHERE parent_id=0 and name != '推荐'
+        )
+    </select>
+
     <select id="selectShortByPrimaryKey" resultMap="BaseResultMapShort" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List_Short"/>
@@ -90,6 +124,11 @@
         from category
         WHERE parent_id= #{parent_id,jdbcType=INTEGER}
     </select>
+
+    <delete id="deleteByParentId" parameterType="java.lang.Integer">
+    delete from category
+    where parent_id = #{pid,jdbcType=INTEGER}
+    </delete>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from category

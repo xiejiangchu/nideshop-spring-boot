@@ -27,6 +27,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public int deleteByParentId(Integer parent_id) {
+        return categoryMapper.deleteByParentId(parent_id);
+    }
+
+    @Override
     public int insert(Category record) {
         return categoryMapper.insert(record);
     }
@@ -72,6 +77,28 @@ public class CategoryServiceImpl implements CategoryService {
     public PageInfo<CategoryShort> selectMainCategory(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         PageInfo<CategoryShort> page = new PageInfo<CategoryShort>(categoryMapper.selectMainCategory());
+        return page;
+    }
+
+    @Override
+    public PageInfo<CategoryShort> selectSubCategory(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<CategoryShort> page = new PageInfo<CategoryShort>(categoryMapper.selectSubCategory());
+        return page;
+    }
+
+    @Override
+    public PageInfo<Category> selectFullMainCategory(int pageNum, int pageSize) {
+
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Category> page = new PageInfo<Category>(categoryMapper.selectFullMainCategory());
+        return page;
+    }
+
+    @Override
+    public PageInfo<Category> selectFullSubCategory(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Category> page = new PageInfo<Category>(categoryMapper.selectFullSubCategory());
         return page;
     }
 

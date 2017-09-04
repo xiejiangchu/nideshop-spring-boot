@@ -15,18 +15,18 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                广告位
-                <small th:text="${'共计 '+adCount+' 个广告位'}"></small>
+                一级分类
+                <small th:text="${'共计 '+categoryPageInfo.total+' 个分类'}"></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li class="active">广告位</li>
+                <li class="active">一级分类</li>
             </ol>
         </section>
         <section class="content">
             <div class="row">
                 <div class="col-xs-12 text-right">
-                    <a th:href="@{/ad/add}"
+                    <a th:href="@{/category/add}"
                        class="btn btn-md btn-primary">增加
                     </a>
                 </div>
@@ -40,45 +40,31 @@
                             <table class="table table-hover">
                                 <tr>
                                     <th>编号</th>
-                                    <th>位置</th>
-                                    <th>类型</th>
                                     <th>名称</th>
-                                    <th>链接</th>
-                                    <th>图片</th>
-                                    <th>可用</th>
+                                    <th>关键字</th>
+                                    <th>显示名称</th>
+                                    <th>显示描述</th>
+                                    <th>父类</th>
+                                    <th>排序</th>
+                                    <th>级别</th>
                                     <th>操作</th>
                                 </tr>
-                                <tr th:each="item,state : ${adPageInfo.list}">
+                                <tr th:each="item,state : ${categoryPageInfo.list}">
                                     <td>
                                         <span th:text="${item.id}"></span>
                                     </td>
-                                    <td th:text="${@enumService.getAdPositionType(item.adPositionId)}"></td>
-                                    <td th:text="${@enumService.getMediaType(item.mediaType)}"></td>
                                     <td>
                                         <a th:href="@{'/ad/'+${item.id}}" th:text="${item.name}"></a>
                                     </td>
-                                    <td th:text="${item.link}"></td>
-                                    <td>
-                                        <a th:href="@{${item.imageUrl}}" target="_blank">
-                                            <img th:src="${item.imageUrl}" th:alt="${item.imageUrl}"
-                                                 style="height: 20px;">
-                                        </a>
 
-                                    </td>
-                                    <td><span th:class="${item.enabled==1}? 'label label-success':'label label-danger'"
-                                              th:text="${item.enabled==1}? '是':'否'"></span></td>
+                                    <td th:text="${item.keywords}"></td>
+                                    <td th:text="${item.frontName}"></td>
+                                    <td th:text="${item.frontDesc}"></td>
+                                    <td th:text="${item.parentId}"></td>
+                                    <td th:text="${item.sortOrder}"></td>
+                                    <td th:text="${item.level}"></td>
                                     <td>
-                                        <a th:href="@{/ad/enabled(id=${item.id},enabled=0,pageNum=${adPageInfo.pageNum},pageSize=${adPageInfo.pageSize})}"
-                                           th:if="${item.enabled==1}"
-                                           class="btn btn-xs btn-flat bg-orange">
-                                            下架
-                                        </a>
-                                        <a th:href="@{/ad/enabled(id=${item.id},enabled=1,pageNum=${adPageInfo.pageNum},pageSize=${adPageInfo.pageSize})}"
-                                           th:if="${item.enabled==0}"
-                                           class="btn btn-xs btn-flat btn-success">
-                                            上架
-                                        </a>
-                                        <a th:href="@{/ad/delete(id=${item.id},pageNum=${adPageInfo.pageNum},pageSize=${adPageInfo.pageSize})}"
+                                        <a th:href="@{/category/delete(id=${item.id},pageNum=${categoryPageInfo.pageNum},pageSize=${categoryPageInfo.pageSize})}"
                                            class="btn btn-xs btn-flat btn-danger">删除
                                         </a>
                                     </td>
@@ -89,12 +75,11 @@
 
                         <div class="box-footer clearfix">
                             <ul class="pagination pagination-sm no-margin pull-right">
-                                <li><a th:href="@{/goods(pageNum=${adPageInfo.prePage})}">&laquo;</a></li>
-                                <li th:class="${navigatepageNum==adPageInfo.pageNum}? 'active':''"
-                                    th:each="navigatepageNum,state : ${adPageInfo.navigatepageNums}"><a
-                                        th:href="@{/goods(pageNum=${navigatepageNum},pageSize=${adPageInfo.pageSize})}"
+                                <li><a th:href="@{/category/l1(pageNum=${categoryPageInfo.prePage})}">&laquo;</a></li>
+                                <li th:class="${navigatepageNum==categoryPageInfo.pageNum}? 'active':''"  th:each="navigatepageNum,state : ${categoryPageInfo.navigatepageNums}"><a
+                                        th:href="@{/category/l1(pageNum=${navigatepageNum},pageSize=${categoryPageInfo.pageSize})}"
                                         th:text="${navigatepageNum}">2</a></li>
-                                <li><a th:href="@{/goods(pageNum=${adPageInfo.lastPage})}">&raquo;</a></li>
+                                <li><a th:href="@{/category/l1(pageNum=${categoryPageInfo.lastPage})}">&raquo;</a></li>
                             </ul>
                         </div>
                     </div>
