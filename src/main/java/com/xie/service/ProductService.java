@@ -16,6 +16,8 @@ public interface ProductService {
 
     int updateByPrimaryKeySelective(Product record);
 
+    int updateByPrimaryKeyAndGid(Product record);
+
     int updateByPrimaryKey(Product record);
 
     List<Product> selectByGoodsId(Integer goodsId);

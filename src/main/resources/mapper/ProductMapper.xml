@@ -93,6 +93,29 @@
             </if>
         </trim>
     </insert>
+
+    <update id="updateByPrimaryKeyAndGid" parameterType="com.xie.bean.Product">
+        update product
+        <set>
+            <if test="goodsSpecificationIds != null">
+                goods_specification_ids = #{goodsSpecificationIds,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsSn != null">
+                goods_sn = #{goodsSn,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsNumber != null">
+                goods_number = #{goodsNumber,jdbcType=INTEGER},
+            </if>
+            <if test="retailPrice != null">
+                retail_price = #{retailPrice,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+        <if test="goodsId != null">
+            AND goods_id = #{goodsId,jdbcType=INTEGER}
+        </if>
+    </update>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.xie.bean.Product">
         update product
         <set>
@@ -114,6 +137,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="com.xie.bean.Product">
     update product
     set goods_id = #{goodsId,jdbcType=INTEGER},

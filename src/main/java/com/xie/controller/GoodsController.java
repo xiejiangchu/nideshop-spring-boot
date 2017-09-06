@@ -92,10 +92,29 @@ public class GoodsController extends BaseController {
         goodDetail.setBrand(brand);
         goodDetail.setCommentCount(commentCount);
         goodDetail.setHotComment(hotComment);
+
+        /**
+         * 相册
+         */
         goodDetail.setGoodsGalleries(goodsGalleries);
+        /**
+         * 问与答
+         */
         goodDetail.setGoodsIssues(goodsIssues);
+
+        /**
+         * 当前商品规格列表
+         */
         goodDetail.setSpecificationList(goodsService.getGoodsSpecificationList(id));
+
+        /**
+         * 规格种类
+         */
         goodDetail.setSpecifications(specificationService.select(1, 100).getList());
+
+        /**
+         * 产品列表
+         */
         goodDetail.setProductWithGoodsSpecificationList(productService.selectFullByGoodsId(id));
 
         model.addAttribute("goodsDetail", goodDetail);

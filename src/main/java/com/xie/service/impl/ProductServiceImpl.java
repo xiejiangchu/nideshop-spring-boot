@@ -52,6 +52,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public int updateByPrimaryKeyAndGid(Product record) {
+        return productMapper.updateByPrimaryKeyAndGid(record);
+    }
+
+    @Override
     public int updateByPrimaryKey(Product record) {
         return productMapper.updateByPrimaryKey(record);
     }

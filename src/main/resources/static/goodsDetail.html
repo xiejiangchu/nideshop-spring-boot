@@ -444,23 +444,40 @@
                 <div id="section9-content" class="section-content col-md-9" style="display: none;">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-sm-12" th:each="item,state:${goodsDetail.productWithGoodsSpecificationList}">
+                            <div class="col-sm-12"
+                                 th:each="item,state:${goodsDetail.productWithGoodsSpecificationList}">
                                 <div class="box box-warning">
                                     <div class="box-header with-border">
                                         <h3 class="box-title" th:text="${item.goodsSn}"></h3>
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">
-                                        <div th:each="iitem,istate : ${item.goodsSpecificationList}">
-                                            <span class="label label-success" th:text="${iitem.name}"></span>
-                                            <span class="label label-warning" th:text="${iitem.value}"></span>
+                                        <div th:each="iitem,istate : ${item.goodsSpecificationList}"
+                                             style="margin: 8px;">
+                                            <span class="" th:text="${iitem.name}"></span>
+                                            <span th:class="${istate.index%4==1}?'label label-warning':(${istate.index%4==2}?'label label-success':(${istate.index%4==3}? 'label label-primary':'label label-danger'))"
+                                                  th:text="${iitem.value}"></span>
                                         </div>
                                     </div>
                                     <!-- /.box-body -->
 
                                     <div class="box-footer">
-                                        <span class="label label-success" th:text="${'数量 '+item.goodsNumber}"></span>
-                                        <span class="label label-danger" th:text="${'$ '+item.retailPrice}"></span>
+                                        <form class="productPriceUpdate">
+                                            <input type="hidden" name="goodsId" th:value="${goodsDetail.goods.id}">
+                                            <input type="hidden" name="id" th:value="${item.id}">
+                                             <span ><i class="fa fa-balance-scale">
+                                            <input type="text" class="box-title" th:value="${item.goodsNumber}"
+                                                   name="goodsNumber">
+                                        </i></span>
+                                            <span ><i class="fa fa-cny">
+                                            <input type="text" class="box-title" th:value="${item.retailPrice}"
+                                                   name="retailPrice">
+                                        </i></span>
+
+                                            <button type="submit" class="btn btn-xs btn-warning">
+                                                修改
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -863,6 +880,29 @@
                 type: "POST",
                 url: '/goodsAttribute/add',
                 data: $('#goodsAttributeAdd').serialize(),
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        });
+
+
+        $(".productPriceUpdate").submit(function (e) {
+            e.preventDefault();
+            var that=$(this);
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/product/priceUpdate',
+                data: that.serialize(),
                 async: false,
                 error: function (request) {
                     alert("网络错误");

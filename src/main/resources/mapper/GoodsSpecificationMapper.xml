@@ -30,11 +30,12 @@
 
     <select id="selectByPrimaryKeyAndGoodsId" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from goods_specification
+        gs.*,s.name
+        from goods_specification gs
+        LEFT JOIN specification s ON gs.specification_id=s.id
         where 1=1
         <if test="ids!=null">
-            AND id IN
+            AND gs.id IN
             <foreach collection="ids" item="id" open="(" close=")" separator=",">
                 #{id,jdbcType=INTEGER}
             </foreach>
@@ -42,13 +43,14 @@
         <if test="gid!=null">
             AND goods_id =#{gid,jdbcType=INTEGER}
         </if>
+        ORDER BY s.sort_order DESC
     </select>
 
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from goods_specification
     where id = #{id,jdbcType=INTEGER}
-  </delete>
+    </delete>
     <insert id="insert" parameterType="com.xie.bean.GoodsSpecification">
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
