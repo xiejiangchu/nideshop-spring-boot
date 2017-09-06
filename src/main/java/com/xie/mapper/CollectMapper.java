@@ -21,5 +21,5 @@ public interface CollectMapper {
 
     int updateByPrimaryKey(Collect record);
 
-    List<CollectWithGoods> selectByUid(Integer uid, Integer typeId);
+    List<CollectWithGoods> selectByUid(@Param("uid") Integer uid, @Param("typeId") Integer typeId);
 }

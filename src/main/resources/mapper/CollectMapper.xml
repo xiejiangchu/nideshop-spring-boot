@@ -36,6 +36,7 @@
 
     <select id="selectByUid" resultMap="BaseResultMapWithGoods">
         SELECT
+        c.*,g.name,g.list_pic_url, g.goods_brief, g.retail_price
         from collect c
         LEFT JOIN goods g on c.value_id  = g.id
         WHERE user_id=#{uid,jdbcType=INTEGER} and type_id=#{typeId,jdbcType=INTEGER}

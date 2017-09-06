@@ -151,7 +151,6 @@ public class GoodsApiController extends BaseController {
         Brand brand = brandService.selectByPrimaryKey(goods.getBrandId());
         int commentCount = commentService.countByGoodsIdAndType(id, 0);
         List<Comment> hotComment = commentService.selectByGoodsIdAndType(id, 0);
-        List<GoodsSpecification> goodsSpecificationList = goodsSpecificationService.selectByGoodsId(id);
 
         goodsDetailResponse.setGoods(goods);
         goodsDetailResponse.setAttributes(attributes);
@@ -161,6 +160,7 @@ public class GoodsApiController extends BaseController {
         goodsDetailResponse.setGoodsGalleries(goodsGalleries);
         goodsDetailResponse.setGoodsIssues(goodsIssues);
         goodsDetailResponse.setSpecificationList(goodsService.getGoodsSpecificationList(id));
+        goodsDetailResponse.setProductList(productService.selectByGoodsId(id));
         goodsDetailResponse.setUserHasCollect(collectService.selectByParams(getUid(), MallConstants.CollectType.商品.getVal(), id) == null ? 0 : 1);
 
         return BaseResponse.ok(goodsDetailResponse);

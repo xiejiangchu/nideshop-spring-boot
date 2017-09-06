@@ -78,6 +78,11 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public int deleteByProductId(Integer uid,List<Integer> productIds) {
+        return cartMapper.deleteByProductId(uid, productIds);
+    }
+
+    @Override
     public int count(Integer uid) {
         return cartMapper.count(uid);
     }

@@ -20,5 +20,5 @@ public interface GoodsSpecificationMapper {
 
     List<GoodsSpecification> selectByGoodsId(Integer gid);
 
-    List<GoodsSpecification> selectByPrimaryKeyAndGoodsId(@Param("ids") List<String> ids, @Param("gid") Integer gid);
+    List<GoodsSpecification> selectByPrimaryKeyAndGoodsId(@Param("ids") List<Integer> ids, @Param("gid") Integer gid);
 }

@@ -31,4 +31,6 @@ public interface CartMapper {
     int deleteByUid(Integer uid);
 
     int count(Integer uid);
+
+    int deleteByProductId(@Param("uid") Integer uid,@Param("productIds") List<Integer> productIds);
 }

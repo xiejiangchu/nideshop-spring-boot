@@ -1,13 +1,12 @@
 package com.xie.controller;
 
-import com.xie.auth.MyUserDetailsService;
 import com.xie.bean.User;
 import com.xie.controller.api.BaseController;
 import com.xie.request.UserRegisterDto;
 import com.xie.service.UserService;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,19 +19,13 @@ import javax.validation.Valid;
  * Created by xie on 17/1/7.
  */
 @Controller
-public class MainController extends BaseController {
+public class MainController extends BaseController implements ErrorController{
 
     @Autowired
     private UserService userService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
-    private MyUserDetailsService myUserDetailsService;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     @RequestMapping(value = {"/", "/index", "index.html"}, method = RequestMethod.GET)
     public String index(Model model) {
@@ -82,4 +75,8 @@ public class MainController extends BaseController {
         return "redirect:/index";
     }
 
+    @Override
+    public String getErrorPath() {
+        return "error";
+    }
 }

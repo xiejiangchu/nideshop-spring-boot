@@ -13,6 +13,8 @@ public class CollectWithGoods implements Serializable {
      */
     private Boolean isAttention;
     private Integer typeId;
+
+
     private String name;
     /**
      * 商品列表图

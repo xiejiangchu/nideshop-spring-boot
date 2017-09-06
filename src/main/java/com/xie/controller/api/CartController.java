@@ -6,6 +6,7 @@ import com.xie.bean.Goods;
 import com.xie.bean.GoodsSpecification;
 import com.xie.bean.Product;
 import com.xie.request.CartCheckedRequest;
+import com.xie.request.CartDeleteRequest;
 import com.xie.request.CartUpdateRequest;
 import com.xie.response.BaseResponse;
 import com.xie.response.CartTotalResponse;
@@ -13,6 +14,8 @@ import com.xie.service.CartService;
 import com.xie.service.GoodsService;
 import com.xie.service.GoodsSpecificationService;
 import com.xie.service.ProductService;
+import com.xie.utils.MallConstants;
+import org.apache.http.util.TextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +51,7 @@ public class CartController extends BaseController {
     }
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public BaseResponse add(@RequestParam(value = "goodsId") int goodsId,
                             @RequestParam(value = "productId") int productId,
@@ -67,7 +70,7 @@ public class CartController extends BaseController {
         if (cart == null) {
             List<GoodsSpecification> goodsSepcifitionValue = null;
             if (cart == null) {
-                List<String> goods_specification_ids = Arrays.asList(product.getGoodsSpecificationIds().split("_"));
+                List<Integer> goods_specification_ids = Arrays.stream(product.getGoodsSpecificationIds().split(MallConstants.SPECIFICATION_SPLIT)).map(item->Integer.parseInt(item)).collect(Collectors.toList());
                 goodsSepcifitionValue = goodsSpecificationService.selectByPrimaryKeyAndGoodsId(goods_specification_ids, goodsId);
             }
 
@@ -102,6 +105,24 @@ public class CartController extends BaseController {
                 cartService.updateNumberByProductId(getUid(), productId, number);
             }
         }
+
+        return BaseResponse.ok(getCart());
+    }
+
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseResponse delete(@RequestBody CartDeleteRequest cartDeleteRequest) {
+        if (TextUtils.isEmpty(cartDeleteRequest.getProductIds())) {
+            return BaseResponse.fail();
+        }
+        List<Integer> productIdList = Arrays.stream(cartDeleteRequest.getProductIds().split(",")).map(item -> Integer.parseInt(item)).collect(Collectors.toList());
+
+        if (productIdList == null || productIdList.size() == 0) {
+            return BaseResponse.fail("删除出错");
+        }
+
+        cartService.deleteByProductId(getUid(), productIdList);
 
         return BaseResponse.ok(getCart());
     }
@@ -141,13 +162,6 @@ public class CartController extends BaseController {
         }
         List<Integer> goodsIds = Arrays.stream(cartCheckedRequest.getProductIds().split(",")).map(item -> Integer.parseInt(item)).collect(Collectors.toList());
         int count = cartService.updateCheckedByProductId(getUid(), goodsIds, cartCheckedRequest.getIsChecked());
-        return BaseResponse.ok(getCart());
-    }
-
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    @ResponseBody
-    public BaseResponse delete() {
-        int count = cartService.deleteByUid(getUid());
         return BaseResponse.ok(getCart());
     }
 

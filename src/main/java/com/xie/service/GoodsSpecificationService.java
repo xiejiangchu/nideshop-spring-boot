@@ -23,5 +23,5 @@ public interface GoodsSpecificationService {
 
     List<GoodsSpecification> selectByGoodsId(Integer gid);
 
-    List<GoodsSpecification> selectByPrimaryKeyAndGoodsId(List<String> ids, Integer gid);
+    List<GoodsSpecification> selectByPrimaryKeyAndGoodsId(List<Integer> ids, Integer gid);
 }

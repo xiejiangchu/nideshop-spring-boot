@@ -32,5 +32,7 @@ public interface CartService {
 
     int deleteByUid(Integer uid);
 
+    int deleteByProductId(Integer uid,List<Integer> productIds);
+
     int count(Integer uid);
 }

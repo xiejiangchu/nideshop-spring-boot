@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.xie.bean.*;
 import com.xie.controller.api.BaseController;
 import com.xie.response.BaseResponse;
-import com.xie.response.GoodsDetailResponse;
+import com.xie.response.GoodDetail;
 import com.xie.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +50,12 @@ public class GoodsController extends BaseController {
     @Autowired
     private AttributeService attributeService;
 
+    @Autowired
+    private SpecificationService specificationService;
+
+    @Autowired
+    private ProductService productService;
+
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public String index(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                         @RequestParam(value = "pageSize", defaultValue = "40") int pageSize,
@@ -68,7 +74,7 @@ public class GoodsController extends BaseController {
         model.addAttribute("title", "商品详情");
         model.addAttribute("token", uploadService.token());
 
-        GoodsDetailResponse goodsDetailResponse = new GoodsDetailResponse();
+        GoodDetail goodDetail = new GoodDetail();
         Goods goods = goodsService.selectByPrimaryKey(id);
         List<GoodsGallery> goodsGalleries = goodsGalleryService.selectByGoodsId(id);
         List<GoodsAttribute> attributes = goodsAttributeService.selectByGoodsId(id);
@@ -81,16 +87,18 @@ public class GoodsController extends BaseController {
         PageInfo<Attribute> attributePageInfo = attributeService.selectByAttributeCategory(goods.getCategoryId(), 1, 100);
         model.addAttribute("attributePageInfo", attributePageInfo);
 
-        goodsDetailResponse.setGoods(goods);
-        goodsDetailResponse.setAttributes(attributes);
-        goodsDetailResponse.setBrand(brand);
-        goodsDetailResponse.setCommentCount(commentCount);
-        goodsDetailResponse.setHotComment(hotComment);
-        goodsDetailResponse.setGoodsGalleries(goodsGalleries);
-        goodsDetailResponse.setGoodsIssues(goodsIssues);
-        goodsDetailResponse.setSpecificationList(goodsService.getGoodsSpecificationList(id));
+        goodDetail.setGoods(goods);
+        goodDetail.setAttributes(attributes);
+        goodDetail.setBrand(brand);
+        goodDetail.setCommentCount(commentCount);
+        goodDetail.setHotComment(hotComment);
+        goodDetail.setGoodsGalleries(goodsGalleries);
+        goodDetail.setGoodsIssues(goodsIssues);
+        goodDetail.setSpecificationList(goodsService.getGoodsSpecificationList(id));
+        goodDetail.setSpecifications(specificationService.select(1, 100).getList());
+        goodDetail.setProductWithGoodsSpecificationList(productService.selectFullByGoodsId(id));
 
-        model.addAttribute("goodsDetail", goodsDetailResponse);
+        model.addAttribute("goodsDetail", goodDetail);
         return "goodsDetail";
     }
 

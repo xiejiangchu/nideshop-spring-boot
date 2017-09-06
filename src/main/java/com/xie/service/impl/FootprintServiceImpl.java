@@ -1,6 +1,9 @@
 package com.xie.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.Footprint;
+import com.xie.bean.FootprintWithGoods;
 import com.xie.mapper.FootprintMapper;
 import com.xie.service.FootprintService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +46,12 @@ public class FootprintServiceImpl implements FootprintService {
     @Override
     public int updateByPrimaryKey(Footprint record) {
         return footprintMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public PageInfo<FootprintWithGoods> selectByUid(Integer uid, int pageSize, int pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<FootprintWithGoods> page = new PageInfo<FootprintWithGoods>(footprintMapper.selectByUid(uid));
+        return page;
     }
 }

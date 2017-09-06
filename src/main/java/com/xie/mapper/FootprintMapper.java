@@ -1,6 +1,9 @@
 package com.xie.mapper;
 
 import com.xie.bean.Footprint;
+import com.xie.bean.FootprintWithGoods;
+
+import java.util.List;
 
 public interface FootprintMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,6 @@ public interface FootprintMapper {
     int updateByPrimaryKeySelective(Footprint record);
 
     int updateByPrimaryKey(Footprint record);
+
+    List<FootprintWithGoods> selectByUid(Integer uid);
 }

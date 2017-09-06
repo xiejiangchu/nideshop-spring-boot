@@ -1,13 +1,14 @@
 package com.xie.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Footprint implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 7428767205729577385L;
     private Integer id;
     private Integer userId;
     private Integer goodsId;
-    private Integer addTime;
+    private Date addTime;
 
     public Integer getId() {
         return id;
@@ -33,11 +34,11 @@ public class Footprint implements Serializable {
         this.goodsId = goodsId;
     }
 
-    public Integer getAddTime() {
+    public Date getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(Integer addTime) {
+    public void setAddTime(Date addTime) {
         this.addTime = addTime;
     }
 

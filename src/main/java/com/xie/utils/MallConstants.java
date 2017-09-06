@@ -21,9 +21,7 @@ public class MallConstants {
     public final static String ADMIN = "admin";
 
     public final static String SESSION_ID = "sessionId";
-    public final static String SYS_QUESTIONS = "questions";
-    public final static String SYS_ABOUT = "about";
-    public final static String SYS_NOTICE = "notice";
+    public final static String SPECIFICATION_SPLIT = "_";
 
     public final static double ORDER_MIN_MONEY = 20;
 

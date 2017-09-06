@@ -94,6 +94,15 @@
         </foreach>
     </update>
 
+    <delete id="deleteByProductId">
+        DELETE FROM cart
+        WHERE user_id = #{uid,jdbcType=INTEGER}
+        AND product_id IN
+        <foreach collection="productIds" open="(" close=")" item="productId" separator=",">
+            #{productId,jdbcType=INTEGER}
+        </foreach>
+    </delete>
+
     <insert id="insert" parameterType="com.xie.bean.Cart">
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
