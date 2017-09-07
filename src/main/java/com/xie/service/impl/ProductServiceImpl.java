@@ -6,6 +6,7 @@ import com.xie.mapper.ProductMapper;
 import com.xie.service.GoodsSpecificationService;
 import com.xie.service.ProductService;
 import com.xie.utils.MallConstants;
+import org.apache.http.util.TextUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,9 +72,14 @@ public class ProductServiceImpl implements ProductService {
         List<Product> productList = productMapper.selectByGoodsId(goodsId);
         List<ProductWithGoodsSpecification> productWithGoodsSpecificationList = productList.stream().map(item -> {
             ProductWithGoodsSpecification productWithGoodsSpecification = new ProductWithGoodsSpecification();
-            BeanUtils.copyProperties(item,productWithGoodsSpecification);
-            List<Integer> ids = Arrays.stream(item.getGoodsSpecificationIds().split(MallConstants.SPECIFICATION_SPLIT)).map(i -> Integer.parseInt(i)).collect(Collectors.toList());
-            productWithGoodsSpecification.setGoodsSpecificationList(goodsSpecificationService.selectByPrimaryKeyAndGoodsId(ids, goodsId));
+            BeanUtils.copyProperties(item, productWithGoodsSpecification);
+            if(!TextUtils.isEmpty(item.getGoodsSpecificationIds())){
+                List<Integer> ids = Arrays.stream(item.getGoodsSpecificationIds().split(MallConstants.SPECIFICATION_SPLIT)).map(i -> Integer.parseInt(i)).collect(Collectors.toList());
+                if (ids != null && ids.size() > 0) {
+                    productWithGoodsSpecification.setGoodsSpecificationList(goodsSpecificationService.selectByPrimaryKeyAndGoodsId(ids, goodsId));
+                }
+            }
+
             return productWithGoodsSpecification;
         }).collect(Collectors.toList());
         return productWithGoodsSpecificationList;
@@ -81,6 +87,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product selectByPrimaryKeyAndGid(Integer id, Integer goodsId) {
-        return null;
+        return productMapper.selectByPrimaryKeyAndGid(id, goodsId);
+    }
+
+    @Override
+    public Product selectByGoodsSn(String goodsSn) {
+        return productMapper.selectByGoodsSn(goodsSn);
     }
 }

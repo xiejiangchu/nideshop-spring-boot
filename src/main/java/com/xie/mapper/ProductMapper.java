@@ -23,4 +23,6 @@ public interface ProductMapper {
     List<Product> selectByGoodsId(Integer goodsId);
 
     Product selectByPrimaryKeyAndGid(@Param("id") Integer id, @Param("goodsId") Integer goodsId);
+
+    Product selectByGoodsSn(String goodsSn);
 }

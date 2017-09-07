@@ -444,11 +444,68 @@
                 <div id="section9-content" class="section-content col-md-9" style="display: none;">
                     <div class="container-fluid">
                         <div class="row">
+                            <div class="col-sm-12">
+                                <div class="box box-warning">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">添加产品</h3>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <form id="productAdd">
+                                            <input type="hidden" name="goodsId" th:value="${goodsDetail.goods.id}">
+                                            <div class="form-group">
+                                                <label>SN</label>
+                                                <input type="text" class="form-control" name="goodsSn">
+                                            </div>
+
+                                            <div class="form-group"
+                                                 th:each="item,state:${goodsDetail.specificationList}">
+                                                <label th:text="${item.name}"></label>
+                                                <select class="form-control select2" name='goodsSpecification[]'
+                                                        style="width: 100%;">
+                                                    <option th:each="iitem,istate:${item.valueList}"
+                                                            th:text="${iitem.value}"
+                                                            th:value="${iitem.id}"></option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>价格</label>
+                                                <input type="text" class="form-control" name="retailPrice">
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label>数量</label>
+                                                <input type="text" class="form-control" name="goodsNumber">
+                                            </div>
+
+                                            <button type="submit" class="btn btn-xs btn-warning">
+                                                新增
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <!-- /.box-body -->
+
+                                    <div class="box-footer">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-sm-12"
                                  th:each="item,state:${goodsDetail.productWithGoodsSpecificationList}">
                                 <div class="box box-warning">
                                     <div class="box-header with-border">
+                                        <label>商品SN</label>
                                         <h3 class="box-title" th:text="${item.goodsSn}"></h3>
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="productDelete btn btn-xs btn-warning"
+                                                    th:attr="data-id=${item.id}">
+                                                删除
+                                            </button>
+                                        </div>
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">
@@ -465,11 +522,11 @@
                                         <form class="productPriceUpdate">
                                             <input type="hidden" name="goodsId" th:value="${goodsDetail.goods.id}">
                                             <input type="hidden" name="id" th:value="${item.id}">
-                                             <span ><i class="fa fa-balance-scale">
+                                            <span><i class="fa fa-balance-scale">
                                             <input type="text" class="box-title" th:value="${item.goodsNumber}"
                                                    name="goodsNumber">
                                         </i></span>
-                                            <span ><i class="fa fa-cny">
+                                            <span><i class="fa fa-cny">
                                             <input type="text" class="box-title" th:value="${item.retailPrice}"
                                                    name="retailPrice">
                                         </i></span>
@@ -482,6 +539,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
                 <div id="section10-content" class="section-content col-md-9" style="display: none;">
@@ -897,7 +956,7 @@
 
         $(".productPriceUpdate").submit(function (e) {
             e.preventDefault();
-            var that=$(this);
+            var that = $(this);
             $.ajax({
                 cache: true,
                 type: "POST",
@@ -916,6 +975,51 @@
                 }
             });
         });
+
+        $(".productDelete").click(function (e) {
+            e.preventDefault();
+            var that = $(this);
+            $.ajax({
+                type: "POST",
+                url: '/product/delete',
+                data: {"id": that.attr("data-id")},
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                        that.parents(".col-sm-12").remove();
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        });
+
+
+        $("#productAdd").submit(function (e) {
+            e.preventDefault();
+            var that = $(this);
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/product/add',
+                data: that.serialize(),
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        })
     })
 </script>
 </body>

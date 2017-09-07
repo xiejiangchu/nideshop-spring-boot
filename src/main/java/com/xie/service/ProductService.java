@@ -25,4 +25,6 @@ public interface ProductService {
     List<ProductWithGoodsSpecification> selectFullByGoodsId(Integer goodsId);
 
     Product selectByPrimaryKeyAndGid(Integer id, Integer goodsId);
+
+    Product selectByGoodsSn(String goodsSn);
 }

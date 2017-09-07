@@ -26,6 +26,13 @@
         where goods_id = #{goodsId,jdbcType=INTEGER}
     </select>
 
+    <select id="selectByGoodsSn" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from product
+        where goods_sn = #{goodsSn,jdbcType=VARCHAR}
+    </select>
+
     <select id="selectByPrimaryKeyAndGid" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -43,10 +50,10 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-        insert into product (id, goods_id, goods_specification_ids,
+        insert into product (goods_id, goods_specification_ids,
         goods_sn, goods_number, retail_price
         )
-        values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{goodsSpecificationIds,jdbcType=VARCHAR},
+        values (#{goodsId,jdbcType=INTEGER}, #{goodsSpecificationIds,jdbcType=VARCHAR},
         #{goodsSn,jdbcType=VARCHAR}, #{goodsNumber,jdbcType=INTEGER}, #{retailPrice,jdbcType=DECIMAL}
         )
     </insert>
