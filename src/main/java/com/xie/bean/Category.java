@@ -10,9 +10,9 @@ public class Category implements Serializable {
     private String keywords;
     private String frontDesc;
     private Integer parentId;
-    private Boolean sortOrder;
-    private Boolean showIndex;
-    private Boolean isShow;
+    private Integer sortOrder;
+    private Integer showIndex;
+    private Integer isShow;
     private String bannerUrl;
     private String iconUrl;
     private String imgUrl;
@@ -62,27 +62,27 @@ public class Category implements Serializable {
         this.parentId = parentId;
     }
 
-    public Boolean getSortOrder() {
+    public Integer getSortOrder() {
         return sortOrder;
     }
 
-    public void setSortOrder(Boolean sortOrder) {
+    public void setSortOrder(Integer sortOrder) {
         this.sortOrder = sortOrder;
     }
 
-    public Boolean getShowIndex() {
+    public Integer getShowIndex() {
         return showIndex;
     }
 
-    public void setShowIndex(Boolean showIndex) {
+    public void setShowIndex(Integer showIndex) {
         this.showIndex = showIndex;
     }
 
-    public Boolean getIsShow() {
+    public Integer getIsShow() {
         return isShow;
     }
 
-    public void setIsShow(Boolean isShow) {
+    public void setIsShow(Integer isShow) {
         this.isShow = isShow;
     }
 

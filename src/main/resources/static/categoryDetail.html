@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace='layout/header :: header'>
+
+</head>
+<link rel="stylesheet" href="/css/select2.min.css">
+<link rel="stylesheet" href="/css/fileinput.min.css">
+<body class="skin-blue sidebar-mini wysihtml5-supported" style="height: auto; min-height: 100%;">
+
+<!-- wrapper -->
+<div class="wrapper">
+    <div th:replace='layout/top :: top'></div>
+    <!-- Left side column. contains the logo and sidebar -->
+    <div th:replace='layout/left :: left'></div>
+    <!-- /Left side column. contains the logo and sidebar -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                新增分类
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">新增分类</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-8">
+                    <!-- general form elements -->
+                    <div class="box box-primary">
+                        <!-- form start -->
+                        <form id="categoryAdd">
+                            <input type="hidden" id="token" th:value="${token}">
+                            <input type="hidden" th:value="${category.id}" name="id">
+                            <div class="box-body">
+
+                                <!--<div class="form-group">-->
+                                <!--<label>一级分类</label>-->
+                                <!--<select class="form-control select2" name='category_l1_id' id="l1_id"-->
+                                <!--style="width: 100%;">-->
+                                <!--<option th:each="item,state:${categoryShortList}" th:text="${item.name}"-->
+                                <!--th:value="${item.id}"></option>-->
+                                <!--</select>-->
+                                <!--</div>-->
+
+                                <div class="form-group">
+                                    <label>级别</label>
+                                    <input type="text" class="form-control" name="level" th:value="${category.level}">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>名称</label>
+                                    <input type="text" class="form-control" name="name" th:value="${category.name}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>关键词</label>
+                                    <input type="text" class="form-control" name="keywords"
+                                           th:value="${category.keywords}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>前台名称</label>
+                                    <input type="text" class="form-control" name="frontName"
+                                           th:value="${category.frontName}">
+                                </div>
+                                <div class="form-group">
+                                    <label>前台文案</label>
+                                    <input type="text" class="form-control" name="frontDesc"
+                                           th:value="${category.frontDesc}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>父类</label>
+                                    <input type="text" class="form-control" name="parentId"
+                                           th:value="${category.parentId}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>排序</label>
+                                    <input type="text" class="form-control" name="sortOrder"
+                                           th:value="${category.sortOrder}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>showIndex</label>
+                                    <input type="text" class="form-control" name="showIndex"
+                                           th:value="${category.showIndex}">
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="isShow" value="1"
+                                                   th:checked="${category.isShow==1}">
+                                            显示
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="isShow" value="0"
+                                                   th:checked="${category.isShow==0}">
+                                            不显示
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>banner图片</label>
+                                    <input type="hidden" id="bannerUrl" name="bannerUrl"
+                                           th:value="${category.bannerUrl}">
+                                    <input type="file" id="bannerUrlFile">
+
+                                    <p class="help-block">预览</p>
+                                    <img class="imgFilePreview" style="max-width: 100%;">
+
+                                    <p class="help-block">当前</p>
+                                    <img class="imgFileCurrent" style="max-width: 100%;" th:src="${category.bannerUrl}">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>ico图片</label>
+                                    <input type="hidden" id="iconUrl" name="iconUrl" th:value="${category.iconUrl}">
+                                    <input type="file" id="iconUrlFile">
+
+                                    <p class="help-block">预览</p>
+                                    <img class="imgFilePreview" style="max-width: 100%;">
+
+                                    <p class="help-block">当前</p>
+                                    <img class="imgFileCurrent" style="max-width: 100%;" th:src="${category.iconUrl}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>img图片</label>
+                                    <input type="hidden" id="imgUrl" name="imgUrl" th:value="${category.imgUrl}">
+                                    <input type="file" id="imgUrlFile">
+
+                                    <p class="help-block">预览</p>
+                                    <img class="imgFilePreview" style="max-width: 100%;">
+
+                                    <p class="help-block">当前</p>
+                                    <img class="imgFileCurrent" style="max-width: 100%;" th:src="${category.imgUrl}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>WAP-banner图片</label>
+                                    <input type="hidden" id="wapBannerUrl" name="wapBannerUrl"
+                                           th:value="${category.wapBannerUrl}">
+                                    <input type="file" id="wapBannerUrlFile">
+
+                                    <p class="help-block">预览</p>
+                                    <img class="imgFilePreview" style="max-width: 100%;">
+
+                                    <p class="help-block">当前</p>
+                                    <img class="imgFileCurrent" style="max-width: 100%;"
+                                         th:src="${category.wapBannerUrl}">
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">修改</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <div th:replace='layout/control :: control'></div>
+    <!-- /.control-sidebar -->
+
+    <!-- footer -->
+    <div th:replace='layout/footer :: footer'></div>
+    <!-- /footer -->
+</div>
+
+<!-- ./wrapper -->
+
+
+<div th:replace='layout/scripts :: scripts'></div>
+
+<script type="text/javascript">
+
+    $(function () {
+        $.extend({
+            format: function (str, param) {
+                str = str.toString();
+                var reg = /{(\d+)}/gm;
+                return str.replace(reg, function (match, name) {
+                    return param[name];
+                });
+            }
+        });
+        $('#l1_id').on('change', function () {
+            var id = $(this).val();
+            $.get('/category/' + id, function (data) {
+                var html = '';
+                for (var i = 0; i < data.data.length; i++) {
+                    html += $.format("<option value='{0}'>{1}</option>", [data.data[i].id, data.data[i].name]);
+                }
+                $('#l2_id').html(html);
+            });
+        });
+
+
+        $('#bannerUrlFile').on("change", function (e) {
+            var data = $(this)[0];
+            var protocol = window.location.protocol || 'http:';
+            var query = 'Authorization=' + document.getElementById('token').value + '&UserAgent=ALIMEDIASDK_WORKSTATION'
+            var url = protocol + "//upload.media.aliyun.com/api/proxy/upload?" + query;
+            var formData = new FormData();
+            formData.append('dir', "");
+            formData.append('name', data.files[0].name);
+            formData.append('size', data.files[0].size);
+            formData.append("content", data.files[0]);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                // 告诉jQuery不要去处理发送的数据
+                processData: false,
+                // 告诉jQuery不要去设置Content-Type请求头
+                contentType: false,
+                beforeSend: function () {
+                    console.log("正在进行，请稍候");
+                },
+                success: function (responseStr) {
+                    if (responseStr.code == 'OK') {
+                        $('#bannerUrl').val(responseStr.url);
+                        $('#bannerUrlFile').siblings('.imgFilePreview').attr("src", responseStr.url);
+                    } else {
+                        alert("失败" + responseStr);
+                    }
+                },
+                error: function (responseStr) {
+                    console.log("error");
+                }
+            });
+        });
+
+
+        $('#iconUrlFile').on("change", function (e) {
+            var data = $(this)[0];
+            var protocol = window.location.protocol || 'http:';
+            var query = 'Authorization=' + document.getElementById('token').value + '&UserAgent=ALIMEDIASDK_WORKSTATION'
+            var url = protocol + "//upload.media.aliyun.com/api/proxy/upload?" + query;
+            var formData = new FormData();
+            formData.append('dir', "");
+            formData.append('name', data.files[0].name);
+            formData.append('size', data.files[0].size);
+            formData.append("content", data.files[0]);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                // 告诉jQuery不要去处理发送的数据
+                processData: false,
+                // 告诉jQuery不要去设置Content-Type请求头
+                contentType: false,
+                beforeSend: function () {
+                    console.log("正在进行，请稍候");
+                },
+                success: function (responseStr) {
+                    if (responseStr.code == 'OK') {
+                        $('#iconUrl').val(responseStr.url);
+                        $('#iconUrlFile').siblings('.imgFilePreview').attr("src", responseStr.url);
+                    } else {
+                        alert("失败" + responseStr);
+                    }
+                },
+                error: function (responseStr) {
+                    console.log("error");
+                }
+            });
+        });
+
+
+        $('#imgUrlFile').on("change", function (e) {
+            var data = $(this)[0];
+            var protocol = window.location.protocol || 'http:';
+            var query = 'Authorization=' + document.getElementById('token').value + '&UserAgent=ALIMEDIASDK_WORKSTATION'
+            var url = protocol + "//upload.media.aliyun.com/api/proxy/upload?" + query;
+            var formData = new FormData();
+            formData.append('dir', "");
+            formData.append('name', data.files[0].name);
+            formData.append('size', data.files[0].size);
+            formData.append("content", data.files[0]);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                // 告诉jQuery不要去处理发送的数据
+                processData: false,
+                // 告诉jQuery不要去设置Content-Type请求头
+                contentType: false,
+                beforeSend: function () {
+                    console.log("正在进行，请稍候");
+                },
+                success: function (responseStr) {
+                    if (responseStr.code == 'OK') {
+                        $('#imgUrl').val(responseStr.url);
+                        $('#imgUrlFile').siblings('.imgFilePreview').attr("src", responseStr.url);
+                    } else {
+                        alert("失败" + responseStr);
+                    }
+                },
+                error: function (responseStr) {
+                    console.log("error");
+                }
+            });
+        });
+
+
+        $('#wapBannerUrlFile').on("change", function (e) {
+            var data = $(this)[0];
+            var protocol = window.location.protocol || 'http:';
+            var query = 'Authorization=' + document.getElementById('token').value + '&UserAgent=ALIMEDIASDK_WORKSTATION'
+            var url = protocol + "//upload.media.aliyun.com/api/proxy/upload?" + query;
+            var formData = new FormData();
+            formData.append('dir', "");
+            formData.append('name', data.files[0].name);
+            formData.append('size', data.files[0].size);
+            formData.append("content", data.files[0]);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                // 告诉jQuery不要去处理发送的数据
+                processData: false,
+                // 告诉jQuery不要去设置Content-Type请求头
+                contentType: false,
+                beforeSend: function () {
+                    console.log("正在进行，请稍候");
+                },
+                success: function (responseStr) {
+                    if (responseStr.code == 'OK') {
+                        $('#wapBannerUrl').val(responseStr.url);
+                        $('#wapBannerUrlFile').siblings('.imgFilePreview').attr("src", responseStr.url);
+                    } else {
+                        alert("失败" + responseStr);
+                    }
+                },
+                error: function (responseStr) {
+                    console.log("error");
+                }
+            });
+        });
+
+
+        $("#categoryAdd").submit(function (e) {
+            e.preventDefault();
+            var that = $(this);
+            $.ajax({
+                type: "POST",
+                url: '/category/add',
+                data: that.serialize(),
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        })
+    })
+</script>
+</body>
+</html>
+
+

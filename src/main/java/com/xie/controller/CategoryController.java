@@ -2,20 +2,14 @@ package com.xie.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.xie.bean.Category;
-import com.xie.bean.CategoryShort;
 import com.xie.controller.api.BaseController;
 import com.xie.response.BaseResponse;
 import com.xie.service.CategoryService;
+import com.xie.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Arrays;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by xie on 17/9/2.
@@ -27,6 +21,9 @@ public class CategoryController extends BaseController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private UploadService uploadService;
+
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public String index(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
@@ -35,9 +32,14 @@ public class CategoryController extends BaseController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public BaseResponse detail(@PathVariable(value = "id", required = false) Integer id) {
-        List<CategoryShort> subCategoryShortList = categoryService.selectByParents(Arrays.asList(id));
-        return BaseResponse.ok(subCategoryShortList);
+    public String detail(@PathVariable(value = "id", required = false) Integer id,
+                         Model model) {
+        setHeaderData(model);
+        model.addAttribute("title", "商品类别详情");
+        Category category = categoryService.selectByPrimaryKey(id);
+        model.addAttribute("category", category);
+        model.addAttribute("token", uploadService.token());
+        return "categoryDetail";
     }
 
 
@@ -67,7 +69,7 @@ public class CategoryController extends BaseController {
                      @RequestParam(value = "pageSize", defaultValue = "40") int pageSize,
                      Model model) {
         setHeaderData(model);
-        model.addAttribute("title", "商品一级分类");
+        model.addAttribute("title", "商品一级类别");
         PageInfo<Category> categoryPageInfo = categoryService.selectFullMainCategory(pageNum, pageSize);
 
         model.addAttribute("categoryPageInfo", categoryPageInfo);
@@ -81,11 +83,94 @@ public class CategoryController extends BaseController {
                      @RequestParam(value = "pageSize", defaultValue = "40") int pageSize,
                      Model model) {
         setHeaderData(model);
-        model.addAttribute("title", "商品二级分类");
+        model.addAttribute("title", "商品二级类别");
         PageInfo<Category> categoryPageInfo = categoryService.selectFullSubCategory(pageNum, pageSize);
 
         model.addAttribute("categoryPageInfo", categoryPageInfo);
 
         return "categoryL2";
     }
+
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String add(Model model) {
+        setHeaderData(model);
+        model.addAttribute("title", "商品类别添加");
+        model.addAttribute("token", uploadService.token());
+
+        return "categoryAdd";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseResponse add(@RequestParam("level") String level,
+                            @RequestParam("name") String name,
+                            @RequestParam("keywords") String keywords,
+                            @RequestParam("frontName") String frontName,
+                            @RequestParam("frontDesc") String frontDesc,
+                            @RequestParam("parentId") int parentId,
+                            @RequestParam("sortOrder") int sortOrder,
+                            @RequestParam("showIndex") int showIndex,
+                            @RequestParam("bannerUrl") String bannerUrl,
+                            @RequestParam("iconUrl") String iconUrl,
+                            @RequestParam("imgUrl") String imgUrl,
+                            @RequestParam("wapBannerUrl") String wapBannerUrl) {
+        Category category = new Category();
+
+        category.setLevel(level);
+        category.setName(name);
+        category.setKeywords(keywords);
+        category.setFrontName(frontName);
+        category.setFrontDesc(frontDesc);
+        category.setParentId(parentId);
+        category.setSortOrder(sortOrder);
+        category.setShowIndex(showIndex);
+        category.setBannerUrl(bannerUrl);
+        category.setIconUrl(iconUrl);
+        category.setImgUrl(imgUrl);
+        category.setWapBannerUrl(wapBannerUrl);
+
+        categoryService.insertSelective(category);
+
+        return BaseResponse.ok();
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseResponse update(@RequestParam("id") int id,
+                               @RequestParam("level") String level,
+                               @RequestParam("name") String name,
+                               @RequestParam("keywords") String keywords,
+                               @RequestParam("frontName") String frontName,
+                               @RequestParam("frontDesc") String frontDesc,
+                               @RequestParam("parentId") int parentId,
+                               @RequestParam("sortOrder") int sortOrder,
+                               @RequestParam("showIndex") int showIndex,
+                               @RequestParam("bannerUrl") String bannerUrl,
+                               @RequestParam("iconUrl") String iconUrl,
+                               @RequestParam("imgUrl") String imgUrl,
+                               @RequestParam("wapBannerUrl") String wapBannerUrl
+    ) {
+        Category category = categoryService.selectByPrimaryKey(id);
+        if (category == null) {
+            return BaseResponse.fail();
+        }
+
+        category.setLevel(level);
+        category.setName(name);
+        category.setKeywords(keywords);
+        category.setFrontName(frontName);
+        category.setFrontDesc(frontDesc);
+        category.setParentId(parentId);
+        category.setSortOrder(sortOrder);
+        category.setShowIndex(showIndex);
+        category.setBannerUrl(bannerUrl);
+        category.setIconUrl(iconUrl);
+        category.setImgUrl(imgUrl);
+        category.setWapBannerUrl(wapBannerUrl);
+
+        categoryService.updateByPrimaryKeySelective(category);
+        return BaseResponse.ok();
+    }
+
 }

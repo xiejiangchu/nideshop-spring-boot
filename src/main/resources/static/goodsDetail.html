@@ -767,7 +767,6 @@
                 type: "POST",
                 url: '/goods/updateGoodsPrice',
                 data: $('#goodsUpdatePrice').serialize(),
-                async: false,
                 error: function (request) {
                     alert("网络错误");
                 },
@@ -788,7 +787,6 @@
                 type: "POST",
                 url: '/goodsIssue/delete',
                 data: {'id': id},
-                async: false,
                 error: function (request) {
                     alert("网络错误");
                 },
@@ -810,7 +808,6 @@
                 type: "POST",
                 url: '/goodsAttribute/update',
                 data: that.parents('#goodsAttributeUpdate').serialize(),
-                async: false,
                 error: function (request) {
                     alert("网络错误");
                 },
@@ -830,7 +827,6 @@
                 type: "POST",
                 url: '/goodsIssue/update',
                 data: that.parents('#goodsIssueUpdate').serialize(),
-                async: false,
                 error: function (request) {
                     alert("网络错误");
                 },
@@ -851,7 +847,6 @@
                 type: "POST",
                 url: '/goodsAttribute/delete',
                 data: {'id': id},
-                async: false,
                 error: function (request) {
                     alert("网络错误");
                 },
@@ -873,7 +868,6 @@
                 type: "POST",
                 url: '/goodsSpecification/delete',
                 data: {"id": that.attr("data-id")},
-                async: false,
                 error: function (request) {
                     alert("网络错误");
                 },
@@ -895,7 +889,6 @@
                 type: "POST",
                 url: '/goodsSpecification/add',
                 data: $('#goodsSpecificationAdd').serialize(),
-                async: false,
                 error: function (request) {
                     alert("网络错误");
                 },
@@ -935,11 +928,9 @@
         $("#goodsAttributeAdd").submit(function (e) {
             e.preventDefault();
             $.ajax({
-                cache: true,
                 type: "POST",
                 url: '/goodsAttribute/add',
                 data: $('#goodsAttributeAdd').serialize(),
-                async: false,
                 error: function (request) {
                     alert("网络错误");
                 },
@@ -958,11 +949,9 @@
             e.preventDefault();
             var that = $(this);
             $.ajax({
-                cache: true,
                 type: "POST",
                 url: '/product/priceUpdate',
                 data: that.serialize(),
-                async: false,
                 error: function (request) {
                     alert("网络错误");
                 },
@@ -983,7 +972,6 @@
                 type: "POST",
                 url: '/product/delete',
                 data: {"id": that.attr("data-id")},
-                async: false,
                 error: function (request) {
                     alert("网络错误");
                 },
@@ -1003,11 +991,9 @@
             e.preventDefault();
             var that = $(this);
             $.ajax({
-                cache: true,
                 type: "POST",
                 url: '/product/add',
                 data: that.serialize(),
-                async: false,
                 error: function (request) {
                     alert("网络错误");
                 },

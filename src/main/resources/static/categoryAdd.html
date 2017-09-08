@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace='layout/header :: header'>
+
+</head>
+<link rel="stylesheet" href="/css/select2.min.css">
+<link rel="stylesheet" href="/css/fileinput.min.css">
+<body class="skin-blue sidebar-mini wysihtml5-supported" style="height: auto; min-height: 100%;">
+
+<!-- wrapper -->
+<div class="wrapper">
+    <div th:replace='layout/top :: top'></div>
+    <!-- Left side column. contains the logo and sidebar -->
+    <div th:replace='layout/left :: left'></div>
+    <!-- /Left side column. contains the logo and sidebar -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                新增分类
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">新增分类</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-8">
+                    <!-- general form elements -->
+                    <div class="box box-primary">
+                        <!-- form start -->
+                        <form role="form" th:action="@{/category/add}" method="post">
+                            <div class="box-body">
+
+                                <!--<div class="form-group">-->
+                                <!--<label>一级分类</label>-->
+                                <!--<select class="form-control select2" name='category_l1_id' id="l1_id"-->
+                                <!--style="width: 100%;">-->
+                                <!--<option th:each="item,state:${categoryShortList}" th:text="${item.name}"-->
+                                <!--th:value="${item.id}"></option>-->
+                                <!--</select>-->
+                                <!--</div>-->
+
+                                <div class="form-group">
+                                    <label>级别</label>
+                                    <input type="text" class="form-control" name="level" placeholder="">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>名称</label>
+                                    <input type="text" class="form-control" name="name" placeholder="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>关键词</label>
+                                    <input type="text" class="form-control" name="keywords" placeholder="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>前台名称</label>
+                                    <input type="text" class="form-control" name="frontName" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label>前台文案</label>
+                                    <input type="text" class="form-control" name="frontDesc" placeholder="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>父类</label>
+                                    <input type="text" class="form-control" name="parentId" placeholder="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>排序</label>
+                                    <input type="text" class="form-control" name="sortOrder" placeholder="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>showIndex</label>
+                                    <input type="text" class="form-control" name="showIndex" placeholder="">
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="isShow" value="1" checked>
+                                            显示
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="isShow" value="0">
+                                            不显示
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>banner图片</label>
+                                    <input type="hidden" id="bannerUrl" name="bannerUrl">
+                                    <input type="file" id="bannerUrlFile">
+
+                                    <p class="help-block">预览</p>
+                                    <img class="imgFilePreview" style="width: 100%;">
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>ico图片</label>
+                                    <input type="hidden" id="iconUrl" name="iconUrl">
+                                    <input type="file" id="iconUrlFile">
+
+                                    <p class="help-block">预览</p>
+                                    <img class="imgFilePreview" style="width: 100%;">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>img图片</label>
+                                    <input type="hidden" id="imgUrl" name="imgUrl">
+                                    <input type="file" id="imgUrlFile">
+
+                                    <p class="help-block">预览</p>
+                                    <img class="imgFilePreview" style="width: 100%;">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>WAP-banner图片</label>
+                                    <input type="hidden" id="wapBannerUrl" name="wapBannerUrl">
+                                    <input type="file" id="wapBannerUrlFile">
+
+                                    <p class="help-block">预览</p>
+                                    <img class="imgFilePreview" style="width: 100%;">
+
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">新增</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <div th:replace='layout/control :: control'></div>
+    <!-- /.control-sidebar -->
+
+    <!-- footer -->
+    <div th:replace='layout/footer :: footer'></div>
+    <!-- /footer -->
+</div>
+
+<!-- ./wrapper -->
+
+
+<div th:replace='layout/scripts :: scripts'></div>
+
+<script type="text/javascript">
+
+    $(function () {
+        $.extend({
+            format: function (str, param) {
+                str = str.toString();
+                var reg = /{(\d+)}/gm;
+                return str.replace(reg, function (match, name) {
+                    return param[name];
+                });
+            }
+        });
+        $('#l1_id').on('change', function () {
+            var id = $(this).val();
+            $.get('/category/' + id, function (data) {
+                var html = '';
+                for (var i = 0; i < data.data.length; i++) {
+                    html += $.format("<option value='{0}'>{1}</option>", [data.data[i].id, data.data[i].name]);
+                }
+                $('#l2_id').html(html);
+            });
+        });
+    })
+</script>
+</body>
+</html>
+
+
