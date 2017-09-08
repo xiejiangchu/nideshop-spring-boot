@@ -20,8 +20,6 @@ public class Booter {
     private static final Logger LOGGER = LoggerFactory.getLogger(Booter.class);
 
     public static void main(String[] args) {
-        LOGGER.info("========                      微信商城服务启动 开始                     ========");
         SpringApplication.run(Booter.class, args);
-        LOGGER.info("========                      微信商城服务启动 完成                     ========");
     }
 }
