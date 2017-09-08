@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
@@ -44,16 +45,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-//        http.addFilterBefore(authenticationTokenProcessingFilter, UsernamePasswordAuthenticationFilter.class)
-//                .authorizeRequests()
-//                .antMatchers("/js/**", "/img/**", "/css/**", "/**/favicon.ico").permitAll()
-//                .antMatchers("/api/**").permitAll()
-//                .antMatchers("/wechat/server").permitAll()
-//                .antMatchers("/error","/register").permitAll()
-//                .anyRequest().authenticated()
-//                .and().formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/index", true).failureUrl("/login").permitAll()
-//                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login").invalidateHttpSession(true).permitAll()
-//                .and().exceptionHandling().accessDeniedHandler(myAccessDeniedHandler);
+        http.addFilterBefore(authenticationTokenProcessingFilter, UsernamePasswordAuthenticationFilter.class)
+                .authorizeRequests()
+                .antMatchers("/js/**", "/img/**", "/css/**", "/**/favicon.ico").permitAll()
+                .antMatchers("/api/**").permitAll()
+                .antMatchers("/wechat/server").permitAll()
+                .antMatchers("/error","/register").permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/index", true).failureUrl("/login").permitAll()
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login").invalidateHttpSession(true).permitAll()
+                .and().exceptionHandling().accessDeniedHandler(myAccessDeniedHandler);
 //                .and().addFilterAfter(new MyCsrfHeaderFilter(), CsrfFilter.class);
 //        http.csrf().requireCsrfProtectionMatcher(myCsrfSecurityRequestMatcher).csrfTokenRepository(csrfTokenRepository());
 
