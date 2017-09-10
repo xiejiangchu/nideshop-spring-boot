@@ -33,19 +33,20 @@
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <!-- form start -->
-                        <form id="categoryAdd">
+                        <form id="categoryUpdate">
                             <input type="hidden" id="token" th:value="${token}">
                             <input type="hidden" th:value="${category.id}" name="id">
                             <div class="box-body">
 
-                                <!--<div class="form-group">-->
-                                <!--<label>一级分类</label>-->
-                                <!--<select class="form-control select2" name='category_l1_id' id="l1_id"-->
-                                <!--style="width: 100%;">-->
-                                <!--<option th:each="item,state:${categoryShortList}" th:text="${item.name}"-->
-                                <!--th:value="${item.id}"></option>-->
-                                <!--</select>-->
-                                <!--</div>-->
+                                <div class="form-group" th:if="${category.parentId>0}">
+                                    <label>一级分类</label>
+                                    <select class="form-control select2" name='parentId' style="width: 100%;">
+                                        <option th:each="item,state:${categoryParentList}" th:text="${item.name}"
+                                                th:value="${item.id}" th:selected="${category.parentId==item.id}">
+
+                                        </option>
+                                    </select>
+                                </div>
 
                                 <div class="form-group">
                                     <label>级别</label>
@@ -202,16 +203,6 @@
                 });
             }
         });
-        $('#l1_id').on('change', function () {
-            var id = $(this).val();
-            $.get('/category/' + id, function (data) {
-                var html = '';
-                for (var i = 0; i < data.data.length; i++) {
-                    html += $.format("<option value='{0}'>{1}</option>", [data.data[i].id, data.data[i].name]);
-                }
-                $('#l2_id').html(html);
-            });
-        });
 
 
         $('#bannerUrlFile').on("change", function (e) {
@@ -362,12 +353,12 @@
         });
 
 
-        $("#categoryAdd").submit(function (e) {
+        $("#categoryUpdate").submit(function (e) {
             e.preventDefault();
             var that = $(this);
             $.ajax({
                 type: "POST",
-                url: '/category/add',
+                url: '/category/update',
                 data: that.serialize(),
                 error: function (request) {
                     alert("网络错误");

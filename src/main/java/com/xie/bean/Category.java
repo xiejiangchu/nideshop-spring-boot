@@ -22,6 +22,8 @@ public class Category implements Serializable {
     private String frontName;
     private List<Category> subCategoryList;
 
+    private Category parentCategory;
+
     public Integer getId() {
         return id;
     }
@@ -148,6 +150,14 @@ public class Category implements Serializable {
 
     public void setSubCategoryList(List<Category> subCategoryList) {
         this.subCategoryList = subCategoryList;
+    }
+
+    public Category getParentCategory() {
+        return parentCategory;
+    }
+
+    public void setParentCategory(Category parentCategory) {
+        this.parentCategory = parentCategory;
     }
 
     @Override

@@ -96,6 +96,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<Category> selectFullMainCategory() {
+        return categoryMapper.selectFullMainCategory();
+    }
+
+    @Override
     public PageInfo<Category> selectFullSubCategory(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         PageInfo<Category> page = new PageInfo<Category>(categoryMapper.selectFullSubCategory());

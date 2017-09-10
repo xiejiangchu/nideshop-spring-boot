@@ -38,6 +38,10 @@ public class CategoryController extends BaseController {
         model.addAttribute("title", "商品类别详情");
         Category category = categoryService.selectByPrimaryKey(id);
         model.addAttribute("category", category);
+
+        if (category.getParentId() > 0) {
+            model.addAttribute("categoryParentList", categoryService.selectFullMainCategory());
+        }
         model.addAttribute("token", uploadService.token());
         return "categoryDetail";
     }
@@ -85,6 +89,11 @@ public class CategoryController extends BaseController {
         setHeaderData(model);
         model.addAttribute("title", "商品二级类别");
         PageInfo<Category> categoryPageInfo = categoryService.selectFullSubCategory(pageNum, pageSize);
+        categoryPageInfo.getList().forEach(item -> {
+            if (item.getParentId() > 0) {
+                item.setParentCategory(categoryService.selectByPrimaryKey(item.getParentId()));
+            }
+        });
 
         model.addAttribute("categoryPageInfo", categoryPageInfo);
 
@@ -97,6 +106,7 @@ public class CategoryController extends BaseController {
         setHeaderData(model);
         model.addAttribute("title", "商品类别添加");
         model.addAttribute("token", uploadService.token());
+        model.addAttribute("categoryParentList", categoryService.selectFullMainCategory());
 
         return "categoryAdd";
     }
@@ -167,6 +177,7 @@ public class CategoryController extends BaseController {
         category.setBannerUrl(bannerUrl);
         category.setIconUrl(iconUrl);
         category.setImgUrl(imgUrl);
+        category.setParentId(parentId);
         category.setWapBannerUrl(wapBannerUrl);
 
         categoryService.updateByPrimaryKeySelective(category);

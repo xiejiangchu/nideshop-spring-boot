@@ -41,12 +41,11 @@
                                 <tr>
                                     <th>编号</th>
                                     <th>名称</th>
-                                    <th>关键字</th>
-                                    <th>显示名称</th>
-                                    <th>显示描述</th>
                                     <th>父类</th>
                                     <th>排序</th>
                                     <th>级别</th>
+                                    <th>关键字</th>
+                                    <th>显示名称</th>
                                     <th>操作</th>
                                 </tr>
                                 <tr th:each="item,state : ${categoryPageInfo.list}">
@@ -56,13 +55,11 @@
                                     <td>
                                         <a th:href="@{'/category/'+${item.id}}" th:text="${item.name}"></a>
                                     </td>
-
-                                    <td th:text="${item.keywords}"></td>
-                                    <td th:text="${item.frontName}"></td>
-                                    <td th:text="${item.frontDesc}"></td>
                                     <td th:text="${item.parentId}"></td>
                                     <td th:text="${item.sortOrder}"></td>
                                     <td th:text="${item.level}"></td>
+                                    <td th:text="${item.keywords}"></td>
+                                    <td th:text="${item.frontName}"></td>
                                     <td>
                                         <a th:href="@{/category/delete(id=${item.id},pageNum=${categoryPageInfo.pageNum},pageSize=${categoryPageInfo.pageSize})}"
                                            class="btn btn-xs btn-flat btn-danger">删除

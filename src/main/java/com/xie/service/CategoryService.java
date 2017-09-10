@@ -36,6 +36,8 @@ public interface CategoryService {
 
     PageInfo<Category> selectFullMainCategory(int pageNum, int pageSize);
 
+    List<Category> selectFullMainCategory();
+
     PageInfo<Category> selectFullSubCategory(int pageNum, int pageSize);
 
     int updateByPrimaryKeySelective(Category record);

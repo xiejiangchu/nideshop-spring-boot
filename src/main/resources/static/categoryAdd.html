@@ -33,23 +33,35 @@
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <!-- form start -->
-                        <form role="form" th:action="@{/category/add}" method="post">
+                        <form id="categoryAdd">
                             <div class="box-body">
 
-                                <!--<div class="form-group">-->
-                                <!--<label>一级分类</label>-->
-                                <!--<select class="form-control select2" name='category_l1_id' id="l1_id"-->
-                                <!--style="width: 100%;">-->
-                                <!--<option th:each="item,state:${categoryShortList}" th:text="${item.name}"-->
-                                <!--th:value="${item.id}"></option>-->
-                                <!--</select>-->
-                                <!--</div>-->
 
                                 <div class="form-group">
                                     <label>级别</label>
-                                    <input type="text" class="form-control" name="level" placeholder="">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="level" value="L1" checked>
+                                             一级
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="level" value="L2">
+                                            二级
+                                        </label>
+                                    </div>
                                 </div>
 
+                                <div class="form-group" id="L1Select" style="display: none;">
+                                    <label>一级分类</label>
+                                    <select class="form-control select2" name='parentId' style="width: 100%;">
+                                        <option th:each="item,state:${categoryParentList}" th:text="${item.name}"
+                                                th:value="${item.id}">
+
+                                        </option>
+                                    </select>
+                                </div>
 
                                 <div class="form-group">
                                     <label>名称</label>
@@ -68,11 +80,6 @@
                                 <div class="form-group">
                                     <label>前台文案</label>
                                     <input type="text" class="form-control" name="frontDesc" placeholder="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>父类</label>
-                                    <input type="text" class="form-control" name="parentId" placeholder="">
                                 </div>
 
                                 <div class="form-group">
@@ -181,14 +188,186 @@
                 });
             }
         });
-        $('#l1_id').on('change', function () {
-            var id = $(this).val();
-            $.get('/category/' + id, function (data) {
-                var html = '';
-                for (var i = 0; i < data.data.length; i++) {
-                    html += $.format("<option value='{0}'>{1}</option>", [data.data[i].id, data.data[i].name]);
+
+
+        $('#bannerUrlFile').on("change", function (e) {
+            var data = $(this)[0];
+            var protocol = window.location.protocol || 'http:';
+            var query = 'Authorization=' + document.getElementById('token').value + '&UserAgent=ALIMEDIASDK_WORKSTATION'
+            var url = protocol + "//upload.media.aliyun.com/api/proxy/upload?" + query;
+            var formData = new FormData();
+            formData.append('dir', "");
+            formData.append('name', data.files[0].name);
+            formData.append('size', data.files[0].size);
+            formData.append("content", data.files[0]);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                // 告诉jQuery不要去处理发送的数据
+                processData: false,
+                // 告诉jQuery不要去设置Content-Type请求头
+                contentType: false,
+                beforeSend: function () {
+                    console.log("正在进行，请稍候");
+                },
+                success: function (responseStr) {
+                    if (responseStr.code == 'OK') {
+                        $('#bannerUrl').val(responseStr.url);
+                        $('#bannerUrlFile').siblings('.imgFilePreview').attr("src", responseStr.url);
+                    } else {
+                        alert("失败" + responseStr);
+                    }
+                },
+                error: function (responseStr) {
+                    console.log("error");
                 }
-                $('#l2_id').html(html);
+            });
+        });
+
+
+        $('#iconUrlFile').on("change", function (e) {
+            var data = $(this)[0];
+            var protocol = window.location.protocol || 'http:';
+            var query = 'Authorization=' + document.getElementById('token').value + '&UserAgent=ALIMEDIASDK_WORKSTATION'
+            var url = protocol + "//upload.media.aliyun.com/api/proxy/upload?" + query;
+            var formData = new FormData();
+            formData.append('dir', "");
+            formData.append('name', data.files[0].name);
+            formData.append('size', data.files[0].size);
+            formData.append("content", data.files[0]);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                // 告诉jQuery不要去处理发送的数据
+                processData: false,
+                // 告诉jQuery不要去设置Content-Type请求头
+                contentType: false,
+                beforeSend: function () {
+                    console.log("正在进行，请稍候");
+                },
+                success: function (responseStr) {
+                    if (responseStr.code == 'OK') {
+                        $('#iconUrl').val(responseStr.url);
+                        $('#iconUrlFile').siblings('.imgFilePreview').attr("src", responseStr.url);
+                    } else {
+                        alert("失败" + responseStr);
+                    }
+                },
+                error: function (responseStr) {
+                    console.log("error");
+                }
+            });
+        });
+
+
+        $('#imgUrlFile').on("change", function (e) {
+            var data = $(this)[0];
+            var protocol = window.location.protocol || 'http:';
+            var query = 'Authorization=' + document.getElementById('token').value + '&UserAgent=ALIMEDIASDK_WORKSTATION'
+            var url = protocol + "//upload.media.aliyun.com/api/proxy/upload?" + query;
+            var formData = new FormData();
+            formData.append('dir', "");
+            formData.append('name', data.files[0].name);
+            formData.append('size', data.files[0].size);
+            formData.append("content", data.files[0]);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                // 告诉jQuery不要去处理发送的数据
+                processData: false,
+                // 告诉jQuery不要去设置Content-Type请求头
+                contentType: false,
+                beforeSend: function () {
+                    console.log("正在进行，请稍候");
+                },
+                success: function (responseStr) {
+                    if (responseStr.code == 'OK') {
+                        $('#imgUrl').val(responseStr.url);
+                        $('#imgUrlFile').siblings('.imgFilePreview').attr("src", responseStr.url);
+                    } else {
+                        alert("失败" + responseStr);
+                    }
+                },
+                error: function (responseStr) {
+                    console.log("error");
+                }
+            });
+        });
+
+
+        $('#wapBannerUrlFile').on("change", function (e) {
+            var data = $(this)[0];
+            var protocol = window.location.protocol || 'http:';
+            var query = 'Authorization=' + document.getElementById('token').value + '&UserAgent=ALIMEDIASDK_WORKSTATION'
+            var url = protocol + "//upload.media.aliyun.com/api/proxy/upload?" + query;
+            var formData = new FormData();
+            formData.append('dir', "");
+            formData.append('name', data.files[0].name);
+            formData.append('size', data.files[0].size);
+            formData.append("content", data.files[0]);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                // 告诉jQuery不要去处理发送的数据
+                processData: false,
+                // 告诉jQuery不要去设置Content-Type请求头
+                contentType: false,
+                beforeSend: function () {
+                    console.log("正在进行，请稍候");
+                },
+                success: function (responseStr) {
+                    if (responseStr.code == 'OK') {
+                        $('#wapBannerUrl').val(responseStr.url);
+                        $('#wapBannerUrlFile').siblings('.imgFilePreview').attr("src", responseStr.url);
+                    } else {
+                        alert("失败" + responseStr);
+                    }
+                },
+                error: function (responseStr) {
+                    console.log("error");
+                }
+            });
+        });
+
+
+        $("#categoryAdd").submit(function (e) {
+            e.preventDefault();
+            var that = $(this);
+            $.ajax({
+                type: "POST",
+                url: '/category/add',
+                data: that.serialize(),
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        })
+
+
+        $("input[name='level']").each(function(){
+            $(this).click(function(){
+                var level = $(this).val();
+                if(level=="L1"){
+                    $("#L1Select").css("display","none");
+                }
+                if(level=="L2"){
+                    $("#L1Select").css("display","block");
+                }
             });
         });
     })
