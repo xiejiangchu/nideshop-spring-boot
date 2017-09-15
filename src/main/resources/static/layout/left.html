@@ -37,40 +37,67 @@
                 <li th:class="${title.indexOf('广告位')>-1}? 'treeview active':'treeview'">
                     <a href="#">
                         <i class="fa fa-dashboard"></i> <span>广告位</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a th:href="@{/ad}"><i class="fa fa-circle-o"></i>广告位列表</a></li>
-                        <li class="active"><a th:href="@{/ad/add}"><i class="fa fa-circle-o"></i>增加广告位</a></li>
-                    </ul>
-                </li>
-                <li th:class="${title.indexOf('商品')>-1}? 'treeview active':'treeview'">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>商品信息</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active"><a th:href="@{/specification}"><i class="fa fa-circle-o"></i>商品规格</a></li>
-                        <li class="active"><a th:href="@{/attributeCategory}"><i class="fa fa-circle-o"></i>商品属性</a>
+                        <li th:class="${title=='广告位'}? 'active':''"><a th:href="@{/ad}"><i class="fa fa-circle-o"></i>广告位列表</a>
                         </li>
-                        <li class="active"><a th:href="@{/goods}"><i class="fa fa-circle-o"></i>商品列表</a></li>
+                        <li th:class="${title=='新增广告位'}? 'active':''"><a th:href="@{/ad/add}"><i
+                                class="fa fa-circle-o"></i>增加广告位</a></li>
                     </ul>
                 </li>
                 <li th:class="${title.indexOf('类别')>-1}? 'treeview active':'treeview'">
                     <a href="#">
                         <i class="fa fa-files-o"></i>
                         <span>类别信息</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a th:href="@{/category/l1}"><i class="fa fa-circle-o"></i> 一级分类</a></li>
-                        <li><a th:href="@{/category/l2}"><i class="fa fa-circle-o"></i> 二级分类</a></li>
+                        <li th:class="${title=='商品一级类别'}? 'active':''"><a th:href="@{/category/l1}"><i class="fa fa-circle-o"></i> 一级分类</a></li>
+                        <li th:class="${title=='商品二级类别'}? 'active':''"><a th:href="@{/category/l2}"><i class="fa fa-circle-o"></i> 二级分类</a></li>
+                    </ul>
+                </li>
+                <li th:class="${title.indexOf('商品')>-1}? 'treeview active':'treeview'">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>商品信息</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li th:class="${title=='商品规格'}? 'active':''"><a th:href="@{/specification}"><i class="fa fa-circle-o"></i>商品规格</a></li>
+                        <li th:class="${title=='商品属性'}? 'active':''"><a th:href="@{/attributeCategory}"><i class="fa fa-circle-o"></i>商品属性</a>
+                        </li>
+                        <li th:class="${title=='商品信息'}? 'active':''"><a th:href="@{/goods}"><i class="fa fa-circle-o"></i>商品列表</a></li>
+                    </ul>
+                </li>
+                <li th:class="${title.indexOf('订单')>-1}? 'treeview active':'treeview'">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>订单管理</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li th:class="${title=='所有订单'}? 'active':''"><a th:href="@{/specification}"><i class="fa fa-circle-o"></i>所有订单</a></li>
+                        <li th:class="${title=='订单统计'}? 'active':''"><a th:href="@{/attributeCategory}"><i class="fa fa-circle-o"></i>订单统计</a>
+                        </li>
+                    </ul>
+                </li>
+                <li th:class="${title.indexOf('优惠券')>-1}? 'treeview active':'treeview'">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>优惠券管理</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a th:href="@{/specification}"><i class="fa fa-circle-o"></i>优惠券类别</a></li>
+                        <li><a th:href="@{/attributeCategory}"><i class="fa fa-circle-o"></i>优惠券管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li th:class="${title.indexOf('地址')>-1}? 'treeview active':'treeview'">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>地址管理</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a th:href="@{/specification}"><i class="fa fa-circle-o"></i>所有地址</a></li>
                     </ul>
                 </li>
             </ul>
