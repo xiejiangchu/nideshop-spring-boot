@@ -7,6 +7,7 @@ import com.xie.response.IndexResponse;
 import com.xie.service.*;
 import com.xie.utils.MallConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,6 +43,7 @@ public class IndexApiController extends BaseController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     @ResponseBody
+    @Cacheable(value = MallConstants.CACHE_NAME, key = "index")
     public BaseResponse index() {
         IndexResponse indexResponse = new IndexResponse();
         indexResponse.setBanner(adService.selectByPosition(MallConstants.AdPositionType.首页标题.getVal()));

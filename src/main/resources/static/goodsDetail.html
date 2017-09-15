@@ -48,14 +48,10 @@
                                     <a href="#"><i class="fa fa-bullseye text-red"></i>属性信息</a>
                                 </li>
                                 <li class="section" data-id="section8-content">
-                                    <a href="#"><i class="fa fa-calculator text-orange"></i>规格信息</a>
-                                </li>
-
-                                <li class="section" data-id="section9-content">
                                     <a href="#"><i class="fa fa-certificate text-green"></i>产品信息</a>
                                 </li>
 
-                                <li class="section" data-id="section10-content">
+                                <li class="section" data-id="section9-content">
                                     <a href="#"><i class="fa  fa-code-fork text-blue"></i>服务信息</a>
                                 </li>
                             </ul>
@@ -304,20 +300,86 @@
                 <div id="section5-content" class="section-content col-md-9" style="display: none;">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-sm-4">
-
+                            <div class="col-sm-6" th:each="item,state : ${goodsDetail.specificationList}">
+                                <div th:class="${state.index%4==1}?'box box-warning box-solid':(${state.index%4==2}?'box box-danger box-solid':(${state.index%4==3}? 'box box-success box-solid':'box box-primary box-solid'))">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title" th:text="${item.name}"></h3>
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool"><i
+                                                    class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <span th:class="${value_state.index%4==1}?'btn btn-primary btn-xs':(${value_state.index%4==2}?'btn btn-danger btn-xs':(${value_state.index%4==3}? 'btn btn-success btn-xs':'btn btn-warning btn-xs'))"
+                                              th:each="value,value_state : ${item.valueList}" style="margin: 4px;">
+                                            <span th:text="${value.value}" style="margin-right: 8px;"></span>
+                                            <i class="goodsSpecificationDelete fa fa-times"
+                                               th:attr="data-id=${value.id}"></i>
+                                        </span>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
                             </div>
-                            <div class="col-sm-4">
 
-                            </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-12">
+                                <form id="goodsSpecificationAdd">
+                                    <input type="hidden" name="goodsId" th:value="${goodsDetail.goods.id}">
+                                    <div class="box box-success">
+                                        <div class="box-header with-border">
+                                            <select class="form-control select2" name='specificationId'
+                                                    style="width: 100%;">
+                                                <option th:each="item,state:${goodsDetail.specifications}"
+                                                        th:text="${item.name}"
+                                                        th:value="${item.id}"></option>
+                                            </select>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <textarea name="value" class="form-control" rows="6"
+                                                      placeholder="规格信息"></textarea>
+                                        </div>
+                                        <!-- /.box-body -->
+
+                                        <div class="box-footer">
+                                            <button type="submit" class="btn btn-primary">添加</button>
+                                        </div>
+                                    </div>
+                                </form>
 
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="section6-content" class="section-content col-md-9" style="display: none;">
-                    6
+                    <div class="box box-primary">
+                        <form id="goodsCategoryUpdate">
+                            <input type="hidden" name="id" th:value="${goodsDetail.goods.id}">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label>一级分类</label>
+                                    <select class="form-control select2" id='l1_id' style="width: 100%;">
+                                        <option th:each="item,state:${categoryL1List}" th:text="${item.name}"
+                                                th:value="${item.id}">
+
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>二级分类</label>
+                                    <select class="form-control select2" name='categoryId' id='categoryId'
+                                            style="width: 100%;">
+
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn btn-xs btn-warning">
+                                    保存
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div id="section7-content" class="section-content col-md-9" style="display: none;">
                     <div class="container-fluid">
@@ -387,61 +449,6 @@
                     </div>
                 </div>
                 <div id="section8-content" class="section-content col-md-9" style="display: none;">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-6" th:each="item,state : ${goodsDetail.specificationList}">
-                                <div th:class="${state.index%4==1}?'box box-warning box-solid':(${state.index%4==2}?'box box-danger box-solid':(${state.index%4==3}? 'box box-success box-solid':'box box-primary box-solid'))">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title" th:text="${item.name}"></h3>
-                                        <div class="box-tools pull-right">
-                                            <button type="button" class="btn btn-box-tool"><i
-                                                    class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <!-- /.box-header -->
-                                    <div class="box-body">
-                                        <span th:class="${value_state.index%4==1}?'btn btn-primary btn-xs':(${value_state.index%4==2}?'btn btn-danger btn-xs':(${value_state.index%4==3}? 'btn btn-success btn-xs':'btn btn-warning btn-xs'))"
-                                              th:each="value,value_state : ${item.valueList}" style="margin: 4px;">
-                                            <span th:text="${value.value}" style="margin-right: 8px;"></span>
-                                            <i class="goodsSpecificationDelete fa fa-times"
-                                               th:attr="data-id=${value.id}"></i>
-                                        </span>
-                                    </div>
-                                    <!-- /.box-body -->
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12">
-                                <form id="goodsSpecificationAdd">
-                                    <input type="hidden" name="goodsId" th:value="${goodsDetail.goods.id}">
-                                    <div class="box box-success">
-                                        <div class="box-header with-border">
-                                            <select class="form-control select2" name='specificationId'
-                                                    style="width: 100%;">
-                                                <option th:each="item,state:${goodsDetail.specifications}"
-                                                        th:text="${item.name}"
-                                                        th:value="${item.id}"></option>
-                                            </select>
-                                        </div>
-                                        <!-- /.box-header -->
-                                        <div class="box-body">
-                                            <textarea name="value" class="form-control" rows="6"
-                                                      placeholder="规格信息"></textarea>
-                                        </div>
-                                        <!-- /.box-body -->
-
-                                        <div class="box-footer">
-                                            <button type="submit" class="btn btn-primary">添加</button>
-                                        </div>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="section9-content" class="section-content col-md-9" style="display: none;">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12">
@@ -543,7 +550,7 @@
 
                     </div>
                 </div>
-                <div id="section10-content" class="section-content col-md-9" style="display: none;">
+                <div id="section9-content" class="section-content col-md-9" style="display: none;">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12" th:each="item,state : ${goodsDetail.goodsIssues}">
@@ -924,6 +931,49 @@
             });
         });
 
+        if ($('#l1_id').val()) {
+            var that = $('#l1_id');
+            var id = that.val();
+            $.get('/category/getByPid/' + id, function (data) {
+                var html = '';
+                for (var i = 0; i < data.data.length; i++) {
+                    html += $.format("<option value='{0}'>{1}</option>", [data.data[i].id, data.data[i].name]);
+                }
+                $('#categoryId').html(html);
+            });
+        }
+        $('#l1_id').on('change', function () {
+            var id = $(this).val();
+            $.get('/category/getByPid/' + id, function (data) {
+                var html = '';
+                for (var i = 0; i < data.data.length; i++) {
+                    html += $.format("<option value='{0}'>{1}</option>", [data.data[i].id, data.data[i].name]);
+                }
+                $('#categoryId').html(html);
+            });
+        });
+
+
+        $("#goodsCategoryUpdate").submit(function (e) {
+            e.preventDefault();
+            var that = $(this);
+            $.ajax({
+                type: "POST",
+                url: '/goods/categoryUpdate',
+                data: that.serialize(),
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        })
+
 
         $("#goodsAttributeAdd").submit(function (e) {
             e.preventDefault();
@@ -964,6 +1014,7 @@
                 }
             });
         });
+
 
         $(".productDelete").click(function (e) {
             e.preventDefault();

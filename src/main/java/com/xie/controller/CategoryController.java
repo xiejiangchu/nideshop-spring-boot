@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by xie on 17/9/2.
  */
@@ -98,6 +100,14 @@ public class CategoryController extends BaseController {
         model.addAttribute("categoryPageInfo", categoryPageInfo);
 
         return "categoryL2";
+    }
+
+    @RequestMapping(value = "/getByPid/{pid}", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseResponse getByPid(@PathVariable("pid") int pid) {
+
+        List<Category> list = categoryService.selectByParent(pid);
+        return BaseResponse.ok(list);
     }
 
 

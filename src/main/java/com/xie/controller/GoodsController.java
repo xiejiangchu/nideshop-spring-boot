@@ -118,6 +118,9 @@ public class GoodsController extends BaseController {
         goodDetail.setProductWithGoodsSpecificationList(productService.selectFullByGoodsId(id));
 
         model.addAttribute("goodsDetail", goodDetail);
+
+        model.addAttribute("categoryL1List", categoryService.selectFullMainCategory());
+
         return "goodsDetail";
     }
 
@@ -149,6 +152,22 @@ public class GoodsController extends BaseController {
         goodsService.updateByPrimaryKey(goods);
 
         return "forward:/goods?pageNum=" + pageNum + "&pageSize=" + pageSize;
+    }
+
+
+    @RequestMapping(value = "/categoryUpdate", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseResponse updateBaseInfo(@RequestParam("id") int id,
+                                       @RequestParam("categoryId") int categoryId) {
+        if (categoryService.selectByPrimaryKey(categoryId) != null) {
+            Goods goods = new Goods();
+            goods.setId(id);
+            goods.setCategoryId(categoryId);
+
+            goodsService.updateByPrimaryKeySelective(goods);
+            return BaseResponse.ok();
+        }
+        return BaseResponse.fail();
     }
 
 
