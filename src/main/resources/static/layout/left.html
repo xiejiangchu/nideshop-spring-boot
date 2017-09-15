@@ -75,8 +75,8 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li th:class="${title=='所有订单'}? 'active':''"><a th:href="@{/specification}"><i class="fa fa-circle-o"></i>所有订单</a></li>
-                        <li th:class="${title=='订单统计'}? 'active':''"><a th:href="@{/attributeCategory}"><i class="fa fa-circle-o"></i>订单统计</a>
+                        <li th:class="${title=='所有订单'}? 'active':''"><a th:href="@{/order}"><i class="fa fa-circle-o"></i>所有订单</a></li>
+                        <li th:class="${title=='订单统计'}? 'active':''"><a th:href="@{/orderStatics}"><i class="fa fa-circle-o"></i>订单统计</a>
                         </li>
                     </ul>
                 </li>
@@ -86,8 +86,8 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a th:href="@{/specification}"><i class="fa fa-circle-o"></i>优惠券类别</a></li>
-                        <li><a th:href="@{/attributeCategory}"><i class="fa fa-circle-o"></i>优惠券管理</a>
+                        <li><a th:href="@{/coupon}"><i class="fa fa-circle-o"></i>优惠券类别</a></li>
+                        <li><a th:href="@{/couponManager}"><i class="fa fa-circle-o"></i>优惠券管理</a>
                         </li>
                     </ul>
                 </li>
@@ -97,7 +97,7 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a th:href="@{/specification}"><i class="fa fa-circle-o"></i>所有地址</a></li>
+                        <li><a th:href="@{/address}"><i class="fa fa-circle-o"></i>所有地址</a></li>
                     </ul>
                 </li>
             </ul>
