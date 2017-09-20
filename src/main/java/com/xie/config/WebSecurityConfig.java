@@ -45,16 +45,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-//        http.addFilterBefore(authenticationTokenProcessingFilter, UsernamePasswordAuthenticationFilter.class)
-//                .authorizeRequests()
-//                .antMatchers("/js/**", "/img/**", "/css/**", "/**/favicon.ico").permitAll()
-//                .antMatchers("/api/**").permitAll()
-//                .antMatchers("/wechat/server").permitAll()
-//                .antMatchers("/error","/register").permitAll()
-//                .anyRequest().authenticated()
-//                .and().formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/index", true).failureUrl("/login").permitAll()
-//                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login").invalidateHttpSession(true).permitAll()
-//                .and().exceptionHandling().accessDeniedHandler(myAccessDeniedHandler);
+        http.addFilterBefore(authenticationTokenProcessingFilter, UsernamePasswordAuthenticationFilter.class)
+                .authorizeRequests()
+                .antMatchers("/js/**", "/img/**", "/css/**", "/**/favicon.ico").permitAll()
+                .antMatchers("/api/**").permitAll()
+                .antMatchers("/wechat/server").permitAll()
+                .antMatchers("/error","/register").permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/index", true).failureUrl("/login").permitAll()
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login").invalidateHttpSession(true).permitAll()
+                .and().exceptionHandling().accessDeniedHandler(myAccessDeniedHandler);
 //                .and().addFilterAfter(new MyCsrfHeaderFilter(), CsrfFilter.class);
 //        http.csrf().requireCsrfProtectionMatcher(myCsrfSecurityRequestMatcher).csrfTokenRepository(csrfTokenRepository());
 
