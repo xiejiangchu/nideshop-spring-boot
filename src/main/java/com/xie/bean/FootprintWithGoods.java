@@ -11,6 +11,7 @@ public class FootprintWithGoods implements Serializable {
     private Date addTime;
 
 
+    private String addTimeStr;
 
     private String name;
     /**
@@ -85,5 +86,13 @@ public class FootprintWithGoods implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAddTimeStr() {
+        return addTimeStr;
+    }
+
+    public void setAddTimeStr(String addTimeStr) {
+        this.addTimeStr = addTimeStr;
     }
 }

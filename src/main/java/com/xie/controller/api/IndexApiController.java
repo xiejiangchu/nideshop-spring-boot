@@ -43,7 +43,7 @@ public class IndexApiController extends BaseController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     @ResponseBody
-    @Cacheable(value = MallConstants.CACHE_NAME, key = "index")
+    @Cacheable(value = MallConstants.CACHE_NAME, key = "#root.methodName")
     public BaseResponse index() {
         IndexResponse indexResponse = new IndexResponse();
         indexResponse.setBanner(adService.selectByPosition(MallConstants.AdPositionType.首页标题.getVal()));
