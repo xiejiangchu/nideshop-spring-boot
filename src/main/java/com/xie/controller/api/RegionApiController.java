@@ -25,4 +25,12 @@ public class RegionApiController {
 
         return BaseResponse.ok(regionService.selectByPatentId(parentId));
     }
+
+
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseResponse list(@RequestParam("regionId") short regionId) {
+
+        return BaseResponse.ok(regionService.selectByPrimaryKey(regionId));
+    }
 }
