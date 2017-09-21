@@ -63,6 +63,16 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public List<Cart> selectByUidChecked(Integer uid) {
+        return cartMapper.selectByUidChecked(uid);
+    }
+
+    @Override
+    public int deleteCheckedByUid(Integer uid) {
+        return cartMapper.deleteCheckedByUid(uid);
+    }
+
+    @Override
     public int updateCheckedByProductId(Integer uid, List<Integer> productids, int checked) {
         return cartMapper.updateCheckedByProductId(uid, productids, checked);
     }

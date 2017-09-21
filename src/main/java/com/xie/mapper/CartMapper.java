@@ -24,11 +24,15 @@ public interface CartMapper {
 
     List<Cart> selectByUid(Integer uid);
 
+    List<Cart> selectByUidChecked(Integer uid);
+
     int updateCheckedByProductId(@Param("uid") Integer uid, @Param("productIds") List<Integer> productIds, @Param("checked") int checked);
 
     int updateNumberByProductId(@Param("uid") Integer uid, @Param("productId") Integer productId, @Param("number") int number);
 
     int deleteByUid(Integer uid);
+
+    int deleteCheckedByUid(Integer uid);
 
     int count(Integer uid);
 

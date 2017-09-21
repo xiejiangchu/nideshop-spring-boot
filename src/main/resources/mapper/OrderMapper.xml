@@ -63,7 +63,7 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-    insert into `order` (id, order_sn, user_id,
+    insert into `order` ( order_sn, user_id,
       order_status, shipping_status, pay_status, 
       consignee, country, province, 
       city, district, address, 
@@ -74,7 +74,7 @@
       add_time, confirm_time, pay_time, 
       freight_price, coupon_id, parent_id, 
       coupon_price, callback_status)
-    values (#{id,jdbcType=INTEGER}, #{orderSn,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+    values ( #{orderSn,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
       #{orderStatus,jdbcType=BIT}, #{shippingStatus,jdbcType=BIT}, #{payStatus,jdbcType=BIT}, 
       #{consignee,jdbcType=VARCHAR}, #{country,jdbcType=SMALLINT}, #{province,jdbcType=SMALLINT}, 
       #{city,jdbcType=SMALLINT}, #{district,jdbcType=SMALLINT}, #{address,jdbcType=VARCHAR}, 

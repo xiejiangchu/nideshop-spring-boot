@@ -23,21 +23,21 @@ public class Order implements Serializable {
     private String shippingName;
     private Byte payId;
     private String payName;
-    private BigDecimal shippingFee;
+    private Double shippingFee;
     /**
      * 实际需要支付的金额
      */
-    private BigDecimal actualPrice;
+    private Double actualPrice;
     private Integer integral;
-    private BigDecimal integralMoney;
+    private Double integralMoney;
     /**
      * 订单总价
      */
-    private BigDecimal orderPrice;
+    private Double orderPrice;
     /**
      * 商品总价
      */
-    private BigDecimal goodsPrice;
+    private Double goodsPrice;
     private Integer addTime;
     private Integer confirmTime;
     private Integer payTime;
@@ -50,7 +50,7 @@ public class Order implements Serializable {
      */
     private Integer couponId;
     private Integer parentId;
-    private BigDecimal couponPrice;
+    private Double couponPrice;
     private String callbackStatus;
 
     public Integer getId() {
@@ -197,19 +197,19 @@ public class Order implements Serializable {
         this.payName = payName;
     }
 
-    public BigDecimal getShippingFee() {
+    public Double getShippingFee() {
         return shippingFee;
     }
 
-    public void setShippingFee(BigDecimal shippingFee) {
+    public void setShippingFee(Double shippingFee) {
         this.shippingFee = shippingFee;
     }
 
-    public BigDecimal getActualPrice() {
+    public Double getActualPrice() {
         return actualPrice;
     }
 
-    public void setActualPrice(BigDecimal actualPrice) {
+    public void setActualPrice(Double actualPrice) {
         this.actualPrice = actualPrice;
     }
 
@@ -221,27 +221,27 @@ public class Order implements Serializable {
         this.integral = integral;
     }
 
-    public BigDecimal getIntegralMoney() {
+    public Double getIntegralMoney() {
         return integralMoney;
     }
 
-    public void setIntegralMoney(BigDecimal integralMoney) {
+    public void setIntegralMoney(Double integralMoney) {
         this.integralMoney = integralMoney;
     }
 
-    public BigDecimal getOrderPrice() {
+    public Double getOrderPrice() {
         return orderPrice;
     }
 
-    public void setOrderPrice(BigDecimal orderPrice) {
+    public void setOrderPrice(Double orderPrice) {
         this.orderPrice = orderPrice;
     }
 
-    public BigDecimal getGoodsPrice() {
+    public Double getGoodsPrice() {
         return goodsPrice;
     }
 
-    public void setGoodsPrice(BigDecimal goodsPrice) {
+    public void setGoodsPrice(Double goodsPrice) {
         this.goodsPrice = goodsPrice;
     }
 
@@ -293,11 +293,11 @@ public class Order implements Serializable {
         this.parentId = parentId;
     }
 
-    public BigDecimal getCouponPrice() {
+    public Double getCouponPrice() {
         return couponPrice;
     }
 
-    public void setCouponPrice(BigDecimal couponPrice) {
+    public void setCouponPrice(Double couponPrice) {
         this.couponPrice = couponPrice;
     }
 

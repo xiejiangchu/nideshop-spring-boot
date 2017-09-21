@@ -11,7 +11,7 @@ public class OrderGoods implements Serializable {
     private String goodsName;
     private String goodsSn;
     private Integer productId;
-    private Short number;
+    private Integer number;
     private BigDecimal marketPrice;
     private BigDecimal retailPrice;
     private Boolean isReal;
@@ -67,11 +67,11 @@ public class OrderGoods implements Serializable {
         this.productId = productId;
     }
 
-    public Short getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(Short number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 

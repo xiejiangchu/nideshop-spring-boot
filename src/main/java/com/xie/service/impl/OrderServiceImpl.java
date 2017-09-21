@@ -24,7 +24,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public int insert(Order record) {
-        return orderMapper.insert(record);
+         orderMapper.insert(record);
+        return record.getId();
     }
 
     @Override

@@ -64,9 +64,24 @@
         from cart
         where user_id = #{uid,jdbcType=INTEGER}
     </select>
+
+    <select id="selectByUidChecked" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from cart
+        where user_id = #{uid,jdbcType=INTEGER} AND checked=1
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete from cart
         where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteCheckedByUid">
+        delete from cart
+        where user_id = #{uid,jdbcType=INTEGER} AND checked=1
     </delete>
 
     <delete id="deleteByUid">

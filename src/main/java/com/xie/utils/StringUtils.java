@@ -39,4 +39,5 @@ public class StringUtils {
     public static String generateSessionId() {
         return randomString(20);
     }
+
 }
