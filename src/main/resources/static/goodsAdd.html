@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace='layout/header :: header'></head>
+<body class="skin-blue sidebar-mini wysihtml5-supported" style="height: auto; min-height: 100%;">
+
+<!-- wrapper -->
+<div class="wrapper">
+    <div th:replace='layout/top :: top'></div>
+    <!-- Left side column. contains the logo and sidebar -->
+    <div th:replace='layout/left :: left'></div>
+    <!-- /Left side column. contains the logo and sidebar -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                商品管理
+                <small>添加商品</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">商品详情</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div id="section1-content" class="col-md-offset-2 col-md-8">
+                    <div class="box box-primary">
+                        <!-- form start -->
+                        <form role="form" id="goodsAddBaseInfo">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label>名称</label>
+                                    <input type="text" class="form-control" name="name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>SN</label>
+                                    <input type="text" class="form-control" name="goodsSn"">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>关键字</label>
+                                    <input type="text" class="form-control" name="keywords"
+                                    >
+                                </div>
+
+                                <div class="form-group">
+                                    <label>单位</label>
+                                    <input type="text" class="form-control" name="goodsUnit"
+                                    >
+                                </div>
+
+                                <div class="form-group">
+                                    <label>促销标签</label>
+                                    <input type="text" class="form-control" name="promotionTag"
+                                    >
+                                </div>
+
+                                <div class="form-group">
+                                    <label>促销信息</label>
+                                    <input type="text" class="form-control" name="promotionDesc"
+                                    >
+                                </div>
+
+                                <div class="form-group">
+                                    <label>简单描述</label>
+                                    <input type="text" class="form-control" name="goodsBrief"
+                                    >
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">增加</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <div th:replace='layout/control :: control'></div>
+    <!-- /.control-sidebar -->
+
+    <!-- footer -->
+    <div th:replace='layout/footer :: footer'></div>
+    <!-- /footer -->
+</div>
+<!-- ./wrapper -->
+
+
+<div th:replace='layout/scripts :: scripts'></div>
+<script src="/js/select2.full.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#goodsAddBaseInfo").submit(function (e) {
+            e.preventDefault();
+            var that = $(this);
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/goods/addBaseInfo',
+                data: that.serialize(),
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('提交成功');
+                        window.location.href = '/goods' + data.data;
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        });
+
+    });
+</script>
+</body>
+</html>
+
+

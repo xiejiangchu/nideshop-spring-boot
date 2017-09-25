@@ -162,9 +162,9 @@
                 <div id="section3-content" class="section-content col-md-9" style="display: none;">
                     <div class="box box-primary">
                         <!-- form start -->
-                        <form role="form" th:action="@{/goods/update}" method="post">
+                        <form id="goodsUpdateImages">
                             <input type="hidden" name="id" th:value="${goodsDetail.goods.id}">
-                            <input type="hidden" name="token" id="token" th:value="${token}">
+                            <input type="hidden" id="token" th:value="${token}">
                             <div class="box-body">
 
                                 <div class="container-fluid">
@@ -652,11 +652,12 @@
 
         $("#goodsUpdateBaseInfo").submit(function (e) {
             e.preventDefault();
+            var that = $(this);
             $.ajax({
                 cache: true,
                 type: "POST",
                 url: '/goods/updateBaseInfo',
-                data: $('#goodsUpdateBaseInfo').serialize(),
+                data: that.serialize(),
                 async: false,
                 error: function (request) {
                     alert("网络错误");
@@ -674,11 +675,36 @@
 
         $("#goodsUpdateGoodsDesc").submit(function (e) {
             e.preventDefault();
+            var that = $(this);
             $.ajax({
                 cache: true,
                 type: "POST",
                 url: '/goods/updateGoodsDesc',
-                data: $('#goodsUpdateGoodsDesc').serialize(),
+                data: that.serialize(),
+                async: false,
+                error: function (request) {
+                    alert("网络错误");
+                },
+                success: function (data) {
+                    if (data.errno == 0) {
+                        alert('修改成功');
+                    } else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        });
+
+        $("#goodsUpdateImages").submit(function (e) {
+            e.preventDefault();
+            var that = $(this);
+            console.log(that.serialize());
+            return
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: '/goods/updateImages',
+                data: that.serialize(),
                 async: false,
                 error: function (request) {
                     alert("网络错误");

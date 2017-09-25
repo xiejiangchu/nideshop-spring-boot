@@ -67,6 +67,7 @@
                         <li th:class="${title=='商品属性'}? 'active':''"><a th:href="@{/attributeCategory}"><i class="fa fa-circle-o"></i>商品属性</a>
                         </li>
                         <li th:class="${title=='商品信息'}? 'active':''"><a th:href="@{/goods}"><i class="fa fa-circle-o"></i>商品列表</a></li>
+                        <li th:class="${title=='商品添加'}? 'active':''"><a th:href="@{/goods/add}"><i class="fa fa-circle-o"></i>商品添加</a></li>
                     </ul>
                 </li>
                 <li th:class="${title.indexOf('订单')>-1}? 'treeview active':'treeview'">

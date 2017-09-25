@@ -68,6 +68,13 @@ public class GoodsController extends BaseController {
         return "goods";
     }
 
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String detail(Model model) {
+        setHeaderData(model);
+        model.addAttribute("title", "商品添加");
+        return "goodsAdd";
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String detail(@PathVariable(value = "id") int id, Model model) {
         setHeaderData(model);
@@ -195,6 +202,32 @@ public class GoodsController extends BaseController {
         return "forward:/goods?pageNum=" + pageNum + "&pageSize=" + pageSize;
     }
 
+
+    @RequestMapping(value = "/addBaseInfo", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseResponse addBaseInfo(
+            @RequestParam("name") String name,
+            @RequestParam("goodsSn") String goodsSn,
+            @RequestParam("keywords") String keywords,
+            @RequestParam("goodsUnit") String goodsUnit,
+            @RequestParam("promotionTag") String promotionTag,
+            @RequestParam("promotionDesc") String promotionDesc,
+            @RequestParam("goodsBrief") String goodsBrief) {
+
+        Goods goods = new Goods();
+        goods.setName(name);
+        goods.setGoodsSn(goodsSn);
+        goods.setKeywords(keywords);
+        goods.setGoodsUnit(goodsUnit);
+        goods.setPromotionDesc(promotionDesc);
+        goods.setPromotionTag(promotionTag);
+        goods.setGoodsBrief(goodsBrief);
+
+        int id = goodsService.insertSelective(goods);
+        return BaseResponse.ok(id);
+
+    }
+
     @RequestMapping(value = "/updateBaseInfo", method = RequestMethod.POST)
     @ResponseBody
     public BaseResponse updateBaseInfo(@RequestParam("id") int id,
@@ -219,6 +252,21 @@ public class GoodsController extends BaseController {
         goodsService.updateByPrimaryKeySelective(goods);
         return BaseResponse.ok();
 
+    }
+
+    @RequestMapping(value = "/updateGoodsImages", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseResponse updateGoodsImages(@RequestParam("id") int id,
+                                          @RequestParam("primaryPicUrl") String primaryPicUrl,
+                                          @RequestParam("listPicUrl") String listPicUrl) {
+
+        Goods goods = new Goods();
+        goods.setId(id);
+        goods.setPrimaryPicUrl(primaryPicUrl);
+        goods.setListPicUrl(listPicUrl);
+
+        goodsService.updateByPrimaryKeySelective(goods);
+        return BaseResponse.ok();
     }
 
 

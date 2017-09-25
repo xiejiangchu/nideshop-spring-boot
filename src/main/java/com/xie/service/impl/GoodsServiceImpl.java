@@ -38,7 +38,8 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public int insertSelective(Goods record) {
-        return goodsMapper.insertSelective(record);
+        goodsMapper.insertSelective(record);
+        return record.getId();
     }
 
     @Override
