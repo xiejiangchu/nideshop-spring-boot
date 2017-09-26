@@ -23,6 +23,11 @@ public class GoodsGalleryServiceImpl implements GoodsGalleryService {
     }
 
     @Override
+    public int deleteByGoodsId(Integer gid) {
+        return goodsGalleryMapper.deleteByGoodsId(gid);
+    }
+
+    @Override
     public int insert(GoodsGallery record) {
         return goodsGalleryMapper.insert(record);
     }

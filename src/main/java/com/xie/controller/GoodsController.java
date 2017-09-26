@@ -9,6 +9,7 @@ import com.xie.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,6 +56,7 @@ public class GoodsController extends BaseController {
 
     @Autowired
     private ProductService productService;
+
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public String index(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
@@ -254,21 +256,6 @@ public class GoodsController extends BaseController {
 
     }
 
-    @RequestMapping(value = "/updateGoodsImages", method = RequestMethod.POST)
-    @ResponseBody
-    public BaseResponse updateGoodsImages(@RequestParam("id") int id,
-                                          @RequestParam("primaryPicUrl") String primaryPicUrl,
-                                          @RequestParam("listPicUrl") String listPicUrl) {
-
-        Goods goods = new Goods();
-        goods.setId(id);
-        goods.setPrimaryPicUrl(primaryPicUrl);
-        goods.setListPicUrl(listPicUrl);
-
-        goodsService.updateByPrimaryKeySelective(goods);
-        return BaseResponse.ok();
-    }
-
 
     @RequestMapping(value = "/updateGoodsDesc", method = RequestMethod.POST)
     @ResponseBody
@@ -276,6 +263,9 @@ public class GoodsController extends BaseController {
                                         @RequestParam("goodsDesc") String goodsDesc) {
 
         Goods goods = new Goods();
+        if (StringUtils.isEmpty(goodsDesc)) {
+            return BaseResponse.fail("内容不能为空");
+        }
         goods.setId(id);
         goods.setGoodsDesc(goodsDesc);
 
@@ -286,16 +276,35 @@ public class GoodsController extends BaseController {
 
     @RequestMapping(value = "/updateGoodsPic", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResponse updateGoodsPic(@RequestParam("id") int id,
+    public BaseResponse updateGoodsPic(@RequestParam("id") int gid,
                                        @RequestParam("primaryPicUrl") String primaryPicUrl,
-                                       @RequestParam("listPicUrl") String listPicUrl) {
+                                       @RequestParam(value = "listPicUrl", required = false) String listPicUrl,
+                                       @RequestParam(value = "detailPicUrl", required = false) List<String> detailPicUrls) {
 
         Goods goods = new Goods();
-        goods.setId(id);
-        goods.setPrimaryPicUrl(primaryPicUrl);
-        goods.setListPicUrl(listPicUrl);
-
+        goods.setId(gid);
+        if (!StringUtils.isEmpty(primaryPicUrl)) {
+            goods.setPrimaryPicUrl(primaryPicUrl);
+        }
+        if (!StringUtils.isEmpty(listPicUrl)) {
+            goods.setListPicUrl(listPicUrl);
+        }
         goodsService.updateByPrimaryKeySelective(goods);
+
+        if (detailPicUrls != null && detailPicUrls.size() > 0) {
+            goodsGalleryService.deleteByGoodsId(gid);
+            for (int i = 0; i < detailPicUrls.size(); i++) {
+                if (!StringUtils.isEmpty(detailPicUrls.get(i))) {
+                    GoodsGallery goodsGallery = new GoodsGallery();
+                    goodsGallery.setGoodsId(gid);
+                    goodsGallery.setImgUrl(detailPicUrls.get(i));
+                    goodsGallery.setSortOrder(detailPicUrls.size() - i);
+                    goodsGalleryService.insertSelective(goodsGallery);
+                }
+            }
+        }
+
+
         return BaseResponse.ok();
     }
 

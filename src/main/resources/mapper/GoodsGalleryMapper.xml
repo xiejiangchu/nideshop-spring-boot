@@ -27,18 +27,23 @@
 
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from goods_gallery
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+      delete from goods_gallery
+      where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByGoodsId" parameterType="java.lang.Integer">
+        delete from goods_gallery
+        where goods_id = #{gid,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="com.xie.bean.GoodsGallery">
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-    insert into goods_gallery (id, goods_id, img_url, 
-      img_desc, sort_order)
-    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{imgUrl,jdbcType=VARCHAR}, 
-      #{imgDesc,jdbcType=VARCHAR}, #{sortOrder,jdbcType=INTEGER})
-  </insert>
+        insert into goods_gallery (id, goods_id, img_url,
+        img_desc, sort_order)
+        values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{imgUrl,jdbcType=VARCHAR},
+        #{imgDesc,jdbcType=VARCHAR}, #{sortOrder,jdbcType=INTEGER})
+    </insert>
     <insert id="insertSelective" parameterType="com.xie.bean.GoodsGallery">
         insert into goods_gallery
         <trim prefix="(" suffix=")" suffixOverrides=",">

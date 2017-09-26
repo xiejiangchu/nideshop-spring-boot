@@ -207,14 +207,12 @@
 
                                 <div class="form-group">
                                     <label for="listPicUrl">详情图片</label>
-                                    <input type="file" id="goodsGalleries">
+                                    <input type="file" id="imgFileDetail" multiple="multiple">
 
                                     <p class="help-block">预览</p>
                                     <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-sm-3 col-xs-3">
-                                                <img class="imgFilePreview" style="width: 100%;">
-                                            </div>
+                                        <div class="row" id="imgFileDetailPreview">
+
                                         </div>
                                     </div>
 
@@ -698,12 +696,10 @@
         $("#goodsUpdateImages").submit(function (e) {
             e.preventDefault();
             var that = $(this);
-            console.log(that.serialize());
-            return
             $.ajax({
                 cache: true,
                 type: "POST",
-                url: '/goods/updateImages',
+                url: '/goods/updateGoodsPic',
                 data: that.serialize(),
                 async: false,
                 error: function (request) {
@@ -720,8 +716,51 @@
         });
 
 
+        $('#imgFileDetail').on("change", function (e) {
+            var files = $(this)[0].files;
+            console.log(files);
+            for (var i = 0; i < files.length; i++) {
+                var data = files[i];
+                var protocol = window.location.protocol || 'http:';
+                var query = 'Authorization=' + document.getElementById('token').value + '&UserAgent=ALIMEDIASDK_WORKSTATION'
+                var url = protocol + "//upload.media.aliyun.com/api/proxy/upload?" + query;
+                var formData = new FormData();
+                formData.append('dir', "");
+                formData.append('name', data.name);
+                formData.append('size', data.size);
+                formData.append("content", data);
+
+                $('#imgFileDetailPreview').html('');
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: formData,
+                    // 告诉jQuery不要去处理发送的数据
+                    processData: false,
+                    // 告诉jQuery不要去设置Content-Type请求头
+                    contentType: false,
+                    beforeSend: function () {
+                        console.log("正在进行，请稍候");
+                    },
+                    success: function (responseStr) {
+                        if (responseStr.code == 'OK') {
+                            var html = $.format("<div class='col-sm-3 col-xs-3'> <input type='hidden' name='detailPicUrl' value='{0}'><img class='imgFilePreview' src='{1}' style='width: 100%;'> </div>", [responseStr.url, responseStr.url]);
+                            $('#imgFileDetailPreview').append(html);
+                        } else {
+                            alert("失败" + responseStr);
+                        }
+                    },
+                    error: function (responseStr) {
+                        console.log("error");
+                    }
+                });
+            }
+        });
+
+
         $('#imgFilePrimary').on("change", function (e) {
-            var data = $('#imgFilePrimary')[0];
+            var data = $(this)[0];
             var protocol = window.location.protocol || 'http:';
             var query = 'Authorization=' + document.getElementById('token').value + '&UserAgent=ALIMEDIASDK_WORKSTATION'
             var url = protocol + "//upload.media.aliyun.com/api/proxy/upload?" + query;

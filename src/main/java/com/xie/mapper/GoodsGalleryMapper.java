@@ -18,4 +18,6 @@ public interface GoodsGalleryMapper {
     int updateByPrimaryKey(GoodsGallery record);
 
     List<GoodsGallery> selectByGoodsId(Integer gid);
+
+    int deleteByGoodsId(Integer gid);
 }

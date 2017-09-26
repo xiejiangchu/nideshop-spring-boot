@@ -11,6 +11,8 @@ public interface GoodsGalleryService {
 
     int deleteByPrimaryKey(Integer id);
 
+    int deleteByGoodsId(Integer gid);
+
     int insert(GoodsGallery record);
 
     int insertSelective(GoodsGallery record);
