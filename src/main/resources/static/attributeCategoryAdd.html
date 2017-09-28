@@ -116,7 +116,7 @@
         });
         $('#l1_id').on('change', function () {
             var id = $(this).val();
-            $.get('/category/' + id, function (data) {
+            $.get('/category/getByPid/' + id, function (data) {
                 var html = '';
                 for (var i = 0; i < data.data.length; i++) {
                     html += $.format("<option value='{0}'>{1}</option>", [data.data[i].id, data.data[i].name]);
