@@ -1,16 +1,16 @@
 package com.xie.bean;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.util.List;
 
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;
     private String orderSn;
     private Integer userId;
-    private Boolean orderStatus;
-    private Boolean shippingStatus;
-    private Boolean payStatus;
+    private Integer orderStatus;
+    private Integer shippingStatus;
+    private Integer payStatus;
     private String consignee;
     private Short country;
     private Short province;
@@ -19,9 +19,9 @@ public class Order implements Serializable {
     private String address;
     private String mobile;
     private String postscript;
-    private Byte shippingId;
+    private Integer shippingId;
     private String shippingName;
-    private Byte payId;
+    private Integer payId;
     private String payName;
     private Double shippingFee;
     /**
@@ -53,6 +53,23 @@ public class Order implements Serializable {
     private Double couponPrice;
     private String callbackStatus;
 
+    /**
+     * 前台显示
+     */
+    private String provinceName;
+    private String cityName;
+    private String districtName;
+    private String fullRegion;
+    private String orderStatusText;
+
+
+    private OrderHandleOption orderHandleOption;
+
+    private List<OrderGoods> orderGoodsList;
+
+
+
+
     public Integer getId() {
         return id;
     }
@@ -77,27 +94,27 @@ public class Order implements Serializable {
         this.userId = userId;
     }
 
-    public Boolean getOrderStatus() {
+    public Integer getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(Boolean orderStatus) {
+    public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
     }
 
-    public Boolean getShippingStatus() {
+    public Integer getShippingStatus() {
         return shippingStatus;
     }
 
-    public void setShippingStatus(Boolean shippingStatus) {
+    public void setShippingStatus(Integer shippingStatus) {
         this.shippingStatus = shippingStatus;
     }
 
-    public Boolean getPayStatus() {
+    public Integer getPayStatus() {
         return payStatus;
     }
 
-    public void setPayStatus(Boolean payStatus) {
+    public void setPayStatus(Integer payStatus) {
         this.payStatus = payStatus;
     }
 
@@ -165,12 +182,20 @@ public class Order implements Serializable {
         this.postscript = postscript;
     }
 
-    public Byte getShippingId() {
+    public Integer getShippingId() {
         return shippingId;
     }
 
-    public void setShippingId(Byte shippingId) {
+    public void setShippingId(Integer shippingId) {
         this.shippingId = shippingId;
+    }
+
+    public Integer getPayId() {
+        return payId;
+    }
+
+    public void setPayId(Integer payId) {
+        this.payId = payId;
     }
 
     public String getShippingName() {
@@ -179,14 +204,6 @@ public class Order implements Serializable {
 
     public void setShippingName(String shippingName) {
         this.shippingName = shippingName;
-    }
-
-    public Byte getPayId() {
-        return payId;
-    }
-
-    public void setPayId(Byte payId) {
-        this.payId = payId;
     }
 
     public String getPayName() {
@@ -307,6 +324,62 @@ public class Order implements Serializable {
 
     public void setCallbackStatus(String callbackStatus) {
         this.callbackStatus = callbackStatus;
+    }
+
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
+    }
+
+    public String getFullRegion() {
+        return fullRegion;
+    }
+
+    public void setFullRegion(String fullRegion) {
+        this.fullRegion = fullRegion;
+    }
+
+    public String getOrderStatusText() {
+        return orderStatusText;
+    }
+
+    public void setOrderStatusText(String orderStatusText) {
+        this.orderStatusText = orderStatusText;
+    }
+
+    public OrderHandleOption getOrderHandleOption() {
+        return orderHandleOption;
+    }
+
+    public void setOrderHandleOption(OrderHandleOption orderHandleOption) {
+        this.orderHandleOption = orderHandleOption;
+    }
+
+    public List<OrderGoods> getOrderGoodsList() {
+        return orderGoodsList;
+    }
+
+    public void setOrderGoodsList(List<OrderGoods> orderGoodsList) {
+        this.orderGoodsList = orderGoodsList;
     }
 
     @Override

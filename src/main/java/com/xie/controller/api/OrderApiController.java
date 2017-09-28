@@ -1,5 +1,6 @@
 package com.xie.controller.api;
 
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.*;
 import com.xie.response.BaseResponse;
 import com.xie.service.*;
@@ -36,14 +37,25 @@ public class OrderApiController extends BaseController {
     private CouponService couponService;
 
     @Autowired
-    private OrderGoodsMapperService orderGoodsMapperService;
+    private RegionService regionService;
+
+    @Autowired
+    private OrderGoodsService orderGoodsService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public BaseResponse list(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
                              @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
 
-        return BaseResponse.ok(orderService.selectByUid(getUid(), page, size));
+        PageInfo<Order> orders = orderService.selectByUid(getUid(), page, size);
+
+        orders.getList().forEach(item -> {
+            item.setOrderStatusText(orderService.getOrderStatusText(item));
+            item.setOrderHandleOption(orderService.getOrderHandleOption(item));
+            item.setOrderGoodsList(orderGoodsService.selectByOrderId(item.getId()));
+        });
+
+        return BaseResponse.ok(orders);
     }
 
 
@@ -55,7 +67,16 @@ public class OrderApiController extends BaseController {
             return BaseResponse.fail("订单不存在");
         }
 
-        return BaseResponse.ok();
+        order.setProvinceName(regionService.selectByPrimaryKey(order.getProvince()).getName());
+        order.setCityName(regionService.selectByPrimaryKey(order.getCity()).getName());
+        order.setDistrictName(regionService.selectByPrimaryKey(order.getDistrict()).getName());
+        order.setFullRegion(order.getProvinceName() + order.getCityName() + order.getDistrictName());
+
+        order.setOrderStatusText(orderService.getOrderStatusText(orderId));
+        order.setOrderHandleOption(orderService.getOrderHandleOption(orderId));
+        order.setOrderGoodsList(orderGoodsService.selectByOrderId(orderId));
+
+        return BaseResponse.ok(order);
     }
 
 
@@ -121,7 +142,7 @@ public class OrderApiController extends BaseController {
             OrderGoods orderGoods = new OrderGoods();
             orderGoods.setOrderId(orderId);
             BeanUtils.copyProperties(item, orderGoods);
-            orderGoodsMapperService.insert(orderGoods);
+            orderGoodsService.insert(orderGoods);
         });
 
         cartService.deleteCheckedByUid(getUid());

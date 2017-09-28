@@ -1,19 +1,16 @@
 package com.xie.controller.api;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xie.bean.Cart;
-import com.xie.bean.Goods;
-import com.xie.bean.GoodsSpecification;
-import com.xie.bean.Product;
+import com.xie.bean.*;
 import com.xie.request.CartCheckedRequest;
+import com.xie.request.CartCheckoutRequest;
 import com.xie.request.CartDeleteRequest;
 import com.xie.request.CartUpdateRequest;
 import com.xie.response.BaseResponse;
+import com.xie.response.CartCheckoutResponse;
 import com.xie.response.CartTotalResponse;
-import com.xie.service.CartService;
-import com.xie.service.GoodsService;
-import com.xie.service.GoodsSpecificationService;
-import com.xie.service.ProductService;
+import com.xie.service.*;
+import com.xie.service.impl.UserCouponServiceImpl;
 import com.xie.utils.MallConstants;
 import org.apache.http.util.TextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +40,21 @@ public class CartController extends BaseController {
     @Autowired
     private GoodsSpecificationService goodsSpecificationService;
 
+    @Autowired
+    private AddressService addressService;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private RegionService regionService;
+
+    @Autowired
+    private CouponService couponService;
+
+    @Autowired
+    private UserCouponServiceImpl userCouponService;
+
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     @ResponseBody
     public BaseResponse index() {
@@ -70,7 +82,7 @@ public class CartController extends BaseController {
         if (cart == null) {
             List<GoodsSpecification> goodsSepcifitionValue = null;
             if (cart == null) {
-                List<Integer> goods_specification_ids = Arrays.stream(product.getGoodsSpecificationIds().split(MallConstants.SPECIFICATION_SPLIT)).map(item->Integer.parseInt(item)).collect(Collectors.toList());
+                List<Integer> goods_specification_ids = Arrays.stream(product.getGoodsSpecificationIds().split(MallConstants.SPECIFICATION_SPLIT)).map(item -> Integer.parseInt(item)).collect(Collectors.toList());
                 goodsSepcifitionValue = goodsSpecificationService.selectByPrimaryKeyAndGoodsId(goods_specification_ids, goodsId);
             }
 
@@ -163,6 +175,56 @@ public class CartController extends BaseController {
         List<Integer> goodsIds = Arrays.stream(cartCheckedRequest.getProductIds().split(",")).map(item -> Integer.parseInt(item)).collect(Collectors.toList());
         int count = cartService.updateCheckedByProductId(getUid(), goodsIds, cartCheckedRequest.getIsChecked());
         return BaseResponse.ok(getCart());
+    }
+
+    @RequestMapping(value = "/checkout", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseResponse checkout(@RequestBody CartCheckoutRequest cartCheckoutRequest) {
+
+        Address checkedAddress = addressService.selectDefaultByUid(getUid());
+        if (checkedAddress != null) {
+            checkedAddress.setProvinceName(regionService.selectByPrimaryKey(checkedAddress.getProvinceId()).getName());
+            checkedAddress.setCityName(regionService.selectByPrimaryKey(checkedAddress.getCityId()).getName());
+            checkedAddress.setDistrictName(regionService.selectByPrimaryKey(checkedAddress.getDistrictId()).getName());
+            checkedAddress.setFullRegion(checkedAddress.getProvinceName() + checkedAddress.getCityName() + checkedAddress.getDistrictName());
+        }
+
+        int goodsCount = 0;
+        double goodsAmount = 0.00;
+        int checkedGoodsCount = 0;
+        double checkedGoodsAmount = 0.00;
+        List<Cart> cartList = cartService.selectByUidChecked(getUid());
+
+        for (int i = 0; i < cartList.size(); i++) {
+            Cart item = cartList.get(i);
+            goodsCount += item.getNumber();
+            goodsAmount += item.getNumber() * item.getRetailPrice();
+            if (item.getChecked() == 1) {
+                checkedGoodsCount += item.getNumber();
+                checkedGoodsAmount += item.getNumber() * item.getRetailPrice();
+            }
+        }
+
+        double freightPrice = 0.0;
+        double couponPrice = 0.0;
+        double goodsTotalPrice = 0.0;
+        double orderTotalPrice = 0.0;
+        double actualPrice = 0.0;
+
+        goodsTotalPrice = checkedGoodsAmount;
+        orderTotalPrice = checkedGoodsAmount + freightPrice - couponPrice;
+        actualPrice = orderTotalPrice - 0.00;
+
+        CartCheckoutResponse cartCheckoutResponse = new CartCheckoutResponse();
+        cartCheckoutResponse.setCheckedAddress(checkedAddress);
+        cartCheckoutResponse.setCouponPrice(couponPrice);
+        cartCheckoutResponse.setGoodsTotalPrice(goodsTotalPrice);
+        cartCheckoutResponse.setOrderTotalPrice(orderTotalPrice);
+        cartCheckoutResponse.setActualPrice(actualPrice);
+        cartCheckoutResponse.setCartList(cartList);
+
+
+        return BaseResponse.ok(cartCheckoutResponse);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)

@@ -2,6 +2,8 @@ package com.xie.mapper;
 
 import com.xie.bean.OrderGoods;
 
+import java.util.List;
+
 public interface OrderGoodsMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -16,4 +18,6 @@ public interface OrderGoodsMapper {
     int updateByPrimaryKeyWithBLOBs(OrderGoods record);
 
     int updateByPrimaryKey(OrderGoods record);
+
+    List<OrderGoods> selectByOrderId(Integer oid);
 }

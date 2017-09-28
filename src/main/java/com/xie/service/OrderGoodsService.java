@@ -2,10 +2,12 @@ package com.xie.service;
 
 import com.xie.bean.OrderGoods;
 
+import java.util.List;
+
 /**
  * Created by xie on 17/9/21.
  */
-public interface OrderGoodsMapperService {
+public interface OrderGoodsService {
 
     int deleteByPrimaryKey(Integer id);
 
@@ -20,4 +22,6 @@ public interface OrderGoodsMapperService {
     int updateByPrimaryKeyWithBLOBs(OrderGoods record);
 
     int updateByPrimaryKey(OrderGoods record);
+
+    List<OrderGoods> selectByOrderId(Integer orderId);
 }

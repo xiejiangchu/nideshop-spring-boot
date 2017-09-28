@@ -15,6 +15,13 @@ public class Address implements Serializable {
     private String mobile;
     private Boolean isDefault;
 
+
+
+    private String provinceName;
+    private String cityName;
+    private String districtName;
+    private String fullRegion;
+
     public Integer getId() {
         return id;
     }
@@ -93,6 +100,39 @@ public class Address implements Serializable {
 
     public void setIsDefault(Boolean isDefault) {
         this.isDefault = isDefault;
+    }
+
+
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
+    }
+
+    public String getFullRegion() {
+        return fullRegion;
+    }
+
+    public void setFullRegion(String fullRegion) {
+        this.fullRegion = fullRegion;
     }
 
     @Override

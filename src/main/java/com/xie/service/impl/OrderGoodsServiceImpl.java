@@ -2,15 +2,17 @@ package com.xie.service.impl;
 
 import com.xie.bean.OrderGoods;
 import com.xie.mapper.OrderGoodsMapper;
-import com.xie.service.OrderGoodsMapperService;
+import com.xie.service.OrderGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by xie on 17/9/21.
  */
 @Service
-public class OrderGoodsMapperServiceImpl implements OrderGoodsMapperService {
+public class OrderGoodsServiceImpl implements OrderGoodsService {
 
     @Autowired
     private OrderGoodsMapper orderGoodsMapper;
@@ -48,5 +50,10 @@ public class OrderGoodsMapperServiceImpl implements OrderGoodsMapperService {
     @Override
     public int updateByPrimaryKey(OrderGoods record) {
         return orderGoodsMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<OrderGoods> selectByOrderId(Integer orderId) {
+        return orderGoodsMapper.selectByOrderId(orderId);
     }
 }
