@@ -55,6 +55,13 @@
         from `order`
         where user_id = #{uid,jdbcType=INTEGER}
     </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `order`
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from `order`
     where id = #{id,jdbcType=INTEGER}

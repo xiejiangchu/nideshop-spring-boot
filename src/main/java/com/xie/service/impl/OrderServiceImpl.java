@@ -57,6 +57,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public PageInfo<Order> selectAll(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Order> page = new PageInfo<Order>(orderMapper.selectAll());
+        return page;
+    }
+
+    @Override
     public OrderHandleOption getOrderHandleOption(Integer orderId) {
 
         OrderHandleOption orderHandleOption = new OrderHandleOption();

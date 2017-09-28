@@ -9,7 +9,6 @@ import com.xie.response.GoodsDetailResponse;
 import com.xie.service.*;
 import com.xie.utils.MallConstants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,7 +61,6 @@ public class GoodsApiController extends BaseController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    @Cacheable(value = MallConstants.CACHE_NAME, key = "#root.methodName")
     public BaseResponse list(@RequestParam(value = "categoryId", required = false) Integer categoryId,
                              @RequestParam(value = "brandId", required = false) Integer brandId,
                              @RequestParam(value = "keyword", required = false) String keyword,

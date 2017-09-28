@@ -29,4 +29,6 @@ public interface OrderService {
     String getOrderStatusText(Integer orderId);
 
     String getOrderStatusText(Order order);
+
+    PageInfo<Order> selectAll(int pageNum, int pageSize);
 }
