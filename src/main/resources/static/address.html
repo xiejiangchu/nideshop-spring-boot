@@ -15,12 +15,12 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                订单管理
-                <small th:text="${'共计  种商品'}"></small>
+                地址列表
+                <small th:text="${'共计 '+addressCount+' 个地址'}"></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li class="active">订单列表</li>
+                <li class="active">地址列表</li>
             </ol>
         </section>
         <section class="content">
@@ -31,25 +31,31 @@
                         <div class="box-body table-responsive no-padding">
                             <table class="table table-hover">
                                 <tr>
-                                    <th>订单序号</th>
-                                    <th>订单编号</th>
-                                    <th>订单金额</th>
-                                    <th>收货人</th>
+                                    <th>编号</th>
+                                    <th>名称</th>
+                                    <th>用户ID</th>
+                                    <th>省份</th>
+                                    <th>城市</th>
+                                    <th>区县</th>
+                                    <th>地址</th>
                                     <th>手机号</th>
-                                    <th>收货地址</th>
-                                    <th>订单留言</th>
-                                    <th>下单时间</th>
+                                    <th>操作</th>
                                 </tr>
-                                <tr th:each="item,state : ${orderPageInfo.list}">
-                                    <td th:text="${item.id}">
-                                    </td>
-                                    <td th:text="${item.orderSn}"></td>
-                                    <td th:text="${item.orderPrice}"></td>
-                                    <td th:text="${item.consignee}"></td>
+                                <tr th:each="item,state : ${addressPageInfo.list}">
+                                    <td th:text="${item.id}"></td>
+                                    <td th:text="${item.name}"></td>
+                                    <td th:text="${item.userId}"></td>
+                                    <td th:text="${item.provinceName}"></td>
+                                    <td th:text="${item.cityName}"></td>
+                                    <td th:text="${item.districtName}"></td>
+                                    <td th:text="${item.address}"></td>
                                     <td th:text="${item.mobile}"></td>
-                                    <td th:text="${item.fullRegion}"></td>
-                                    <td th:text="${item.postscript}"></td>
-                                    <td th:text="${item.addTime}"></td>
+                                    <td>
+                                        <a th:href="@{'/address/'+${item.id}}" class="btn btn-xs btn-flat btn-success">详情</a>
+                                        <a th:href="@{/address/delete(id=${item.id},pageNum=${addressPageInfo.pageNum},pageSize=${addressPageInfo.pageSize})}"
+                                           class="btn btn-xs btn-flat btn-danger">删除
+                                        </a>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
@@ -57,12 +63,11 @@
 
                         <div class="box-footer clearfix">
                             <ul class="pagination pagination-sm no-margin pull-right">
-                                <li><a th:href="@{/order(pageNum=${orderPageInfo.prePage})}">&laquo;</a></li>
-                                <li th:class="${navigatepageNum==orderPageInfo.pageNum}? 'active':''"
-                                    th:each="navigatepageNum,state : ${orderPageInfo.navigatepageNums}"><a
-                                        th:href="@{/order(pageNum=${navigatepageNum},pageSize=${orderPageInfo.pageSize})}"
+                                <li><a th:href="@{/goods(pageNum=${addressPageInfo.prePage})}">&laquo;</a></li>
+                                <li th:class="${navigatepageNum==addressPageInfo.pageNum}? 'active':''" th:each="navigatepageNum,state : ${addressPageInfo.navigatepageNums}"><a
+                                        th:href="@{/goods(pageNum=${navigatepageNum},pageSize=${addressPageInfo.pageSize})}"
                                         th:text="${navigatepageNum}">2</a></li>
-                                <li><a th:href="@{/order(pageNum=${orderPageInfo.lastPage})}">&raquo;</a></li>
+                                <li><a th:href="@{/goods(pageNum=${addressPageInfo.lastPage})}">&raquo;</a></li>
                             </ul>
                         </div>
                     </div>

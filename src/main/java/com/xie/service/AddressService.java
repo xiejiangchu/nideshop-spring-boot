@@ -1,5 +1,6 @@
 package com.xie.service;
 
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.Address;
 import com.xie.bean.AddressWithName;
 
@@ -19,6 +20,10 @@ public interface AddressService {
     Address selectByPrimaryKey(Integer id);
 
     AddressWithName selectWithNameByPrimaryKey(Integer id);
+
+    PageInfo<Address> selectAddress(int pageNum, int pageSize);
+
+    int count();
 
     int updateByPrimaryKeySelective(Address record);
 

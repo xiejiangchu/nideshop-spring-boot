@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace='layout/header :: header'>
+
+</head>
+<link rel="stylesheet" href="/css/select2.min.css">
+<link rel="stylesheet" href="/css/fileinput.min.css">
+<body class="skin-blue sidebar-mini wysihtml5-supported" style="height: auto; min-height: 100%;">
+
+<!-- wrapper -->
+<div class="wrapper">
+    <div th:replace='layout/top :: top'></div>
+    <!-- Left side column. contains the logo and sidebar -->
+    <div th:replace='layout/left :: left'></div>
+    <!-- /Left side column. contains the logo and sidebar -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                地址
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">地址</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-offset-1 col-md-10">
+                    <!-- general form elements -->
+                    <div class="box box-primary">
+                        <!-- form start -->
+                        <form role="form" th:action="@{/address/update}" method="post">
+                            <input type="hidden" name="id" th:value="${address.id}">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label>省份</label>
+                                    <select class="form-control select2" data-placeholder="位置" name="provinceId"
+                                            id="provinceId"
+                                            style="width: 100%;">
+                                        <option th:each="item,state:${province}" th:text="${item.name}"
+                                                th:value="${item.id}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>市区</label>
+                                    <select class="form-control select2" id="cityId" name="cityId"
+                                            style="width: 100%;">
+                                        <option th:each="item,state:${city}" th:text="${item.name}"
+                                                th:value="${item.id}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>区县</label>
+                                    <select class="form-control select2" id="districtId" name="districtId"
+                                            style="width: 100%;">
+                                        <option th:each="item,state:${district}" th:text="${item.name}"
+                                                th:value="${item.id}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>详细地址</label>
+                                    <input type="text" class="form-control" name="address" th:value="${address.address}">
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">修改</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <div th:replace='layout/control :: control'></div>
+    <!-- /.control-sidebar -->
+
+    <!-- footer -->
+    <div th:replace='layout/footer :: footer'></div>
+    <!-- /footer -->
+</div>
+<!-- ./wrapper -->
+
+
+<div th:replace='layout/scripts :: scripts'></div>
+<script src="/js/select2.full.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.select2').select2();
+        $.extend({
+            format: function (str, param) {
+                str = str.toString();
+                var reg = /{(\d+)}/gm;
+                return str.replace(reg, function (match, name) {
+                    return param[name];
+                });
+            }
+        });
+
+        $('#provinceId').on('change', function () {
+            var id = $(this).val();
+            console.log(id);
+            $.get('/region/getByPid/' + id, function (data) {
+                var html = '';
+                for (var i = 0; i < data.data.length; i++) {
+                    html += $.format("<option value='{0}'>{1}</option>", [data.data[i].id, data.data[i].name]);
+                }
+                $('#cityId').html(html);
+            });
+        });
+
+        $('#cityId').on('change', function () {
+            var id = $(this).val();
+            $.get('/region/getByPid/' + id, function (data) {
+                var html = '';
+                for (var i = 0; i < data.data.length; i++) {
+                    html += $.format("<option value='{0}'>{1}</option>", [data.data[i].id, data.data[i].name]);
+                }
+                $('#districtId').html(html);
+            });
+        });
+    });
+</script>
+</body>
+</html>
+
+

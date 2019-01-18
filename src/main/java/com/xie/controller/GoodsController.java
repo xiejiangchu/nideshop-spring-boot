@@ -71,7 +71,7 @@ public class GoodsController extends BaseController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String detail(Model model) {
+    public String add(Model model) {
         setHeaderData(model);
         model.addAttribute("title", "商品添加");
         return "goodsAdd";

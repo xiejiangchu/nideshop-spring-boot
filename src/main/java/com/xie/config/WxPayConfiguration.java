@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnClass(WxPayService.class)
 @EnableConfigurationProperties(WxPayProperties.class)
 public class WxPayConfiguration {
+
     @Autowired
     private WxPayProperties properties;
 

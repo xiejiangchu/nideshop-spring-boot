@@ -1,9 +1,12 @@
 package com.xie.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xie.bean.Address;
 import com.xie.bean.AddressWithName;
 import com.xie.mapper.AddressMapper;
 import com.xie.service.AddressService;
+import com.xie.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,9 @@ public class AddressServiceImpl implements AddressService {
 
     @Autowired
     private AddressMapper addressMapper;
+
+    @Autowired
+    private RegionService regionService;
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
@@ -43,6 +49,25 @@ public class AddressServiceImpl implements AddressService {
         AddressWithName addressWithName = addressMapper.selectWithNameByPrimaryKey(id);
         addressWithName.setFullRegion(addressWithName.getProvinceName() + addressWithName.getCityName() + addressWithName.getDistrictName());
         return addressWithName;
+    }
+
+    @Override
+    public PageInfo<Address> selectAddress(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Address> page = new PageInfo<Address>(addressMapper.selectAllAddress());
+        for (Address addr : page.getList()
+        ) {
+            addr.setProvinceName(regionService.selectByPrimaryKey(addr.getProvinceId()).getName());
+            addr.setCityName(regionService.selectByPrimaryKey(addr.getCityId()).getName());
+            addr.setDistrictName(regionService.selectByPrimaryKey(addr.getDistrictId()).getName());
+            addr.setFullRegion(addr.getProvinceName() + addr.getCityName() + addr.getDistrictName());
+        }
+        return page;
+    }
+
+    @Override
+    public int count() {
+        return addressMapper.count();
     }
 
     @Override

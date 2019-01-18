@@ -33,14 +33,24 @@
     is_default
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
+        SELECT
         <include refid="Base_Column_List"/>
         from address
         where id = #{id,jdbcType=INTEGER}
     </select>
 
+    <select id="selectAllAddress" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from address
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(1) FROM address
+    </select>
+
     <select id="selectWithNameByPrimaryKey" resultMap="BaseResultMapWithName" parameterType="java.lang.Integer">
-        select
+        SELECT
         a.id, a.name, a.user_id, a.country_id, a.province_id, a.city_id, a.district_id, a.address, a.mobile, a.is_default
         ,r1.name as province_name
         ,r2.name as city_name

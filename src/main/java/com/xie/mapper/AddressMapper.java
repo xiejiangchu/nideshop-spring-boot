@@ -27,4 +27,8 @@ public interface AddressMapper {
     AddressWithName selectWithNameByPrimaryKey(Integer id);
 
     int updateDefaultByUid(Integer uid);
+
+    List<Address> selectAllAddress();
+
+    int count();
 }
