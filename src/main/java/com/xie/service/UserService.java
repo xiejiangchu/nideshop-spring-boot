@@ -16,6 +16,8 @@ public interface UserService {
 
     User getByUsernameOrOpenId(String username);
 
+    User selectUserByToken(String token);
+
     PageInfo<User> getAllUsers(int pageNum, int pageSize);
 
     int insert(User user);

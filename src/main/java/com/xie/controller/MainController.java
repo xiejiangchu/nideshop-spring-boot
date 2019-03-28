@@ -66,7 +66,7 @@ public class MainController extends BaseController implements ErrorController{
             return "/register";
         }
         User user = new User();
-        user.setUsername(userRegisterDto.getUsername());
+        user.setUserName(userRegisterDto.getUsername());
         user.setCreatedAt(DateTime.now().toDate());
         user.setUserLevelId((byte) 1);
         user.setPassword(bCryptPasswordEncoder.encode(userRegisterDto.getPassword()));

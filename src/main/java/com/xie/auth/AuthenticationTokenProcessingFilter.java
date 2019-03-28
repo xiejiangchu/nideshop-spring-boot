@@ -51,9 +51,9 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
         }
 
         Map<String, String[]> params = httpServletRequest.getParameterMap();
-        String headParams = httpServletRequest.getHeader("SESSIONID");
-        if (params.containsKey(MallConstants.SESSION_ID) || headParams != null) {
-            String token = params.get(MallConstants.SESSION_ID) == null ? headParams : params.get(MallConstants.SESSION_ID)[0];
+        String headParams = httpServletRequest.getHeader(MallConstants.TOKEN_HEADER);
+        if (params.containsKey(MallConstants.TOKEN_HEADER) || (headParams != null && !headParams.equals(""))) {
+            String token = params.get(MallConstants.TOKEN_HEADER) == null ? headParams : params.get(MallConstants.TOKEN_HEADER)[0];
             if (token == null) {
                 throw new BadCredentialsException("账户未找到");
             }

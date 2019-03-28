@@ -45,6 +45,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User selectUserByToken(String token) {
+        return userMapper.selectUserByToken(token);
+    }
+
+    @Override
     public int insert(User user) {
         Assert.notNull(user);
         if (userMapper.insert(user) > 0) {

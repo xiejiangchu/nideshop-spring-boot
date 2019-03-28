@@ -36,7 +36,7 @@ public class StringUtils {
         return "NO" + randomString(10);
     }
 
-    public static String generateSessionId() {
+    public static String generateToken() {
         return randomString(20);
     }
 

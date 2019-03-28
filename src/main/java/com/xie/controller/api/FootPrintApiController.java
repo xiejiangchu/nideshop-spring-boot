@@ -48,6 +48,7 @@ public class FootPrintApiController extends BaseController {
                 item.setAddTimeStr("前天");
                 list_two_day_ago.add(item);
             } else {
+                item.setAddTimeStr("");
                 list_three_day_ago.add(item);
             }
         });

@@ -50,8 +50,8 @@
         </if>
     </select>
 
-    <select id="count" resultType="integer" parameterType="java.lang.Integer">
-        SELECT SUM(number)
+    <select id="count" resultType="int" parameterType="java.lang.Integer">
+        SELECT COALESCE(SUM(`number`),0)
         from cart
         where user_id = #{uid,jdbcType=INTEGER}
     </select>

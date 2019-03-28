@@ -13,13 +13,11 @@ public class BaseResponse {
 
     private int errno;
     private String errmsg;
-    private Date timestamp;
     private Object data;
 
     public BaseResponse(int errno, String errmsg, Object data) {
         this.errno = errno;
         this.errmsg = errmsg;
-        this.timestamp = new Date();
         this.data = data;
     }
 
@@ -33,6 +31,10 @@ public class BaseResponse {
 
     public static BaseResponse fail(String data) {
         return new BaseResponse(FAIL_CODE, data, null);
+    }
+
+    public static BaseResponse fail(int code, String data) {
+        return new BaseResponse(code, data, null);
     }
 
     public static BaseResponse fail(Object data) {
@@ -57,14 +59,6 @@ public class BaseResponse {
 
     public void setErrmsg(String errmsg) {
         this.errmsg = errmsg;
-    }
-
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
     }
 
     public Object getData() {

@@ -1,243 +1,285 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xie.mapper.UserMapper">
-    <resultMap id="BaseResultMap" type="com.xie.bean.User">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="username" jdbcType="VARCHAR" property="username"/>
-        <result column="sessionid" jdbcType="CHAR" property="sessionid"/>
-        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
-        <result column="email" jdbcType="VARCHAR" property="email"/>
-        <result column="wx" jdbcType="VARCHAR" property="wx"/>
-        <result column="openid" jdbcType="VARCHAR" property="openid"/>
-        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
-        <result column="gender" jdbcType="VARCHAR" property="gender"/>
-        <result column="password" jdbcType="VARCHAR" property="password"/>
-        <result column="user_level_id" jdbcType="TINYINT" property="userLevelId"/>
-        <result column="remember_token" jdbcType="VARCHAR" property="rememberToken"/>
-        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
-        <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
-        <result column="expired" jdbcType="TIMESTAMP" property="expired"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-    id, username, sessionid, mobile, email, wx, openid, avatar, gender, password, user_level_id,
-    remember_token, created_at, updated_at, expired
-    </sql>
-    <select id="selectAll" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-    </select>
+  <resultMap id="BaseResultMap" type="com.xie.bean.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="nickName" jdbcType="VARCHAR" property="nickName" />
+    <result column="token" jdbcType="CHAR" property="token" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="wx" jdbcType="VARCHAR" property="wx" />
+    <result column="openId" jdbcType="VARCHAR" property="openid" />
+    <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="user_level_id" jdbcType="TINYINT" property="userLevelId" />
+    <result column="remember_token" jdbcType="VARCHAR" property="rememberToken" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="expired" jdbcType="TIMESTAMP" property="expired" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userName, nickName, token, mobile, email, wx, openId, avatarUrl, country, province, 
+    city, gender, `password`, user_level_id, remember_token, created_at, updated_at, 
+    expired
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+  </select>
 
-    <select id="getByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where username = #{username}
-    </select>
+  <select id="getByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where userName = #{userName}
+  </select>
 
-    <select id="getByUsernameOrOpenId" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where username = #{username,jdbcType=VARCHAR} OR openid = #{username,jdbcType=VARCHAR}
-    </select>
+  <select id="getByUsernameOrOpenId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where userName = #{userName,jdbcType=VARCHAR} OR openid = #{userName,jdbcType=VARCHAR} OR openid = #{nickName,jdbcType=VARCHAR}
+  </select>
 
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-
-    <select id="selectByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where openid = #{openId,jdbcType=VARCHAR}
-    </select>
-
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where openid = #{openId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectUserByToken" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where token = #{token,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.xie.bean.User">
-        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
-            SELECT LAST_INSERT_ID() AS id
-        </selectKey>
-        insert into user (id, username, sessionid,
-        mobile, email, wx,
-        openid, avatar, gender,
-        password, user_level_id, remember_token,
-        created_at, updated_at, expired
-        )
-        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{sessionid,jdbcType=CHAR},
-        #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{wx,jdbcType=VARCHAR},
-        #{openid,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR},
-        #{password,jdbcType=VARCHAR}, #{userLevelId,jdbcType=TINYINT}, #{rememberToken,jdbcType=VARCHAR},
-        #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{expired,jdbcType=TIMESTAMP}
-        )
-    </insert>
-    <insert id="insertSelective" parameterType="com.xie.bean.User">
-        insert into user
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="username != null">
-                username,
-            </if>
-            <if test="sessionid != null">
-                sessionId,
-            </if>
-            <if test="mobile != null">
-                mobile,
-            </if>
-            <if test="email != null">
-                email,
-            </if>
-            <if test="wx != null">
-                wx,
-            </if>
-            <if test="openid != null">
-                openId,
-            </if>
-            <if test="avatar != null">
-                avatar,
-            </if>
-            <if test="gender != null">
-                gender,
-            </if>
-            <if test="password != null">
-                password,
-            </if>
-            <if test="userLevelId != null">
-                user_level_id,
-            </if>
-            <if test="rememberToken != null">
-                remember_token,
-            </if>
-            <if test="createdAt != null">
-                created_at,
-            </if>
-            <if test="updatedAt != null">
-                updated_at,
-            </if>
-            <if test="expired != null">
-                expired,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="username != null">
-                #{username,jdbcType=VARCHAR},
-            </if>
-            <if test="sessionid != null">
-                #{sessionid,jdbcType=CHAR},
-            </if>
-            <if test="mobile != null">
-                #{mobile,jdbcType=VARCHAR},
-            </if>
-            <if test="email != null">
-                #{email,jdbcType=VARCHAR},
-            </if>
-            <if test="wx != null">
-                #{wx,jdbcType=VARCHAR},
-            </if>
-            <if test="openid != null">
-                #{openid,jdbcType=VARCHAR},
-            </if>
-            <if test="avatar != null">
-                #{avatar,jdbcType=VARCHAR},
-            </if>
-            <if test="gender != null">
-                #{gender,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null">
-                #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="userLevelId != null">
-                #{userLevelId,jdbcType=TINYINT},
-            </if>
-            <if test="rememberToken != null">
-                #{rememberToken,jdbcType=VARCHAR},
-            </if>
-            <if test="createdAt != null">
-                #{createdAt,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updatedAt != null">
-                #{updatedAt,jdbcType=TIMESTAMP},
-            </if>
-            <if test="expired != null">
-                #{expired,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.xie.bean.User">
-        update user
-        <set>
-            <if test="username != null">
-                username = #{username,jdbcType=VARCHAR},
-            </if>
-            <if test="sessionid != null">
-                sessionId = #{sessionid,jdbcType=CHAR},
-            </if>
-            <if test="mobile != null">
-                mobile = #{mobile,jdbcType=VARCHAR},
-            </if>
-            <if test="email != null">
-                email = #{email,jdbcType=VARCHAR},
-            </if>
-            <if test="wx != null">
-                wx = #{wx,jdbcType=VARCHAR},
-            </if>
-            <if test="openid != null">
-                openId = #{openid,jdbcType=VARCHAR},
-            </if>
-            <if test="avatar != null">
-                avatar = #{avatar,jdbcType=VARCHAR},
-            </if>
-            <if test="gender != null">
-                gender = #{gender,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null">
-                password = #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="userLevelId != null">
-                user_level_id = #{userLevelId,jdbcType=TINYINT},
-            </if>
-            <if test="rememberToken != null">
-                remember_token = #{rememberToken,jdbcType=VARCHAR},
-            </if>
-            <if test="createdAt != null">
-                created_at = #{createdAt,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updatedAt != null">
-                updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-            </if>
-            <if test="expired != null">
-                expired = #{expired,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.xie.bean.User">
-        update user
-        set username = #{username,jdbcType=VARCHAR},
-        sessionId = #{sessionid,jdbcType=CHAR},
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xie.bean.User" useGeneratedKeys="true">
+    insert into user (userName, nickName, token, 
+      mobile, email, wx, 
+      openId, avatarUrl, country, 
+      province, city, gender, 
+      `password`, user_level_id, remember_token, 
+      created_at, updated_at, expired
+      )
+    values (#{userName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{token,jdbcType=CHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{wx,jdbcType=VARCHAR}, 
+      #{openid,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{userLevelId,jdbcType=TINYINT}, #{rememberToken,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{expired,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xie.bean.User" useGeneratedKeys="true">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="nickName != null">
+        nickName,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="wx != null">
+        wx,
+      </if>
+      <if test="openid != null">
+        openId,
+      </if>
+      <if test="avatarUrl != null">
+        avatarUrl,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="userLevelId != null">
+        user_level_id,
+      </if>
+      <if test="rememberToken != null">
+        remember_token,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="expired != null">
+        expired,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=CHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="wx != null">
+        #{wx,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarUrl != null">
+        #{avatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevelId != null">
+        #{userLevelId,jdbcType=TINYINT},
+      </if>
+      <if test="rememberToken != null">
+        #{rememberToken,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expired != null">
+        #{expired,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xie.bean.User">
+    update user
+    <set>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nickName = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=CHAR},
+      </if>
+      <if test="mobile != null">
         mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="wx != null">
         wx = #{wx,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
         openId = #{openid,jdbcType=VARCHAR},
-        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarUrl != null">
+        avatarUrl = #{avatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
         gender = #{gender,jdbcType=VARCHAR},
-        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevelId != null">
         user_level_id = #{userLevelId,jdbcType=TINYINT},
+      </if>
+      <if test="rememberToken != null">
         remember_token = #{rememberToken,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
         updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-        expired = #{expired,jdbcType=TIMESTAMP}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
+      </if>
+      <if test="expired != null">
+        expired = #{expired,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xie.bean.User">
+    update user
+    set userName = #{userName,jdbcType=VARCHAR},
+      nickName = #{nickName,jdbcType=VARCHAR},
+      token = #{token,jdbcType=CHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      wx = #{wx,jdbcType=VARCHAR},
+      openId = #{openid,jdbcType=VARCHAR},
+      avatarUrl = #{avatarUrl,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      user_level_id = #{userLevelId,jdbcType=TINYINT},
+      remember_token = #{rememberToken,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      expired = #{expired,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

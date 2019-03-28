@@ -34,18 +34,18 @@ public class MyUserDetailsService implements UserDetailsService {
     private ConcurrentHashMap<String, UserDetails> users = new ConcurrentHashMap<>();
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (users.containsKey(username)) {
-            return users.get(username);
+    public UserDetails loadUserByUsername(String token) throws UsernameNotFoundException {
+        if (users.containsKey(token)) {
+            return users.get(token);
         }
-        User user = userService.getByUsernameOrOpenId(username);
+        User user = userService.selectUserByToken(token);
         if (null == user) {
             throw new UsernameNotFoundException("用户不存在");
         }
         List<Roles> roles = roleService.getRolesByUid(user.getId());
         List<Permissions> permissions = permissionService.getByUid(user.getId());
         UserDetails userDetails = new MyUserDetails(user, roles, permissions);
-        users.put(username, userDetails);
+        users.put(token, userDetails);
         return userDetails;
     }
 }

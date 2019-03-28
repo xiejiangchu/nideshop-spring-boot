@@ -20,7 +20,7 @@ public class MallConstants {
 
     public final static String ADMIN = "admin";
 
-    public final static String SESSION_ID = "sessionId";
+    public final static String TOKEN_HEADER = "X-Nideshop-Token";
     public final static String SPECIFICATION_SPLIT = "_";
 
     public final static double ORDER_MIN_MONEY = 20;

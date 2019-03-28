@@ -6,7 +6,7 @@ import com.xie.bean.WxSession;
 import com.xie.config.MyWxPayConfig;
 import com.xie.request.LoginRequest;
 import com.xie.response.BaseResponse;
-import com.xie.response.SessionResponse;
+import com.xie.response.TokenResponse;
 import com.xie.service.UserService;
 import com.xie.utils.AES;
 import com.xie.utils.MallConstants;
@@ -75,43 +75,49 @@ public class AuthApiController extends BaseController {
             WxSession wxSession = JSONObject.parseObject(result.getBody(), WxSession.class);
             User user_cache = (User) cacheManager.getCache(MallConstants.CACHE_NAME).get(MallConstants.SESSION_USER + wxSession.getOpenid());
             if (user_cache != null) {
-                SessionResponse sessionResponse = new SessionResponse();
+                TokenResponse tokenResponse = new TokenResponse();
                 session.setAttribute(MallConstants.SESSION_USER, user_cache);
-                sessionResponse.setUid(user_cache.getId());
-                return BaseResponse.ok(sessionResponse);
+                tokenResponse.setUserInfo(user_cache);
+                return BaseResponse.ok(tokenResponse);
             }
             User user = userService.getByOpenId(wxSession.getOpenid());
-            String sessionId = StringUtils.generateSessionId();
-            SessionResponse sessionResponse = new SessionResponse();
-            sessionResponse.setSessionId(sessionId);
+            String token = StringUtils.generateToken();
+            TokenResponse tokenResponse = new TokenResponse();
+            tokenResponse.setToken(token);
             if (user != null) {
-                BeanUtils.copyProperties(loginRequest.getUserInfo(), user);
+                BeanUtils.copyProperties(loginRequest.getUserInfo().getUserInfo(), user);
+                user.setOpenid(wxSession.getOpenid());
+                user.setWx(loginRequest.getUserInfo().getUserInfo().getNickName());
+                user.setToken(token);
                 userService.updateAll(user);
                 session.setAttribute(MallConstants.SESSION_USER, user);
-                sessionResponse.setUid(user.getId());
+                tokenResponse.setUserInfo(user);
                 cacheManager.getCache(MallConstants.CACHE_NAME).put(MallConstants.SESSION_USER + wxSession.getOpenid(), user);
-                return BaseResponse.ok(sessionResponse);
+                return BaseResponse.ok(tokenResponse);
             } else {
                 if (null != wxSession.getSession_key()) {
                     User insert = new User();
-                    BeanUtils.copyProperties(loginRequest.getUserInfo(), insert);
-                    user.setCreatedAt(DateTime.now().toDate());
+                    BeanUtils.copyProperties(loginRequest.getUserInfo().getUserInfo(), insert);
+                    insert.setOpenid(wxSession.getOpenid());
+                    insert.setWx(loginRequest.getUserInfo().getUserInfo().getNickName());
+                    insert.setToken(token);
+                    insert.setCreatedAt(DateTime.now().toDate());
                     insert.setUpdatedAt(DateTime.now().toDate());
-                    insert.setUsername(insert.getUsername());
+                    insert.setUserLevelId((byte) 0);
                     insert.setPassword(bCryptPasswordEncoder.encode("pass@1234"));
                     int uid = userService.insert(insert);
                     if (uid > 0) {
                         User user_new = userService.getById(uid);
                         session.setAttribute(MallConstants.SESSION_USER, user_new);
-                        sessionResponse.setUid(user_new.getId());
+                        tokenResponse.setUserInfo(user_new);
                         cacheManager.getCache(MallConstants.CACHE_NAME).put(MallConstants.SESSION_USER + wxSession.getOpenid(), user_new);
-                        return BaseResponse.ok(sessionResponse);
+                        return BaseResponse.ok(tokenResponse);
                     } else {
                         return BaseResponse.fail();
                     }
 
                 }
-                return BaseResponse.ok(sessionResponse);
+                return BaseResponse.ok(tokenResponse);
             }
         }
 
